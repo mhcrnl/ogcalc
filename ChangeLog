@@ -1,6 +1,13 @@
+2004-10-10  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.2.1.
+
+	* Correct the PG definition.  The multiplication factor is 10000,
+	not 100.
+
 2004-10-03  Roger Leigh  <rleigh@debian.org>
 
-	* Version 1.2.0
+	* Version 1.2.0.
 
 	* Updated all examples to work with Gtkmm 2.4.  GTK+ 2.4 remains
 	API- and ABI-compatible with GTK+ 2.2 and 2.0.

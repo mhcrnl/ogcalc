@@ -3,6 +3,7 @@ ogcalc                                                              -*- text -*-
 
 Calculate %ABV and OG from PG, RI and CF.
 
+
 Legal
 -----
 
@@ -20,6 +21,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 USA.
+
+The full licence text is available in the COPYING file.
 
 
 Background
@@ -74,7 +77,7 @@ be installed.
 On a Debian unstable system, these packages are required:
 ogcalc: libgtk2.0-dev
 ogcalc-gl: libglade2-dev
-ogcalcmm: libgtkmm2.0-dev, libglademm2.0-dev
+ogcalcmm: libgtkmm2.4-dev, libglademm-2.4-dev
 glade-2 provides the Glade interface editor.
 
 

@@ -1,3 +1,14 @@
+* Major changes in release 2.0.0:
+
+** Changes
+
+  The Gtkmm examples have been reworked for version 2.4.x.  This uses
+  the new version of libsigc++ (2.0) which renamed a number of classes
+  in order to bring the naming scheme in line with that of the C++
+  Standard Library.
+
+  A number of typos have been corrected.
+
 * Major changes in release 1.0.4:
 
 ** Changes
