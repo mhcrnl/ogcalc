@@ -1,0 +1,51 @@
+* Major changes in release 1.0.4:
+
+** Changes
+
+  The Ogcalc class in C/ogcalc did not destroy the contained GladeXML
+  interface description when it was destroyed.  A class initialiser
+  has been added to override the GObject finalize() method so that the
+  GladeXML object may be unreferenced in the Ogcalc finaliser.
+
+* Major changes in release 1.0.3:
+
+** Changes
+
+  The main() function in C/plain/ogcalc.c has been split into helper
+  functions for greater clarity.
+
+  The Glade-using examples no longer use glade_xml_reparent_widget(),
+  instead loading the interface from a specified root in the tree.
+
+  The tutorial has been completely proof-read, and several minor
+  technical errors have been corrected.  In addition, manual build
+  instructions have been added.
+
+* Major changes in release 1.0.2:
+
+** New features
+
+  A GObject-based version of ogcalc has been added, along with a new
+  chapter in the tutorial.
+
+** Changes
+
+  The source tree has been reorganised into separate subdirectories,
+  so that each version of ogcalc may be built in isolation.
+
+* Major changes in release 1.0.1:
+
+** Changes
+
+  Minor grammatical fixes.
+
+* Major changes in release 1.0.0:
+
+** New features
+
+  This is is the first release of ogcalc.
+
+
+Local Variables:
+mode: outline
+End:

@@ -1,0 +1,17 @@
+# ogcalc - a GTK+ program written in C, but using libglade to
+# construct the interface and connect all signals
+
+# The program to build.
+noinst_PROGRAMS = ogcalc
+
+# The sources and compiler flags.
+ogcalc_SOURCES = ogcalc.c
+ogcalc_CFLAGS = $(GLADE_CFLAGS)
+ogcalc_LDADD = $(GLADE_LIBS)
+
+# The Glade user interface files
+noinst_DATA = ogcalc.glade ogcalc.gladep
+
+# Files not automatically distributed which should be included
+# in the distribution tarball.
+EXTRA_DIST = $(noinst_DATA)

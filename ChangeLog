@@ -1,0 +1,76 @@
+2004-10-03  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.2.0
+
+	* Updated all examples to work with Gtkmm 2.4.  GTK+ 2.4 remains
+	API- and ABI-compatible with GTK+ 2.2 and 2.0.
+
+	* Added two corrections from Fazl Rahman <Fazl.Rahman@web.de>:
+	  - A GtkWindow, rather than a GtkWidget can contain only one
+	    widget.
+	  - Replaced "used use" with "use".
+
+2004-07-16  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.0.4.
+
+	* Add an object finaliser to correctly unref the GladeXML
+	interface on Ogcalc destruction, preventing a memory leak.
+
+2004-07-14  Roger Leigh  <rleigh@debian.org>
+
+	* Small formatting and indentation fixes following proofreading.
+
+2004-06-27  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.0.3.
+
+	* Document glade_xml_signal_autoconnect() issues on MS Windows.
+
+	* Document how to build manually.
+
+	* Split C/plain/ogcalc.c main() into helper functions.
+
+	* Apply consistent use of GTK_WIDGET_CAN_DEFAULT in Glade
+	interfaces (affected the Reset button).  Update Glade screenshots
+	(all are now perfectly identical).
+
+	* Replaced the use of Glade reparent_widget() with loading from a
+	specified root.
+
+	* First pass at detailed proofreading.  Corrected several minor
+	technical errors.
+
+2004-06-17  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.0.2.
+
+	* Add build instructions to the tutorial.
+
+	* Comment all the autotools files.
+
+2004-06-17  Roger Leigh  <rleigh@debian.org>
+
+	* Switch to an autotools-based build framework.
+
+	* Split the source into separate directories to make the source
+	easier to understand.
+
+	* Add a new GObject-based version of ogcalc, and add a new section
+	to the tutorial describing it.
+
+2004-03-13  Roger Leigh <rleigh@debian.org>
+
+	* .cvsignore:
+	Add .cvsignore to ignore executables and generated documentation.
+
+	* figures/signals.fig: Update names of signal handlers.
+
+	* ogcalcmm.h: Fix a typo.
+
+2003-08-23  Roger Leigh <rleigh@debian.org>
+
+	* ogcalc.tex: Minor grammatical fixes.
+
+	* Inject ogcalc GTK+ tutorial into CVS.
+
