@@ -1,3 +1,23 @@
+* Major changes in release 2.0.2:
+
+** Changes
+
+  None.
+
+* Major changes in release 2.0.2:
+
+** Changes
+
+  The G_DEFINE_TYPE macro introduced with GLib 2.4 has replaced the
+  ogcalc_get_type function in C/gobject/ogcalc.c, as well as some
+  function prototypes.
+
+* Major changes in release 2.0.1:
+
+** Changes
+
+  Corrected the PG calculation, which was out by a factor of 100.
+
 * Major changes in release 2.0.0:
 
 ** Changes

@@ -58,7 +58,7 @@
 
 
 \title{An introduction to programming with GTK+ and Glade in ISO C and
-  ISO C++\\\bigskip\large{Version 1.2.1}}
+  ISO C++\\\bigskip\large{Version 1.2.2}}
 \author{Roger Leigh\\\texttt{rleigh@debian.org}}
 \maketitle
 
@@ -131,8 +131,8 @@ Software Foundation; either version 2 of the Licence, or (at your
 option) any later version.
 
 A copy of the GNU General Public Licence version 2 is provided in the
-file \filename{COPYING} in the source package this document was
-generated from.
+file \filename{COPYING}, in the source package from which this
+document was generated.
 
 
 \section{GTK+ basics}
@@ -144,7 +144,7 @@ unless one is aware of the basic OO concepts (classes, class methods,
 inheritance, polymorphism), this tutorial (and GTK+ in general) will
 seem rather confusing.  On my first attempt at learning GTK+, I didn't
 `get' it, but after I learnt C++, the concepts GTK+ is built on just
-`clicked', and I understood it quite quickly.
+`clicked' and I understood it quite quickly.
 
 The C language does not natively support classes, and so GTK+ provides
 its own object/type system, \textbf{GObject}.  GObject provides
@@ -689,11 +689,12 @@ g_signal_connect (G_OBJECT(window),
                   gtk_main_quit, NULL);
 \end{lstlisting}
 
-This code connects the ``destroy'' signal to the
+This code connects the ``destroy'' signal of \variable{window} to the
 \function{gtk\_main\_quit} function.  This signal is emitted by the
-window it is to be destroyed, for example when the ``close'' button on
-the titlebar is clicked).  The result is that when the window is
-closed, the main event loop returns, and the program then exits.
+window when it is to be destroyed, for example when the ``close''
+button on the titlebar is clicked).  The result is that when the
+window is closed, the main event loop returns, and the program then
+exits.
 
 \begin{lstlisting}[numbers=none, language=C]
 vbox1 = gtk_vbox_new (FALSE, 0);
@@ -704,9 +705,9 @@ gtk_container_add (GTK_CONTAINER(window), vbox1);
 \function{gtk\_vbox\_new}, it is set to be non-homogeneous
 (\code{FALSE}), which allows the widgets contained within the
 \class{GtkVBox} to be of different sizes, and has zero pixels padding
-space between the containers it contains.  The homogeneity and padding
-space are different for the various \class{GtkBox}es used, depending
-on the visual effect intended.
+space between the container widgets it will contain.  The homogeneity
+and padding space are different for the various \class{GtkBox}es used,
+depending on the visual effect intended.
 
 \function{gtk\_container\_add} packs \variable{vbox1} into the window
 (a \class{GtkWindow} object \emph{is a} \class{GtkContainer}).
@@ -834,10 +835,9 @@ is activated (i.e. it is a keyboard shortcut).  The shortcut is
 underlined, in common with other graphical toolkits.
 
 The ``clicked'' signal (emitted when the button is pressed and
-released) is connected to the
-\function{on\_button\_clicked\_calculate} callback.  The
-\variable{cb\_widgets} structure is passed as the argument to the
-callback.
+released) is connected to the \function{on\_button\_clicked\_calculate}
+callback.  A pointer to the \variable{cb\_widgets} structure is passed
+as the argument to the callback.
 
 Lastly, the \code{GTK\_CAN\_DEFAULT} attribute is set.  This attribute
 allows the button to be the default widget in the window.
@@ -881,9 +881,9 @@ gtk_main();
 This is the GTK+ event loop.  It runs until \function{gtk\_main\_quit}
 is called.
 
-The signal handlers are far simpler than building the interface.  The
-function \function{on\_button\_clicked\_calculate} reads the user
-input, performs a calculation, then displays the result.
+The signal handlers are far simpler than the interface construction.
+The function \function{on\_button\_clicked\_calculate} reads the user
+input, performs a calculation, and then displays the result.
 
 \begin{lstlisting}[numbers=none, language=C]
 void on_button_clicked_calculate( GtkWidget *widget,
@@ -1149,7 +1149,7 @@ be taken advantage of using plain C and GObject.
 
 \lstinputlisting[language=C,
                  caption={\filename{C/gobject/ogcalc.c}},
-                 firstline=24, lastline=243]
+                 firstline=24, lastline=201]
                  {C/gobject/ogcalc.c}
 
 \lstinputlisting[language=C,
@@ -1197,23 +1197,27 @@ construction, initialisation and notification of destruction.  The
 body of the methods to reset and calculate are identical to previous
 examples.
 
-\function{ogcalc\_get\_type} is used to get the the typeid
-(\type{GType}) of the class.  As a side effect, it also triggers
-registration of the class with the GType type system.  Remember, GType
-is a \emph{dynamic} type system.  Unlike languages like C++, where the
-types of all classes are known at compile-time, the majority of all
-the types used with GTK+ are registered on demand, except for the
-primitive data types and the base class \class{GObject} which are
-registered as \emph{fundamental} types.  As a result, in addition to
-being able to specify constructors and destructors for the
-\emph{object} (or \emph{initialisers} and \emph{finalisers} in GType
-parlance), it is also possible to have initialisation and finalisation
-functions for both the \emph{class} and \emph{base}.  For example, the
-class initialiser could be used to fix up the vtable for overriding
-virtual functions in derived classes.  In addition, there is also an
-\variable{instance\_init} function, which is used in this example to
-initialise the class.  It's similar to the constructor, but is called
-after object construction.
+The macro \code{G\_DEFINE\_TYPE} is used for convenience.  Its
+parameters are the class name to register, the prefix used by methods
+of this class and the GType of the parent type we are inheriting from.
+It prototypes the initialisation functions defined in the source
+below, and it defines the function \function{ogcalc\_get\_type}, which
+is used to get the the typeid (\type{GType}) of the class.  As a side
+effect, this function triggers registration of the class with the
+GType type system.  GType is a \emph{dynamic} type system.  Unlike
+languages like C++, where the types of all classes are known at
+compile-time, the majority of all the types used with GTK+ are
+registered on demand, except for the primitive data types and the base
+class \class{GObject} which are registered as \emph{fundamental}
+types.  As a result, in addition to being able to specify constructors
+and destructors for the \emph{object} (or \emph{initialisers} and
+\emph{finalisers} in GType parlance), it is also possible to have
+initialisation and finalisation functions for both the \emph{class}
+and \emph{base}.  For example, the class initialiser could be used to
+fix up the vtable for overriding virtual functions in derived classes.
+In addition, there is also an \variable{instance\_init} function, which
+is used in this example to initialise the class.  It's similar to the
+constructor, but is called after object construction.
 
 All these functions are specified in a \class{GTypeInfo} structure
 which is passed to \function{g\_type\_register\_static} to register the

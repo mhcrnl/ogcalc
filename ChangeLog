@@ -1,3 +1,22 @@
+2004-12-23  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.2.3.
+
+	* Clarified the use of the "destroy" signal, making it clear which
+	object it originates from.
+
+	* Minor grammatical changes.
+
+2004-10-27  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.2.2.
+
+	* Shortened the width of some of the widget images so that they
+	are laid out better on the page.
+
+	* C/gobject/ogcalc.c: replaced ogcalc_get_type and class and
+	instance init prototypes with the G_DEFINE_TYPE macro.
+
 2004-10-10  Roger Leigh  <rleigh@debian.org>
 
 	* Version 1.2.1.

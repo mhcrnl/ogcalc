@@ -69,16 +69,16 @@ Run:
 * "make" or "make all" to build everything.
 * "glade-2 ogcalc.glade" to view/edit the Glade interface.
 
-All the programs require the GTK+ 2.0 or 2.2 libraries and headers to
-be installed.  ogcalc-gl requires libglade and its headers to be
+All the programs require the GTK+ 2.4 libraries and headers to be
+installed.  ogcalc-gl requires libglade and its headers to be
 installed.  ogcalcmm requires Gtkmm, libglademm and their headers to
 be installed.
 
 On a Debian unstable system, these packages are required:
-ogcalc: libgtk2.0-dev
+ogcalc: libgtk2.0-dev (>= 2.4.1-1)
 ogcalc-gl: libglade2-dev
 ogcalcmm: libgtkmm2.4-dev, libglademm-2.4-dev
 glade-2 provides the Glade interface editor.
 
 
- -- Roger Leigh <rleigh@debian.org>  Sun, 27 Jun 2004 17:57:57 +0100
+ -- Roger Leigh <rleigh@debian.org>  Thu, 28 Oct 2004 00:10:26 +0100

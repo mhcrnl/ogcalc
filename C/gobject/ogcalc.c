@@ -23,53 +23,14 @@
 
 #include "ogcalc.h"
 
-static void
-ogcalc_class_init( OgcalcClass *klass );
-
-static void
-ogcalc_init( GTypeInstance *instance,
-             gpointer       g_class );
+/* Declare class and instance initialisation functions and
+   an ogcalc_get_type function to get the GType of Ogcalc.
+   This has the side effect of registering Ogcalc as a new
+   GType if it has not already been registered. */
+G_DEFINE_TYPE(Ogcalc, ogcalc, GTK_TYPE_WINDOW);
 
 static void
 ogcalc_finalize( Ogcalc *self );
-
-/* Get the GType of Ogcalc.  This has the side effect of
-   registering Ogcalc as a new GType if it has not already
-   been registered. */
-GType
-ogcalc_get_type (void)
-{
-  static GType type = 0;
-
-  if (type == 0)
-    {
-      /* GTypeInfo describes a GType.  In this case, we only
-         specify the size of the class and object instance
-         types, along with an initialisation function.  We
-         could have also specified both class and object
-         constructors and destructors here as well. */
-      static const GTypeInfo info =
-        {
-          sizeof (OgcalcClass),
-          NULL,
-          NULL,
-          (GClassInitFunc) ogcalc_class_init,
-          NULL,
-          NULL,
-          sizeof (Ogcalc),
-          0,
-          (GInstanceInitFunc) ogcalc_init
-        };
-      /* Actually register the type using the above type
-         information.  We specify the type we are deriving
-         from, the class name and type information. */
-      type = g_type_register_static (GTK_TYPE_WINDOW,
-                                     "Ogcalc",
-                                     &info,
-                                     (GTypeFlags) 0);
-    }
-  return type;
-}
 
 /* This is the class initialisation function.  It has no
    comparable C++ equivalent, since this is done by the
@@ -88,11 +49,8 @@ ogcalc_class_init ( OgcalcClass *klass )
    comparable to a C++ constructor.  Note the similarity
    between "self" and the C++ "this" pointer. */
 static void
-ogcalc_init( GTypeInstance *instance,
-             gpointer       g_class )
+ogcalc_init( Ogcalc *self )
 {
-  Ogcalc *self = (Ogcalc *) instance;
-
   /* Set the window title */
   gtk_window_set_title(GTK_WINDOW (self),
                        "OG & ABV Calculator");
