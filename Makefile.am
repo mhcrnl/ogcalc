@@ -1,5 +1,5 @@
 # Subdirectories to make.
-SUBDIRS = C C++ figures
+SUBDIRS = C C++ python figures
 
 # Rules to build documentation.
 docs: ogcalc.pdf

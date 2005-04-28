@@ -58,7 +58,7 @@
 
 
 \title{An introduction to programming with GTK+ and Glade in ISO C and
-  ISO C++\\\bigskip\large{Version 1.2.2}}
+  ISO C++\\\bigskip\large{Version 1.2.3}}
 \author{Roger Leigh\\\texttt{rleigh@debian.org}}
 \maketitle
 
@@ -1404,9 +1404,9 @@ To build the source, do the following:
 
 \begin{verbatim}
 cd C++/glade
-c++ `pkg-config --cflags libglademm-2.0` -c ogcalc.cc
-c++ `pkg-config --cflags libglademm-2.0` -c ogcalc-main.cc
-c++ `pkg-config --libs libglademm-2.0` -o ogcalc ogcalc.o \
+c++ `pkg-config --cflags libglademm-2.4` -c ogcalc.cc
+c++ `pkg-config --cflags libglademm-2.4` -c ogcalc-main.cc
+c++ `pkg-config --libs libglademm-2.4` -o ogcalc ogcalc.o \
                                           ogcalc-main.o
 \end{verbatim}
 
@@ -1415,9 +1415,9 @@ tutorial:
 
 \begin{verbatim}
 cd C++/plain
-c++ `pkg-config --cflags gtkmm-2.0` -c ogcalc.cc
-c++ `pkg-config --cflags gtkmm-2.0` -c ogcalc-main.cc
-c++ `pkg-config --libs gtkmm-2.0` -o ogcalc ogcalc.o \
+c++ `pkg-config --cflags gtkmm-2.4` -c ogcalc.cc
+c++ `pkg-config --cflags gtkmm-2.4` -c ogcalc-main.cc
+c++ `pkg-config --libs gtkmm-2.4` -o ogcalc ogcalc.o \
                                             ogcalc-main.o
 \end{verbatim}
 

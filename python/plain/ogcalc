@@ -1,0 +1,338 @@
+#!/usr/bin/python
+#
+# ogcalc - calculate %ABV and OG from PG, RI and CF.
+#
+# Copyright (C) 2003-2004  Roger Leigh <rleigh@debian.org>
+#
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General
+# Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public
+# License along with this program; if not, write to the
+# Free Software Foundation, Inc., 675 Mass Ave, Cambridge,
+# MA 02139, USA.
+#
+#############################################################
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+
+# A utility widget for UI construction.
+class OgcalcSpinEntry(gtk.HBox):
+
+    def __init__(self, label_text, tooltip_text,
+                 adjustment, digits):
+        gtk.HBox.__init__(self, False, 5)
+
+        # An eventbox.  This widget is just a container for
+        # widgets (like labels) that don't have an
+        # associated X window, and so can't receive X
+        # events.  This is just used to we can add tooltips
+        # to each label.
+        eventbox = gtk.EventBox()
+        eventbox.show()
+        self.pack_start(eventbox, False, False)
+        # Create a label.
+        label = gtk.Label(label_text)
+        # Add the label to the eventbox.
+        eventbox.add(label)
+        label.show()
+
+        # Create a GtkSpinButton and associate it with the
+        # adjustment. It adds/substracts 0.5 when the spin
+        # buttons are used, and has digits accuracy.
+        self.spinbutton = gtk.SpinButton(adjustment, 0.5,
+                                         digits)
+        # Only numbers can be entered.
+        self.spinbutton.set_numeric(True)
+        self.pack_start(self.spinbutton)
+        self.spinbutton.show()
+
+        # Create a tooltip and add it to the EventBox
+        # previously created.
+        tooltip = gtk.Tooltips()
+        tooltip.set_tip(eventbox, tooltip_text)
+
+# A utility widget for UI construction.
+class OgcalcResult(gtk.HBox):
+
+    def __init__(self, label_text, tooltip_text):
+        gtk.HBox.__init__(self, False, 5)
+
+        # As before, a label in an event box with a tooltip.
+        eventbox = gtk.EventBox()
+        eventbox.show()
+        self.pack_start(eventbox, False, False)
+
+        label = gtk.Label(label_text)
+        eventbox.add(label)
+        label.show()
+
+        # This is a label, used to display the OG result.
+        self.result_value = gtk.Label()
+        # Because it's a result, it is set "selectable", to
+        # allow copy/paste of the result, but it's not
+        # modifiable.
+        self.result_value.set_selectable(True)
+        self.pack_start(self.result_value)
+        self.result_value.show()
+
+        # Add the tooltip to the event box.
+        tooltip = gtk.Tooltips()
+        tooltip.set_tip(eventbox, tooltip_text, None)
+
+# The main widget (a top-level window).
+class Ogcalc(gtk.Window):
+
+    # This is a callback function.  It resets the values
+    # of the entry widgets, and clears the results.
+    # "data" is the calculation_widgets structure, which
+    # needs casting back to its correct type from a
+    # gpointer (void *) type.
+    def on_button_clicked_reset(self, data=None):
+        self.pg_entry.spinbutton.set_value(0.0)
+        self.ri_entry.spinbutton.set_value(0.0)
+        self.cf_entry.spinbutton.set_value(0.0)
+        self.og_result.result_value.set_text("")
+        self.abv_result.result_value.set_text("")
+
+        # This callback does the actual calculation.  Its
+        # arguments are the same as for
+        # on_button_clicked_reset().
+
+    def on_button_clicked_calculate(self, data=None):
+        # Get the numerical values from the entry widgets.
+        pg = self.pg_entry.spinbutton.get_value()
+        ri = self.ri_entry.spinbutton.get_value()
+        cf = self.cf_entry.spinbutton.get_value()
+
+        # Do the sums.
+        og = (ri * 2.597) - (pg * 1.644) - 34.4165 + cf
+
+        if (og < 60):
+            abv = (og - pg) * 0.130
+        else:
+            abv = (og - pg) * 0.134
+
+        # Display the results.  Note the <b></b> GMarkup
+        # tags to make it display in boldface.
+        self.og_result.result_value.set_markup \
+        ("<b>%(result)0.2f</b>" %{'result': og})
+        self.abv_result.result_value.set_markup \
+        ("<b>%(result)0.2f</b>" %{'result': abv})
+
+    def __init__(self):
+        gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
+        self.set_title("OG & ABV Calculator")
+
+        # Disable window resizing, since there's no point in
+        # this case.
+        self.set_resizable(False)
+
+        # Connect the window close button ("destroy" event)
+        # to gtk_main_quit().
+        self.connect("destroy", gtk.main_quit, None)
+
+        # Create a GtkVBox to hold the other widgets.  This
+        # contains other widgets, which are packed in to it
+        # vertically.
+        vbox1 = gtk.VBox()
+
+        # Add the VBox to the Window.  A GtkWindow /is a/
+        # GtkContainer which /is a/ GtkWidget.
+        # GTK_CONTAINER casts the GtkWidget to a
+        # GtkContainer, like a C++ dynamic_cast.
+        self.add(vbox1)
+        # Display the VBox.  At this point, the Window has
+        # not yet been displayed, so the window isn't yet
+        # visible.
+        vbox1.show()
+
+        # Create a second GtkVBox.  Unlike the previous
+        # VBox, the widgets it will contain will be of
+        # uniform size and separated by a 5 pixel gap.
+        vbox2 = gtk.VBox(True, 5)
+        # Set a 10 pixel border width.
+        vbox2.set_border_width(10)
+        # Add this VBox to our first VBox.
+        vbox1.pack_start(vbox2, False, False)
+        vbox2.show()
+
+        # Create a GtkHBox.  This is identical to a GtkVBox
+        # except that the widgets pack horizontally instead
+        # of vertically.
+        hbox1 = gtk.HBox(False, 10)
+
+        # Add to vbox2.  The function's other arguments mean
+        # to expand into any extra space alloted to it, to
+        # fill the extra space and to add 0 pixels of
+        # padding between it and its neighbour.
+        vbox2.pack_start(hbox1)
+        hbox1.show()
+
+        # A GtkAdjustment is used to hold a numeric value:
+        # the initial value, minimum and maximum values,
+        # "step" and "page" increments and the "page size".
+        # It's used by spin buttons, scrollbars, sliders
+        # etc..
+        adjustment = gtk.Adjustment(0.0, 0.0, 10000.0,
+                                    0.01, 1.0, 0)
+
+        # Use a helper widget to create a GtkSpinButton
+        # entry together with a label and a tooltip.  The
+        # spin button is stored in the cb_widgets.pg_val
+        # pointer for later use. We also specify the
+        # adjustment to use and the number of decimal places
+        # to allow.
+        self.pg_entry = \
+        OgcalcSpinEntry("PG:", "Present Gravity (density)",
+                        adjustment, 2)
+
+        # Pack the returned widget into the interface.
+        hbox1.pack_start(self.pg_entry)
+        self.pg_entry.show()
+
+        # Repeat the above for the next spin button.
+        adjustment = gtk.Adjustment(0.0, 0.0, 10000.0,
+                                    0.01, 1.0, 0)
+        self.ri_entry = \
+        OgcalcSpinEntry("RI:", "Refractive Index",
+                         adjustment, 2)
+        hbox1.pack_start(self.ri_entry)
+        self.ri_entry.show()
+
+        # Repeat again for the last spin button.
+        adjustment = gtk.Adjustment(0.0, -50.0, 50.0,
+                                    0.1, 1.0, 0)
+        self.cf_entry = \
+        OgcalcSpinEntry("CF:", "Correction Factor",
+                        adjustment, 1)
+        hbox1.pack_start(self.cf_entry)
+        self.cf_entry.show()
+
+        # Now we move to the second "row" of the interface,
+        # used display the results.
+
+        # Firstly, a new GtkHBox to pack the labels into.
+        hbox1 = gtk.HBox(True, 10)
+        vbox2.pack_start(hbox1)
+        hbox1.show()
+
+        # Create the OG result label, then pack and display.
+        self.og_result = \
+        OgcalcResult("OG:", "Original Gravity (density)")
+
+        hbox1.pack_start(self.og_result)
+        self.og_result.show()
+
+        # Repeat as above for the second result value.
+        self.abv_result = \
+        OgcalcResult("ABV %:", "Percent Alcohol By Volume")
+        hbox1.pack_start(self.abv_result)
+        self.abv_result.show()
+
+        # Create a horizontal separator (GtkHSeparator) and
+        # add it to the VBox.
+        hsep = gtk.HSeparator()
+        vbox1.pack_start(hsep, False, False)
+        hsep.show()
+
+        # Create a GtkHBox to hold the bottom row of
+        # buttons.
+        hbox1 = gtk.HBox(True, 5)
+        hbox1.set_border_width(10)
+        vbox1.pack_start(hbox1)
+        hbox1.show()
+
+        # Create the "Quit" button.  We use a "stock"
+        # button--commonly-used buttons that have a set
+        # title and icon.
+        button1 = gtk.Button(None, gtk.STOCK_QUIT, False)
+        # We connect the "clicked" signal to the
+        # gtk_main_quit() callback which will end the
+        # program.
+        button1.connect("clicked", gtk.main_quit, None)
+        hbox1.pack_start(button1)
+        button1.show()
+
+        # This button resets the interface.
+        button1 = gtk.Button("_Reset", None, True)
+        # The "clicked" signal is connected to the
+        # on_button_clicked_reset() callback above, and our
+        # "cb_widgets" widget list is passed as the second
+        # argument, cast to a gpointer (void *).
+        button1.connect_object("clicked",
+            Ogcalc.on_button_clicked_reset, self)
+        # connect_object is used to connect a signal from
+        # one widget to the handler of another.  The last
+        # argument is the widget that will be passed as the
+        # first argument of the callback.  This causes
+        # gtk_widget_grab_focus to switch the focus to the
+        # PG entry.
+        button1.connect_object("clicked",
+            gtk.Widget.grab_focus, self.pg_entry.spinbutton)
+        # This lets the default action (Enter) activate this
+        # widget even when the focus is elsewhere.  This
+        # doesn't set the default, it just makes it possible
+        # to set.
+        button1.set_flags(gtk.CAN_DEFAULT)
+        hbox1.pack_start(button1)
+        button1.show()
+
+        # The final button is the Calculate button.
+        button2 = gtk.Button("_Calculate", None, True)
+        # When the button is clicked, call the
+        # on_button_clicked_calculate() function.  This is
+        # the same as for the Reset button.
+        button2.connect_object("clicked",
+            Ogcalc.on_button_clicked_calculate, self)
+        # Switch the focus to the Reset button when the
+        # button is clicked.
+        button2.connect_object("clicked",
+            gtk.Widget.grab_focus, button1)
+        # As before, the button can be the default.
+        button2.set_flags(gtk.CAN_DEFAULT)
+        hbox1.pack_start(button2)
+        # Make this button the default.  Note the thicker
+        # border in the interface--this button is activated
+        # if you press enter in the CF entry field.
+        button2.grab_default()
+        button2.show()
+
+        # Set up data entry focus movement.  This makes the
+        # interface work correctly with the keyboard, so
+        # that you can touch-type through the interface with
+        # no mouse usage or tabbing between the fields.
+
+        # When Enter is pressed in the PG entry box, focus
+        # is transferred to the RI entry.
+        self.pg_entry.spinbutton.connect_object("activate",
+            gtk.Widget.grab_focus, self.ri_entry.spinbutton)
+
+        # RI -> CF.
+        self.ri_entry.spinbutton.connect_object("activate",
+            gtk.Widget.grab_focus, self.cf_entry.spinbutton)
+        # When Enter is pressed in the RI field, it
+        # activates the Calculate button.
+        self.cf_entry.spinbutton.connect_object("activate",
+            gtk.Window.activate_default, self)
+
+if __name__ == "__main__":
+    ogcalc = Ogcalc()
+    ogcalc.show()
+    gtk.main()
+
+# Local Variables:
+# mode:python
+# fill-column:60
+# End:

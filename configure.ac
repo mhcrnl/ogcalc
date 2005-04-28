@@ -5,7 +5,7 @@ dnl The minimum version of autoconf required.
 AC_PREREQ(2.59)
 dnl Initialise automake with the package name, version and
 dnl bug-reporting address.
-AC_INIT([ogcalc], [1.2.2], [rleigh@debian.org])
+AC_INIT([ogcalc], [1.2.3], [rleigh@debian.org])
 dnl For safety, check we are in the right directory by
 dnl checking for a known unique file.
 AC_CONFIG_SRCDIR([C/plain/ogcalc.c])
@@ -44,6 +44,9 @@ AC_CONFIG_FILES([C/gobject/Makefile])
 AC_CONFIG_FILES([C++/Makefile])
 AC_CONFIG_FILES([C++/plain/Makefile])
 AC_CONFIG_FILES([C++/glade/Makefile])
+AC_CONFIG_FILES([python/Makefile])
+AC_CONFIG_FILES([python/plain/Makefile])
+AC_CONFIG_FILES([python/glade/Makefile])
 AC_CONFIG_FILES([figures/Makefile])
 dnl Output the generated config.status script.
 AC_OUTPUT

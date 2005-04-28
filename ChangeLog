@@ -2,6 +2,8 @@
 
 	* Version 1.2.3.
 
+	* Corrected the pkg-config version numbers for C++ examples.
+
 	* Clarified the use of the "destroy" signal, making it clear which
 	object it originates from.
 

@@ -1,0 +1,141 @@
+#!/usr/bin/python
+#
+# ogcalc - calculate %ABV and OG from PG, RI and CF.
+#
+# Copyright (C) 2003-2004  Roger Leigh <rleigh@debian.org>
+#
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General
+# Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public
+# License along with this program; if not, write to the
+# Free Software Foundation, Inc., 675 Mass Ave, Cambridge,
+# MA 02139, USA.
+#
+#############################################################
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+import gtk.glade
+
+class Ogcalc(gtk.Window):
+
+    # This function is called when the window is about to be
+    # destroyed (e.g. if the close button on the window was
+    # clicked).  It is not a destructor.
+    def on_delete_event(self, event, data=None):
+        self.hide()
+        return True
+
+    # Reset the interface.
+    def reset(self, data=None):
+        self.pg_val.set_value(0.0)
+        self.ri_val.set_value(0.0)
+        self.cf_val.set_value(0.0)
+        self.og_result.set_text("")
+        self.abv_result.set_text("")
+
+    # Peform the calculation.
+    def calculate(self, data=None):
+        pg = self.pg_val.get_value()
+        ri = self.ri_val.get_value()
+        cf = self.cf_val.get_value()
+
+        og = (ri * 2.597) - (pg * 1.644) - 34.4165 + cf;
+
+        # Do the sums.
+        if og < 60:
+            abv = (og - pg) * 0.130;
+        else:
+            abv = (og - pg) * 0.134;
+
+        # Display the results.  Note the <b></b> GMarkup
+        # tags to make it display in boldface.
+        self.og_result.set_markup("<b>%(result)0.2f</b>"
+                                  %{'result': og})
+        self.abv_result.set_markup("<b>%(result)0.2f</b>"
+                                   %{'result': abv})
+
+    signal_handlers = {
+        'ogcalc_calculate': calculate,
+        'ogcalc_reset': reset
+    }
+
+    def __init__(self):
+        gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
+        self.set_title("OG & ABV Calculator")
+
+        # Disable window resizing, since there's no point in
+        # this case.
+        self.set_resizable(False)
+
+        self.connect("delete-event",
+                     Ogcalc.on_delete_event, None)
+
+        # Load the interface description.
+        self.xml = gtk.glade.XML("ogcalc.glade",
+                                 "ogcalc_main_vbox", None);
+
+        # Get the widgets.
+        self.pg_val = self.xml.get_widget("pg_entry");
+        self.ri_val = self.xml.get_widget("ri_entry");
+        self.cf_val = self.xml.get_widget("cf_entry");
+        self.og_result = self.xml.get_widget("og_result");
+        self.abv_result = self.xml.get_widget("abv_result");
+        self.quit_button = \
+            self.xml.get_widget("quit_button");
+        self.reset_button = \
+            self.xml.get_widget("reset_button");
+        self.calculate_button = \
+            self.xml.get_widget("calculate_button");
+
+        self.cf_val.connect_object("activate",
+            gtk.Window.activate_default, self)
+        self.calculate_button.connect_object("clicked",
+            Ogcalc.calculate, self)
+        self.calculate_button.connect_object("clicked",
+            gtk.Widget.grab_focus, self.reset_button)
+        self.reset_button.connect_object("clicked",
+            Ogcalc.reset, self)
+        self.reset_button.connect_object("clicked",
+            gtk.Widget.grab_focus, self.pg_val)
+        self.quit_button.connect_object("clicked",
+            gtk.Widget.hide, self)
+
+        # Set up signal handlers for numeric entries.
+        self.pg_val.connect_object("activate",
+            gtk.Widget.grab_focus, self.ri_val)
+        self.ri_val.connect_object("activate",
+            gtk.Widget.grab_focus, self.cf_val)
+        self.cf_val.connect_object("activate",
+            gtk.Window.activate_default, self)
+
+        # Get the interface root and pack it into our
+        # window.
+        self.add(self.xml.get_widget("ogcalc_main_vbox"))
+
+        # Ensure calculate is the default.  The Glade
+        # default was lost since it wasn't in a window when
+        # the default was set.
+        self.calculate_button.grab_default()
+
+if __name__ == "__main__":
+    ogcalc = Ogcalc()
+    ogcalc.connect("hide", gtk.main_quit, None)
+    ogcalc.show()
+    gtk.main()
+
+# Local Variables:
+# mode:python
+# fill-column:60
+# End:
