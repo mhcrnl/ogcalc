@@ -32,11 +32,11 @@
 \usepackage{fancybox}
 \usepackage[center]{subfigure}
 \usepackage[pdftex,
-  pdftitle={An introduction to programming with GTK+ and Glade in ISO C and
-  ISO C++},
+  pdftitle={An introduction to programming with GTK+ and Glade in ISO C,
+  ISO C++ and Python},
   pdfauthor={Roger Leigh},
   pdfsubject={GTK+},
-  pdfkeywords={GTK+, Glade, C, C++, GNU, Linux},
+  pdfkeywords={GTK+, Glade, C, C++, Python, GNU, Linux},
   a4paper,raiselinks,
   bookmarks,
   pdfstartview={FitH},
@@ -57,8 +57,8 @@
 \begin{document}
 
 
-\title{An introduction to programming with GTK+ and Glade in ISO C and
-  ISO C++\\\bigskip\large{Version 1.2.3}}
+\title{An introduction to programming with GTK+ and Glade in ISO C,
+  ISO C++ and Python\\\bigskip\large{Version 1.3.0}}
 \author{Roger Leigh\\\texttt{rleigh@debian.org}}
 \maketitle
 
@@ -85,8 +85,8 @@ other free software projects, one of the most notable being the
 GTK+ is written in C and, because of the ubiquity of the C language,
 \emph{bindings} have been written to allow the development of GTK+
 applications in many other languages.  This short tutorial is intended
-as a simple introduction to writing GTK+ applications in C and C++,
-using the current 2.0/2.2 version of \filename{libgtk}.  It also
+as a simple introduction to writing GTK+ applications in C, C++ and
+Python, using the current (2.6) version of \filename{libgtk}.  It also
 covers the use of the Glade user interface designer for \emph{rapid
   application development} (RAD).
 
@@ -94,7 +94,9 @@ It is assumed that the reader is familiar with C and C++ programming,
 and it would be helpful to work through the ``Getting Started''
 chapter of the GTK+ tutorial before reading further.  The GTK+, GLib,
 libglade, Gtkmm and libglademm API references will be useful while
-working through the examples.
+working through the examples.  Very little Python knowledge is
+required, but the Python tutorial and manual, and the PyGTK and Glade
+API references, will also be useful.
 
 I hope you find this tutorial informative.  Please send any
 corrections or suggestions to \texttt{rleigh@debian.org}.
@@ -626,6 +628,8 @@ first be left.
 
 
 \section{GTK+ and C}
+
+\label{sec:gtkc}
 
 \subsection{Introduction}
 
@@ -1593,6 +1597,222 @@ class, \variable{window}, is instantiated.  Finally, the interface is
 run, using \code{kit.run()}.  This function will return when
 \variable{window} is hidden, and then the program will exit.
 
+\section{Python}
+
+\label{sec:python}
+
+\subsection{Introduction}
+
+Python is a popular scripting language, particularly with beginners to
+programming, but also used by many veteran developers.  It has a clear
+and simple syntax, coupled with decent support for both procedural and
+object-oriented programming.  Unlike C and C++, Python is an
+interpreted language, and so compilation is not necessary.  This has
+some advantages, for example development is faster, particularly when
+prototyping new code.  There are also disadvantages, such as programs
+running much slower than machine code.  Worse, all code paths must be
+run in order to verify they are syntactically correct, and simple
+typing mistakes can result in a syntactically correct, but
+dysfunctional, program.  A good C or C++ compiler would catch these
+errors, but Python cannot.  There are tools, such as
+\program{pychecker}, which help with this.  The purpose of this
+document is not to advocate any particular tool, however.  The pros
+and cons of each language have been discussed at length in many other
+places.
+
+Python has a language binding for GTK+, pyGTK, which allows the
+creation of GTK+ user interfaces directly, including the ability to
+derive new classes from the standard GTK+ classes, and use Python
+functions and object methods as callbacks.  The functionality
+provided by \program{libglade} in C is also similarly available.
+
+In the next section, examples show the use of pyGTK to create the
+\program{ogcalc} interface, using both plain GTK+ and Glade.
+The author wrote the Python scripts with only a few hours of Python
+experience, directly from the original C source, which demonstrates
+just how easy Python is to get into.
+
+\subsection{Code listing}
+
+\lstinputlisting[language=Python,
+                 caption={\filename{python/plain/ogcalc}},
+                 firstline=26, lastline=333]
+                 {python/plain/ogcalc}
+
+\lstinputlisting[language=Python,
+                 caption={\filename{python/glade/ogcalc}},
+                 firstline=26, lastline=131]
+                 {python/glade/ogcalc}
+
+\subsection{Analysis}
+
+What the GTK+ classes and methods do here will not be discussed,
+having been covered in the previous sections.  Instead, the
+Python-specific differences will be examined.
+
+\begin{lstlisting}[numbers=none, language=Python]
+import pygtk
+pygtk.require('2.0')
+import gtk
+\end{lstlisting}
+
+This preamble imports the pyGTK modules for us, and checks that the
+GTK+ version is correct.
+
+\begin{lstlisting}[numbers=none, language=Python]
+class OgcalcSpinEntry(gtk.HBox):
+    def __init__(self, label_text, tooltip_text,
+                 adjustment, digits):
+        gtk.HBox.__init__(self, False, 5)
+        ...
+
+class OgcalcResult(gtk.HBox):
+    def __init__(self, label_text, tooltip_text):
+        gtk.HBox.__init__(self, False, 5)
+        ...
+\end{lstlisting}
+
+These two simple classes derive from \class{GtkHBox}.  They are the
+Python equivalents of the \function{create\_spin\_entry} and
+\function{create\_result\_label} functions in Section \ref{sec:gtkc}.
+They are mostly identical to the C code in terms of the objects
+created and the object methods used.  The main difference is that
+\function{create\_spin\_entry} has a \variable{spinbutton\_pointer}
+argument which has been dropped here.  The same difference applies to
+\function{create\_result\_label} for
+\variable{result\_label\_pointer}.  In Python, we can't pass pointers
+as easily as in C, however we can access the spinbutton as a member of
+the \class{OgcalcSpinEntry} object instead (\code{object.spinbutton}).
+
+Note that because the object is derived, the \function{\_\_init\_\_}
+initialiser (constructor) has to manually chain up to the parent
+initialiser in order to correctly initialise the class instance.
+
+\begin{lstlisting}[numbers=none, language=Python]
+class Ogcalc(gtk.Window):
+\end{lstlisting}
+
+\noindent is our main application object.  It derives from
+\class{gtk.Window}.
+
+\begin{lstlisting}[numbers=none, language=Python]
+    def on_button_clicked_reset(self, data=None):
+        self.pg_entry.spinbutton.set_value(0.0)
+        ...
+        self.abv_result.result_value.set_text("")
+\end{lstlisting}
+
+This function resets the interface to its initial state.  Note that
+all the member variables are accessed through \variable{self}, which
+is the class instance, and that the spinbutton and value label to be
+manipulated are contained within the helper objects defined above.
+
+\begin{lstlisting}[numbers=none, language=Python]
+    def on_button_clicked_calculate(self, data=None):
+        ...
+        self.og_result.result_value.set_markup \
+        ("<b>%(result)0.2f</b>" %{'result': og})
+\end{lstlisting}
+
+This function does the calculation.  Note the substitution of the
+result value into the string, which is rather simpler than both the C
+and the C++ code used to construct the result string.
+
+\begin{lstlisting}[numbers=none, language=Python]
+    def __init__(self):
+        gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
+        self.set_title("OG & ABV Calculator")
+\end{lstlisting}
+
+This is the initialiser for the \class{Ogcalc} class.  It starts by
+chaining up the \class{gtk.Window} initialiser, and then calls the
+\function{set\_title} \class{gtk.Window} method to set the window
+title.
+
+\begin{lstlisting}[numbers=none, language=Python]
+        self.connect("destroy", gtk.main_quit, None)
+\end{lstlisting}
+
+This connects the ``destroy'' signal to the \function{gtk.main\_quit}
+function.  There's far less to type than the C and C++ equivalents,
+and hence it's rather more readable.
+
+\begin{lstlisting}[numbers=none, language=Python]
+        self.pg_entry = \
+        OgcalcSpinEntry("PG:", "Present Gravity (density)",
+                        adjustment, 2)
+\end{lstlisting}
+
+Here we create a helper object for entering the PG value.
+
+\begin{lstlisting}[numbers=none, language=Python]
+        self.abv_result = \
+        OgcalcResult("ABV %:", "Percent Alcohol By Volume")
+\end{lstlisting}
+
+Here we create a helper object for displaying the ABV result.
+
+\begin{lstlisting}[numbers=none, language=Python]
+        button1 = gtk.Button(None, gtk.STOCK_QUIT, False)
+        button1 = gtk.Button("_Reset", None, True)
+        button2 = gtk.Button("_Calculate", None, True)
+\end{lstlisting}
+
+This code creates the buttons.  Unlike C and C++, where different
+functions or overloaded constructors were used to create an object
+with different parameters, Python only has a single initialiser
+function, which is used for both stock and non-stock widgets.
+Depending on whether a stock or non-stock widget is being created, the
+first and third, or the second arguments are redundant, respectively.
+
+\begin{lstlisting}[numbers=none, language=Python]
+        button1.connect_object("clicked",
+            Ogcalc.on_button_clicked_reset, self)
+\end{lstlisting}
+
+This connects the ``clicked'' signal to the \class{Ogcalc}
+\function{on\_button\_clicked\_reset} method of the \variable{self}
+object.
+
+\begin{lstlisting}[numbers=none, language=Python]
+        self.pg_entry.spinbutton.connect_object("activate",
+            gtk.Widget.grab_focus, self.ri_entry.spinbutton)
+\end{lstlisting}
+
+This connects the ``activate'' signal to the \class{Ogcalc}
+\function{grab\_focus} method of the
+\variable{self.ri\_entry.spinbutton} object.
+
+\begin{lstlisting}[numbers=none, language=Python]
+if __name__ == "__main__":
+    ogcalc = Ogcalc()
+    ogcalc.show()
+    gtk.main()
+\end{lstlisting}
+
+The classes are intended for use as a module in a larger program.
+When run as a standalone script from the command-line, we ``run'' the
+class by creating an instance of it, showing it, and then run the GTK+
+main loop.
+
+The Glade code is identical, except for loading the Glade interface:
+
+\begin{lstlisting}[numbers=none, language=Python]
+        self.xml = gtk.glade.XML("ogcalc.glade",
+                                 "ogcalc_main_vbox", None);
+\end{lstlisting}
+
+Here the Glade interface is loaded, rooted at the
+``ogcalc\_main\_vbox'' widget,
+
+\begin{lstlisting}[numbers=none, language=Python]
+        self.pg_val = self.xml.get_widget("pg_entry");
+\end{lstlisting}
+
+\noindent and now a specific widget is pulled out of the XML interface
+description.
+
+
 \section{Conclusion}
 
 Which method of programming one chooses is dependent on many different
@@ -1630,6 +1850,11 @@ C++ code in terms of its structure.  However, C++ still provides
 facilities such as RAII (Resource Acquisition is Initialisation) and
 automatic destruction when an object goes out of scope that C cannot
 provide.
+
+Depending on whether the speed and safety tradeoffs are acceptable,
+Python may also be a valid choice.  While Python code is certainly
+clearer and simpler, the speed of execution and lack of compile-time
+type checking are a concern.
 
 There is no ``best solution'' for everyone.  Choose based on your own
 preferences and capabilities.  In addition, Glade is not the solution

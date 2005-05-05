@@ -66,11 +66,6 @@ class Ogcalc(gtk.Window):
         self.abv_result.set_markup("<b>%(result)0.2f</b>"
                                    %{'result': abv})
 
-    signal_handlers = {
-        'ogcalc_calculate': calculate,
-        'ogcalc_reset': reset
-    }
-
     def __init__(self):
         gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
         self.set_title("OG & ABV Calculator")

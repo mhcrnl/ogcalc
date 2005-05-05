@@ -32,7 +32,8 @@ While learning how to use GTK+, I wrote a small demo program to
 explore the features of GTK+.  Later, I wanted to determine if using
 either Glade (the GTK+ interface designer) or Gtkmm (the GTK+ C++
 bindings) could make my life simpler, by making programs smaller,
-better structured and more maintainable.
+better structured and more maintainable.  A year later, I needed to
+evaluate the use of Python, and added the Python examples.
 
 This small package includes the same small program written in:
 
@@ -41,6 +42,8 @@ This small package includes the same small program written in:
 * C, using and GObject and libglade.
 * C++, using Gtkmm.
 * C++, using Gtkmm and libglademm.
+* Python, using PyGTK.
+* Python, using PyGTK and Glade.
 
 All of these programs use exactly the same interface, and behave in
 exactly the same way, using the same program logic.  This allows an
@@ -78,7 +81,7 @@ On a Debian unstable system, these packages are required:
 ogcalc: libgtk2.0-dev (>= 2.4.1-1)
 ogcalc-gl: libglade2-dev
 ogcalcmm: libgtkmm2.4-dev, libglademm-2.4-dev
+python: python-gtk2, python-glade2
 glade-2 provides the Glade interface editor.
 
-
- -- Roger Leigh <rleigh@debian.org>  Thu, 28 Oct 2004 00:10:26 +0100
+ -- Roger Leigh <rleigh@debian.org>  Fri, 29 Apr 2005 22:54:04 +0100
