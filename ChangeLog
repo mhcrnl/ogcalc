@@ -1,3 +1,16 @@
+2006-07-20  Roger Leigh  <rleigh@debian.org>
+
+	* Version 1.3.1
+
+	* configure.ac: Bump version to 1.3.1.  Add gmodule-2.0 to
+	libglade-2.0 pkg-config check (current GTK+ releases no longer add
+	gmodule, so -Wl,--export-dynamic is dropped, breaking
+	glade_xml_signal_autoconnect()).
+
+	* ogcalc.tex: Document correct pkg-config modules for current
+	libglade releases.  Use $() rather than `` for subshells in
+	examples.
+
 2005-05-05  Roger Leigh  <rleigh@debian.org>
 
 	* Version 1.3.0

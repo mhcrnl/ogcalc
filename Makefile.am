@@ -8,7 +8,7 @@ ogcalc.pdf: ogcalc.tex pdf_figures
 	pdflatex $<
 	pdflatex $<
 	pdflatex $<
-	thumbpdf $(basename $<)
+#	thumbpdf $(basename $<)
 	pdflatex $<
 	$(MAKE) tidy
 	$(MAKE) -C figures tidy

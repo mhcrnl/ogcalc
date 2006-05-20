@@ -58,7 +58,7 @@
 
 
 \title{An introduction to programming with GTK+ and Glade in ISO C,
-  ISO C++ and Python\\\bigskip\large{Version 1.3.0}}
+  ISO C++ and Python\\\bigskip\large{Version 1.3.1}}
 \author{Roger Leigh\\\texttt{rleigh@debian.org}}
 \maketitle
 
@@ -676,8 +676,8 @@ To build the source, do the following:
 
 \begin{verbatim}
 cd C/plain
-cc `pkg-config --cflags gtk+-2.0` -c ogcalc.c
-cc `pkg-config --libs gtk+-2.0` -o ogcalc ogcalc.o
+cc $(pkg-config --cflags gtk+-2.0) -c ogcalc.c
+cc $(pkg-config --libs gtk+-2.0) -o ogcalc ogcalc.o
 \end{verbatim}
 
 \subsection{Analysis}
@@ -1044,8 +1044,9 @@ To build the source, do the following:
 
 \begin{verbatim}
 cd C/glade
-cc `pkg-config --cflags libglade-2.0` -c ogcalc.c
-cc `pkg-config --libs libglade-2.0` -o ogcalc ogcalc.o
+cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) -c ogcalc.c
+cc $(pkg-config --libs libglade-2.0 gmodule-2.0)
+  -o ogcalc ogcalc.o
 \end{verbatim}
 
 \subsection{Analysis}
@@ -1165,10 +1166,12 @@ To build the source, do the following:
 
 \begin{verbatim}
 cd C/gobject
-cc `pkg-config --cflags libglade-2.0` -c ogcalc.c
-cc `pkg-config --cflags libglade-2.0` -c ogcalc-main.c
-cc `pkg-config --libs libglade-2.0` -o ogcalc ogcalc.o \
-                                       ogcalc-main.o
+cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
+  -c ogcalc.c
+cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
+  -c ogcalc-main.c
+cc $(pkg-config --libs libglade-2.0 gmodule-2.0) \
+  -o ogcalc ogcalc.o ogcalc-main.o
 \end{verbatim}
 
 \subsection{Analysis}
@@ -1408,9 +1411,9 @@ To build the source, do the following:
 
 \begin{verbatim}
 cd C++/glade
-c++ `pkg-config --cflags libglademm-2.4` -c ogcalc.cc
-c++ `pkg-config --cflags libglademm-2.4` -c ogcalc-main.cc
-c++ `pkg-config --libs libglademm-2.4` -o ogcalc ogcalc.o \
+c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc.cc
+c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc-main.cc
+c++ $(pkg-config --libs libglademm-2.4) -o ogcalc ogcalc.o \
                                           ogcalc-main.o
 \end{verbatim}
 
@@ -1419,9 +1422,9 @@ tutorial:
 
 \begin{verbatim}
 cd C++/plain
-c++ `pkg-config --cflags gtkmm-2.4` -c ogcalc.cc
-c++ `pkg-config --cflags gtkmm-2.4` -c ogcalc-main.cc
-c++ `pkg-config --libs gtkmm-2.4` -o ogcalc ogcalc.o \
+c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc.cc
+c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc-main.cc
+c++ $(pkg-config --libs gtkmm-2.4) -o ogcalc ogcalc.o \
                                             ogcalc-main.o
 \end{verbatim}
 
