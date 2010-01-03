@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
   GtkWidget                  *window;
   GtkWidget                  *vbox1,   *vbox2;
   GtkWidget                  *hbox1,   *hbox2;
-  GtkWidget                  *button1, *button2;
+  GtkWidget                  *quit, *reset, *calculate;
   GtkObject                  *adjustment;
   GtkWidget                  *hsep;
   struct calculation_widgets  cb_widgets;
@@ -195,22 +195,22 @@ int main(int argc, char *argv[])
   /* Create the "Quit" button.  We use a "stock"
      button--commonly-used buttons that have a set title and
      icon. */
-  button1 = gtk_button_new_from_stock(GTK_STOCK_QUIT);
+  quit = gtk_button_new_from_stock(GTK_STOCK_QUIT);
   /* We connect the "clicked" signal to the gtk_main_quit()
      callback which will end the program. */
-  g_signal_connect (G_OBJECT (button1), "clicked",
+  g_signal_connect (G_OBJECT (quit), "clicked",
                     gtk_main_quit, NULL);
-  gtk_box_pack_start(GTK_BOX(hbox1), button1,
+  gtk_box_pack_start(GTK_BOX(hbox1), quit,
                      TRUE, TRUE, 0);
-  gtk_widget_show(button1);
+  gtk_widget_show(quit);
 
   /* This button resets the interface. */
-  button1 = gtk_button_new_with_mnemonic("_Reset");
+  reset = gtk_button_new_with_mnemonic("_Reset");
   /* The "clicked" signal is connected to the
      on_button_clicked_reset() callback above, and our
      "cb_widgets" widget list is passed as the second
      argument, cast to a gpointer (void *). */
-  g_signal_connect (G_OBJECT (button1), "clicked",
+  g_signal_connect (G_OBJECT (reset), "clicked",
                     G_CALLBACK(on_button_clicked_reset),
                     (gpointer) &cb_widgets);
   /* g_signal_connect_swapped is used to connect a signal
@@ -220,42 +220,42 @@ int main(int argc, char *argv[])
      gtk_widget_grab_focus to switch the focus to the PG
      entry. */
   g_signal_connect_swapped
-    (G_OBJECT (button1),
+    (G_OBJECT (reset),
      "clicked",
      G_CALLBACK (gtk_widget_grab_focus),
      (gpointer)GTK_WIDGET(cb_widgets.pg_val));
   /* This lets the default action (Enter) activate this
      widget even when the focus is elsewhere.  This doesn't
      set the default, it just makes it possible to set.*/
-  GTK_WIDGET_SET_FLAGS (button1, GTK_CAN_DEFAULT);
-  gtk_box_pack_start(GTK_BOX(hbox1), button1,
+  GTK_WIDGET_SET_FLAGS (reset, GTK_CAN_DEFAULT);
+  gtk_box_pack_start(GTK_BOX(hbox1), reset,
                      TRUE, TRUE, 0);
-  gtk_widget_show(button1);
+  gtk_widget_show(reset);
 
   /* The final button is the Calculate button. */
-  button2 = gtk_button_new_with_mnemonic("_Calculate");
+  calculate = gtk_button_new_with_mnemonic("_Calculate");
   /* When the button is clicked, call the
      on_button_clicked_calculate() function.  This is the
      same as for the Reset button. */
-  g_signal_connect (G_OBJECT (button2), "clicked",
+  g_signal_connect (G_OBJECT (calculate), "clicked",
                     G_CALLBACK(on_button_clicked_calculate),
                     (gpointer) &cb_widgets);
   /* Switch the focus to the Reset button when the button is
      clicked. */
   g_signal_connect_swapped
-    (G_OBJECT (button2),
+    (G_OBJECT (calculate),
      "clicked",
      G_CALLBACK (gtk_widget_grab_focus),
-     (gpointer)GTK_WIDGET(button1));
+     (gpointer)GTK_WIDGET(reset));
   /* As before, the button can be the default. */
-  GTK_WIDGET_SET_FLAGS (button2, GTK_CAN_DEFAULT);
-  gtk_box_pack_start(GTK_BOX(hbox1), button2,
+  GTK_WIDGET_SET_FLAGS (calculate, GTK_CAN_DEFAULT);
+  gtk_box_pack_start(GTK_BOX(hbox1), calculate,
                      TRUE, TRUE, 0);
   /* Make this button the default.  Note the thicker border
      in the interface--this button is activated if you press
      enter in the CF entry field. */
-  gtk_widget_grab_default (button2);
-  gtk_widget_show(button2);
+  gtk_widget_grab_default (calculate);
+  gtk_widget_show(calculate);
 
   /* Set up data entry focus movement.  This makes the
      interface work correctly with the keyboard, so that you

@@ -5,7 +5,7 @@ dnl The minimum version of autoconf required.
 AC_PREREQ(2.59)
 dnl Initialise automake with the package name, version and
 dnl bug-reporting address.
-AC_INIT([ogcalc], [1.3.1], [rleigh@debian.org])
+AC_INIT([ogcalc], [1.4.0], [rleigh@debian.org])
 dnl For safety, check we are in the right directory by
 dnl checking for a known unique file.
 AC_CONFIG_SRCDIR([C/plain/ogcalc.c])
@@ -24,6 +24,7 @@ AC_PROG_LIBTOOL
 
 # Checks for libraries.
 PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.4.0])
+PKG_CHECK_MODULES([GTKBUILDER], [gtk+-2.0 >= 2.12.0 gmodule-2.0])
 PKG_CHECK_MODULES([GLADE], [libglade-2.0 >= 2.4.0 gmodule-2.0])
 PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4])
 PKG_CHECK_MODULES([GLADEMM], [libglademm-2.4])
@@ -39,8 +40,11 @@ dnl Configure which files to generate.
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([C/Makefile])
 AC_CONFIG_FILES([C/plain/Makefile])
+AC_CONFIG_FILES([C/builder/Makefile])
 AC_CONFIG_FILES([C/glade/Makefile])
 AC_CONFIG_FILES([C/gobject/Makefile])
+AC_CONFIG_FILES([C/gobject-glade/Makefile])
+AC_CONFIG_FILES([C/gobject-builder/Makefile])
 AC_CONFIG_FILES([C++/Makefile])
 AC_CONFIG_FILES([C++/plain/Makefile])
 AC_CONFIG_FILES([C++/glade/Makefile])

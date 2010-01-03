@@ -1,2 +1,2 @@
 # Subdirectories to make.
-SUBDIRS = plain glade gobject
+SUBDIRS = plain gobject builder glade gobject-glade gobject-builder

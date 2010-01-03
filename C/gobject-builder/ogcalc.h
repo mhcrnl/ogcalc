@@ -71,6 +71,7 @@ typedef struct _OgcalcClass OgcalcClass;
 struct _Ogcalc
 {
   GtkWindow parent; /* The object derives from GtkWindow. */
+  GtkBuilder *builder;    /* The XML interface. */
   /* Widgets contained within the window. */
   GtkSpinButton *pg_val;
   GtkSpinButton *ri_val;
