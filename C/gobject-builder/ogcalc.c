@@ -55,7 +55,7 @@ ogcalc_init( Ogcalc *self )
   gtk_window_set_title(GTK_WINDOW (self),
                        "OG & ABV Calculator");
   /* Don't permit resizing */
-  gtk_window_set_resizable(GTK_WINDOW (self), NULL);
+  gtk_window_set_resizable(GTK_WINDOW (self), FALSE);
 
   /* Connect the window close button ("destroy-event") to
      a callback. */
@@ -74,8 +74,8 @@ ogcalc_init( Ogcalc *self )
   /* Get the interface root and pack it into our window. */
   gtk_container_add
     (GTK_CONTAINER (self),
-     gtk_builder_get_object(self->builder,
-			    "ogcalc_main_vbox"));
+     GTK_WIDGET(gtk_builder_get_object(self->builder,
+				       "ogcalc_main_vbox")));
 
   /* Get the widgets. */
   self->pg_val = GTK_SPIN_BUTTON
