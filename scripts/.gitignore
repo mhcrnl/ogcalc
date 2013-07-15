@@ -2,3 +2,5 @@ depcomp
 ltmain.sh
 missing
 mkinstalldirs
+compile
+install-sh
