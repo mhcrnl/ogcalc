@@ -58,7 +58,7 @@
 
 
 \title{An introduction to programming with GTK+ and Glade in ISO C,
-  ISO C++ and Python\\\bigskip\large{Version 1.4.1}}
+  ISO C++ and Python\\\bigskip\large{Version 1.5.0}}
 \author{Roger Leigh\\\texttt{rleigh@debian.org}}
 \maketitle
 
@@ -634,14 +634,14 @@ first be left.
 \subsection{Introduction}
 
 Many GTK+ applications are written in C alone.  This section
-demonstrates the \program{C/plain/ogcalc} program discussed in the
+demonstrates the \program{gtk/C/plain/ogcalc} program discussed in the
 previous section.  Figure \ref{fig:ogcalc} is a screenshot of the
 finished application.
 
 \begin{figure}
   \centering \resizebox{\textwidth}{!}{
     \includegraphics{figures/c-plain.png} }
-  \caption[\program{C/plain/ogcalc} in action]{\program{C/plain/ogcalc} in action.}
+  \caption[\program{gtk/C/plain/ogcalc} in action]{\program{gtk/C/plain/ogcalc} in action.}
   \label{fig:ogcalc}
 \end{figure}
 
@@ -668,14 +668,14 @@ commented, to explain what is going on.
 
 
 \lstinputlisting[language=C,
-                 caption={\filename{C/plain/ogcalc.c}},
+                 caption={\filename{gtk/C/plain/ogcalc.c}},
                  firstline=24, lastline=459]
-                 {C/plain/ogcalc.c}
+                 {gtk/C/plain/ogcalc.c}
 
 To build the source, do the following:
 
 \begin{verbatim}
-cd C/plain
+cd gtk/C/plain
 cc $(pkg-config --cflags gtk+-2.0) -c ogcalc.c
 cc $(pkg-config --libs gtk+-2.0) -o ogcalc ogcalc.o
 \end{verbatim}
@@ -995,8 +995,8 @@ Glade.
   \label{fig:glade}
 \end{figure}
 
-The file \filename{C/glade/ogcalc.glade} contains the same interface
-constructed in \program{C/plain/ogcalc}, but designed in Glade.  This
+The file \filename{gtk/C/glade/ogcalc.glade} contains the same interface
+constructed in \program{gtk/C/plain/ogcalc}, but designed in Glade.  This
 file can be opened in Glade, and changed as needed, without needing to
 touch any code.
 
@@ -1018,9 +1018,9 @@ listing, but with the following changes:
   between the interface and the callbacks.
 \end{itemize}
 
-The running \program{C/glade/ogcalc} application is shown in Figure
+The running \program{gtk/C/glade/ogcalc} application is shown in Figure
 \ref{fig:ogcalcgl}.  Notice that it is identical to
-\program{C/plain/ogcalc}, shown in Figure \ref{fig:ogcalc}.  (No, they
+\program{gtk/C/plain/ogcalc}, shown in Figure \ref{fig:ogcalc}.  (No, they
 are \emph{not} the same screenshot!)
 
 \begin{figure}
@@ -1028,7 +1028,7 @@ are \emph{not} the same screenshot!)
   \resizebox{\textwidth}{!}{
     \includegraphics{figures/c-glade.png}
   }
-  \caption[\program{C/glade/ogcalc} in action]{\program{C/glade/ogcalc} in
+  \caption[\program{gtk/C/glade/ogcalc} in action]{\program{gtk/C/glade/ogcalc} in
     action.}
   \label{fig:ogcalcgl}
 \end{figure}
@@ -1036,14 +1036,14 @@ are \emph{not} the same screenshot!)
 \subsection{Code listing}
 
 \lstinputlisting[language=C,
-                 caption={\filename{C/glade/ogcalc.c}},
+                 caption={\filename{gtk/C/glade/ogcalc.c}},
                  firstline=24, lastline=142]
-                 {C/glade/ogcalc.c}
+                 {gtk/C/glade/ogcalc.c}
 
 To build the source, do the following:
 
 \begin{verbatim}
-cd C/glade
+cd gtk/C/glade
 cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) -c ogcalc.c
 cc $(pkg-config --libs libglade-2.0 gmodule-2.0)
   -o ogcalc ogcalc.o
@@ -1140,7 +1140,7 @@ be taken advantage of using plain C and GObject.
   \resizebox{\textwidth}{!}{
     \includegraphics{figures/c-gobject.png}
   }
-  \caption[\program{C/gobject/ogcalc} in action]{\program{C/gobject/ogcalc} in
+  \caption[\program{gtk/C/gobject/ogcalc} in action]{\program{gtk/C/gobject/ogcalc} in
     action.}
   \label{fig:ogcalcgo}
 \end{figure}
@@ -1148,24 +1148,24 @@ be taken advantage of using plain C and GObject.
 \subsection{Code listing}
 
 \lstinputlisting[language=C,
-                 caption={\filename{C/gobject/ogcalc.h}},
+                 caption={\filename{gtk/C/gobject/ogcalc.h}},
                  firstline=27, lastline=113]
-                 {C/gobject/ogcalc.h}
+                 {gtk/C/gobject/ogcalc.h}
 
 \lstinputlisting[language=C,
-                 caption={\filename{C/gobject/ogcalc.c}},
+                 caption={\filename{gtk/C/gobject/ogcalc.c}},
                  firstline=24, lastline=201]
-                 {C/gobject/ogcalc.c}
+                 {gtk/C/gobject/ogcalc.c}
 
 \lstinputlisting[language=C,
-                 caption={\filename{C/gobject/ogcalc-main.c}},
+                 caption={\filename{gtk/C/gobject/ogcalc-main.c}},
                  firstline=24, lastline=55]
-                 {C/gobject/ogcalc-main.c}
+                 {gtk/C/gobject/ogcalc-main.c}
 
 To build the source, do the following:
 
 \begin{verbatim}
-cd C/gobject
+cd gtk/C/gobject
 cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
   -c ogcalc.c
 cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
@@ -1178,7 +1178,7 @@ cc $(pkg-config --libs libglade-2.0 gmodule-2.0) \
 
 The bulk of the code is the same as in previous sections, and so
 describing what the code does will not be repeated here.  The
-\class{Ogcalc} class is defined in \filename{C/gobject/ogcalc.h}.
+\class{Ogcalc} class is defined in \filename{gtk/C/gobject/ogcalc.h}.
 This header declares the object and class structures and some macros
 common to all GObject-based objects and classes.  The macros and
 internals of GObject are out of the scope of this document, but
@@ -1198,7 +1198,7 @@ virtual function pointers.  It has many similarities to a C++ vtable.
 Finally, the header defines the public member functions of the class.
 
 The implementation of this class is found in
-\filename{C/gobject/ogcalc.c}.  The major difference to previous
+\filename{gtk/C/gobject/ogcalc.c}.  The major difference to previous
 examples is the class registration and the extra functions for object
 construction, initialisation and notification of destruction.  The
 body of the methods to reset and calculate are identical to previous
@@ -1273,7 +1273,7 @@ destruction is prevented.  Both the ``Quit'' button and the ``delete''
 event end up calling \function{gtk\_widget\_hide} to hide the widget
 rather than \function{gtk\_main\_quit} as before.
 
-Lastly, \filename{C/gobject/ogcalc-main.c} defines a minimal
+Lastly, \filename{gtk/C/gobject/ogcalc-main.c} defines a minimal
 \function{main}.  The sole purpose of this function is to create an
 instance of \class{Ogcalc}, show it, and then destroy it.  Notice how
 simple and understandable this has become now that building the UI is
@@ -1351,7 +1351,7 @@ be connected manually.  This is because the \program{libsigc++}
 signals, connecting to the methods of individual objects, cannot be
 connected automatically.
 
-\program{C++/glade/ogcalc}, shown in Figure \ref{fig:ogcalcmm}, is
+\program{gtk/C++/glade/ogcalc}, shown in Figure \ref{fig:ogcalcmm}, is
 identical to the previous examples, both in appearance and
 functionality.  However, internally there are some major differences.
 
@@ -1360,14 +1360,14 @@ functionality.  However, internally there are some major differences.
   \resizebox{\textwidth}{!}{
     \includegraphics{figures/c++-glade.png}
   }
-  \caption[\program{C++/glade/ogcalc} in action]{\program{C++/glade/ogcalc} in
+  \caption[\program{gtk/C++/glade/ogcalc} in action]{\program{gtk/C++/glade/ogcalc} in
     action.}
   \label{fig:ogcalcmm}
 \end{figure}
 
 Firstly, the \function{main} function no longer knows anything about
 the user interface.  It merely instantiates an instance of the
-\class{ogcalc} class, similarly to \program{C/gobject/ogcalc}.
+\class{ogcalc} class, similarly to \program{gtk/C/gobject/ogcalc}.
 
 The \class{ogcalc} class is derived from the \class{Gtk::Window}
 class, and so contains all of the functionality of a
@@ -1393,24 +1393,24 @@ to the reader to compare and contrast them.
 \subsection{Code Listing}
 
 \lstinputlisting[language={[GNU]C++},
-                 caption={\filename{C++/glade/ogcalc.h}},
+                 caption={\filename{gtk/C++/glade/ogcalc.h}},
                  firstline=27, lastline=54]%
-                 {C++/glade/ogcalc.h}
+                 {gtk/C++/glade/ogcalc.h}
 
 \lstinputlisting[language={[GNU]C++},
-                 caption={\filename{C++/glade/ogcalc.cc}},
+                 caption={\filename{gtk/C++/glade/ogcalc.cc}},
                  firstline=24, lastline=128]%
-                 {C++/glade/ogcalc.cc}
+                 {gtk/C++/glade/ogcalc.cc}
 
 \lstinputlisting[language={[GNU]C++},
-                 caption={\filename{C++/glade/ogcalc-main.cc}},
+                 caption={\filename{gtk/C++/glade/ogcalc-main.cc}},
                  firstline=24, lastline=40]%
-                 {C++/glade/ogcalc-main.cc}
+                 {gtk/C++/glade/ogcalc-main.cc}
 
 To build the source, do the following:
 
 \begin{verbatim}
-cd C++/glade
+cd gtk/C++/glade
 c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc.cc
 c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc-main.cc
 c++ $(pkg-config --libs libglademm-2.4) -o ogcalc ogcalc.o \
@@ -1421,7 +1421,7 @@ Similarly, for the plain C++ version, which is not discussed in the
 tutorial:
 
 \begin{verbatim}
-cd C++/plain
+cd gtk/C++/plain
 c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc.cc
 c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc-main.cc
 c++ $(pkg-config --libs gtkmm-2.4) -o ogcalc ogcalc.o \
@@ -1638,14 +1638,14 @@ just how easy Python is to get into.
 \subsection{Code listing}
 
 \lstinputlisting[language=Python,
-                 caption={\filename{python/plain/ogcalc}},
+                 caption={\filename{gtk/python/plain/ogcalc}},
                  firstline=26, lastline=333]
-                 {python/plain/ogcalc}
+                 {gtk/python/plain/ogcalc}
 
 \lstinputlisting[language=Python,
-                 caption={\filename{python/glade/ogcalc}},
+                 caption={\filename{gtk/python/glade/ogcalc}},
                  firstline=26, lastline=131]
-                 {python/glade/ogcalc}
+                 {gtk/python/glade/ogcalc}
 
 \subsection{Analysis}
 
@@ -1828,7 +1828,7 @@ factors, such as:
 \item{The need for code reuse.}
 \end{itemize}
 
-For simple programs, such as \program{C/plain/ogcalc}, there is no
+For simple programs, such as \program{gtk/C/plain/ogcalc}, there is no
 problem with writing in plain C, but as programs become more complex,
 Glade can greatly ease the effort needed to develop and maintain the
 code.  The code reduction and de-uglification achieved through
