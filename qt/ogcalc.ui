@@ -253,6 +253,9 @@
         <property name="text">
          <string>&amp;Reset</string>
         </property>
+        <property name="autoDefault">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -293,8 +296,8 @@
    <slot>reset()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>199</x>
-     <y>245</y>
+     <x>267</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
@@ -309,8 +312,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>71</x>
-     <y>74</y>
+     <x>76</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
@@ -325,8 +328,8 @@
    <slot>calculate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>325</x>
-     <y>75</y>
+     <x>401</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
@@ -341,28 +344,12 @@
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>325</x>
-     <y>75</y>
+     <x>401</x>
+     <y>115</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>75</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>reset</sender>
-   <signal>clicked()</signal>
-   <receiver>pg_entry</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>199</x>
-     <y>75</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>87</x>
-     <y>20</y>
+     <x>267</x>
+     <y>115</y>
     </hint>
    </hints>
   </connection>
@@ -409,8 +396,40 @@
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>325</x>
-     <y>75</y>
+     <x>401</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pg_entry</sender>
+   <signal>enterPressed()</signal>
+   <receiver>ri_entry</receiver>
+   <slot>selectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>88</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>217</x>
+     <y>21</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ri_entry</sender>
+   <signal>enterPressed()</signal>
+   <receiver>cf_entry</receiver>
+   <slot>selectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>217</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>353</x>
+     <y>21</y>
     </hint>
    </hints>
   </connection>

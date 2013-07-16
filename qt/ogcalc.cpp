@@ -44,6 +44,9 @@ ogcalc::calculate()
     output.str("");
     output << std::fixed << std::setprecision(2) << abv;
     ui->abv_result->setText(QString::fromStdString(output.str()));
+
+    ui->reset->setDefault(true);
+    ui->calculate->setDefault(false);
 }
 
 void
@@ -54,4 +57,8 @@ ogcalc::reset()
     ui->cf_entry->setValue(0.0);
     ui->og_result->setText("");
     ui->abv_result->setText("");
+    ui->pg_entry->setFocus();
+    ui->pg_entry->selectAll();
+    ui->reset->setDefault(false);
+    ui->calculate->setDefault(true);
 }
