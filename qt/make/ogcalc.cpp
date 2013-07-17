@@ -9,7 +9,6 @@ ogcalc::ogcalc(QWidget *parent) :
     ui(new Ui::ogcalc)
 {
     ui->setupUi(this);
-    setWindowIcon(QIcon("ogcalc.svg"));
 
     reset();
 }
