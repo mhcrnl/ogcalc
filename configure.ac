@@ -29,6 +29,7 @@ PKG_CHECK_MODULES([GTKBUILDER], [gtk+-2.0 >= 2.12.0 gmodule-2.0])
 PKG_CHECK_MODULES([GLADE], [libglade-2.0 >= 2.4.0 gmodule-2.0])
 PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4])
 PKG_CHECK_MODULES([GLADEMM], [libglademm-2.4])
+PKG_CHECK_MODULES([QT], [Qt5Core Qt5Gui Qt5Widgets Qt5Svg])
 
 # Checks for header files (none at the moment).
 
@@ -53,6 +54,8 @@ AC_CONFIG_FILES([gtk/C++/glade/Makefile])
 AC_CONFIG_FILES([gtk/python/Makefile])
 AC_CONFIG_FILES([gtk/python/plain/Makefile])
 AC_CONFIG_FILES([gtk/python/glade/Makefile])
+AC_CONFIG_FILES([qt/Makefile])
+AC_CONFIG_FILES([qt/am/Makefile])
 AC_CONFIG_FILES([figures/Makefile])
 dnl Output the generated config.status script.
 AC_OUTPUT

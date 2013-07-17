@@ -1,2 +1,2 @@
 # Subdirectories to make.
-SUBDIRS = qmake make
+SUBDIRS = qmake make am

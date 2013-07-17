@@ -1,5 +1,5 @@
 # Subdirectories to make.
-SUBDIRS = gtk figures
+SUBDIRS = gtk qt figures
 
 # Rules to build documentation.
 docs: ogcalc.pdf
