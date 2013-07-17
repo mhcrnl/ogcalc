@@ -17,7 +17,7 @@ OGCALC_OBJECTS = $(addsuffix .o,$(basename $(OGCALC_SOURCES) $(OGCALC_MOC_SOURCE
 OGCALC_CXXFLAGS = $(CXXFLAGS) $(QT_CXXFLAGS) -fPIC
 OGCALC_LIBS = $(QT_LIBS)
 
-default: ogcalc
+all: ogcalc
 
 moc_%.cpp: %.h
 	moc $< -o $@
