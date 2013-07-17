@@ -4,8 +4,8 @@ OGCALC_MOC_SOURCES = $(addprefix moc_,$(addsuffix .cpp,$(basename $(OGCALC_MOC_H
 OGCALC_UI_DEFS = $(wildcard *.ui)
 OGCALC_UI_SOURCES = $(addprefix ui_,$(addsuffix .h,$(basename $(OGCALC_UI_DEFS))))
 
-QT_CXXFLAGS += $(shell pkg-config --cflags Qt5Core Qt5Gui Qt5Widgets)
-QT_LIBS += $(shell pkg-config --libs Qt5Core Qt5Gui Qt5Widgets)
+QT_CXXFLAGS += $(shell pkg-config --cflags Qt5Core Qt5Gui Qt5Widgets Qt5Svg)
+QT_LIBS += $(shell pkg-config --libs Qt5Core Qt5Gui Qt5Widgets Qt5Svg)
 
 OGCALC_SOURCES = 		\
 	main.cpp		\
@@ -17,13 +17,7 @@ OGCALC_OBJECTS = $(addsuffix .o,$(basename $(OGCALC_SOURCES) $(OGCALC_MOC_SOURCE
 OGCALC_CXXFLAGS = $(CXXFLAGS) $(QT_CXXFLAGS) -fPIC
 OGCALC_LIBS = $(QT_LIBS)
 
-default:
-	echo $(OGCALC_MOC_HEADERS)
-	echo $(OGCALC_MOC_SOURCES)
-	echo $(OGCALC_UI_DEFS)
-	echo $(OGCALC_UI_SOURCES)
-	echo $(OGCALC_CXXFLAGS)
-	echo $(OGCALC_LIBS)
+default: ogcalc
 
 moc_%.cpp: %.h
 	moc $< -o $@
@@ -39,3 +33,5 @@ ogcalc: $(OGCALC_MOC_SOURCES) $(OGCALC_UI_SOURCES) $(OGCALC_OBJECTS)
 
 clean:
 	rm -f $(OGCALC_MOC_SOURCES) $(OGCALC_UI_SOURCES) $(OGCALC_OBJECTS) ogcalc
+
+.PHONY: default clean

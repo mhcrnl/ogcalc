@@ -22,6 +22,7 @@ public slots:
 
 private:
     Ui::ogcalc *ui;
+    QIcon icon;
 };
 
 #endif // OGCALC_H
