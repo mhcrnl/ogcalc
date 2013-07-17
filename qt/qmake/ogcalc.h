@@ -1,7 +1,7 @@
 #ifndef OGCALC_H
 #define OGCALC_H
 
-#include <QMainWindow>
+#include <QtWidgets/QMainWindow>
 
 namespace Ui {
 class ogcalc;

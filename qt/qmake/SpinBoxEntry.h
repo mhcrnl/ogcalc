@@ -1,8 +1,8 @@
 #ifndef SPINBOXENTRY_H
 #define SPINBOXENTRY_H
 
-#include <QDoubleSpinBox>
-#include <QKeyEvent>
+#include <QtWidgets/QDoubleSpinBox>
+#include <QtGui/QKeyEvent>
 
 class SpinBoxEntry : public QDoubleSpinBox
 {
