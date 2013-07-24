@@ -34,4 +34,8 @@ ogcalc: $(OGCALC_MOC_SOURCES) $(OGCALC_UI_SOURCES) $(OGCALC_OBJECTS)
 clean:
 	rm -f $(OGCALC_MOC_SOURCES) $(OGCALC_UI_SOURCES) $(OGCALC_OBJECTS) ogcalc
 
-.PHONY: default clean
+distclean: clean
+
+maintainerclean: distclean
+
+.PHONY: default clean distclean maintainerclean

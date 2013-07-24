@@ -1,12 +1,12 @@
 OGCALC_MOC_H = $(shell egrep -l "[[:space:]]*((public|protected|private)[[:space:]]+)?signals|slots:" *.h)
-OGCALC_MOC_SOURCES = $(addprefix moc_,$(addsuffix .cpp,$(basename $(OGCALC_MOC_H))))
+OGCALC_MOC_SRC = $(addprefix moc_,$(addsuffix .cpp,$(basename $(OGCALC_MOC_H))))
 
 OGCALC_UI_DEFS = $(wildcard *.ui)
-OGCALC_UI_SOURCES = $(addprefix ui_,$(addsuffix .h,$(basename $(OGCALC_UI_DEFS))))
+OGCALC_UI_SRC = $(addprefix ui_,$(addsuffix .h,$(basename $(OGCALC_UI_DEFS))))
 
-BUILT_SOURCES = moc.cpp
+BUILT_SOURCES = moc.cpp $(OGCALC_UI_SRC)
 
-moc.cpp: $(OGCALC_MOC_SOURCES)
+moc.cpp: $(OGCALC_MOC_SRC)
 	cat $^ > $@
 
 bin_PROGRAMS = ogcalc
@@ -16,7 +16,7 @@ ogcalc_SOURCES =		\
 	ogcalc.h		\
 	ogcalc.cpp		\
 	SpinBoxEntry.cpp
-nodist_ogcalc_SOURCES = moc.cpp
+nodist_ogcalc_SOURCES = moc.cpp $(OGCALC_UI_SRC)
 ogcalc_CXXFLAGS = $(CXXFLAGS) $(QT_CFLAGS) -fPIC
 ogcalc_LDADD = $(QT_LIBS)
 

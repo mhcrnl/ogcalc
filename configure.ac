@@ -22,6 +22,7 @@ AC_PROG_CXX
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_PROG_LIBTOOL
+AC_PATH_PROG([QMAKE], [qmake])
 
 # Checks for libraries.
 PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.4.0])
@@ -57,5 +58,8 @@ AC_CONFIG_FILES([gtk/python/glade/Makefile])
 AC_CONFIG_FILES([qt/Makefile])
 AC_CONFIG_FILES([qt/am/Makefile])
 AC_CONFIG_FILES([figures/Makefile])
+
+AC_CONFIG_COMMANDS([qt/qmake/Makefile], [($MKDIR_P qt/qmake && cd qt/qmake && "$QMAKE" "${ac_abs_top_srcdir}/qt/qmake/ogcalc.pro" -o "Makefile")], [QMAKE="$QMAKE"])
+
 dnl Output the generated config.status script.
 AC_OUTPUT

@@ -1,2 +1,11 @@
 # Subdirectories to make.
-SUBDIRS = qmake make am
+SUBDIRS = make am
+
+all-local:
+	$(MAKE) -C qmake all
+
+clean-local:
+	$(MAKE) -C qmake clean
+
+distclean-local:
+	$(MAKE) -C qmake distclean
