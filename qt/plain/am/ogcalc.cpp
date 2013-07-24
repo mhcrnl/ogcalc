@@ -19,6 +19,7 @@
 ogcalc::ogcalc(QWidget *parent) :
     QMainWindow(parent)
 {
+  setupUi();
 }
 
 void
