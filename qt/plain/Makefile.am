@@ -1,2 +1,2 @@
 # Subdirectories to make.
-SUBDIRS = uic plain
+SUBDIRS = am
