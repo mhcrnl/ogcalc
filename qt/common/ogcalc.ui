@@ -36,7 +36,7 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="vertical_layout">
     <item>
      <layout class="QHBoxLayout" name="entry_layout">
       <item>
