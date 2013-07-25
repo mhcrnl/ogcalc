@@ -124,26 +124,17 @@ other facilities such as reference counting and signal emission and
 handling.  Essentially, it provides C++ classes in C.  The syntax
 differs a little from C++ though.  As an example, the following C++
 
-% NOTE: Listings must fold at 61 chars maximum.
-\lstset{% General listing parameters
-  numbers=left,
-  numberstyle=\tiny,
-  basicstyle=\small\ttfamily,     % Small typeface
-  commentstyle=\rmfamily\itshape,
-  showstringspaces=false,
-  language={[GNU]C++}}   % Language
+.. code-block:: c++
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-myclass c;
-c.add(2);
-\end{lstlisting}
+   myclass c;
+   c.add(2);
 
 \noindent would be written like this using GObject:
 
-\begin{lstlisting}[numbers=none, language=C]
-myclass *c = myclass_new();
-myclass_add(c, 2);
-\end{lstlisting}
+.. code-block:: c
+
+   myclass *c = myclass_new();
+   myclass_add(c, 2);
 
 \noindent The difference is due to the lack of a \variable{this}
 pointer in the C language (since objects do not exist).  This means
@@ -160,19 +151,20 @@ member functions from both the class and the classes it is derived
 from.  With GTK+, the object needs explicit casting to the required
 type.  For example
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-GtkButton mybutton;
-mybutton.set_label("Cancel");
-mybutton.show();
-\end{lstlisting}
+
+.. code-block:: c++
+
+   GtkButton mybutton;
+   mybutton.set_label("Cancel");
+   mybutton.show();
 
 \noindent would be written as
 
-\begin{lstlisting}[numbers=none, language=C]
-GtkButton *mybutton = gtk_button_new();
-gtk_button_set_label(mybutton, "Cancel");
-gtk_widget_show(GTK_WIDGET(mybutton))
-\end{lstlisting}
+.. code-block:: c
+
+   GtkButton *mybutton = gtk_button_new();
+   gtk_button_set_label(mybutton, "Cancel");
+   gtk_widget_show(GTK_WIDGET(mybutton))
 
 \noindent In this example, \texttt{set\_label()} is a method of
 \class{GtkButton}, whilst \texttt{show()} is a method of
@@ -730,11 +722,11 @@ interface, connecting the signals to the signal handlers, and then
 entering the main event loop.  The more complex aspects of the
 function are discussed here.
 
-\begin{lstlisting}[numbers=none, language=C]
-g_signal_connect (G_OBJECT(window),
-                  "destroy",
-                  gtk_main_quit, NULL);
-\end{lstlisting}
+.. code-block:: c
+
+   g_signal_connect (G_OBJECT(window),
+                     "destroy",
+                     gtk_main_quit, NULL);
 
 This code connects the ``destroy'' signal of \variable{window} to the
 \function{gtk\_main\_quit} function.  This signal is emitted by the
@@ -743,10 +735,10 @@ button on the titlebar is clicked).  The result is that when the
 window is closed, the main event loop returns, and the program then
 exits.
 
-\begin{lstlisting}[numbers=none, language=C]
-vbox1 = gtk_vbox_new (FALSE, 0);
-gtk_container_add (GTK_CONTAINER(window), vbox1);
-\end{lstlisting}
+.. code-block:: c
+
+   vbox1 = gtk_vbox_new (FALSE, 0);
+   gtk_container_add (GTK_CONTAINER(window), vbox1);
 
 \variable{vbox1} is a \class{GtkVBox}.  When constructed using
 \function{gtk\_vbox\_new}, it is set to be non-homogeneous
@@ -759,12 +751,12 @@ depending on the visual effect intended.
 \function{gtk\_container\_add} packs \variable{vbox1} into the window
 (a \class{GtkWindow} object *is a* \class{GtkContainer}).
 
-\begin{lstlisting}[numbers=none, language=C]
-eventbox = gtk_event_box_new();
-gtk_widget_show(eventbox);
-gtk_box_pack_start (GTK_BOX(hbox2), eventbox,
-                    FALSE, FALSE, 0);
-\end{lstlisting}
+.. code-block:: c
+
+   eventbox = gtk_event_box_new();
+   gtk_widget_show(eventbox);
+   gtk_box_pack_start (GTK_BOX(hbox2), eventbox,
+                       FALSE, FALSE, 0);
 
 Some widgets do not receive events from the windowing system, and
 hence cannot emit signals.  Label widgets are one example of this.  If
@@ -800,17 +792,17 @@ The \function{create\_spin\_entry} function is a helper function to
 create a numeric entry (spin button) together with a label and
 tooltip.  It is used to create all three entries.
 
-\begin{lstlisting}[numbers=none, language=C]
-label = gtk_label_new(label_text);
-\end{lstlisting}
+.. code-block:: c
+
+   label = gtk_label_new(label_text);
 
 A new label is created displaying the text \variable{label\_text}.
 
-\begin{lstlisting}[numbers=none, language=C]
-spinbutton = gtk_spin_button_new (adjustment, 0.5, 2);
-gtk_spin_button_set_numeric
-  (GTK_SPIN_BUTTON(spinbutton), TRUE);
-\end{lstlisting}
+.. code-block:: c
+
+   spinbutton = gtk_spin_button_new (adjustment, 0.5, 2);
+   gtk_spin_button_set_numeric
+     (GTK_SPIN_BUTTON(spinbutton), TRUE);
 
 A \class{GtkSpinButton} is a numeric entry field.  It has up and down
 buttons to ``spin'' the numeric value up and down.  It is associated
@@ -833,11 +825,11 @@ are pressed) and the number of decimal places to display.
 Finally, \function{gtk\_spin\_button\_set\_numeric} is used to ensure
 that only numbers can be entered.
 
-\begin{lstlisting}[numbers=none, language=C]
-tooltip = gtk_tooltips_new();
-gtk_tooltips_set_tip(tooltip, eventbox,
-                     tooltip_text, NULL);
-\end{lstlisting}
+.. code-block:: c
+
+   tooltip = gtk_tooltips_new();
+   gtk_tooltips_set_tip(tooltip, eventbox,
+                        tooltip_text, NULL);
 
 A tooltip (pop-up help message) is created with
 \function{gtk\_tooltips\_new}.  \function{gtk\_tooltips\_set\_tip} is
@@ -848,9 +840,9 @@ argument should typically be \code{NULL}.
 The \function{create\_result\_label} function is a helper function to
 create a result label together with a descriptive label and tooltip.
 
-\begin{lstlisting}[numbers=none, language=C]
-gtk_label_set_selectable (GTK_LABEL(result_value), TRUE);
-\end{lstlisting}
+.. code-block:: c
+
+   gtk_label_set_selectable (GTK_LABEL(result_value), TRUE);
 
 Normally, labels simply display a text string.  The above code allows
 the text to be selected and copied, to allow pasting of the text
@@ -859,21 +851,21 @@ copy them.
 
 Continuing with the \function{main} function:
 
-\begin{lstlisting}[numbers=none, language=C]
-button1 = gtk_button_new_from_stock(GTK_STOCK_QUIT);
-\end{lstlisting}
+.. code-block:: c
+
+   button1 = gtk_button_new_from_stock(GTK_STOCK_QUIT);
 
 This code creates a new button, using a *stock widget*.  A stock
 widget contains a predefined icon and text.  These are available for
 commonly used functions, such as ``OK'', ``Cancel'', ``Print'', etc..
 
-\begin{lstlisting}[numbers=none, language=C]
-button2 = gtk_button_new_with_mnemonic("_Calculate");
-g_signal_connect (G_OBJECT (button2), "clicked",
-                  G_CALLBACK(on_button_clicked_calculate),
-                  (gpointer) &cb_widgets);
-GTK_WIDGET_SET_FLAGS (button2, GTK_CAN_DEFAULT);
-\end{lstlisting}
+.. code-block:: c
+
+   button2 = gtk_button_new_with_mnemonic("_Calculate");
+   g_signal_connect (G_OBJECT (button2), "clicked",
+                     G_CALLBACK(on_button_clicked_calculate),
+                     (gpointer) &cb_widgets);
+   GTK_WIDGET_SET_FLAGS (button2, GTK_CAN_DEFAULT);
 
 Here, a button is created, with the label ``Calculate''.  The
 *mnemonic* is the `\code{\_C}', which creates an *accelerator*.  This
@@ -889,13 +881,13 @@ as the argument to the callback.
 Lastly, the \code{GTK\_CAN\_DEFAULT} attribute is set.  This attribute
 allows the button to be the default widget in the window.
 
-\begin{lstlisting}[numbers=none, language=C]
-g_signal_connect_swapped
-  (G_OBJECT (cb_widgets.pg_val),
-   "activate",
-   G_CALLBACK (gtk_widget_grab_focus),
-   (gpointer)GTK_WIDGET(cb_widgets.ri_val));
-\end{lstlisting}
+.. code-block:: c
+
+   g_signal_connect_swapped
+     (G_OBJECT (cb_widgets.pg_val),
+      "activate",
+      G_CALLBACK (gtk_widget_grab_focus),
+      (gpointer)GTK_WIDGET(cb_widgets.ri_val));
 
 This code connects signals in the same way as
 \function{gtk\_signal\_connect}.  The difference is the fourth
@@ -907,13 +899,13 @@ handler is given \variable{cb\_widgets.ri\_val} rather than
 input is sent) to be switched to the next entry field when Enter is
 pressed in the first.
 
-\begin{lstlisting}[numbers=none, language=C]
-g_signal_connect_swapped
-  (G_OBJECT (cb_widgets.cf_val),
-   "activate",
-   G_CALLBACK (gtk_window_activate_default),
-   (gpointer) GTK_WIDGET(window));
-\end{lstlisting}
+.. code-block:: c
+
+   g_signal_connect_swapped
+     (G_OBJECT (cb_widgets.cf_val),
+      "activate",
+      G_CALLBACK (gtk_window_activate_default),
+      (gpointer) GTK_WIDGET(window));
 
 This is identical to the last example, but in this case the callback
 is the function \function{gtk\_window\_activate\_default} and the widget
@@ -921,9 +913,9 @@ to give to the signal handler is \variable{window}.  When Enter is
 pressed in the CF entry field, the default ``Calculate'' button is
 activated.
 
-\begin{lstlisting}[numbers=none, language=C]
-gtk_main();
-\end{lstlisting}
+.. code-block:: c
+
+   gtk_main();
 
 This is the GTK+ event loop.  It runs until \function{gtk\_main\_quit}
 is called.
@@ -932,13 +924,13 @@ The signal handlers are far simpler than the interface construction.
 The function \function{on\_button\_clicked\_calculate} reads the user
 input, performs a calculation, and then displays the result.
 
-\begin{lstlisting}[numbers=none, language=C]
-void on_button_clicked_calculate( GtkWidget *widget,
-                                  gpointer   data )
-{
-  struct calculation_widgets *w;
-  w = (struct calculation_widgets *) data;
-\end{lstlisting}
+.. code-block:: c
+
+   void on_button_clicked_calculate( GtkWidget *widget,
+                                     gpointer   data )
+   {
+     struct calculation_widgets *w;
+     w = (struct calculation_widgets *) data;
 
 Recall that a pointer to \variable{cb\_widgets}, of type \type{struct
   calculation\_widgets}, was passed to the signal handler, cast to a
@@ -946,21 +938,21 @@ Recall that a pointer to \variable{cb\_widgets}, of type \type{struct
 \variable{data} to a pointer of type \type{struct
   calculation\_widgets}.
 
-\begin{lstlisting}[numbers=none, language=C]
-gdouble pg;
-pg = gtk_spin_button_get_value
-  (GTK_SPIN_BUTTON(w->pg_val));
-\end{lstlisting}
+.. code-block:: c
+
+   gdouble pg;
+   pg = gtk_spin_button_get_value
+     (GTK_SPIN_BUTTON(w->pg_val));
 
 This code gets the value from the \class{GtkSpinButton}.
 
-\begin{lstlisting}[numbers=none, language=C]
-gchar *og_string;
-og_string = g_strdup_printf ("<b>%0.2f</b>", og);
-gtk_label_set_markup (GTK_LABEL(w->og_result),
-                      og_string);
-g_free (og_string);
-\end{lstlisting}
+.. code-block:: c
+
+   gchar *og_string;
+   og_string = g_strdup_printf ("<b>%0.2f</b>", og);
+   gtk_label_set_markup (GTK_LABEL(w->og_result),
+                         og_string);
+   g_free (og_string);
 
 Here the result \variable{og} is printed to the string
 \variable{og\_string}.  This is then set as the label text using
@@ -968,11 +960,11 @@ Here the result \variable{og} is printed to the string
 using the *Pango Markup Format*, which uses the `\code{<b>}' and
 `\code{</b>}' tags to embolden the text.
 
-\begin{lstlisting}[numbers=none, language=C]
-gtk_spin_button_set_value (GTK_SPIN_BUTTON(w->pg_val),
-                           0.0);
-gtk_label_set_text (GTK_LABEL(w->og_result), "");
-\end{lstlisting}
+.. code-block:: c
+
+   gtk_spin_button_set_value (GTK_SPIN_BUTTON(w->pg_val),
+                              0.0);
+   gtk_label_set_text (GTK_LABEL(w->og_result), "");
 
 \function{on\_button\_clicked\_reset} resets the input fields to their
 default value, and blanks the result fields.
@@ -1103,17 +1095,17 @@ The most obvious difference between this listing and the previous one
 is the huge reduction in size.  The \function{main} function is
 reduced to just these lines:
 
-\begin{lstlisting}[numbers=none, language=C]
-GladeXML *xml;
-GtkWidget *window;
+.. code-block:: c
 
-xml = glade_xml_new("ogcalc.glade", NULL, NULL);
+   GladeXML *xml;
+   GtkWidget *window;
 
-glade_xml_signal_autoconnect(xml);
+   xml = glade_xml_new("ogcalc.glade", NULL, NULL);
 
-window = glade_xml_get_widget (xml, "ogcalc_main_window");
-gtk_widget_show(window);
-\end{lstlisting}
+   glade_xml_signal_autoconnect(xml);
+
+   window = glade_xml_get_widget (xml, "ogcalc_main_window");
+   gtk_widget_show(window);
 
 \function{glade\_xml\_new} reads the interface from the file
 \filename{ogcalc.glade}.  It returns the interface as a pointer to a
@@ -1130,12 +1122,12 @@ removed.  No information needs to be passed to them through the
 \variable{data} argument, since the widgets they need to use may now
 be found using the \class{GladeXML} interface description.
 
-\begin{lstlisting}[numbers=none, language=C]
-GtkWidget *pg_val;
-GladeXML *xml;
-xml = glade_get_widget_tree (GTK_WIDGET (widget));
-pg_val = glade_xml_get_widget (xml, "pg_entry");
-\end{lstlisting}
+.. code-block:: c
+
+   GtkWidget *pg_val;
+   GladeXML *xml;
+   xml = glade_get_widget_tree (GTK_WIDGET (widget));
+   pg_val = glade_xml_get_widget (xml, "pg_entry");
 
 Firstly, the \class{GladeXML} interface is found, by finding the
 widget tree containing the widget passed as the first argument to the
@@ -1497,26 +1489,26 @@ Analysis
 
 The header file declares the \class{ogcalc} class.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-class ogcalc : public Gtk::Window
-\end{lstlisting}
+.. code-block:: c++
+
+   class ogcalc : public Gtk::Window
 
 \class{ogcalc} is derived from \class{Gtk::Window}
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-virtual void on_button_clicked_calculate();
-virtual void on_button_clicked_reset();
-\end{lstlisting}
+.. code-block:: c++
+
+   virtual void on_button_clicked_calculate();
+   virtual void on_button_clicked_reset();
 
 \function{on\_button\_clicked\_calculate} and
 \function{on\_button\_clicked\_reset} are the signal handling
 functions, as previously.  However, they are now class *member
 functions*, taking no arguments.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-Gtk::SpinButton* pg_entry;
-Glib::RefPtr<Gnome::Glade::Xml> xml_interface;
-\end{lstlisting}
+.. code-block:: c++
+
+   Gtk::SpinButton* pg_entry;
+   Glib::RefPtr<Gnome::Glade::Xml> xml_interface;
 
 The class data members include pointers to the objects needed by the
 callbacks (which can access the class members like normal class member
@@ -1532,32 +1524,35 @@ object when \class{ogcalc} is destroyed.
 The constructor \function{ogcalc::ogcalc} takes care of creating the
 interface when the class is instantiated.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-set_title("OG & ABV Calculator");
-set_resizable(false);
-\end{lstlisting}
+.. code-block:: c++
+
+   set_title("OG & ABV Calculator");
+   set_resizable(false);
 
 The above code uses member functions of the \class{Gtk::Window} class.
 The global functions \function{gtk\_window\_set\_title} and
 \function{gtk\_window\_set\_resizable} were used previously.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-xml\_interface =
-  Gnome::Glade::Xml::create("ogcalc.glade",
-                            "ogcalc\_main\_vbox");
-Gtk::VBox *main\_vbox;
-xml\_interface->get\_widget("ogcalc\_main\_vbox", main\_vbox);
-add(*main\_vbox);
-\end{lstlisting}
+.. code-block:: c++
+
+   set_title("OG & ABV Calculator");
+   set_resizable(false);
+
+   xml\_interface =
+     Gnome::Glade::Xml::create("ogcalc.glade",
+                               "ogcalc\_main\_vbox");
+   Gtk::VBox *main\_vbox;
+   xml\_interface->get\_widget("ogcalc\_main\_vbox", main\_vbox);
+   add(*main\_vbox);
 
 The Glade interface is loaded using
 \function{Gnome::Glade::Xml::create}, in a similar manner to the
 GObject example, and then the main VBox is added to the \class{Ogcalc}
 object.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-xml_interface->get_widget("pg_entry", pg_entry);
-\end{lstlisting}
+.. code-block:: c++
+
+   xml_interface->get_widget("pg_entry", pg_entry);
 
 Individual widgets may be obtained from the widget tree using the
 static member function \function{Gnome::Glade::Xml::get\_widget}.
@@ -1567,48 +1562,48 @@ class member functions as signal handlers (normal functions may also
 be used, too), the signals cannot be connected automatically, as in
 the previous example.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-quit_button->signal_clicked().connect
-  ( sigc::mem_fun(*this, &ogcalc::hide) );
-\end{lstlisting}
+.. code-block:: c++
+
+   quit_button->signal_clicked().connect
+     ( sigc::mem_fun(*this, &ogcalc::hide) );
 
 This complex-looking code can be broken into several parts.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-sigc::mem_fun(*this, &ogcalc::hide)
-\end{lstlisting}
+.. code-block:: c++
+
+   sigc::mem_fun(*this, &ogcalc::hide)
 
 \noindent creates a \class{sigc::mem\_fun} (function object) which points
 to the \function{ogcalc::hide} member function of this object.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-quit_button->signal_clicked()
-\end{lstlisting}
+.. code-block:: c++
+
+   quit_button->signal_clicked()
 
 \noindent returns a \class{Glib::SignalProxy0} object (a signal taking no
 arguments).  The \function{connect} method of the signal proxy is used
 to connect \function{ogcalc::hide} to the ``clicked'' signal of the
 \class{Gtk::Button}.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-calculate_button->signal_clicked().connect
-  ( sigc::mem_fun(*this,
-                 &ogcalc::on_button_clicked_calculate) );
-calculate_button->signal_clicked().connect
-  ( sigc::mem_fun(*reset_button, &Gtk::Widget::grab_focus) );
-\end{lstlisting}
+.. code-block:: c++
+
+   calculate_button->signal_clicked().connect
+     ( sigc::mem_fun(*this,
+                    &ogcalc::on_button_clicked_calculate) );
+   calculate_button->signal_clicked().connect
+     ( sigc::mem_fun(*reset_button, &Gtk::Widget::grab_focus) );
 
 Here two signal handlers are connected to the same signal.  When the
 ``Calculate'' button is clicked,
 \function{ogcalc::on\_button\_clicked\_calculate} is called first,
 followed by \function{Gtk::Widget::grab\_focus}.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-cf_entry->signal_activate().connect
-  ( sigc::hide_return
-    ( sigc::mem_fun(*this,
-                   &Gtk::Window::activate_default) ) );
-\end{lstlisting}
+.. code-block:: c++
+
+   cf_entry->signal_activate().connect
+     ( sigc::hide_return
+       ( sigc::mem_fun(*this,
+                      &Gtk::Window::activate_default) ) );
 
 \class{sigc::hide\_return} is a special \class{sigc::mem\_fun} used to
 mask the boolean value returned by \function{activate\_default}.  The
@@ -1619,32 +1614,32 @@ together.
 In the \function{ogcalc::on\_button\_clicked\_calculate} member
 function,
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-double pg
-pg = pg_entry->get_value();
-\end{lstlisting}
+.. code-block:: c++
+
+   double pg
+   pg = pg_entry->get_value();
 
 \noindent the member function \function{Gtk::SpinButton::get\_value}
 was previously used as \function{gtk\_spin\_button\_get\_value}.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-std::ostringstream output;
-output.imbue(std::locale(""));
-output << "<b>" << std::fixed << std::setprecision(2)
-       << og << "</b>";
-og_result->set_markup(Glib::locale_to_utf8(output.str()));
-\end{lstlisting}
+.. code-block:: c++
+
+   std::ostringstream output;
+   output.imbue(std::locale(""));
+   output << "<b>" << std::fixed << std::setprecision(2)
+          << og << "</b>";
+   og_result->set_markup(Glib::locale_to_utf8(output.str()));
 
 This code sets the result field text, using an output stringstream and
 Pango markup.
 
 In the \function{ogcalc::on\_button\_clicked\_reset} member function,
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-pg_entry->set_value(0.0);
-og_result->set_text("");
-pg_entry->grab_focus();
-\end{lstlisting}
+.. code-block:: c++
+
+   pg_entry->set_value(0.0);
+   og_result->set_text("");
+   pg_entry->grab_focus();
 
 \noindent class member functions are used to reset and clear the
 widgets as in previous examples.
@@ -1654,11 +1649,11 @@ widgets as in previous examples.
 
 This file contains a very simple \function{main} function.
 
-\begin{lstlisting}[numbers=none, language={[GNU]C++}]
-Gtk::Main kit(argc, argv); // Initialise GTK+.
-ogcalc window;
-kit.run(window);
-\end{lstlisting}
+.. code-block:: c++
+
+   Gtk::Main kit(argc, argv); // Initialise GTK+.
+   ogcalc window;
+   kit.run(window);
 
 A \class{Gtk::Main} object is created, and then an \class{ogcalc}
 class, \variable{window}, is instantiated.  Finally, the interface is
@@ -1724,27 +1719,27 @@ What the GTK+ classes and methods do here will not be discussed,
 having been covered in the previous sections.  Instead, the
 Python-specific differences will be examined.
 
-\begin{lstlisting}[numbers=none, language=Python]
-import pygtk
-pygtk.require('2.0')
-import gtk
-\end{lstlisting}
+.. code-block:: python
+
+   import pygtk
+   pygtk.require('2.0')
+   import gtk
 
 This preamble imports the pyGTK modules for us, and checks that the
 GTK+ version is correct.
 
-\begin{lstlisting}[numbers=none, language=Python]
-class OgcalcSpinEntry(gtk.HBox):
-    def __init__(self, label_text, tooltip_text,
-                 adjustment, digits):
-        gtk.HBox.__init__(self, False, 5)
-        ...
+.. code-block:: python
 
-class OgcalcResult(gtk.HBox):
-    def __init__(self, label_text, tooltip_text):
-        gtk.HBox.__init__(self, False, 5)
-        ...
-\end{lstlisting}
+   class OgcalcSpinEntry(gtk.HBox):
+       def __init__(self, label_text, tooltip_text,
+                    adjustment, digits):
+           gtk.HBox.__init__(self, False, 5)
+           …
+
+   class OgcalcResult(gtk.HBox):
+       def __init__(self, label_text, tooltip_text):
+           gtk.HBox.__init__(self, False, 5)
+           …
 
 These two simple classes derive from \class{GtkHBox}.  They are the
 Python equivalents of the \function{create\_spin\_entry} and
@@ -1762,75 +1757,75 @@ Note that because the object is derived, the \function{\_\_init\_\_}
 initialiser (constructor) has to manually chain up to the parent
 initialiser in order to correctly initialise the class instance.
 
-\begin{lstlisting}[numbers=none, language=Python]
-class Ogcalc(gtk.Window):
-\end{lstlisting}
+.. code-block:: python
+
+   class Ogcalc(gtk.Window):
 
 \noindent is our main application object.  It derives from
 \class{gtk.Window}.
 
-\begin{lstlisting}[numbers=none, language=Python]
-    def on_button_clicked_reset(self, data=None):
-        self.pg_entry.spinbutton.set_value(0.0)
-        ...
-        self.abv_result.result_value.set_text("")
-\end{lstlisting}
+.. code-block:: python
+
+       def on_button_clicked_reset(self, data=None):
+           self.pg_entry.spinbutton.set_value(0.0)
+           …
+           self.abv_result.result_value.set_text("")
 
 This function resets the interface to its initial state.  Note that
 all the member variables are accessed through \variable{self}, which
 is the class instance, and that the spinbutton and value label to be
 manipulated are contained within the helper objects defined above.
 
-\begin{lstlisting}[numbers=none, language=Python]
-    def on_button_clicked_calculate(self, data=None):
-        ...
-        self.og_result.result_value.set_markup \
-        ("<b>%(result)0.2f</b>" %{'result': og})
-\end{lstlisting}
+.. code-block:: python
+
+       def on_button_clicked_calculate(self, data=None):
+           …
+           self.og_result.result_value.set_markup \
+           ("<b>%(result)0.2f</b>" %{'result': og})
 
 This function does the calculation.  Note the substitution of the
 result value into the string, which is rather simpler than both the C
 and the C++ code used to construct the result string.
 
-\begin{lstlisting}[numbers=none, language=Python]
-    def __init__(self):
-        gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
-        self.set_title("OG & ABV Calculator")
-\end{lstlisting}
+.. code-block:: python
+
+       def __init__(self):
+           gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
+           self.set_title("OG & ABV Calculator")
 
 This is the initialiser for the \class{Ogcalc} class.  It starts by
 chaining up the \class{gtk.Window} initialiser, and then calls the
 \function{set\_title} \class{gtk.Window} method to set the window
 title.
 
-\begin{lstlisting}[numbers=none, language=Python]
-        self.connect("destroy", gtk.main_quit, None)
-\end{lstlisting}
+.. code-block:: python
+
+           self.connect("destroy", gtk.main_quit, None)
 
 This connects the ``destroy'' signal to the \function{gtk.main\_quit}
 function.  There's far less to type than the C and C++ equivalents,
 and hence it's rather more readable.
 
-\begin{lstlisting}[numbers=none, language=Python]
-        self.pg_entry = \
-        OgcalcSpinEntry("PG:", "Present Gravity (density)",
-                        adjustment, 2)
-\end{lstlisting}
+.. code-block:: python
+
+           self.pg_entry = \
+           OgcalcSpinEntry("PG:", "Present Gravity (density)",
+                           adjustment, 2)
 
 Here we create a helper object for entering the PG value.
 
-\begin{lstlisting}[numbers=none, language=Python]
-        self.abv_result = \
-        OgcalcResult("ABV %:", "Percent Alcohol By Volume")
-\end{lstlisting}
+.. code-block:: python
+
+           self.abv_result = \
+           OgcalcResult("ABV %:", "Percent Alcohol By Volume")
 
 Here we create a helper object for displaying the ABV result.
 
-\begin{lstlisting}[numbers=none, language=Python]
-        button1 = gtk.Button(None, gtk.STOCK_QUIT, False)
-        button1 = gtk.Button("_Reset", None, True)
-        button2 = gtk.Button("_Calculate", None, True)
-\end{lstlisting}
+.. code-block:: python
+
+           button1 = gtk.Button(None, gtk.STOCK_QUIT, False)
+           button1 = gtk.Button("_Reset", None, True)
+           button2 = gtk.Button("_Calculate", None, True)
 
 This code creates the buttons.  Unlike C and C++, where different
 functions or overloaded constructors were used to create an object
@@ -1839,30 +1834,30 @@ function, which is used for both stock and non-stock widgets.
 Depending on whether a stock or non-stock widget is being created, the
 first and third, or the second arguments are redundant, respectively.
 
-\begin{lstlisting}[numbers=none, language=Python]
-        button1.connect_object("clicked",
-            Ogcalc.on_button_clicked_reset, self)
-\end{lstlisting}
+.. code-block:: python
+
+           button1.connect_object("clicked",
+               Ogcalc.on_button_clicked_reset, self)
 
 This connects the ``clicked'' signal to the \class{Ogcalc}
 \function{on\_button\_clicked\_reset} method of the \variable{self}
 object.
 
-\begin{lstlisting}[numbers=none, language=Python]
-        self.pg_entry.spinbutton.connect_object("activate",
-            gtk.Widget.grab_focus, self.ri_entry.spinbutton)
-\end{lstlisting}
+.. code-block:: python
+
+           self.pg_entry.spinbutton.connect_object("activate",
+               gtk.Widget.grab_focus, self.ri_entry.spinbutton)
 
 This connects the ``activate'' signal to the \class{Ogcalc}
 \function{grab\_focus} method of the
 \variable{self.ri\_entry.spinbutton} object.
 
-\begin{lstlisting}[numbers=none, language=Python]
-if __name__ == "__main__":
-    ogcalc = Ogcalc()
-    ogcalc.show()
-    gtk.main()
-\end{lstlisting}
+.. code-block:: python
+
+   if __name__ == "__main__":
+       ogcalc = Ogcalc()
+       ogcalc.show()
+       gtk.main()
 
 The classes are intended for use as a module in a larger program.
 When run as a standalone script from the command-line, we ``run'' the
@@ -1871,17 +1866,17 @@ main loop.
 
 The Glade code is identical, except for loading the Glade interface:
 
-\begin{lstlisting}[numbers=none, language=Python]
-        self.xml = gtk.glade.XML("ogcalc.glade",
-                                 "ogcalc_main_vbox", None);
-\end{lstlisting}
+.. code-block:: python
+
+           self.xml = gtk.glade.XML("ogcalc.glade",
+                                    "ogcalc_main_vbox", None);
 
 Here the Glade interface is loaded, rooted at the
 ``ogcalc\_main\_vbox'' widget,
 
-\begin{lstlisting}[numbers=none, language=Python]
-        self.pg_val = self.xml.get_widget("pg_entry");
-\end{lstlisting}
+.. code-block:: python
+
+           self.pg_val = self.xml.get_widget("pg_entry");
 
 \noindent and now a specific widget is pulled out of the XML interface
 description.
