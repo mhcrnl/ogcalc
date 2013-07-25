@@ -708,11 +708,11 @@ Code listing
 The program code is listed below.  The source code is extensively
 commented, to explain what is going on.
 
+\filename{gtk/C/plain/ogcalc.c}
 
-\lstinputlisting[language=C,
-                 caption={\filename{gtk/C/plain/ogcalc.c}},
-                 firstline=24, lastline=459]
-                 {gtk/C/plain/ogcalc.c}
+.. literalinclude:: ../gtk/C/plain/ogcalc.c
+   :language: c
+   :lines: 24-459
 
 To build the source, do the following:
 
@@ -1081,10 +1081,11 @@ are *not* the same screenshot!)
 Code listing
 ------------
 
-\lstinputlisting[language=C,
-                 caption={\filename{gtk/C/glade/ogcalc.c}},
-                 firstline=24, lastline=142]
-                 {gtk/C/glade/ogcalc.c}
+\filename{gtk/C/glade/ogcalc.c}
+
+.. literalinclude:: ../gtk/C/glade/ogcalc.c
+   :language: c
+   :lines: 24-142
 
 To build the source, do the following:
 
@@ -1197,20 +1198,23 @@ be taken advantage of using plain C and GObject.
 Code listing
 ------------
 
-\lstinputlisting[language=C,
-                 caption={\filename{gtk/C/gobject/ogcalc.h}},
-                 firstline=27, lastline=113]
-                 {gtk/C/gobject/ogcalc.h}
+\filename{gtk/C/gobject/ogcalc.h}
 
-\lstinputlisting[language=C,
-                 caption={\filename{gtk/C/gobject/ogcalc.c}},
-                 firstline=24, lastline=201]
-                 {gtk/C/gobject/ogcalc.c}
+.. literalinclude:: ../gtk/C/gobject/ogcalc.h
+   :language: c
+   :lines: 27-113
 
-\lstinputlisting[language=C,
-                 caption={\filename{gtk/C/gobject/ogcalc-main.c}},
-                 firstline=24, lastline=55]
-                 {gtk/C/gobject/ogcalc-main.c}
+\filename{gtk/C/gobject/ogcalc.c}
+
+.. literalinclude:: ../gtk/C/gobject/ogcalc.c
+   :language: c
+   :lines: 24-201
+
+\filename{gtk/C/gobject/ogcalc-main.c}
+
+.. literalinclude:: ../gtk/C/gobject/ogcalc-main.c
+   :language: c
+   :lines: 24-55
 
 To build the source, do the following:
 
@@ -1446,20 +1450,23 @@ to the reader to compare and contrast them.
 Code Listing
 ------------
 
-\lstinputlisting[language={[GNU]C++},
-                 caption={\filename{gtk/C++/glade/ogcalc.h}},
-                 firstline=27, lastline=54]%
-                 {gtk/C++/glade/ogcalc.h}
+\filename{gtk/C++/glade/ogcalc.h}
 
-\lstinputlisting[language={[GNU]C++},
-                 caption={\filename{gtk/C++/glade/ogcalc.cc}},
-                 firstline=24, lastline=128]%
-                 {gtk/C++/glade/ogcalc.cc}
+.. literalinclude:: ../gtk/C++/glade/ogcalc.h
+   :language: c++
+   :lines: 27-54
 
-\lstinputlisting[language={[GNU]C++},
-                 caption={\filename{gtk/C++/glade/ogcalc-main.cc}},
-                 firstline=24, lastline=40]%
-                 {gtk/C++/glade/ogcalc-main.cc}
+\filename{gtk/C++/glade/ogcalc.cc}
+
+.. literalinclude:: ../gtk/C++/glade/ogcalc.cc
+   :language: c++
+   :lines: 24-128
+
+\filename{gtk/C++/glade/ogcalc-main.cc}
+
+.. literalinclude:: ../gtk/C++/glade/ogcalc-main.cc
+   :language: c++
+   :lines: 24-40
 
 To build the source, do the following:
 
@@ -1698,15 +1705,17 @@ just how easy Python is to get into.
 Code listing
 ------------
 
-\lstinputlisting[language=Python,
-                 caption={\filename{gtk/python/plain/ogcalc}},
-                 firstline=26, lastline=333]
-                 {gtk/python/plain/ogcalc}
+\filename{gtk/python/plain/ogcalc}
 
-\lstinputlisting[language=Python,
-                 caption={\filename{gtk/python/glade/ogcalc}},
-                 firstline=26, lastline=131]
-                 {gtk/python/glade/ogcalc}
+.. literalinclude:: ../gtk/python/plain/ogcalc
+   :language: python
+   :lines: 26-333
+
+\filename{gtk/python/glade/ogcalc}
+
+.. literalinclude:: ../gtk/python/glade/ogcalc
+   :language: python
+   :lines: 26-131
 
 Analysis
 --------
