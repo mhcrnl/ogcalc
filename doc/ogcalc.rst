@@ -24,8 +24,6 @@ Contents:
    :maxdepth: 2
 
 ..
- \newcommand{\filename}[1]{\texttt{#1}}
- \newcommand{\program}[1]{\texttt{#1}}
  \newcommand{\variable}[1]{\textsl{#1}}
  \newcommand{\class}[1]{\texttt{#1}}
  \newcommand{\function}[1]{\texttt{#1()}}
@@ -51,7 +49,7 @@ GTK+ is written in C and, because of the ubiquity of the C language,
 *bindings* have been written to allow the development of GTK+
 applications in many other languages.  This short tutorial is intended
 as a simple introduction to writing GTK+ applications in C, C++ and
-Python, using the current (2.6) version of \filename{libgtk}.  It also
+Python, using the 2.x (2.6 and later) version of GTK+.  It also
 covers the use of the Glade user interface designer for *rapid
 application development* (RAD).
 
@@ -74,10 +72,10 @@ also available from
 \url{http://people.debian.org/~rleigh/gtk/ogcalc/}.  To build them,
 type:
 
-\begin{verbatim}
-./configure
-make
-\end{verbatim}
+::
+
+   ./configure
+   make
 
 \noindent This will check for the required libraries and build the
 example code.  Each program may then be run from within its
@@ -100,7 +98,7 @@ Software Foundation; either version 2 of the Licence, or (at your
 option) any later version.
 
 A copy of the GNU General Public Licence version 2 is provided in the
-file \filename{COPYING}, in the source package from which this
+file :file:`COPYING`, in the source package from which this
 document was generated.
 
 
@@ -177,7 +175,7 @@ Objects and C work well, but there are some issues, such as a lack of
 type-safety of callbacks and limited compile-time type checking.
 Using GObject, deriving new widgets is complex and error-prone.  For
 these, and other, reasons, C++ may be a better language to use.
-\program{libsigc++} provides type-safe signal handling, and all of the
+:program:`libsigc++` provides type-safe signal handling, and all of the
 GTK+ (and GLib, Pango et. al.) objects are available as standard C++
 classes.  Callbacks may also be class methods, which makes for cleaner
 code since the class can contain object data, removing the need to
@@ -419,7 +417,7 @@ manipulated using the ``Properties'' dialogue.  While studying the
 code examples, Glade may be used to interactively build and manipulate
 the interface, to visually follow how the code is working.  More
 detail about Glade is provided in Section \ref{sec:glade}, where
-\program{libglade} is used to dynamically load a user interface.
+:program:`libglade` is used to dynamically load a user interface.
 
 
 Signals
@@ -446,7 +444,7 @@ GTK+ applications differ from this model.  The programs must react to
 Enter in an text entry field.  These widgets emit signals in response
 to user actions.  For each signal of interest, a function defined by
 the programmer is called.  In these functions, the programmer can do
-whatever needed.  For example, in the \program{ogcalc} program, when
+whatever needed.  For example, in the :program:`ogcalc` program, when
 the ``Calculate'' button is pressed, a function is called to read the
 data from entry fields, do some calculations, and then display the
 results.
@@ -483,34 +481,34 @@ Libraries
 GTK+ is comprised of several separate libraries:
 
 \begin{description}
-\item[\filename{atk}] Accessibility Toolkit, to enable use by disabled
+\item[:program:`atk`] Accessibility Toolkit, to enable use by disabled
   people.
-\item[\filename{gdk}] GIMP Drawing Kit (XLib abstraction
+\item[:program:`gdk`] GIMP Drawing Kit (XLib abstraction
   layer---windowing system dependent part).
-\item[\filename{gdk-pixbuf}] Image loading and display.
-\item[\filename{glib}] Basic datatypes and common algorithms.
-\item[\filename{gmodule}] Dynamic module loader (\filename{libdl}
+\item[:program:`gdk-pixbuf`] Image loading and display.
+\item[:program:`glib`] Basic datatypes and common algorithms.
+\item[:program:`gmodule}] Dynamic module loader (\filename{libdl`
   portability wrapper).
-\item[\filename{gobject}] Object/type system.
-\item[\filename{gtk}] GIMP Tool Kit (windowing system independent part).
-\item[\filename{pango}] Typeface layout and rendering.
+\item[:program:`gobject`] Object/type system.
+\item[:program:`gtk`] GIMP Tool Kit (windowing system independent part).
+\item[:program:`pango`] Typeface layout and rendering.
 \end{description}
 
-When using \filename{libglade} another library is required:
+When using :program:`libglade` another library is required:
 
 \begin{description}
-\item[\filename{glade}] User Interface description loader/constructor.
+\item[:program:`glade`] User Interface description loader/constructor.
 \end{description}
 
 Lastly, when using C++, some additional C++ libraries are also needed:
 
 \begin{description}
-\item[\filename{atkmm}] C++ ATK wrapper.
-\item[\filename{gdkmm}] C++ GDK wrapper.
-\item[\filename{gtkmm}] C++ GTK+ wrapper.
-\item[\filename{glademm}] C++ Glade wrapper.
-\item[\filename{pangomm}] C++ Pango wrapper.
-\item[\filename{sigc++}] Advanced C++ signalling \& event handling
+\item[:program:`atkmm`] C++ ATK wrapper.
+\item[:program:`gdkmm`] C++ GDK wrapper.
+\item[:program:`gtkmm`] C++ GTK+ wrapper.
+\item[:program:`glademm`] C++ Glade wrapper.
+\item[:program:`pangomm`] C++ Pango wrapper.
+\item[:program:`sigc++`] Advanced C++ signalling \& event handling
   (wraps GObject signals).
 \end{description}
 
@@ -537,7 +535,7 @@ interface on paper, before constructing it.  Interface designers such
 as Glade are helpful here, but a pen and paper are best for the
 initial design.
 
-Introducing \program{ogcalc}
+Introducing :program:`ogcalc`
 ----------------------------
 
 As part of the production (and quality control) processes in the
@@ -559,7 +557,7 @@ that the OG is within the set limits of the specification for the
 product as the ABV.
 
 
-The \program{ogcalc} program performs the following calculation:
+The :program:`ogcalc` program performs the following calculation:
 
 \begin{equation}
 O = (R \times 2.597) - (P \times 1.644) - 34.4165 + C
@@ -599,7 +597,7 @@ A simple sketch of the interface is shown in Figure \ref{fig:sketch}.
   \centering
   \includegraphics[width=0.6\textwidth]{figures/sketch}
   \caption[Sketching a user interface]{Sketching a user interface.
-    The \program{ogcalc} main window is drawn simply, to illustrate
+    The :program:`ogcalc` main window is drawn simply, to illustrate
     its functionality.  The top row contains three numeric entry
     fields, followed by two result fields on the middle row.  The
     bottom row contains buttons to quit the program, reset the
@@ -667,14 +665,14 @@ Introduction
 ------------
 
 Many GTK+ applications are written in C alone.  This section
-demonstrates the \program{gtk/C/plain/ogcalc} program discussed in the
+demonstrates the :program:`gtk/C/plain/ogcalc` program discussed in the
 previous section.  Figure \ref{fig:ogcalc} is a screenshot of the
 finished application.
 
 \begin{figure}
   \centering \resizebox{\textwidth}{!}{
     \includegraphics{figures/c-plain.png} }
-  \caption[\program{gtk/C/plain/ogcalc} in action]{\program{gtk/C/plain/ogcalc} in action.}
+  \caption[:program:`gtk/C/plain/ogcalc` in action]{:program:`gtk/C/plain/ogcalc` in action.}
 .. _fig-ogcalc:
 \end{figure}
 
@@ -700,7 +698,7 @@ Code listing
 The program code is listed below.  The source code is extensively
 commented, to explain what is going on.
 
-\filename{gtk/C/plain/ogcalc.c}
+:file:`gtk/C/plain/ogcalc.c`
 
 .. literalinclude:: ../gtk/C/plain/ogcalc.c
    :language: c
@@ -708,11 +706,11 @@ commented, to explain what is going on.
 
 To build the source, do the following:
 
-\begin{verbatim}
-cd gtk/C/plain
-cc $(pkg-config --cflags gtk+-2.0) -c ogcalc.c
-cc $(pkg-config --libs gtk+-2.0) -o ogcalc ogcalc.o
-\end{verbatim}
+::
+
+   cd gtk/C/plain
+   cc $(pkg-config --cflags gtk+-2.0) -c ogcalc.c
+   cc $(pkg-config --libs gtk+-2.0) -o ogcalc ogcalc.o
 
 Analysis
 --------
@@ -1032,8 +1030,8 @@ Glade.
 .. _fig-glade:
 \end{figure}
 
-The file \filename{gtk/C/glade/ogcalc.glade} contains the same interface
-constructed in \program{gtk/C/plain/ogcalc}, but designed in Glade.  This
+The file :file:`gtk/C/glade/ogcalc.glade` contains the same interface
+constructed in :program:`gtk/C/plain/ogcalc`, but designed in Glade.  This
 file can be opened in Glade, and changed as needed, without needing to
 touch any code.
 
@@ -1045,7 +1043,7 @@ listing, but with the following changes:
 
 \begin{itemize}
 \item The \function{main} function does not construct the interface.
-  It merely loads the \filename{ogcalc.glade} interface description,
+  It merely loads the :file:`ogcalc.glade` interface description,
   auto-connects the signals, and shows the main window.
 \item The \class{cb\_widgets} structure is no longer needed: the
   callbacks are now able to query the widget tree through the Glade
@@ -1055,9 +1053,9 @@ listing, but with the following changes:
   between the interface and the callbacks.
 \end{itemize}
 
-The running \program{gtk/C/glade/ogcalc} application is shown in Figure
+The running :program:`gtk/C/glade/ogcalc` application is shown in Figure
 \ref{fig:ogcalcgl}.  Notice that it is identical to
-\program{gtk/C/plain/ogcalc}, shown in Figure \ref{fig:ogcalc}.  (No, they
+:program:`gtk/C/plain/ogcalc`, shown in Figure \ref{fig:ogcalc}.  (No, they
 are *not* the same screenshot!)
 
 \begin{figure}
@@ -1065,7 +1063,7 @@ are *not* the same screenshot!)
   \resizebox{\textwidth}{!}{
     \includegraphics{figures/c-glade.png}
   }
-  \caption[\program{gtk/C/glade/ogcalc} in action]{\program{gtk/C/glade/ogcalc} in
+  \caption[:program:`gtk/C/glade/ogcalc` in action]{:program:`gtk/C/glade/ogcalc` in
     action.}
 .. _fig-ogcalcgl:
 \end{figure}
@@ -1073,7 +1071,7 @@ are *not* the same screenshot!)
 Code listing
 ------------
 
-\filename{gtk/C/glade/ogcalc.c}
+:file:`gtk/C/glade/ogcalc.c`
 
 .. literalinclude:: ../gtk/C/glade/ogcalc.c
    :language: c
@@ -1081,12 +1079,12 @@ Code listing
 
 To build the source, do the following:
 
-\begin{verbatim}
-cd gtk/C/glade
-cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) -c ogcalc.c
-cc $(pkg-config --libs libglade-2.0 gmodule-2.0)
-  -o ogcalc ogcalc.o
-\end{verbatim}
+::
+
+   cd gtk/C/glade
+   cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) -c ogcalc.c
+   cc $(pkg-config --libs libglade-2.0 gmodule-2.0)
+     -o ogcalc ogcalc.o
 
 Analysis
 --------
@@ -1108,7 +1106,7 @@ reduced to just these lines:
    gtk_widget_show(window);
 
 \function{glade\_xml\_new} reads the interface from the file
-\filename{ogcalc.glade}.  It returns the interface as a pointer to a
+:file:`ogcalc.glade`.  It returns the interface as a pointer to a
 \class{GladeXML} object, which will be used later.  Next, the signal
 handlers are connected with
 \function{glade\_xml\_signal\_autoconnect}.  Windows users may require
@@ -1182,7 +1180,7 @@ be taken advantage of using plain C and GObject.
   \resizebox{\textwidth}{!}{
     \includegraphics{figures/c-gobject.png}
   }
-  \caption[\program{gtk/C/gobject/ogcalc} in action]{\program{gtk/C/gobject/ogcalc} in
+  \caption[:program:`gtk/C/gobject/ogcalc` in action]{:program:`gtk/C/gobject/ogcalc` in
     action.}
 .. _fig-ogcalcgo:
 \end{figure}
@@ -1190,19 +1188,19 @@ be taken advantage of using plain C and GObject.
 Code listing
 ------------
 
-\filename{gtk/C/gobject/ogcalc.h}
+:file:`gtk/C/gobject/ogcalc.h`
 
 .. literalinclude:: ../gtk/C/gobject/ogcalc.h
    :language: c
    :lines: 27-113
 
-\filename{gtk/C/gobject/ogcalc.c}
+:file:`gtk/C/gobject/ogcalc.c`
 
 .. literalinclude:: ../gtk/C/gobject/ogcalc.c
    :language: c
    :lines: 24-201
 
-\filename{gtk/C/gobject/ogcalc-main.c}
+:file:`gtk/C/gobject/ogcalc-main.c`
 
 .. literalinclude:: ../gtk/C/gobject/ogcalc-main.c
    :language: c
@@ -1210,22 +1208,22 @@ Code listing
 
 To build the source, do the following:
 
-\begin{verbatim}
-cd gtk/C/gobject
-cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
-  -c ogcalc.c
-cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
-  -c ogcalc-main.c
-cc $(pkg-config --libs libglade-2.0 gmodule-2.0) \
-  -o ogcalc ogcalc.o ogcalc-main.o
-\end{verbatim}
+::
+
+   cd gtk/C/gobject
+   cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
+     -c ogcalc.c
+   cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
+     -c ogcalc-main.c
+   cc $(pkg-config --libs libglade-2.0 gmodule-2.0) \
+     -o ogcalc ogcalc.o ogcalc-main.o
 
 Analysis
 --------
 
 The bulk of the code is the same as in previous sections, and so
 describing what the code does will not be repeated here.  The
-\class{Ogcalc} class is defined in \filename{gtk/C/gobject/ogcalc.h}.
+\class{Ogcalc} class is defined in :file:`gtk/C/gobject/ogcalc.h`.
 This header declares the object and class structures and some macros
 common to all GObject-based objects and classes.  The macros and
 internals of GObject are out of the scope of this document, but
@@ -1245,7 +1243,7 @@ virtual function pointers.  It has many similarities to a C++ vtable.
 Finally, the header defines the public member functions of the class.
 
 The implementation of this class is found in
-\filename{gtk/C/gobject/ogcalc.c}.  The major difference to previous
+:file:`gtk/C/gobject/ogcalc.c`.  The major difference to previous
 examples is the class registration and the extra functions for object
 construction, initialisation and notification of destruction.  The
 body of the methods to reset and calculate are identical to previous
@@ -1320,7 +1318,7 @@ destruction is prevented.  Both the ``Quit'' button and the ``delete''
 event end up calling \function{gtk\_widget\_hide} to hide the widget
 rather than \function{gtk\_main\_quit} as before.
 
-Lastly, \filename{gtk/C/gobject/ogcalc-main.c} defines a minimal
+Lastly, :file:`gtk/C/gobject/ogcalc-main.c` defines a minimal
 \function{main}.  The sole purpose of this function is to create an
 instance of \class{Ogcalc}, show it, and then destroy it.  Notice how
 simple and understandable this has become now that building the UI is
@@ -1382,7 +1380,7 @@ which results in more robust code, since object type checking is not
 deferred until run-time.
 
 Signal handling is also more reliable.  Gtkmm uses the
-\program{libsigc++} library, which provides a templated signalling
+:program:`libsigc++` library, which provides a templated signalling
 mechanism for type-safe signal handling.  The \class{mem\_fun} objects
 allow signal handlers with a different signature than the signal
 requires to be bound, which gives greater flexibility than the C
@@ -1393,14 +1391,14 @@ allows the signal handlers to access the member data of their class.
 Unlike the *Qt* library, Gtkmm does not require any source
 preprocessing, allowing plain ISO C++ to be used without extensions.
 
-\program{libglademm} is a C++ wrapper around libglade, and may be used
+:program:`libglademm` is a C++ wrapper around libglade, and may be used
 to dynamically load user interfaces as in the previous section.  It
 provides similar functionality, the exception being that signals must
-be connected manually.  This is because the \program{libsigc++}
+be connected manually.  This is because the :program:`libsigc++`
 signals, connecting to the methods of individual objects, cannot be
 connected automatically.
 
-\program{gtk/C++/glade/ogcalc}, shown in Figure \ref{fig:ogcalcmm}, is
+:program:`gtk/C++/glade/ogcalc`, shown in Figure \ref{fig:ogcalcmm}, is
 identical to the previous examples, both in appearance and
 functionality.  However, internally there are some major differences.
 
@@ -1409,14 +1407,14 @@ functionality.  However, internally there are some major differences.
   \resizebox{\textwidth}{!}{
     \includegraphics{figures/c++-glade.png}
   }
-  \caption[\program{gtk/C++/glade/ogcalc} in action]{\program{gtk/C++/glade/ogcalc} in
+  \caption[:program:`gtk/C++/glade/ogcalc` in action]{:program:`gtk/C++/glade/ogcalc` in
     action.}
 .. _fig-ogcalcmm:
 \end{figure}
 
 Firstly, the \function{main} function no longer knows anything about
 the user interface.  It merely instantiates an instance of the
-\class{ogcalc} class, similarly to \program{gtk/C/gobject/ogcalc}.
+\class{ogcalc} class, similarly to :program:`gtk/C/gobject/ogcalc`.
 
 The \class{ogcalc} class is derived from the \class{Gtk::Window}
 class, and so contains all of the functionality of a
@@ -1431,7 +1429,7 @@ class member data, and as a result are somewhat simpler than
 previously.
 
 Two versions are provided, one using the basic C++ classes and methods
-to construct the interface, the other using \program{libglademm} to
+to construct the interface, the other using :program:`libglademm` to
 load and construct the interface as for the previous examples using
 Glade.  Only the latter is discussed here.  There are a great many
 similarities between the C and C++ versions not using Glade, and the C
@@ -1442,19 +1440,19 @@ to the reader to compare and contrast them.
 Code Listing
 ------------
 
-\filename{gtk/C++/glade/ogcalc.h}
+:file:`gtk/C++/glade/ogcalc.h`
 
 .. literalinclude:: ../gtk/C++/glade/ogcalc.h
    :language: c++
    :lines: 27-54
 
-\filename{gtk/C++/glade/ogcalc.cc}
+:file:`gtk/C++/glade/ogcalc.cc`
 
 .. literalinclude:: ../gtk/C++/glade/ogcalc.cc
    :language: c++
    :lines: 24-128
 
-\filename{gtk/C++/glade/ogcalc-main.cc}
+:file:`gtk/C++/glade/ogcalc-main.cc`
 
 .. literalinclude:: ../gtk/C++/glade/ogcalc-main.cc
    :language: c++
@@ -1462,29 +1460,29 @@ Code Listing
 
 To build the source, do the following:
 
-\begin{verbatim}
-cd gtk/C++/glade
-c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc.cc
-c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc-main.cc
-c++ $(pkg-config --libs libglademm-2.4) -o ogcalc ogcalc.o \
-                                          ogcalc-main.o
-\end{verbatim}
+::
+
+   cd gtk/C++/glade
+   c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc.cc
+   c++ $(pkg-config --cflags libglademm-2.4) -c ogcalc-main.cc
+   c++ $(pkg-config --libs libglademm-2.4) -o ogcalc ogcalc.o \
+                                             ogcalc-main.o
 
 Similarly, for the plain C++ version, which is not discussed in the
 tutorial:
 
-\begin{verbatim}
-cd gtk/C++/plain
-c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc.cc
-c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc-main.cc
-c++ $(pkg-config --libs gtkmm-2.4) -o ogcalc ogcalc.o \
-                                            ogcalc-main.o
-\end{verbatim}
+::
+
+   cd gtk/C++/plain
+   c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc.cc
+   c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc-main.cc
+   c++ $(pkg-config --libs gtkmm-2.4) -o ogcalc ogcalc.o \
+                                               ogcalc-main.o
 
 Analysis
 --------
 
-\filename{ogcalc.h}
+:file:`ogcalc.h`
 ^^^^^^^^^^^^^^^^^^^
 
 The header file declares the \class{ogcalc} class.
@@ -1518,7 +1516,7 @@ It also includes a pointer to the XML interface description.
 pointer'' class, which will take care of destroying the pointed-to
 object when \class{ogcalc} is destroyed.
 
-\filename{ogcalc.cc}
+:file:`ogcalc.cc`
 ^^^^^^^^^^^^^^^^^^^^
 
 The constructor \function{ogcalc::ogcalc} takes care of creating the
@@ -1557,7 +1555,7 @@ object.
 Individual widgets may be obtained from the widget tree using the
 static member function \function{Gnome::Glade::Xml::get\_widget}.
 
-Because Gtkmm uses \program{libsigc++} for signal handling, which uses
+Because Gtkmm uses :program:`libsigc++` for signal handling, which uses
 class member functions as signal handlers (normal functions may also
 be used, too), the signals cannot be connected automatically, as in
 the previous example.
@@ -1644,7 +1642,7 @@ In the \function{ogcalc::on\_button\_clicked\_reset} member function,
 \noindent class member functions are used to reset and clear the
 widgets as in previous examples.
 
-\filename{ogcalc-main.cc}
+:file:`ogcalc-main.cc`
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This file contains a very simple \function{main} function.
@@ -1680,7 +1678,7 @@ run in order to verify they are syntactically correct, and simple
 typing mistakes can result in a syntactically correct, but
 dysfunctional, program.  A good C or C++ compiler would catch these
 errors, but Python cannot.  There are tools, such as
-\program{pychecker}, which help with this.  The purpose of this
+:program:`pychecker`, which help with this.  The purpose of this
 document is not to advocate any particular tool, however.  The pros
 and cons of each language have been discussed at length in many other
 places.
@@ -1689,10 +1687,10 @@ Python has a language binding for GTK+, pyGTK, which allows the
 creation of GTK+ user interfaces directly, including the ability to
 derive new classes from the standard GTK+ classes, and use Python
 functions and object methods as callbacks.  The functionality
-provided by \program{libglade} in C is also similarly available.
+provided by :program:`libglade` in C is also similarly available.
 
 In the next section, examples show the use of pyGTK to create the
-\program{ogcalc} interface, using both plain GTK+ and Glade.
+:program:`ogcalc` interface, using both plain GTK+ and Glade.
 The author wrote the Python scripts with only a few hours of Python
 experience, directly from the original C source, which demonstrates
 just how easy Python is to get into.
@@ -1700,13 +1698,13 @@ just how easy Python is to get into.
 Code listing
 ------------
 
-\filename{gtk/python/plain/ogcalc}
+:file:`gtk/python/plain/ogcalc`
 
 .. literalinclude:: ../gtk/python/plain/ogcalc
    :language: python
    :lines: 26-333
 
-\filename{gtk/python/glade/ogcalc}
+:file:`gtk/python/glade/ogcalc`
 
 .. literalinclude:: ../gtk/python/glade/ogcalc
    :language: python
@@ -1895,18 +1893,18 @@ factors, such as:
 \item{The need for code reuse.}
 \end{itemize}
 
-For simple programs, such as \program{gtk/C/plain/ogcalc}, there is no
+For simple programs, such as :program:`gtk/C/plain/ogcalc`, there is no
 problem with writing in plain C, but as programs become more complex,
 Glade can greatly ease the effort needed to develop and maintain the
 code.  The code reduction and de-uglification achieved through
-conversion to Glade/\program{libglade} is beneficial even for small
+conversion to Glade/:program:`libglade` is beneficial even for small
 programs, however, so I would recommend that Glade be used for all but
 the most trivial code.
 
 The C++ code using Gtkmm is slightly more complex than the code using
 Glade.  However, the benefits of type and signal safety, encapsulation
 of complexity and the ability to re-use code through the derivation of
-new widgets make Gtkmm and \program{libglademm} an even better choice.
+new widgets make Gtkmm and :program:`libglademm` an even better choice.
 Although it is possible to write perfectly good code in C, Gtkmm gives
 the programmer security through compiler type checking that plain GTK+
 cannot offer.  In addition, improved code organisation is possible,
