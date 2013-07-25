@@ -8,34 +8,34 @@
 
 class ogcalc : public QMainWindow
 {
-    Q_OBJECT
-    
-public:
-    explicit ogcalc(QWidget *parent = 0);
-    ~ogcalc();
+  Q_OBJECT;
+ public:
+  explicit ogcalc (QWidget *parent = 0);
 
-public slots:
-    void calculate();
+  ~ogcalc ();
 
-    void reset();
+  public slots:
+  void calculate ();
 
-private:
-    void setupUi();
-    void retranslateUi();
+  void reset ();
 
-    QLabel *pg_label;
-    SpinBoxEntry *pg_entry;
-    QLabel *ri_label;
-    SpinBoxEntry *ri_entry;
-    QLabel *cf_label;
-    SpinBoxEntry *cf_entry;
-    QLabel *og_label;
-    QLabel *og_result;
-    QLabel *abv_entry;
-    QLabel *abv_result;
-    QPushButton *quit_button;
-    QPushButton *reset_button;
-    QPushButton *calculate_button;
+ private:
+  void setupUi ();
+  void retranslateUi ();
+
+  QLabel       *pg_label;
+  SpinBoxEntry *pg_entry;
+  QLabel       *ri_label;
+  SpinBoxEntry *ri_entry;
+  QLabel       *cf_label;
+  SpinBoxEntry *cf_entry;
+  QLabel       *og_label;
+  QLabel       *og_result;
+  QLabel       *abv_entry;
+  QLabel       *abv_result;
+  QPushButton  *quit_button;
+  QPushButton  *reset_button;
+  QPushButton  *calculate_button;
 };
 
 #endif // OGCALC_H
