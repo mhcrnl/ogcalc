@@ -29,7 +29,7 @@
    <iconset>
     <normaloff>../../../../../ogcalc/ogcalc.svg</normaloff>../../../../../ogcalc/ogcalc.svg</iconset>
   </property>
-  <widget class="QWidget" name="centralWidget">
+  <widget class="QWidget" name="toplevel_layout">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
      <horstretch>0</horstretch>
@@ -38,9 +38,9 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="entry_layout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <layout class="QHBoxLayout" name="pg_layout">
         <item>
          <widget class="QLabel" name="pg_label">
           <property name="sizePolicy">
@@ -82,7 +82,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <layout class="QHBoxLayout" name="ri_layout">
         <item>
          <widget class="QLabel" name="ri_label">
           <property name="sizePolicy">
@@ -115,7 +115,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <layout class="QHBoxLayout" name="cf_layout">
         <item>
          <widget class="QLabel" name="cf_label">
           <property name="sizePolicy">
@@ -150,9 +150,9 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="result_layout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <layout class="QHBoxLayout" name="og_layout">
         <item>
          <widget class="QLabel" name="og_label">
           <property name="sizePolicy">
@@ -197,7 +197,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <layout class="QHBoxLayout" name="abv_layout">
         <item>
          <widget class="QLabel" name="abv_entry">
           <property name="sizePolicy">
@@ -244,7 +244,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <layout class="QHBoxLayout" name="button_layout">
       <item>
        <widget class="QPushButton" name="quit">
         <property name="text">
