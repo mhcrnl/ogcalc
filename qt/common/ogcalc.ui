@@ -71,12 +71,6 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="specialValueText">
-           <string>0.00</string>
-          </property>
-          <property name="prefix">
-           <string/>
-          </property>
          </widget>
         </item>
        </layout>
@@ -183,9 +177,6 @@
             <bold>true</bold>
            </font>
           </property>
-          <property name="text">
-           <string>OGVAL</string>
-          </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -199,7 +190,7 @@
       <item>
        <layout class="QHBoxLayout" name="abv_layout">
         <item>
-         <widget class="QLabel" name="abv_entry">
+         <widget class="QLabel" name="abv_label">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -227,9 +218,6 @@
             <weight>75</weight>
             <bold>true</bold>
            </font>
-          </property>
-          <property name="text">
-           <string>ABVVAL</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

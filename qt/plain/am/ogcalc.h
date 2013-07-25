@@ -31,7 +31,7 @@ class ogcalc : public QMainWindow
   SpinBoxEntry *cf_entry;
   QLabel       *og_label;
   QLabel       *og_result;
-  QLabel       *abv_entry;
+  QLabel       *abv_label;
   QLabel       *abv_result;
   QPushButton  *quit_button;
   QPushButton  *reset_button;
