@@ -38,22 +38,22 @@ Introduction
 What is GTK+?
 -------------
 
-GTK+ is a \emph{toolkit} used for writing graphical applications.
+GTK+ is a *toolkit* used for writing graphical applications.
 Originally written for the X11 windowing system, it has now been
 ported to other systems, such as Microsoft Windows and the Apple
 Macintosh, and so may be used for cross-platform software development.
-GTK+ was written as a part of the \emph{GNU Image Manipulation
-  Program} (GIMP), but has long been a separate project, used by many
-other free software projects, one of the most notable being the
-\emph{GNU Network Object Model Environment} (GNOME) Project.
+GTK+ was written as a part of the *GNU Image Manipulation Program*
+(GIMP), but has long been a separate project, used by many other free
+software projects, one of the most notable being the *GNU Network
+Object Model Environment* (GNOME) Project.
 
 GTK+ is written in C and, because of the ubiquity of the C language,
-\emph{bindings} have been written to allow the development of GTK+
+*bindings* have been written to allow the development of GTK+
 applications in many other languages.  This short tutorial is intended
 as a simple introduction to writing GTK+ applications in C, C++ and
 Python, using the current (2.6) version of \filename{libgtk}.  It also
-covers the use of the Glade user interface designer for \emph{rapid
-  application development} (RAD).
+covers the use of the Glade user interface designer for *rapid
+application development* (RAD).
 
 It is assumed that the reader is familiar with C and C++ programming,
 and it would be helpful to work through the ``Getting Started''
@@ -110,7 +110,7 @@ GTK+ basics
 Objects
 -------
 
-GTK+ is an \emph{object-oriented} (OO) toolkit.  I'm afraid that
+GTK+ is an *object-oriented* (OO) toolkit.  I'm afraid that
 unless one is aware of the basic OO concepts (classes, class methods,
 inheritance, polymorphism), this tutorial (and GTK+ in general) will
 seem rather confusing.  On my first attempt at learning GTK+, I didn't
@@ -118,7 +118,7 @@ seem rather confusing.  On my first attempt at learning GTK+, I didn't
 `clicked' and I understood it quite quickly.
 
 The C language does not natively support classes, and so GTK+ provides
-its own object/type system, \textbf{GObject}.  GObject provides
+its own object/type system, **GObject**.  GObject provides
 objects, inheritance, polymorphism, constructors, destructors and
 other facilities such as reference counting and signal emission and
 handling.  Essentially, it provides C++ classes in C.  The syntax
@@ -154,11 +154,11 @@ argument.  This happens automatically in C++, but it needs doing
 Another difference is seen when dealing with polymorphic objects.  All
 GTK+ widgets (the controls, such as buttons, checkboxes, labels, etc.)
 are derived from \class{GtkWidget}.  That is to say, a
-\class{GtkButton} \emph{is a} \class{GtkWidget}, which \emph{is a}
-\class{GtkObject}, which \emph{is a} \class{GObject}.  In C++, one
-can call member functions from both the class and the classes it is
-derived from.  With GTK+, the object needs explicit casting to the
-required type.  For example
+\class{GtkButton} *is a* \class{GtkWidget}, which *is a*
+\class{GtkObject}, which *is a* \class{GObject}.  In C++, one can call
+member functions from both the class and the classes it is derived
+from.  With GTK+, the object needs explicit casting to the required
+type.  For example
 
 \begin{lstlisting}[numbers=none, language={[GNU]C++}]
 GtkButton mybutton;
@@ -177,8 +177,8 @@ gtk_widget_show(GTK_WIDGET(mybutton))
 \noindent In this example, \texttt{set\_label()} is a method of
 \class{GtkButton}, whilst \texttt{show()} is a method of
 \class{GtkWidget}, which requires an explicit cast.  The
-\texttt{GTK\_WIDGET()} cast is actually a form of \emph{run-time type
-  identification} (RTTI).  This ensures that the objects are of the
+\texttt{GTK\_WIDGET()} cast is actually a form of *run-time type
+identification* (RTTI).  This ensures that the objects are of the
 correct type when they are used.
 
 Objects and C work well, but there are some issues, such as a lack of
@@ -210,7 +210,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/qt-label.png}
       }
     }
-    \label{fig:qtwidget:label}
+.. _fig-qtwidget:label:
   }
   \subfigure[A drop-down selection (combo box)]{
     \makebox[0.45\textwidth][c]{
@@ -218,7 +218,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/qt-combo-box.png}
       }
     }
-    \label{fig:qtwidget:combobox}
+.. _fig-qtwidget:combobox:
   }
   \subfigure[A push button]{
     \makebox[0.45\textwidth][c]{
@@ -226,7 +226,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/qt-button.png}
       }
     }
-    \label{fig:qtwidget:button}
+.. _fig-qtwidget:button:
   }
   \subfigure[A tick box]{
     \makebox[0.45\textwidth][c]{
@@ -234,7 +234,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/qt-check-button.png}
       }
     }
-    \label{fig:qtwidget:checkbox}
+.. _fig-qtwidget:checkbox:
   }
   \subfigure[A menu bar]{
     \makebox[0.45\textwidth][c]{
@@ -242,7 +242,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/qt-menu.png}
       }
     }
-    \label{fig:qtwidget:menu}
+.. _fig-qtwidget:menu:
   }
   \subfigure[A text entry field]{
     \makebox[0.45\textwidth][c]{
@@ -250,16 +250,16 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/qt-text-entry.png}
       }
     }
-    \label{fig:qtwidget:entry}
+.. _fig-qtwidget:entry:
   }
   \subfigure[A font selection]{
     \resizebox{0.45\textwidth}{!}{
       \includegraphics{figures/qt-font-selection.png}
     }
-    \label{fig:qtwidget:fontsel}
+.. _fig-qtwidget:fontsel:
   }
   \caption[A selection of Qt widgets]{A selection of Qt widgets.}
-  \label{fig:qtwidgets}
+.. _fig-qtwidgets:
 \end{figure}
 
 \begin{figure}
@@ -270,7 +270,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/gtk-label.png}
       }
     }
-    \label{fig:gtkwidget:label}
+.. _fig-gtkwidget:label:
   }
   \subfigure[A drop-down selection (combo box)]{
     \makebox[0.45\textwidth][c]{
@@ -278,7 +278,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/gtk-combo-box.png}
       }
     }
-    \label{fig:gtkwidget:combobox}
+.. _fig-gtkwidget:combobox:
   }
   \subfigure[A push button]{
     \makebox[0.45\textwidth][c]{
@@ -286,7 +286,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/gtk-button.png}
       }
     }
-    \label{fig:gtkwidget:button}
+.. _fig-gtkwidget:button:
   }
   \subfigure[A tick box]{
     \makebox[0.45\textwidth][c]{
@@ -294,7 +294,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/gtk-check-button.png}
       }
     }
-    \label{fig:gtkwidget:checkbox}
+.. _fig-gtkwidget:checkbox:
   }
   \subfigure[A menu bar]{
     \makebox[0.45\textwidth][c]{
@@ -302,7 +302,7 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/gtk-menu.png}
       }
     }
-    \label{fig:gtkwidget:menu}
+.. _fig-gtkwidget:menu:
   }
   \subfigure[A text entry field]{
     \makebox[0.45\textwidth][c]{
@@ -310,16 +310,16 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
         \includegraphics{figures/gtk-text-entry.png}
       }
     }
-    \label{fig:gtkwidget:entry}
+.. _fig-gtkwidget:entry:
   }
   \subfigure[A font selection]{
     \resizebox{0.45\textwidth}{!}{
       \includegraphics{figures/gtk-font-selection.png}
     }
-    \label{fig:gtkwidget:fontsel}
+.. _fig-gtkwidget:fontsel:
   }
   \caption[A selection of GTK+ widgets]{A selection of GTK+ widgets.}
-  \label{fig:gtkwidgets}
+.. _fig-gtkwidgets:
 \end{figure}
 
 Not all widgets are interactive.  For example, the user cannot usually
@@ -327,7 +327,7 @@ interact with a label, or a framebox.  Some widgets, such as
 containers, boxes and event boxes are not even visible to the user
 (there is more about this in Section \ref{sec:containers}).
 
-Different types of widget have their own unique \emph{properties}.
+Different types of widget have their own unique *properties*.
 For example, a label widget contains the text it displays, and there
 are functions to get and set the label text.  A checkbox may be ticked
 or not, and there are functions to get and set its state.  An options
@@ -338,18 +338,18 @@ user has chosen.
 Containers
 ----------
 
-\label{sec:containers}
+.. _sec-containers:
 
-The top-level of every GTK+ interface is the \emph{window}.  A window
+The top-level of every GTK+ interface is the *window*.  A window
 is what one might expect it to be: it has a title bar, borders (which
 may allow resizing), and it contains the rest of the interface.
 
-In GTK+, a \class{GtkWindow} \emph{is a} \class{GtkContainer}.  In
-English, this means that the window is a widget that can contain
-another widget.  More precisely, a \class{GtkContainer} can contain
-exactly \textbf{one} widget.  This is usually quite confusing compared
-with the behaviour of other graphics toolkits, which allow one to
-place the controls on some sort of ``form''.
+In GTK+, a \class{GtkWindow} *is a* \class{GtkContainer}.  In English,
+this means that the window is a widget that can contain another
+widget.  More precisely, a \class{GtkContainer} can contain exactly
+**one** widget.  This is usually quite confusing compared with
+the behaviour of other graphics toolkits, which allow one to place the
+controls on some sort of ``form''.
 
 The fact that a \class{GtkWindow} can only contain one widget
 initially seems quite useless.  After all, user interfaces usually
@@ -370,23 +370,23 @@ the interface.
   \centering
   \subfigure[Horizontal box: \class{GtkHBox}]{
     \includegraphics[width=0.45\textwidth]{figures/container-hbox}
-    \label{fig:container:hbox}
+.. _fig-container:hbox:
   }
   \subfigure[Vertical box: \class{GtkVBox}]{
     \makebox[0.45\textwidth][c]{
       \includegraphics[height=0.45\textwidth]{figures/container-vbox}
     }
-     \label{fig:container:vbox}
+.. _fig-container:vbox:
    }
    \subfigure[Table: \class{GtkTable}]{
      \includegraphics[width=0.45\textwidth]{figures/container-table}
-     \label{fig:container:table}
+.. _fig-container:table:
    }
    \caption[GTK+ containers]{GTK+ containers.  Each container may
     contain other widgets in the shaded areas.  Containers may contain
     more containers, allowing them to nest.  Complex interfaces may be
     constructed by nesting the different types of container.}
-  \label{fig:containers}
+.. _fig-containers:
 \end{figure}
 
 In addition to the containers discussed above, there are more complex
@@ -397,7 +397,7 @@ scope of this tutorial, however.
 Newcomers to GTK+ may find the concept of containers quite strange.
 Users of Microsoft Visual Basic or Visual C++ may be used to the
 free-form placement of controls.  The placement of controls at fixed
-positions on a form has \emph{no} advantages over automatic
+positions on a form has *no* advantages over automatic
 positioning and sizing.  All decent modern toolkits use automatic
 positioning.  This fixes several issues with fixed layouts:
 
@@ -410,7 +410,7 @@ positioning.  This fixes several issues with fixed layouts:
 \item Bad things happen when changing the font size from the default.
 \end{itemize}
 
-The nesting of containers results in a \emph{widget tree}, which has
+The nesting of containers results in a *widget tree*, which has
 many useful properties, some of which will be used later.  One
 important advantage is that they can dynamically resize and
 accommodate different lengths of text, important for
@@ -433,7 +433,7 @@ detail about Glade is provided in Section \ref{sec:glade}, where
 Signals
 -------
 
-Most graphical toolkits are \emph{event-driven}, and GTK+ is no
+Most graphical toolkits are *event-driven*, and GTK+ is no
 exception.  Traditional console applications tend not to be
 event-driven; these programs follow a fixed path of execution.  A
 typical program might do something along these lines:
@@ -450,7 +450,7 @@ single function (each of which might be split into helper functions,
 and so on).
 
 GTK+ applications differ from this model.  The programs must react to
-\emph{events}, such as the user clicking on a button, or pressing
+*events*, such as the user clicking on a button, or pressing
 Enter in an text entry field.  These widgets emit signals in response
 to user actions.  For each signal of interest, a function defined by
 the programmer is called.  In these functions, the programmer can do
@@ -459,12 +459,12 @@ the ``Calculate'' button is pressed, a function is called to read the
 data from entry fields, do some calculations, and then display the
 results.
 
-Each event causes a \emph{signal} to be \emph{emitted} from the widget
-handling the event.  The signals are sent to \emph{signal handlers}.
-A signal handler is a function which is called when the signal is
-emitted.  The signal handler is \emph{connected} to the signal.  In C,
-these functions are known as \emph{callbacks}.  The process is
-illustrated graphically in Figure \ref{fig:signals}.
+Each event causes a *signal* to be *emitted* from the widget handling
+the event.  The signals are sent to *signal handlers*.  A signal
+handler is a function which is called when the signal is emitted.  The
+signal handler is *connected* to the signal.  In C, these functions
+are known as *callbacks*.  The process is illustrated graphically in
+Figure \ref{fig:signals}.
 
 \begin{figure}
   \centering
@@ -472,7 +472,7 @@ illustrated graphically in Figure \ref{fig:signals}.
   \caption[A typical signal handler]{A typical signal handler.  When
     the button is pressed, a signal is emitted, causing the registered
     callback function to be called.}
-  \label{fig:signals}
+.. _fig-signals:
 \end{figure}
 
 A signal may have zero, one or many signal handlers connected
@@ -480,7 +480,7 @@ A signal may have zero, one or many signal handlers connected
 are called in the order they were connected in.
 
 Without signals, the user interface would display on the screen, but
-would not actually \emph{do} anything.  By associating signal handlers
+would not actually *do* anything.  By associating signal handlers
 with signals one is interested in, events triggered by the user
 interacting with the widgets will cause things to happen.
 
@@ -537,7 +537,7 @@ Planning ahead
 Before starting to code, it is necessary to plan ahead by thinking
 about what the program will do, and how it should do it.  When
 designing a graphical interface, one should pay attention to
-\emph{how} the user will interact with it, to ensure that it is both
+*how* the user will interact with it, to ensure that it is both
 easy to understand and efficient to use.
 
 When designing a GTK+ application, it is useful to sketch the
@@ -612,7 +612,7 @@ A simple sketch of the interface is shown in Figure \ref{fig:sketch}.
     fields, followed by two result fields on the middle row.  The
     bottom row contains buttons to quit the program, reset the
     interface and do the calculation.}
-  \label{fig:sketch}
+.. _fig-sketch:
 \end{figure}
 
 Creating the interface
@@ -628,39 +628,39 @@ user will use go in last.  This is illustrated in Figure
   \centering
   \subfigure[An empty window]{
     \includegraphics[width=0.45\textwidth]{figures/packing-1}
-    \label{fig:packing:1}
+.. _fig-packing:1:
   }
   \subfigure[Addition of a \class{GtkVBox}]{
     \includegraphics[width=0.45\textwidth]{figures/packing-2}
-    \label{fig:packing:2}
+.. _fig-packing:2:
   }
   \subfigure[Addition of a second \class{GtkVBox}; this has uniformly-
-  sized children (it is \emph{homogeneous}), unlike the first.]{
+  sized children (it is *homogeneous*), unlike the first.]{
     \includegraphics[width=0.45\textwidth]{figures/packing-3}
-    \label{fig:packing:3}
+.. _fig-packing:3:
   }
   \subfigure[Addition of three \class{GtkHBox}es]{
     \includegraphics[width=0.45\textwidth]{figures/packing-4}
-    \label{fig:packing:4}
+.. _fig-packing:4:
   }
   \subfigure[Addition of five more \class{GtkHBox}es, used to ensure
   visually appealing widget placement]{
     \includegraphics[width=0.45\textwidth]{figures/packing-5}
-    \label{fig:packing:5}
+.. _fig-packing:5:
   }
   \subfigure[Addition of all of the user-visible widgets]{
     \includegraphics[width=0.45\textwidth]{figures/packing-final}
-    \label{fig:packing:final}
+.. _fig-packing:final:
   }
   \caption[Widget packing]{Widget packing.  The steps taken during the
     creation of an interface are shown, demonstrating the use of
     nested containers to pack widgets.}
-  \label{fig:packing}
+.. _fig-packing:
 \end{figure}
 
 Once a widget has been created, signal handlers may be connected to
 its signals.  After this is completed, the interface can be displayed,
-and the main \emph{event loop} may be entered.  The event loop
+and the main *event loop* may be entered.  The event loop
 receives events from the keyboard, mouse and other sources, and causes
 the widgets to emit signals.  To end the program, the event loop must
 first be left.
@@ -669,7 +669,7 @@ first be left.
 GTK+ and C
 ==========
 
-\label{sec:gtkc}
+.. _sec-gtkc:
 
 Introduction
 ------------
@@ -683,7 +683,7 @@ finished application.
   \centering \resizebox{\textwidth}{!}{
     \includegraphics{figures/c-plain.png} }
   \caption[\program{gtk/C/plain/ogcalc} in action]{\program{gtk/C/plain/ogcalc} in action.}
-  \label{fig:ogcalc}
+.. _fig-ogcalc:
 \end{figure}
 
 This program consists of five functions:
@@ -757,7 +757,7 @@ and padding space are different for the various \class{GtkBox}es used,
 depending on the visual effect intended.
 
 \function{gtk\_container\_add} packs \variable{vbox1} into the window
-(a \class{GtkWindow} object \emph{is a} \class{GtkContainer}).
+(a \class{GtkWindow} object *is a* \class{GtkContainer}).
 
 \begin{lstlisting}[numbers=none, language=C]
 eventbox = gtk_event_box_new();
@@ -775,7 +775,7 @@ the appropriate handler.
 
 \function{gtk\_widget\_show} displays a widget.  Widgets are hidden by
 default when created, and so must be shown before they can be used.
-It is typical to show the top-level window \emph{last}, so that the
+It is typical to show the top-level window *last*, so that the
 user does not see the interface being drawn.
 
 \function{gtk\_box\_pack\_start} packs a widget into a \class{GtkBox},
@@ -793,7 +793,7 @@ respectively.  Figure \ref{fig:boxpacking} shows how
     \includegraphics{figures/box-packing} }
   \caption[Packing widgets into a \class{GtkHBox}]{Packing widgets
     into a \class{GtkHBox}.}
-  \label{fig:boxpacking}
+.. _fig-boxpacking:
 \end{figure}
 
 The \function{create\_spin\_entry} function is a helper function to
@@ -863,7 +863,7 @@ Continuing with the \function{main} function:
 button1 = gtk_button_new_from_stock(GTK_STOCK_QUIT);
 \end{lstlisting}
 
-This code creates a new button, using a \emph{stock widget}.  A stock
+This code creates a new button, using a *stock widget*.  A stock
 widget contains a predefined icon and text.  These are available for
 commonly used functions, such as ``OK'', ``Cancel'', ``Print'', etc..
 
@@ -876,10 +876,10 @@ GTK_WIDGET_SET_FLAGS (button2, GTK_CAN_DEFAULT);
 \end{lstlisting}
 
 Here, a button is created, with the label ``Calculate''.  The
-\emph{mnemonic} is the `\code{\_C}', which creates an
-\emph{accelerator}.  This means that when Alt-C is pressed, the button
-is activated (i.e. it is a keyboard shortcut).  The shortcut is
-underlined, in common with other graphical toolkits.
+*mnemonic* is the `\code{\_C}', which creates an *accelerator*.  This
+means that when Alt-C is pressed, the button is activated (i.e. it is
+a keyboard shortcut).  The shortcut is underlined, in common with
+other graphical toolkits.
 
 The ``clicked'' signal (emitted when the button is pressed and
 released) is connected to the \function{on\_button\_clicked\_calculate}
@@ -965,7 +965,7 @@ g_free (og_string);
 Here the result \variable{og} is printed to the string
 \variable{og\_string}.  This is then set as the label text using
 \function{gtk\_label\_set\_markup}.  This function sets the label text
-using the \emph{Pango Markup Format}, which uses the `\code{<b>}' and
+using the *Pango Markup Format*, which uses the `\code{<b>}' and
 `\code{</b>}' tags to embolden the text.
 
 \begin{lstlisting}[numbers=none, language=C]
@@ -982,7 +982,7 @@ default value, and blanks the result fields.
 GTK+ and Glade
 ==============
 
-\label{sec:glade}
+.. _sec-glade:
 
 Introduction
 ------------
@@ -1007,7 +1007,7 @@ Glade.
     \resizebox{0.40\textwidth}{!}{
       \includegraphics{figures/glade-main-window.png}
     }
-    \label{fig:glade:main}
+.. _fig-glade:main:
   }
   \subfigure[Palette for widget selection]{
     \makebox[0.40\textwidth][c]{
@@ -1015,29 +1015,29 @@ Glade.
         \includegraphics{figures/glade-palette.png}
       }
     }
-    \label{fig:glade:palette}
+.. _fig-glade:palette:
   }
   \subfigure[Widget properties dialogue]{
     \resizebox{0.40\textwidth}{!}{
       \includegraphics{figures/glade-properties.png}
     }
-    \label{fig:glade:properties}
+.. _fig-glade:properties:
   }
   \subfigure[Widget tree]{
     \resizebox{0.40\textwidth}{!}{
       \includegraphics{figures/glade-widget-tree.png}
     }
-    \label{fig:glade:tree}
+.. _fig-glade:tree:
   }
   \subfigure[The program being designed]{
     \resizebox{0.40\textwidth}{!}{
       \includegraphics{figures/glade-ogcalc.png}
     }
-    \label{fig:glade:ogcalc}
+.. _fig-glade:ogcalc:
   }
   \caption[The Glade user interface designer]{The Glade user interface
     designer.}
-  \label{fig:glade}
+.. _fig-glade:
 \end{figure}
 
 The file \filename{gtk/C/glade/ogcalc.glade} contains the same interface
@@ -1066,7 +1066,7 @@ listing, but with the following changes:
 The running \program{gtk/C/glade/ogcalc} application is shown in Figure
 \ref{fig:ogcalcgl}.  Notice that it is identical to
 \program{gtk/C/plain/ogcalc}, shown in Figure \ref{fig:ogcalc}.  (No, they
-are \emph{not} the same screenshot!)
+are *not* the same screenshot!)
 
 \begin{figure}
   \centering
@@ -1075,7 +1075,7 @@ are \emph{not} the same screenshot!)
   }
   \caption[\program{gtk/C/glade/ogcalc} in action]{\program{gtk/C/glade/ogcalc} in
     action.}
-  \label{fig:ogcalcgl}
+.. _fig-ogcalcgl:
 \end{figure}
 
 Code listing
@@ -1151,7 +1151,7 @@ understandable, cleaner and maintainable.
 GTK+ and GObject
 ================
 
-\label{sec:gobject}
+.. _sec-gobject:
 
 Introduction
 ------------
@@ -1164,7 +1164,7 @@ larger the source will become more difficult to understand and manage.
 A better way of organising the source is required.
 
 One very common way of reducing this complexity is
-\emph{object-orientation}.  The GTK+ library is already made up of
+*object-orientation*.  The GTK+ library is already made up of
 many different objects.  By using the same object mechanism (GObject),
 the ogcalc code can be made more understandable and maintainable.
 
@@ -1176,7 +1176,7 @@ variables and the signal handlers would be member functions (methods).
 The user of the class wouldn't be required to have knowledge of these
 details, they just create a new \class{Ogcalc} object and show it.
 
-By using objects one also gains \emph{reusability}.  Previously only
+By using objects one also gains *reusability*.  Previously only
 one instance of the object at a time was possible, and \function{main}
 had explicit knowledge of the creation and workings of the interface.
 
@@ -1191,7 +1191,7 @@ be taken advantage of using plain C and GObject.
   }
   \caption[\program{gtk/C/gobject/ogcalc} in action]{\program{gtk/C/gobject/ogcalc} in
     action.}
-  \label{fig:ogcalcgo}
+.. _fig-ogcalcgo:
 \end{figure}
 
 Code listing
@@ -1262,20 +1262,20 @@ It prototypes the initialisation functions defined in the source
 below, and it defines the function \function{ogcalc\_get\_type}, which
 is used to get the the typeid (\type{GType}) of the class.  As a side
 effect, this function triggers registration of the class with the
-GType type system.  GType is a \emph{dynamic} type system.  Unlike
+GType type system.  GType is a *dynamic* type system.  Unlike
 languages like C++, where the types of all classes are known at
 compile-time, the majority of all the types used with GTK+ are
 registered on demand, except for the primitive data types and the base
-class \class{GObject} which are registered as \emph{fundamental}
-types.  As a result, in addition to being able to specify constructors
-and destructors for the \emph{object} (or \emph{initialisers} and
-\emph{finalisers} in GType parlance), it is also possible to have
-initialisation and finalisation functions for both the \emph{class}
-and \emph{base}.  For example, the class initialiser could be used to
-fix up the vtable for overriding virtual functions in derived classes.
-In addition, there is also an \variable{instance\_init} function, which
-is used in this example to initialise the class.  It's similar to the
-constructor, but is called after object construction.
+class \class{GObject} which are registered as *fundamental* types.  As
+a result, in addition to being able to specify constructors and
+destructors for the *object* (or *initialisers* and *finalisers* in
+GType parlance), it is also possible to have initialisation and
+finalisation functions for both the *class* and *base*.  For example,
+the class initialiser could be used to fix up the vtable for
+overriding virtual functions in derived classes.  In addition, there
+is also an \variable{instance\_init} function, which is used in this
+example to initialise the class.  It's similar to the constructor, but
+is called after object construction.
 
 All these functions are specified in a \class{GTypeInfo} structure
 which is passed to \function{g\_type\_register\_static} to register the
@@ -1299,7 +1299,7 @@ Glade) and setting up the few object properties and signal handlers
 that could not be done automatically with Glade.  In this example, a
 second argument is passed to \function{glade\_xml\_new}; in this case,
 there is no need to create the window, since our \class{Ogcalc} object
-\emph{is a} window, and so only the interface rooted from
+*is a* window, and so only the interface rooted from
 ``ogcalc\_main\_vbox'' is loaded.
 
 \function{ogcalc\_finalize} is the object finalisation function (C++
@@ -1343,7 +1343,7 @@ hands of the user of the class---where it should be.
 GTK+ and C++
 ============
 
-\label{sec:cxxglade}
+.. _sec-cxxglade:
 
 Introduction
 ------------
@@ -1373,7 +1373,7 @@ maintainability.  However, some problems remain:
 
 Gtkmm offers solutions to most of these problems.  Firstly, all of the
 GTK+ objects are available as native C++ classes.  The object accessor
-functions are now normal C++ \emph{class methods}, which prevents some
+functions are now normal C++ *class methods*, which prevents some
 of the abuse of objects that could be accomplished in C.  The
 advantage is less typing, and there is no need to manually cast
 between an object's types to use the methods for different classes in
@@ -1394,7 +1394,7 @@ signals allow.  Perhaps the most notable feature is that signal
 handlers may be class methods, which are recommended over global
 functions.  This results in further encapsulation of complexity, and
 allows the signal handlers to access the member data of their class.
-Unlike the \emph{Qt} library, Gtkmm does not require any source
+Unlike the *Qt* library, Gtkmm does not require any source
 preprocessing, allowing plain ISO C++ to be used without extensions.
 
 \program{libglademm} is a C++ wrapper around libglade, and may be used
@@ -1415,7 +1415,7 @@ functionality.  However, internally there are some major differences.
   }
   \caption[\program{gtk/C++/glade/ogcalc} in action]{\program{gtk/C++/glade/ogcalc} in
     action.}
-  \label{fig:ogcalcmm}
+.. _fig-ogcalcmm:
 \end{figure}
 
 Firstly, the \function{main} function no longer knows anything about
@@ -1503,8 +1503,8 @@ virtual void on_button_clicked_reset();
 
 \function{on\_button\_clicked\_calculate} and
 \function{on\_button\_clicked\_reset} are the signal handling
-functions, as previously.  However, they are now class \emph{member
-  functions}, taking no arguments.
+functions, as previously.  However, they are now class *member
+functions*, taking no arguments.
 
 \begin{lstlisting}[numbers=none, language={[GNU]C++}]
 Gtk::SpinButton* pg_entry;
@@ -1661,7 +1661,7 @@ run, using \code{kit.run()}.  This function will return when
 Python
 ======
 
-\label{sec:python}
+.. _sec-python:
 
 Introduction
 ------------
@@ -1926,7 +1926,7 @@ There is no ``best solution'' for everyone.  Choose based on your own
 preferences and capabilities.  In addition, Glade is not the solution
 for every problem.  The author typically uses a mixture of custom
 widgets and Glade interfaces (and your custom widgets can
-\emph{contain} Glade interfaces!).  Really dynamic interfaces must be
+*contain* Glade interfaces!).  Really dynamic interfaces must be
 coded by hand, since Glade interfaces are not sufficiently flexible.
 Use what is best for each situation.
 
