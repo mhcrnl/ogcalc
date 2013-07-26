@@ -54,7 +54,7 @@ covers the use of the Glade user interface designer for *rapid
 application development* (RAD).
 
 It is assumed that the reader is familiar with C and C++ programming,
-and it would be helpful to work through the ``Getting Started''
+and it would be helpful to work through the "Getting Started"
 chapter of the GTK+ tutorial before reading further.  The GTK+, GLib,
 libglade, Gtkmm and libglademm API references will be useful while
 working through the examples.  Very little Python knowledge is
@@ -339,7 +339,7 @@ this means that the window is a widget that can contain another
 widget.  More precisely, a \class{GtkContainer} can contain exactly
 **one** widget.  This is usually quite confusing compared with
 the behaviour of other graphics toolkits, which allow one to place the
-controls on some sort of ``form''.
+controls on some sort of "form".
 
 The fact that a \class{GtkWindow} can only contain one widget
 initially seems quite useless.  After all, user interfaces usually
@@ -413,7 +413,7 @@ manipulation of the interface, and all of the standard GTK+ widgets
 are available.  Modifying an existing interface is trivial, even when
 doing major reworking.  Whole branches of the widget tree may be cut,
 copied and pasted at will, and a widget's properties may be
-manipulated using the ``Properties'' dialogue.  While studying the
+manipulated using the "Properties" dialogue.  While studying the
 code examples, Glade may be used to interactively build and manipulate
 the interface, to visually follow how the code is working.  More
 detail about Glade is provided in Section \ref{sec:glade}, where
@@ -445,7 +445,7 @@ Enter in an text entry field.  These widgets emit signals in response
 to user actions.  For each signal of interest, a function defined by
 the programmer is called.  In these functions, the programmer can do
 whatever needed.  For example, in the :program:`ogcalc` program, when
-the ``Calculate'' button is pressed, a function is called to read the
+the "Calculate" button is pressed, a function is called to read the
 data from entry fields, do some calculations, and then display the
 results.
 
@@ -726,9 +726,9 @@ function are discussed here.
                      "destroy",
                      gtk_main_quit, NULL);
 
-This code connects the ``destroy'' signal of \variable{window} to the
+This code connects the "destroy" signal of \variable{window} to the
 \function{gtk\_main\_quit} function.  This signal is emitted by the
-window when it is to be destroyed, for example when the ``close''
+window when it is to be destroyed, for example when the "close"
 button on the titlebar is clicked).  The result is that when the
 window is closed, the main event loop returns, and the program then
 exits.
@@ -740,7 +740,7 @@ exits.
 
 \variable{vbox1} is a \class{GtkVBox}.  When constructed using
 \function{gtk\_vbox\_new}, it is set to be non-homogeneous
-(\code{FALSE}), which allows the widgets contained within the
+(``FALSE``), which allows the widgets contained within the
 \class{GtkVBox} to be of different sizes, and has zero pixels padding
 space between the container widgets it will contain.  The homogeneity
 and padding space are different for the various \class{GtkBox}es used,
@@ -773,7 +773,7 @@ in a similar manner to \function{gtk\_container\_add}.  This packs
 \variable{eventbox} into \variable{hbox2}.  The last three arguments
 control whether the child widget should expand into an extra space
 available, whether it should fill any extra space available (this has
-no effect if \variable{expand} is \code{FALSE}), and extra space in
+no effect if \variable{expand} is ``FALSE``), and extra space in
 pixels to put between its neighbours (or the edge of the box),
 respectively.  Figure \ref{fig:boxpacking} shows how
 \function{gtk\_box\_pack\_start} works.
@@ -803,7 +803,7 @@ A new label is created displaying the text \variable{label\_text}.
      (GTK_SPIN_BUTTON(spinbutton), TRUE);
 
 A \class{GtkSpinButton} is a numeric entry field.  It has up and down
-buttons to ``spin'' the numeric value up and down.  It is associated
+buttons to "spin" the numeric value up and down.  It is associated
 with a \class{GtkAdjustment}, which controls the range allowed,
 default value, etc..  \function{gtk\_adjustment\_new} returns a new
 \class{GtkAdjustment} object.  Its arguments are the default value,
@@ -817,7 +817,7 @@ with scrollbars).
 
 \function{gtk\_spin\_button\_new} creates a new \class{GtkSpinButton},
 and associates it with \variable{adjustment}.  The second and third
-arguments set the ``climb rate'' (rate of change when the spin buttons
+arguments set the "climb rate" (rate of change when the spin buttons
 are pressed) and the number of decimal places to display.
 
 Finally, \function{gtk\_spin\_button\_set\_numeric} is used to ensure
@@ -833,7 +833,7 @@ A tooltip (pop-up help message) is created with
 \function{gtk\_tooltips\_new}.  \function{gtk\_tooltips\_set\_tip} is
 used to associate \variable{tooltip} with the \variable{eventbox}
 widget, also specifying the message it should contain.  The fourth
-argument should typically be \code{NULL}.
+argument should typically be ``NULL``.
 
 The \function{create\_result\_label} function is a helper function to
 create a result label together with a descriptive label and tooltip.
@@ -855,7 +855,7 @@ Continuing with the \function{main} function:
 
 This code creates a new button, using a *stock widget*.  A stock
 widget contains a predefined icon and text.  These are available for
-commonly used functions, such as ``OK'', ``Cancel'', ``Print'', etc..
+commonly used functions, such as "OK", "Cancel", "Print", etc..
 
 .. code-block:: c
 
@@ -865,18 +865,18 @@ commonly used functions, such as ``OK'', ``Cancel'', ``Print'', etc..
                      (gpointer) &cb_widgets);
    GTK_WIDGET_SET_FLAGS (button2, GTK_CAN_DEFAULT);
 
-Here, a button is created, with the label ``Calculate''.  The
-*mnemonic* is the `\code{\_C}', which creates an *accelerator*.  This
+Here, a button is created, with the label "Calculate".  The
+*mnemonic* is the ``_C``, which creates an *accelerator*.  This
 means that when Alt-C is pressed, the button is activated (i.e. it is
 a keyboard shortcut).  The shortcut is underlined, in common with
 other graphical toolkits.
 
-The ``clicked'' signal (emitted when the button is pressed and
+The "clicked" signal (emitted when the button is pressed and
 released) is connected to the \function{on\_button\_clicked\_calculate}
 callback.  A pointer to the \variable{cb\_widgets} structure is passed
 as the argument to the callback.
 
-Lastly, the \code{GTK\_CAN\_DEFAULT} attribute is set.  This attribute
+Lastly, the ``GTK_CAN_DEFAULT`` attribute is set.  This attribute
 allows the button to be the default widget in the window.
 
 .. code-block:: c
@@ -908,7 +908,7 @@ pressed in the first.
 This is identical to the last example, but in this case the callback
 is the function \function{gtk\_window\_activate\_default} and the widget
 to give to the signal handler is \variable{window}.  When Enter is
-pressed in the CF entry field, the default ``Calculate'' button is
+pressed in the CF entry field, the default "Calculate" button is
 activated.
 
 .. code-block:: c
@@ -955,8 +955,8 @@ This code gets the value from the \class{GtkSpinButton}.
 Here the result \variable{og} is printed to the string
 \variable{og\_string}.  This is then set as the label text using
 \function{gtk\_label\_set\_markup}.  This function sets the label text
-using the *Pango Markup Format*, which uses the `\code{<b>}' and
-`\code{</b>}' tags to embolden the text.
+using the *Pango Markup Format*, which uses the ``<b>`` and
+``</b>`` tags to embolden the text.
 
 .. code-block:: c
 
@@ -978,7 +978,7 @@ Introduction
 ------------
 
 In the previous section, the user interface was constructed entirely
-``by hand''.  This might seem to be rather difficult to do, as well as
+"by hand".  This might seem to be rather difficult to do, as well as
 being messy and time-consuming.  In addition, it also makes for rather
 unmaintainable code, since changing the interface, for example to add
 a new feature, would be rather hard.  As interfaces become more
@@ -1035,8 +1035,8 @@ constructed in :program:`gtk/C/plain/ogcalc`, but designed in Glade.  This
 file can be opened in Glade, and changed as needed, without needing to
 touch any code.
 
-Even signal connection is automated.  Examine the ``Signals'' tab in
-the ``Properties'' dialogue box.
+Even signal connection is automated.  Examine the "Signals" tab in
+the "Properties" dialogue box.
 
 The source code is listed below.  This is the same as the previous
 listing, but with the following changes:
@@ -1249,7 +1249,7 @@ construction, initialisation and notification of destruction.  The
 body of the methods to reset and calculate are identical to previous
 examples.
 
-The macro \code{G\_DEFINE\_TYPE} is used for convenience.  Its
+The macro ``G_DEFINE_TYPE`` is used for convenience.  Its
 parameters are the class name to register, the prefix used by methods
 of this class and the GType of the parent type we are inheriting from.
 It prototypes the initialisation functions defined in the source
@@ -1294,7 +1294,7 @@ that could not be done automatically with Glade.  In this example, a
 second argument is passed to \function{glade\_xml\_new}; in this case,
 there is no need to create the window, since our \class{Ogcalc} object
 *is a* window, and so only the interface rooted from
-``ogcalc\_main\_vbox'' is loaded.
+``ogcalc_main_vbox`` is loaded.
 
 \function{ogcalc\_finalize} is the object finalisation function (C++
 destructor).  It's used to free resources allocated by the object, in
@@ -1308,13 +1308,13 @@ when there are cyclic references between objects, but this is not
 required in this simple case.
 
 An important difference with earlier examples is that instead of
-connecting the window ``destroy'' signal to \function{gtk\_main\_quit}
-to end the application by ending the GTK+ main loop, the ``delete''
+connecting the window "destroy" signal to \function{gtk\_main\_quit}
+to end the application by ending the GTK+ main loop, the "delete"
 signal is connected to \function{ogcalc\_on\_delete\_event} instead.
-This is because the default action of the ``delete'' event is to
-trigger a ``destroy'' event.  The object should not be destroyed, so
-by handling the ``delete'' signal and returning \code{TRUE},
-destruction is prevented.  Both the ``Quit'' button and the ``delete''
+This is because the default action of the "delete" event is to
+trigger a "destroy" event.  The object should not be destroyed, so
+by handling the "delete" signal and returning ``TRUE``,
+destruction is prevented.  Both the "Quit" button and the "delete"
 event end up calling \function{gtk\_widget\_hide} to hide the widget
 rather than \function{gtk\_main\_quit} as before.
 
@@ -1326,9 +1326,9 @@ where it belongs---in the object construction process.  The users of
 \class{Ogcalc} need no knowledge of its internal workings, which is
 the advantage of encapsulating complexity in classes.
 
-By connecting the ``hide'' signal of the \class{Ogcalc} object to
+By connecting the "hide" signal of the \class{Ogcalc} object to
 \function{gtk\_main\_quit} the GTK+ event loop is ended when the user
-presses ``Quit'' or closes the window.  By not doing this directly in
+presses "Quit" or closes the window.  By not doing this directly in
 the class it is possible to have as many instances of it as ones likes
 in the same program, and control over termination is entirely in the
 hands of the user of the class---where it should be.
@@ -1353,7 +1353,7 @@ maintainability.  However, some problems remain:
   In addition, it is very difficult (although not impossible) to
   derive new widgets from existing ones using GObject, or override a
   class method or signal.  Most programmers do not bother, or just use
-  ``compound widgets'', which are just a container containing more
+  "compound widgets", which are just a container containing more
   widgets.
 \item Signal handlers are not type safe.  This could result in
   undefined behaviour, or a crash, if a signal handler does not have a
@@ -1512,8 +1512,8 @@ The class data members include pointers to the objects needed by the
 callbacks (which can access the class members like normal class member
 functions).  Note that \class{Gtk::SpinButton} is a native C++ class.
 It also includes a pointer to the XML interface description.
-\class{Glib::RefPtr} is a templated, reference-counted, ``smart
-pointer'' class, which will take care of destroying the pointed-to
+\class{Glib::RefPtr} is a templated, reference-counted, "smart
+pointer" class, which will take care of destroying the pointed-to
 object when \class{ogcalc} is destroyed.
 
 :file:`ogcalc.cc`
@@ -1580,7 +1580,7 @@ to the \function{ogcalc::hide} member function of this object.
 
 \noindent returns a \class{Glib::SignalProxy0} object (a signal taking no
 arguments).  The \function{connect} method of the signal proxy is used
-to connect \function{ogcalc::hide} to the ``clicked'' signal of the
+to connect \function{ogcalc::hide} to the "clicked" signal of the
 \class{Gtk::Button}.
 
 .. code-block:: c++
@@ -1592,7 +1592,7 @@ to connect \function{ogcalc::hide} to the ``clicked'' signal of the
      ( sigc::mem_fun(*reset_button, &Gtk::Widget::grab_focus) );
 
 Here two signal handlers are connected to the same signal.  When the
-``Calculate'' button is clicked,
+"Calculate" button is clicked,
 \function{ogcalc::on\_button\_clicked\_calculate} is called first,
 followed by \function{Gtk::Widget::grab\_focus}.
 
@@ -1606,7 +1606,7 @@ followed by \function{Gtk::Widget::grab\_focus}.
 \class{sigc::hide\_return} is a special \class{sigc::mem\_fun} used to
 mask the boolean value returned by \function{activate\_default}.  The
 \class{mem\_fun} created is incompatible with with the
-\class{mem\_fun} type required by the signal, and this ``glues'' them
+\class{mem\_fun} type required by the signal, and this "glues" them
 together.
 
 In the \function{ogcalc::on\_button\_clicked\_calculate} member
@@ -1655,7 +1655,7 @@ This file contains a very simple \function{main} function.
 
 A \class{Gtk::Main} object is created, and then an \class{ogcalc}
 class, \variable{window}, is instantiated.  Finally, the interface is
-run, using \code{kit.run()}.  This function will return when
+run, using ``kit.run()``.  This function will return when
 \variable{window} is hidden, and then the program will exit.
 
 Python
@@ -1800,7 +1800,7 @@ title.
 
            self.connect("destroy", gtk.main_quit, None)
 
-This connects the ``destroy'' signal to the \function{gtk.main\_quit}
+This connects the "destroy" signal to the \function{gtk.main\_quit}
 function.  There's far less to type than the C and C++ equivalents,
 and hence it's rather more readable.
 
@@ -1837,7 +1837,7 @@ first and third, or the second arguments are redundant, respectively.
            button1.connect_object("clicked",
                Ogcalc.on_button_clicked_reset, self)
 
-This connects the ``clicked'' signal to the \class{Ogcalc}
+This connects the "clicked" signal to the \class{Ogcalc}
 \function{on\_button\_clicked\_reset} method of the \variable{self}
 object.
 
@@ -1846,7 +1846,7 @@ object.
            self.pg_entry.spinbutton.connect_object("activate",
                gtk.Widget.grab_focus, self.ri_entry.spinbutton)
 
-This connects the ``activate'' signal to the \class{Ogcalc}
+This connects the "activate" signal to the \class{Ogcalc}
 \function{grab\_focus} method of the
 \variable{self.ri\_entry.spinbutton} object.
 
@@ -1858,7 +1858,7 @@ This connects the ``activate'' signal to the \class{Ogcalc}
        gtk.main()
 
 The classes are intended for use as a module in a larger program.
-When run as a standalone script from the command-line, we ``run'' the
+When run as a standalone script from the command-line, we "run" the
 class by creating an instance of it, showing it, and then run the GTK+
 main loop.
 
@@ -1870,7 +1870,7 @@ The Glade code is identical, except for loading the Glade interface:
                                     "ogcalc_main_vbox", None);
 
 Here the Glade interface is loaded, rooted at the
-``ogcalc\_main\_vbox'' widget,
+``ogcalc_main_vbox`` widget,
 
 .. code-block:: python
 
@@ -1924,13 +1924,13 @@ Python may also be a valid choice.  While Python code is certainly
 clearer and simpler, the speed of execution and lack of compile-time
 type checking are a concern.
 
-There is no ``best solution'' for everyone.  Choose based on your own
-preferences and capabilities.  In addition, Glade is not the solution
-for every problem.  The author typically uses a mixture of custom
-widgets and Glade interfaces (and your custom widgets can
-*contain* Glade interfaces!).  Really dynamic interfaces must be
-coded by hand, since Glade interfaces are not sufficiently flexible.
-Use what is best for each situation.
+There is no "best solution" for all use cases.  Choose based on your
+own requirements, preferences and capabilities.  In addition, Glade is
+not the solution for every problem.  The author typically uses a
+mixture of custom widgets and Glade interfaces (and your custom
+widgets can *contain* Glade interfaces!).  Really dynamic interfaces
+must be coded by hand, since Glade interfaces are not sufficiently
+flexible.  Use what is best for each situation.
 
 
 Further Reading
