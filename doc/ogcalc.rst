@@ -72,7 +72,7 @@ also available from `people.debian.org/~rleigh/ogcalc/
    ./configure
    make
 
-\noindent This will check for the required libraries and build the
+This will check for the required libraries and build the
 example code.  Each program may then be run from within its
 subdirectory.
 
@@ -86,7 +86,7 @@ Legal bit
 
 This tutorial document, the source code and compiled binaries, and all
 other files distributed in the source package are copyright
-\copyright{} 2003--2004 Roger Leigh.  These files and binary programs
+© 2003--2013 Roger Leigh.  These files and binary programs
 are free software; you can redistribute them and/or modify them under
 the terms of the GNU General Public Licence as published by the Free
 Software Foundation; either version 2 of the Licence, or (at your
@@ -122,14 +122,14 @@ differs a little from C++ though.  As an example, the following C++
    myclass c;
    c.add(2);
 
-\noindent would be written like this using GObject:
+would be written like this using GObject:
 
 .. code-block:: c
 
    myclass *c = myclass_new();
    myclass_add(c, 2);
 
-\noindent The difference is due to the lack of a :c:data:`this`
+The difference is due to the lack of a :c:data:`this`
 pointer in the C language (since objects do not exist).  This means
 that class methods require the object pointer passing as their first
 argument.  This happens automatically in C++, but it needs doing
@@ -150,7 +150,7 @@ type.  For example
    mybutton.set_label("Cancel");
    mybutton.show();
 
-\noindent would be written as
+would be written as
 
 .. code-block:: c
 
@@ -158,7 +158,7 @@ type.  For example
    gtk_button_set_label(mybutton, "Cancel");
    gtk_widget_show(GTK_WIDGET(mybutton))
 
-\noindent In this example, :cpp:func:`set_label` is a method of
+In this example, :cpp:func:`set_label` is a method of
 :cpp:class:`GtkButton`, whilst :cpp:func:`show` is a method of
 :cpp:class:`GtkWidget`, which requires an explicit cast.  The C API
 uses functions prefixed with the class name, the object being operated
@@ -425,7 +425,7 @@ typical program might do something along these lines:
 * Do some work
 * Print the results
 
-\noindent This type of program does not give the user any freedom to
+This type of program does not give the user any freedom to
 do things in a different order.  Each of the above steps might be a
 single function (each of which might be split into helper functions,
 and so on).
@@ -559,19 +559,19 @@ The :program:`ogcalc` program performs the following calculation:
 
    O = (R \times 2.597) - (P \times 1.644) - 34.4165 + C
 
-\noindent If O is less than 60, then
+If O is less than 60, then
 
 .. math::
 
    A = (O - P) \times 0.130
 
-\noindent otherwise
+otherwise
 
 .. math::
 
    A = (O - P) \times 0.134
 
-\noindent The symbols have the following meanings:
+The symbols have the following meanings:
 
 :math:`A`
    Percentage Alcohol By Volume
@@ -934,11 +934,10 @@ input, performs a calculation, and then displays the result.
      struct calculation_widgets *w;
      w = (struct calculation_widgets *) data;
 
-Recall that a pointer to :c:data:`cb_widgets`, of type \type{struct
-  calculation_widgets}, was passed to the signal handler, cast to a
+Recall that a pointer to :c:data:`cb_widgets`, of type :c:type:`struct
+calculation_widgets`, was passed to the signal handler, cast to a
 :c:type:`gpointer`.  The reverse process is now applied, casting
-:c:data:`data` to a pointer of type \type{struct
-  calculation_widgets}.
+:c:data:`data` to a pointer of type :c:type:`struct calculation_widgets`.
 
 .. code-block:: c
 
@@ -1381,7 +1380,7 @@ deferred until run-time.
 
 Signal handling is also more reliable.  Gtkmm uses the
 :program:`libsigc++` library, which provides a templated signalling
-mechanism for type-safe signal handling.  The \class{mem_fun} objects
+mechanism for type-safe signal handling.  The :cpp:class:`mem_fun` objects
 allow signal handlers with a different signature than the signal
 requires to be bound, which gives greater flexibility than the C
 signals allow.  Perhaps the most notable feature is that signal
@@ -1412,18 +1411,18 @@ functionality.  However, internally there are some major differences.
 .. _fig-ogcalcmm:
 \end{figure}
 
-Firstly, the \function{main} function no longer knows anything about
+Firstly, the :cpp:func:`main` function no longer knows anything about
 the user interface.  It merely instantiates an instance of the
-\class{ogcalc} class, similarly to :program:`gtk/C/gobject/ogcalc`.
+:cpp:class:`ogcalc` class, similarly to :program:`gtk/C/gobject/ogcalc`.
 
-The \class{ogcalc} class is derived from the \class{Gtk::Window}
+The :cpp:class:`ogcalc` class is derived from the :cpp:class:`Gtk::Window`
 class, and so contains all of the functionality of a
-\class{Gtk::Window}, plus its own additional functions and data.
-\class{ogcalc} contains methods called
-\function{on_button_clicked_calculate} and
-\function{on_button_clicked_reset}.  These are the equivalents of
-the functions \function{on_button_clicked_calculate} and
-\function{on_button_clicked_reset} used in the previous examples.
+:cpp:class:`Gtk::Window`, plus its own additional functions and data.
+:cpp:class:`ogcalc` contains methods called
+:cpp:func:`on_button_clicked_calculate` and
+:cpp:func:`on_button_clicked_reset`.  These are the equivalents of
+the functions :c:func:`on_button_clicked_calculate` and
+:c:func:`on_button_clicked_reset` used in the previous examples.
 Because these functions are class methods, they have access to the
 class member data, and as a result are somewhat simpler than
 previously.
@@ -1485,21 +1484,21 @@ Analysis
 :file:`ogcalc.h`
 ^^^^^^^^^^^^^^^^^^^
 
-The header file declares the \class{ogcalc} class.
+The header file declares the :cpp:class:`ogcalc` class.
 
 .. code-block:: c++
 
    class ogcalc : public Gtk::Window
 
-\class{ogcalc} is derived from \class{Gtk::Window}
+:cpp:class:`ogcalc` is derived from :cpp:class:`Gtk::Window`
 
 .. code-block:: c++
 
    virtual void on_button_clicked_calculate();
    virtual void on_button_clicked_reset();
 
-\function{on_button_clicked_calculate} and
-\function{on_button_clicked_reset} are the signal handling
+:cpp:func:`on_button_clicked_calculate` and
+:cpp:func:`on_button_clicked_reset` are the signal handling
 functions, as previously.  However, they are now class *member
 functions*, taking no arguments.
 
@@ -1510,16 +1509,16 @@ functions*, taking no arguments.
 
 The class data members include pointers to the objects needed by the
 callbacks (which can access the class members like normal class member
-functions).  Note that \class{Gtk::SpinButton} is a native C++ class.
+functions).  Note that :cpp:class:`Gtk::SpinButton` is a native C++ class.
 It also includes a pointer to the XML interface description.
-\class{Glib::RefPtr} is a templated, reference-counted, "smart
+:cpp:class:`Glib::RefPtr` is a templated, reference-counted, "smart
 pointer" class, which will take care of destroying the pointed-to
-object when \class{ogcalc} is destroyed.
+object when :cpp:class:`ogcalc` is destroyed.
 
 :file:`ogcalc.cc`
 ^^^^^^^^^^^^^^^^^^^^
 
-The constructor \function{ogcalc::ogcalc} takes care of creating the
+The constructor :cpp:func:`ogcalc::ogcalc` takes care of creating the
 interface when the class is instantiated.
 
 .. code-block:: c++
@@ -1527,9 +1526,9 @@ interface when the class is instantiated.
    set_title("OG & ABV Calculator");
    set_resizable(false);
 
-The above code uses member functions of the \class{Gtk::Window} class.
-The global functions \function{gtk_window_set_title} and
-\function{gtk_window_set_resizable} were used previously.
+The above code uses member functions of the :cpp:class:`Gtk::Window` class.
+The global functions :c:func:`gtk_window_set_title` and
+:c:func:`gtk_window_set_resizable` were used previously.
 
 .. code-block:: c++
 
@@ -1544,8 +1543,8 @@ The global functions \function{gtk_window_set_title} and
    add(*main_vbox);
 
 The Glade interface is loaded using
-\function{Gnome::Glade::Xml::create}, in a similar manner to the
-GObject example, and then the main VBox is added to the \class{Ogcalc}
+:cpp:func:`Gnome::Glade::Xml::create`, in a similar manner to the
+GObject example, and then the main VBox is added to the :cpp:class:`Ogcalc`
 object.
 
 .. code-block:: c++
@@ -1553,7 +1552,7 @@ object.
    xml_interface->get_widget("pg_entry", pg_entry);
 
 Individual widgets may be obtained from the widget tree using the
-static member function \function{Gnome::Glade::Xml::get_widget}.
+static member function :cpp:func:`Gnome::Glade::Xml::get_widget`.
 
 Because Gtkmm uses :program:`libsigc++` for signal handling, which uses
 class member functions as signal handlers (normal functions may also
@@ -1571,17 +1570,17 @@ This complex-looking code can be broken into several parts.
 
    sigc::mem_fun(*this, &ogcalc::hide)
 
-\noindent creates a \class{sigc::mem_fun} (function object) which points
-to the \function{ogcalc::hide} member function of this object.
+creates a :cpp:class:`sigc::mem_fun` (function object) which points
+to the :cpp:func:`ogcalc::hide` member function of this object.
 
 .. code-block:: c++
 
    quit_button->signal_clicked()
 
-\noindent returns a \class{Glib::SignalProxy0} object (a signal taking no
-arguments).  The \function{connect} method of the signal proxy is used
-to connect \function{ogcalc::hide} to the "clicked" signal of the
-\class{Gtk::Button}.
+returns a :cpp:class:`Glib::SignalProxy0` object (a signal taking no
+arguments).  The :cpp:func:`connect` method of the signal proxy is used
+to connect :cpp:func:`ogcalc::hide` to the "clicked" signal of the
+:cpp:class:`Gtk::Button`.
 
 .. code-block:: c++
 
@@ -1593,8 +1592,8 @@ to connect \function{ogcalc::hide} to the "clicked" signal of the
 
 Here two signal handlers are connected to the same signal.  When the
 "Calculate" button is clicked,
-\function{ogcalc::on_button_clicked_calculate} is called first,
-followed by \function{Gtk::Widget::grab_focus}.
+:cpp:func:`ogcalc::on_button_clicked_calculate` is called first,
+followed by :cpp:func:`Gtk::Widget::grab_focus`.
 
 .. code-block:: c++
 
@@ -1603,13 +1602,13 @@ followed by \function{Gtk::Widget::grab_focus}.
        ( sigc::mem_fun(*this,
                       &Gtk::Window::activate_default) ) );
 
-\class{sigc::hide_return} is a special \class{sigc::mem_fun} used to
-mask the boolean value returned by \function{activate_default}.  The
-\class{mem_fun} created is incompatible with with the
-\class{mem_fun} type required by the signal, and this "glues" them
+:cpp:class:`sigc::hide_return` is a special :cpp:class:`sigc::mem_fun` used to
+mask the boolean value returned by :cpp:func:`activate_default`.  The
+:cpp:class:`mem_fun` created is incompatible with with the
+:cpp:class:`mem_fun` type required by the signal, and this "glues" them
 together.
 
-In the \function{ogcalc::on_button_clicked_calculate} member
+In the :cpp:func:`ogcalc::on_button_clicked_calculate` member
 function,
 
 .. code-block:: c++
@@ -1617,8 +1616,8 @@ function,
    double pg
    pg = pg_entry->get_value();
 
-\noindent the member function \function{Gtk::SpinButton::get_value}
-was previously used as \function{gtk_spin_button_get_value}.
+the member function :cpp:func:`Gtk::SpinButton::get_value`
+was previously used as :cpp:func:`gtk_spin_button_get_value`.
 
 .. code-block:: c++
 
@@ -1631,7 +1630,7 @@ was previously used as \function{gtk_spin_button_get_value}.
 This code sets the result field text, using an output stringstream and
 Pango markup.
 
-In the \function{ogcalc::on_button_clicked_reset} member function,
+In the :cpp:func:`ogcalc::on_button_clicked_reset` member function,
 
 .. code-block:: c++
 
@@ -1639,13 +1638,13 @@ In the \function{ogcalc::on_button_clicked_reset} member function,
    og_result->set_text("");
    pg_entry->grab_focus();
 
-\noindent class member functions are used to reset and clear the
+class member functions are used to reset and clear the
 widgets as in previous examples.
 
 :file:`ogcalc-main.cc`
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This file contains a very simple \function{main} function.
+This file contains a very simple :cpp:func:`main` function.
 
 .. code-block:: c++
 
@@ -1653,10 +1652,10 @@ This file contains a very simple \function{main} function.
    ogcalc window;
    kit.run(window);
 
-A \class{Gtk::Main} object is created, and then an \class{ogcalc}
-class, \variable{window}, is instantiated.  Finally, the interface is
+A :cpp:class:`Gtk::Main` object is created, and then an :cpp:class:`ogcalc`
+class, :cpp:data:`window`, is instantiated.  Finally, the interface is
 run, using ``kit.run()``.  This function will return when
-\variable{window} is hidden, and then the program will exit.
+:cpp:data:`window` is hidden, and then the program will exit.
 
 Python
 ======
@@ -1739,9 +1738,9 @@ GTK+ version is correct.
            gtk.HBox.__init__(self, False, 5)
            …
 
-These two simple classes derive from \class{GtkHBox}.  They are the
-Python equivalents of the \function{create_spin_entry} and
-\function{create_result_label} functions in Section \ref{sec:gtkc}.
+These two simple classes derive from :py:class:`GtkHBox`.  They are the
+Python equivalents of the :c:func:`create_spin_entry` and
+:c:func:`create_result_label` functions in Section \ref{sec:gtkc}.
 They are mostly identical to the C code in terms of the objects
 created and the object methods used.  The main difference is that
 :c:func:`create_spin_entry` has a :c:data:`spinbutton_pointer`
@@ -1749,9 +1748,9 @@ argument which has been dropped here.  The same difference applies to
 :c:func:`create_result_label` for
 :c:data:`result_label_pointer`.  In Python, we can't pass pointers
 as easily as in C, however we can access the spinbutton as a member of
-the \class{OgcalcSpinEntry} object instead (``object.spinbutton``).
+the :py:class:`OgcalcSpinEntry` object instead (``object.spinbutton``).
 
-Note that because the object is derived, the \function{__init__}
+Note that because the object is derived, the :py:func:`__init__`
 initialiser (constructor) has to manually chain up to the parent
 initialiser in order to correctly initialise the class instance.
 
@@ -1759,8 +1758,8 @@ initialiser in order to correctly initialise the class instance.
 
    class Ogcalc(gtk.Window):
 
-\noindent is our main application object.  It derives from
-\class{gtk.Window}.
+is our main application object.  It derives from
+:py:class:`gtk.Window`.
 
 .. code-block:: python
 
@@ -1770,7 +1769,7 @@ initialiser in order to correctly initialise the class instance.
            self.abv_result.result_value.set_text("")
 
 This function resets the interface to its initial state.  Note that
-all the member variables are accessed through \variable{self}, which
+all the member variables are accessed through :py:attr:`self`, which
 is the class instance, and that the spinbutton and value label to be
 manipulated are contained within the helper objects defined above.
 
@@ -1791,16 +1790,16 @@ and the C++ code used to construct the result string.
            gtk.Window.__init__(self, gtk.WINDOW_TOPLEVEL)
            self.set_title("OG & ABV Calculator")
 
-This is the initialiser for the \class{Ogcalc} class.  It starts by
-chaining up the \class{gtk.Window} initialiser, and then calls the
-\function{set_title} \class{gtk.Window} method to set the window
+This is the initialiser for the :py:class:`Ogcalc` class.  It starts by
+chaining up the :py:class:`gtk.Window` initialiser, and then calls the
+:py:func:`set_title` :py:class:`gtk.Window` method to set the window
 title.
 
 .. code-block:: python
 
            self.connect("destroy", gtk.main_quit, None)
 
-This connects the "destroy" signal to the \function{gtk.main_quit}
+This connects the "destroy" signal to the :py:func:`gtk.main_quit`
 function.  There's far less to type than the C and C++ equivalents,
 and hence it's rather more readable.
 
@@ -1837,8 +1836,8 @@ first and third, or the second arguments are redundant, respectively.
            button1.connect_object("clicked",
                Ogcalc.on_button_clicked_reset, self)
 
-This connects the "clicked" signal to the \class{Ogcalc}
-\function{on_button_clicked_reset} method of the \variable{self}
+This connects the "clicked" signal to the :py:class:`Ogcalc`
+:py:func:`on_button_clicked_reset` method of the :py:attr:`self`
 object.
 
 .. code-block:: python
@@ -1846,9 +1845,9 @@ object.
            self.pg_entry.spinbutton.connect_object("activate",
                gtk.Widget.grab_focus, self.ri_entry.spinbutton)
 
-This connects the "activate" signal to the \class{Ogcalc}
-\function{grab_focus} method of the
-\variable{self.ri_entry.spinbutton} object.
+This connects the "activate" signal to the :py:class:`Ogcalc`
+:py:func:`grab_focus` method of the
+:py:attr:`self.ri_entry.spinbutton` object.
 
 .. code-block:: python
 
@@ -1876,7 +1875,7 @@ Here the Glade interface is loaded, rooted at the
 
            self.pg_val = self.xml.get_widget("pg_entry");
 
-\noindent and now a specific widget is pulled out of the XML interface
+and now a specific widget is pulled out of the XML interface
 description.
 
 
