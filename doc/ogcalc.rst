@@ -185,7 +185,7 @@ A user interface consists of different objects with which the user can
 interact.  These include buttons which can be pushed, text entry
 fields, tick boxes, labels and more complex things such as menus,
 lists, multiple selections, colour and font pickers.  Some example
-widgets are shown in Figure \ref{fig:gtkwidgets}.
+Qt and GTK+ widgets are shown below.
 
 .. _fig-qtwidgets:
 
@@ -311,7 +311,7 @@ A selection of GTK+ widgets.
 Not all widgets are interactive.  For example, the user cannot usually
 interact with a label, or a framebox.  Some widgets, such as
 containers, boxes and event boxes are not even visible to the user
-(there is more about this in Section \ref{sec:containers}).
+(there is more about this in :ref:`sec-containers`).
 
 Different types of widget have their own unique *properties*.
 For example, a label widget contains the text it displays, and there
@@ -320,11 +320,11 @@ or not, and there are functions to get and set its state.  An options
 menu has functions to set the valid options, and get the option the
 user has chosen.
 
+.. _sec-containers:
 
 Containers
 ----------
 
-.. _sec-containers:
 
 The top-level of every GTK+ interface is the *window*.  A window
 is what one might expect it to be: it has a title bar, borders (which
@@ -342,39 +342,30 @@ initially seems quite useless.  After all, user interfaces usually
 consist of more than a single button.  In GTK+, there are other kinds
 of :c:type:`GtkContainer`.  The most commonly used are horizontal boxes,
 vertical boxes, and tables.  The structure of these containers is
-shown in Figure \ref{fig:containers}.
+shown in the Figure :ref:`Basic containers <fig-containers>`.
 
-Figure \ref{fig:containers} shows the containers as having equal size,
-but in a real interface, the containers resize themselves to fit the
-widgets they contain.  In other cases, widgets may be expanded or
-shrunk to fit the space allotted to them.  There are several ways to
-control this behaviour, to give fine control over the appearance of
-the interface.
+The Figure :ref:`Basic containers <fig-containers>` shows the
+containers as having equal size, but in a real interface, the
+containers resize themselves to fit the widgets they contain.  In
+other cases, widgets may be expanded or shrunk to fit the space
+allotted to them.  There are several ways to control this behaviour,
+to give fine control over the appearance of the interface.
 
 .. _fig-containers:
+.. figure:: figures/containers.svg
+   :figwidth: 100%
+   :width: 60%
+   :align: center
 
-GTK+ containers.  Each container may contain other widgets in the
-shaded areas.  Containers may contain more containers, allowing them
-to nest.  Complex interfaces may be constructed by nesting the
-different types of container.
+   Basic containers.  Here are shown a horizontal box
+   (:cpp:class:`QHBoxLayout` or :c:type:`GtkHBox`), vertical box
+   (:cpp:class:`QVBoxLayout` or :c:type:`GtkVbox`) and table
+   (:cpp:class:`QGridLayout` or :c:type:`GtkTable`).  Each container
+   may contain other widgets in the shaded areas.  Containers may
+   contain more containers, allowing them to nest.  Complex interfaces
+   may be constructed by nesting the different types of container.
 
-.. _fig-container-hbox:
-.. figure:: figures/container-hbox
-   :figwidth: 45%
 
-   Horizontal box: :c:type:`GtkHBox`
-
-.. _fig-container-vbox:
-.. figure:: figures/container-vbox
-   :figwidth: 45%
-
-   Vertical box: :c:type:`GtkVbox`
-
-.. _fig-container-table:
-.. figure:: figures/container-table
-   :figwidth: 45%
-
-   Table: :c:type:`GtkTable`
 
 In addition to the containers discussed above, there are more complex
 containers available, such are horizontal and vertical panes, tabbed
@@ -411,7 +402,7 @@ copied and pasted at will, and a widget's properties may be
 manipulated using the "Properties" dialogue.  While studying the
 code examples, Glade may be used to interactively build and manipulate
 the interface, to visually follow how the code is working.  More
-detail about Glade is provided in Section \ref{sec:glade}, where
+detail about Glade is provided in Section :ref:`sec-glade`, where
 :program:`libglade` is used to dynamically load a user interface.
 
 
@@ -447,7 +438,7 @@ the event.  The signals are sent to *signal handlers*.  A signal
 handler is a function which is called when the signal is emitted.  The
 signal handler is *connected* to the signal.  In C, these functions
 are known as *callbacks*.  The process is illustrated graphically in
-Figure \ref{fig:signals}.
+Figure :ref:`A typical signal handler <fig-signals>`.
 
 .. _fig-signals:
 .. figure:: figures/signals
@@ -592,7 +583,7 @@ The program needs to ask the user for the values of :math:`C`,
 :math:`P`, and :math:`R`.  It must then display the results, :math:`A`
 and :math:`O`.
 
-A simple sketch of the interface is shown in Figure \ref{fig:sketch}.
+A simple sketch of the interface is shown in Figure :ref:`fig:sketch`.
 
 .. _fig-sketch:
 .. figure:: figures/sketch.svg
@@ -613,7 +604,7 @@ Due to the need to build up an interface from the bottom up, due to
 the containers being nested, the interface is constructed starting
 with the window, then the containers that fit in it.  The widgets the
 user will use go in last.  This is illustrated in Figure
-\ref{fig:packing}.
+:ref:`fig-packing`.
 
 Widget packing.  The steps taken during the creation of an interface
 are shown, demonstrating the use of nested containers to pack widgets.
@@ -720,17 +711,17 @@ the widgets to emit signals.  To end the program, the event loop must
 first be left.
 
 
+.. _sec-gtkc:
+
 GTK+ and C
 ==========
-
-.. _sec-gtkc:
 
 Introduction
 ------------
 
 Many GTK+ applications are written in C alone.  This section
 demonstrates the :program:`gtk/C/plain/ogcalc` program discussed in the
-previous section.  Figure \ref{fig:ogcalc} is a screenshot of the
+previous section.  Figure :ref:`fig-ogcalc` is a screenshot of the
 finished application.
 
 .. _fig-ogcalc:
@@ -841,7 +832,7 @@ control whether the child widget should expand into an extra space
 available, whether it should fill any extra space available (this has
 no effect if :c:data:`expand` is ``FALSE``), and extra space in
 pixels to put between its neighbours (or the edge of the box),
-respectively.  Figure \ref{fig:boxpacking} shows how
+respectively.  Figure :ref:`fig-boxpacking` shows how
 :c:func:`gtk_box_pack_start` works.
 
 .. _fig-boxpacking:
@@ -1033,11 +1024,10 @@ using the *Pango Markup Format*, which uses the ``<b>`` and
 default value, and blanks the result fields.
 
 
+.. _sec-glade:
 
 GTK+ and Glade
 ==============
-
-.. _sec-glade:
 
 Introduction
 ------------
@@ -1053,7 +1043,7 @@ The Glade user interface designer is an alternative to this.  Glade
 allows one to design an interface visually, selecting the desired
 widgets from a palette and placing them on windows, or in containers,
 in a similar manner to other interface designers.  Figure
-\ref{fig:glade} shows some screenshots of the various components of
+:ref:`fig-glade` shows some screenshots of the various components of
 Glade.
 
 .. _fig-glade:
@@ -1111,8 +1101,8 @@ listing, but with the following changes:
   the interface and the callbacks.
 
 The running :program:`gtk/C/glade/ogcalc` application is shown in Figure
-\ref{fig:ogcalcgl}.  Notice that it is identical to
-:program:`gtk/C/plain/ogcalc`, shown in Figure \ref{fig:ogcalc}.  (No, they
+:ref:`fig-ogcalcgl`.  Notice that it is identical to
+:program:`gtk/C/plain/ogcalc`, shown in Figure :ref:`fig-ogcalc`.  (No, they
 are *not* the same screenshot!)
 
 .. _fig-ogcalcgl:
@@ -1192,10 +1182,10 @@ cast to :c:type:`gpointer`, which was ugly.  The code is far more
 understandable, cleaner and maintainable.
 
 
+.. _sec-gobject:
+
 GTK+ and GObject
 ================
-
-.. _sec-gobject:
 
 Introduction
 ------------
@@ -1225,7 +1215,7 @@ one instance of the object at a time was possible, and :c:func:`main`
 had explicit knowledge of the creation and workings of the interface.
 
 This example bears many similarities with the C++ Glade example in
-Section \ref{sec:cxxglade}.  Some of the features offered by C++ may
+Section :ref:`sec:cxxglade`.  Some of the features offered by C++ may
 be taken advantage of using plain C and GObject.
 
 .. _fig-ogcalcgo:
@@ -1383,10 +1373,10 @@ in the same program, and control over termination is entirely in the
 hands of the user of the class---where it should be.
 
 
+.. _sec-cxxglade:
+
 GTK+ and C++
 ============
-
-.. _sec-cxxglade:
 
 Introduction
 ------------
@@ -1445,7 +1435,7 @@ be connected manually.  This is because the :program:`libsigc++`
 signals, connecting to the methods of individual objects, cannot be
 connected automatically.
 
-:program:`gtk/C++/glade/ogcalc`, shown in Figure \ref{fig:ogcalcmm}, is
+:program:`gtk/C++/glade/ogcalc`, shown in Figure :ref:`fig:ogcalcmm`, is
 identical to the previous examples, both in appearance and
 functionality.  However, internally there are some major differences.
 
@@ -1701,10 +1691,11 @@ class, :cpp:member:`window`, is instantiated.  Finally, the interface is
 run, using ``kit.run()``.  This function will return when
 :cpp:member:`window` is hidden, and then the program will exit.
 
-Python
-======
 
 .. _sec-python:
+
+Python
+======
 
 Introduction
 ------------
@@ -1784,7 +1775,7 @@ GTK+ version is correct.
 
 These two simple classes derive from :py:class:`GtkHBox`.  They are the
 Python equivalents of the :c:func:`create_spin_entry` and
-:c:func:`create_result_label` functions in Section \ref{sec:gtkc}.
+:c:func:`create_result_label` functions in Section :ref:`sec-gtkc`.
 They are mostly identical to the C code in terms of the objects
 created and the object methods used.  The main difference is that
 :c:func:`create_spin_entry` has a :c:data:`spinbutton_pointer`
