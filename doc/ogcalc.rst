@@ -103,12 +103,12 @@ GTK+ basics
 Objects
 -------
 
-GTK+ is an *object-oriented* (OO) toolkit.  I'm afraid that
-unless one is aware of the basic OO concepts (classes, class methods,
+GTK+ is an *object-oriented* (OO) toolkit.  I'm afraid that unless one
+is aware of the basic OO concepts (classes, class methods,
 inheritance, polymorphism), this tutorial (and GTK+ in general) will
 seem rather confusing.  On my first attempt at learning GTK+, I didn't
-`get' it, but after I learnt C++, the concepts GTK+ is built on just
-`clicked' and I understood it quite quickly.
+understand it, but after I learnt C++, the concepts GTK+ is built on
+finally made sense.
 
 The C language does not natively support classes, and so GTK+ provides
 its own object/type system, **GObject**.  GObject provides
@@ -133,7 +133,7 @@ The difference is due to the lack of a :c:data:`this`
 pointer in the C language (since objects do not exist).  This means
 that class methods require the object pointer passing as their first
 argument.  This happens automatically in C++, but it needs doing
-`manually' in C.
+"manually" in C.
 
 Another difference is seen when dealing with polymorphic objects.  All
 GTK+ widgets (the controls, such as buttons, checkboxes, labels, etc.)
@@ -188,7 +188,7 @@ lists, multiple selections, colour and font pickers.  Some example
 widgets are shown in Figure \ref{fig:gtkwidgets}.
 
 .. _fig-qtwidgets:
-A selection of Qt widgets:
+A selection of Qt widgets.
 
 .. _fig-qtwidget-label:
 .. figure:: ../figures/qt-label.png
@@ -233,7 +233,7 @@ A selection of Qt widgets:
    A font selection
 
 .. _fig-gtkwidgets:
-A selection of GTK+ widgets:
+A selection of GTK+ widgets.
 
 .. _fig-gtkwidget-label:
 .. figure:: ../figures/gtk-label.png
@@ -322,6 +322,7 @@ control this behaviour, to give fine control over the appearance of
 the interface.
 
 .. _fig-containers:
+
 GTK+ containers.  Each container may contain other widgets in the
 shaded areas.  Containers may contain more containers, allowing them
 to nest.  Complex interfaces may be constructed by nesting the
@@ -418,14 +419,12 @@ signal handler is *connected* to the signal.  In C, these functions
 are known as *callbacks*.  The process is illustrated graphically in
 Figure \ref{fig:signals}.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/signals}
-  \caption[A typical signal handler]{A typical signal handler.  When
-    the button is pressed, a signal is emitted, causing the registered
-    callback function to be called.}
 .. _fig-signals:
-\end{figure}
+.. figure:: ../figures/signals
+   :figwidth: 60%
+
+   A typical signal handler.  When the button is pressed, a signal is
+   emitted, causing the registered callback function to be called.
 
 A signal may have zero, one or many signal handlers connected
 (registered) with it.  If there is more than one signal handler, they
@@ -503,7 +502,7 @@ as Glade are helpful here, but a pen and paper are best for the
 initial design.
 
 Introducing :program:`ogcalc`
-----------------------------
+-----------------------------
 
 As part of the production (and quality control) processes in the
 brewing industry, it is necessary to determine the alcohol content of
@@ -565,17 +564,15 @@ and :math:`O`.
 
 A simple sketch of the interface is shown in Figure \ref{fig:sketch}.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\textwidth]{figures/sketch}
-  \caption[Sketching a user interface]{Sketching a user interface.
-    The :program:`ogcalc` main window is drawn simply, to illustrate
-    its functionality.  The top row contains three numeric entry
-    fields, followed by two result fields on the middle row.  The
-    bottom row contains buttons to quit the program, reset the
-    interface and do the calculation.}
 .. _fig-sketch:
-\end{figure}
+.. figure:: ../figures/sketch
+   :figwidth: 60%
+
+   Sketching a user interface.  The :program:`ogcalc` main window is
+   drawn simply, to illustrate its functionality.  The top row
+   contains three numeric entry fields, followed by two result fields
+   on the middle row.  The bottom row contains buttons to quit the
+   program, reset the interface and do the calculation.
 
 Creating the interface
 ----------------------
@@ -586,39 +583,47 @@ with the window, then the containers that fit in it.  The widgets the
 user will use go in last.  This is illustrated in Figure
 \ref{fig:packing}.
 
-\begin{figure}
-  \centering
-  \subfigure[An empty window]{
-    \includegraphics[width=0.45\textwidth]{figures/packing-1}
-.. _fig-packing:1:
-  }
-  \subfigure[Addition of a :c:type:`GtkVBox`]{
-    \includegraphics[width=0.45\textwidth]{figures/packing-2}
-.. _fig-packing:2:
-  }
-  \subfigure[Addition of a second :c:type:`GtkVBox`; this has uniformly-
-  sized children (it is *homogeneous*), unlike the first.]{
-    \includegraphics[width=0.45\textwidth]{figures/packing-3}
-.. _fig-packing:3:
-  }
-  \subfigure[Addition of three :c:type:`GtkHBox`es]{
-    \includegraphics[width=0.45\textwidth]{figures/packing-4}
-.. _fig-packing:4:
-  }
-  \subfigure[Addition of five more :c:type:`GtkHBox`es, used to ensure
-  visually appealing widget placement]{
-    \includegraphics[width=0.45\textwidth]{figures/packing-5}
-.. _fig-packing:5:
-  }
-  \subfigure[Addition of all of the user-visible widgets]{
-    \includegraphics[width=0.45\textwidth]{figures/packing-final}
-.. _fig-packing:final:
-  }
-  \caption[Widget packing]{Widget packing.  The steps taken during the
-    creation of an interface are shown, demonstrating the use of
-    nested containers to pack widgets.}
+Widget packing.  The steps taken during the creation of an interface
+are shown, demonstrating the use of nested containers to pack widgets.
+
 .. _fig-packing:
-\end{figure}
+.. _fig-packing-1:
+.. figure:: ../figures/packing-1
+   :figwidth: 45%
+
+   An empty window
+
+.. _fig-packing-2:
+.. figure:: ../figures/packing-2
+   :figwidth: 45%
+
+   Addition of a :c:type:`GtkVBox`
+
+.. _fig-packing-3:
+.. figure:: ../figures/packing-3
+   :figwidth: 45%
+
+   Addition of a second :c:type:`GtkVBox`; this has uniformly-
+   sized children (it is *homogeneous*), unlike the first.
+
+.. _fig-packing-4:
+.. figure:: ../figures/packing-4
+   :figwidth: 45%
+
+   Addition of three :c:type:`GtkHBox` widgets
+
+.. _fig-packing-5:
+.. figure:: ../figures/packing-5
+   :figwidth: 45%
+
+   Addition of five more :c:type:`GtkHBox` widgets, used to ensure
+   visually appealing widget placement
+
+.. _fig-packing-6:
+.. figure:: ../figures/packing-6
+   :figwidth: 45%
+
+   Addition of all of the user-visible widgets
 
 Once a widget has been created, signal handlers may be connected to
 its signals.  After this is completed, the interface can be displayed,
@@ -641,12 +646,11 @@ demonstrates the :program:`gtk/C/plain/ogcalc` program discussed in the
 previous section.  Figure \ref{fig:ogcalc} is a screenshot of the
 finished application.
 
-\begin{figure}
-  \centering \resizebox{\textwidth}{!}{
-    \includegraphics{figures/c-plain.png} }
-  \caption[:program:`gtk/C/plain/ogcalc` in action]{:program:`gtk/C/plain/ogcalc` in action.}
 .. _fig-ogcalc:
-\end{figure}
+.. figure:: ../figures/c-plain.png
+   :figwidth: 60%
+
+   :program:`gtk/C/plain/ogcalc` in action
 
 This program consists of five functions:
 
@@ -753,13 +757,11 @@ pixels to put between its neighbours (or the edge of the box),
 respectively.  Figure \ref{fig:boxpacking} shows how
 :c:func:`gtk_box_pack_start` works.
 
-\begin{figure}
-  \centering \resizebox{0.6\textwidth}{!}{
-    \includegraphics{figures/box-packing} }
-  \caption[Packing widgets into a :c:type:`GtkHBox`]{Packing widgets
-    into a :c:type:`GtkHBox}.`
 .. _fig-boxpacking:
-\end{figure}
+.. figure:: ../figures/box-packing
+   :figwidth: 60%
+
+   Packing widgets into a :c:type:`GtkHBox}.
 
 The :c:func:`create_spin_entry` function is a helper function to
 create a numeric entry (spin button) together with a label and
@@ -965,44 +967,38 @@ in a similar manner to other interface designers.  Figure
 \ref{fig:glade} shows some screenshots of the various components of
 Glade.
 
-\begin{figure}
-  \centering
-  \subfigure[Main window]{
-    \resizebox{0.40\textwidth}{!}{
-      \includegraphics{figures/glade-main-window.png}
-    }
-.. _fig-glade:main:
-  }
-  \subfigure[Palette for widget selection]{
-    \makebox[0.40\textwidth][c]{
-      \resizebox{0.2\textwidth}{!}{
-        \includegraphics{figures/glade-palette.png}
-      }
-    }
-.. _fig-glade:palette:
-  }
-  \subfigure[Widget properties dialogue]{
-    \resizebox{0.40\textwidth}{!}{
-      \includegraphics{figures/glade-properties.png}
-    }
-.. _fig-glade:properties:
-  }
-  \subfigure[Widget tree]{
-    \resizebox{0.40\textwidth}{!}{
-      \includegraphics{figures/glade-widget-tree.png}
-    }
-.. _fig-glade:tree:
-  }
-  \subfigure[The program being designed]{
-    \resizebox{0.40\textwidth}{!}{
-      \includegraphics{figures/glade-ogcalc.png}
-    }
-.. _fig-glade:ogcalc:
-  }
-  \caption[The Glade user interface designer]{The Glade user interface
-    designer.}
 .. _fig-glade:
-\end{figure}
+The Glade user interface designer.
+
+.. _fig-glade:main:
+.. figure:: ../figures/glade-main-window.png
+   :figwidth: 40%
+
+   Main window
+
+.. _fig-glade:palette:
+.. figure:: ../figures/glade-palette.png
+   :figwidth: 40%
+
+   Palette for widget selection
+
+.. _fig-glade:properties:
+.. figure:: ../figures/glade-properties.png
+   :figwidth: 40%
+
+   Widget properties dialogue
+
+.. _fig-glade:tree:
+.. figure:: ../figures/glade-widget-tree.png
+   :figwidth: 40%
+
+   Widget tree
+
+.. _fig-glade:ogcalc:
+.. figure:: ../figures/glade-ogcalc.png
+   :figwidth: 40%
+
+   The program being designed
 
 The file :file:`gtk/C/glade/ogcalc.glade` contains the same interface
 constructed in :program:`gtk/C/plain/ogcalc`, but designed in Glade.  This
@@ -1030,15 +1026,11 @@ The running :program:`gtk/C/glade/ogcalc` application is shown in Figure
 :program:`gtk/C/plain/ogcalc`, shown in Figure \ref{fig:ogcalc}.  (No, they
 are *not* the same screenshot!)
 
-\begin{figure}
-  \centering
-  \resizebox{\textwidth}{!}{
-    \includegraphics{figures/c-glade.png}
-  }
-  \caption[:program:`gtk/C/glade/ogcalc` in action]{:program:`gtk/C/glade/ogcalc` in
-    action.}
 .. _fig-ogcalcgl:
-\end{figure}
+.. figure:: ../figures/c-glade.png
+   :figwidth: 60%
+
+   :program:`gtk/C/glade/ogcalc` in action
 
 Code listing
 ------------
@@ -1147,15 +1139,11 @@ This example bears many similarities with the C++ Glade example in
 Section \ref{sec:cxxglade}.  Some of the features offered by C++ may
 be taken advantage of using plain C and GObject.
 
-\begin{figure}
-  \centering
-  \resizebox{\textwidth}{!}{
-    \includegraphics{figures/c-gobject.png}
-  }
-  \caption[:program:`gtk/C/gobject/ogcalc` in action]{:program:`gtk/C/gobject/ogcalc` in
-    action.}
 .. _fig-ogcalcgo:
-\end{figure}
+.. figure:: ../figures/c-gobject.png
+   :figwidth: 60%
+
+   :program:`gtk/C/gobject/ogcalc` in action
 
 Code listing
 ------------
@@ -1372,15 +1360,11 @@ connected automatically.
 identical to the previous examples, both in appearance and
 functionality.  However, internally there are some major differences.
 
-\begin{figure}
-  \centering
-  \resizebox{\textwidth}{!}{
-    \includegraphics{figures/c++-glade.png}
-  }
-  \caption[:program:`gtk/C++/glade/ogcalc` in action]{:program:`gtk/C++/glade/ogcalc` in
-    action.}
 .. _fig-ogcalcmm:
-\end{figure}
+.. figure:: ../figures/c++-glade.png
+   :figwidth: 60%
+
+   :program:`gtk/C++/glade/ogcalc` in action
 
 Firstly, the :cpp:func:`main` function no longer knows anything about
 the user interface.  It merely instantiates an instance of the
@@ -1624,9 +1608,9 @@ This file contains a very simple :cpp:func:`main` function.
    kit.run(window);
 
 A :cpp:class:`Gtk::Main` object is created, and then an :cpp:class:`ogcalc`
-class, :cpp:data:`window`, is instantiated.  Finally, the interface is
+class, :cpp:member:`window`, is instantiated.  Finally, the interface is
 run, using ``kit.run()``.  This function will return when
-:cpp:data:`window` is hidden, and then the program will exit.
+:cpp:member:`window` is hidden, and then the program will exit.
 
 Python
 ======
