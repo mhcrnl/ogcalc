@@ -191,43 +191,43 @@ widgets are shown in Figure \ref{fig:gtkwidgets}.
 A selection of Qt widgets.
 
 .. _fig-qtwidget-label:
-.. figure:: ../figures/qt-label.png
+.. figure:: figures/qt-label.png
    :figwidth: 45%
 
    A text label
 
 .. _fig-qtwidget-combobox:
-.. figure:: ../figures/qt-combo-box.png
+.. figure:: figures/qt-combo-box.png
    :figwidth: 45%
 
    A drop-down selection (combo box)
 
 .. _fig-qtwidget-button:
-.. figure:: ../figures/qt-button.png
+.. figure:: figures/qt-button.png
    :figwidth: 45%
 
    A push button
 
 .. _fig-qtwidget-checkbox:
-.. figure:: ../figures/qt-check-button.png
+.. figure:: figures/qt-check-button.png
    :figwidth: 45%
 
    A tick box
 
 .. _fig-qtwidget-menu:
-.. figure:: ../figures/qt-menu.png
+.. figure:: figures/qt-menu.png
    :figwidth: 45%
 
    A menu bar
 
 .. _fig-qtwidget-entry:
-.. figure:: ../figures/qt-text-entry.png
+.. figure:: figures/qt-text-entry.png
    :figwidth: 45%
 
    A text entry field
 
 .. _fig-qtwidget-fontsel:
-.. figure:: ../figures/qt-font-selection.png
+.. figure:: figures/qt-font-selection.png
    :figwidth: 45%
 
    A font selection
@@ -236,43 +236,43 @@ A selection of Qt widgets.
 A selection of GTK+ widgets.
 
 .. _fig-gtkwidget-label:
-.. figure:: ../figures/gtk-label.png
+.. figure:: figures/gtk-label.png
    :figwidth: 45%
 
    A text label
 
 .. _fig-gtkwidget-combobox:
-.. figure:: ../figures/gtk-combo-box.png
+.. figure:: figures/gtk-combo-box.png
    :figwidth: 45%
 
    A drop-down selection (combo box)
 
 .. _fig-gtkwidget-button:
-.. figure:: ../figures/gtk-button.png
+.. figure:: figures/gtk-button.png
    :figwidth: 45%
 
    A push button
 
 .. _fig-gtkwidget-checkbox:
-.. figure:: ../figures/gtk-check-button.png
+.. figure:: figures/gtk-check-button.png
    :figwidth: 45%
 
    A tick box
 
 .. _fig-gtkwidget-menu:
-.. figure:: ../figures/gtk-menu.png
+.. figure:: figures/gtk-menu.png
    :figwidth: 45%
 
    A menu bar
 
 .. _fig-gtkwidget-entry:
-.. figure:: ../figures/gtk-text-entry.png
+.. figure:: figures/gtk-text-entry.png
    :figwidth: 45%
 
    A text entry field
 
 .. _fig-gtkwidget-fontsel:
-.. figure:: ../figures/gtk-font-selection.png
+.. figure:: figures/gtk-font-selection.png
    :figwidth: 45%
 
    A font selection
@@ -329,19 +329,19 @@ to nest.  Complex interfaces may be constructed by nesting the
 different types of container.
 
 .. _fig-container-hbox:
-.. figure:: ../figures/container-hbox
+.. figure:: figures/container-hbox
    :figwidth: 45%
 
    Horizontal box: :c:type:`GtkHBox`
 
 .. _fig-container-vbox:
-.. figure:: ../figures/container-vbox
+.. figure:: figures/container-vbox
    :figwidth: 45%
 
    Vertical box: :c:type:`GtkVbox`
 
 .. _fig-container-table:
-.. figure:: ../figures/container-table
+.. figure:: figures/container-table
    :figwidth: 45%
 
    Table: :c:type:`GtkTable`
@@ -420,7 +420,7 @@ are known as *callbacks*.  The process is illustrated graphically in
 Figure \ref{fig:signals}.
 
 .. _fig-signals:
-.. figure:: ../figures/signals
+.. figure:: figures/signals
    :figwidth: 60%
 
    A typical signal handler.  When the button is pressed, a signal is
@@ -565,7 +565,7 @@ and :math:`O`.
 A simple sketch of the interface is shown in Figure \ref{fig:sketch}.
 
 .. _fig-sketch:
-.. figure:: ../figures/sketch
+.. figure:: figures/sketch
    :figwidth: 60%
 
    Sketching a user interface.  The :program:`ogcalc` main window is
@@ -588,39 +588,39 @@ are shown, demonstrating the use of nested containers to pack widgets.
 
 .. _fig-packing:
 .. _fig-packing-1:
-.. figure:: ../figures/packing-1
+.. figure:: figures/packing-1
    :figwidth: 45%
 
    An empty window
 
 .. _fig-packing-2:
-.. figure:: ../figures/packing-2
+.. figure:: figures/packing-2
    :figwidth: 45%
 
    Addition of a :c:type:`GtkVBox`
 
 .. _fig-packing-3:
-.. figure:: ../figures/packing-3
+.. figure:: figures/packing-3
    :figwidth: 45%
 
    Addition of a second :c:type:`GtkVBox`; this has uniformly-
    sized children (it is *homogeneous*), unlike the first.
 
 .. _fig-packing-4:
-.. figure:: ../figures/packing-4
+.. figure:: figures/packing-4
    :figwidth: 45%
 
    Addition of three :c:type:`GtkHBox` widgets
 
 .. _fig-packing-5:
-.. figure:: ../figures/packing-5
+.. figure:: figures/packing-5
    :figwidth: 45%
 
    Addition of five more :c:type:`GtkHBox` widgets, used to ensure
    visually appealing widget placement
 
 .. _fig-packing-6:
-.. figure:: ../figures/packing-6
+.. figure:: figures/packing-6
    :figwidth: 45%
 
    Addition of all of the user-visible widgets
@@ -647,7 +647,7 @@ previous section.  Figure \ref{fig:ogcalc} is a screenshot of the
 finished application.
 
 .. _fig-ogcalc:
-.. figure:: ../figures/c-plain.png
+.. figure:: figures/c-plain.png
    :figwidth: 60%
 
    :program:`gtk/C/plain/ogcalc` in action
@@ -758,7 +758,7 @@ respectively.  Figure \ref{fig:boxpacking} shows how
 :c:func:`gtk_box_pack_start` works.
 
 .. _fig-boxpacking:
-.. figure:: ../figures/box-packing
+.. figure:: figures/box-packing
    :figwidth: 60%
 
    Packing widgets into a :c:type:`GtkHBox}.
@@ -971,31 +971,31 @@ Glade.
 The Glade user interface designer.
 
 .. _fig-glade:main:
-.. figure:: ../figures/glade-main-window.png
+.. figure:: figures/glade-main-window.png
    :figwidth: 40%
 
    Main window
 
 .. _fig-glade:palette:
-.. figure:: ../figures/glade-palette.png
+.. figure:: figures/glade-palette.png
    :figwidth: 40%
 
    Palette for widget selection
 
 .. _fig-glade:properties:
-.. figure:: ../figures/glade-properties.png
+.. figure:: figures/glade-properties.png
    :figwidth: 40%
 
    Widget properties dialogue
 
 .. _fig-glade:tree:
-.. figure:: ../figures/glade-widget-tree.png
+.. figure:: figures/glade-widget-tree.png
    :figwidth: 40%
 
    Widget tree
 
 .. _fig-glade:ogcalc:
-.. figure:: ../figures/glade-ogcalc.png
+.. figure:: figures/glade-ogcalc.png
    :figwidth: 40%
 
    The program being designed
@@ -1027,7 +1027,7 @@ The running :program:`gtk/C/glade/ogcalc` application is shown in Figure
 are *not* the same screenshot!)
 
 .. _fig-ogcalcgl:
-.. figure:: ../figures/c-glade.png
+.. figure:: figures/c-glade.png
    :figwidth: 60%
 
    :program:`gtk/C/glade/ogcalc` in action
@@ -1140,7 +1140,7 @@ Section \ref{sec:cxxglade}.  Some of the features offered by C++ may
 be taken advantage of using plain C and GObject.
 
 .. _fig-ogcalcgo:
-.. figure:: ../figures/c-gobject.png
+.. figure:: figures/c-gobject.png
    :figwidth: 60%
 
    :program:`gtk/C/gobject/ogcalc` in action
@@ -1361,7 +1361,7 @@ identical to the previous examples, both in appearance and
 functionality.  However, internally there are some major differences.
 
 .. _fig-ogcalcmm:
-.. figure:: ../figures/c++-glade.png
+.. figure:: figures/c++-glade.png
    :figwidth: 60%
 
    :program:`gtk/C++/glade/ogcalc` in action

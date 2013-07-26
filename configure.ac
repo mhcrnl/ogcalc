@@ -60,7 +60,6 @@ AC_CONFIG_FILES([qt/uic/Makefile])
 AC_CONFIG_FILES([qt/uic/am/Makefile])
 AC_CONFIG_FILES([qt/plain/Makefile])
 AC_CONFIG_FILES([qt/plain/am/Makefile])
-AC_CONFIG_FILES([figures/Makefile])
 
 AC_CONFIG_COMMANDS([qt/uic/qmake/Makefile], [($MKDIR_P qt/uic/qmake && cd qt/uic/qmake && "$QMAKE" "${ac_abs_top_srcdir}/qt/uic/qmake/ogcalc.pro" -o "Makefile")], [QMAKE="$QMAKE"])
 
