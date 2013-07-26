@@ -69,7 +69,7 @@ Building the example code
 
 Several working, commented examples accompany the tutorial.  They are
 also available from
-\url{http://people.debian.org/~rleigh/gtk/ogcalc/}.  To build them,
+`<http://people.debian.org/~rleigh/gtk/ogcalc/>`_.  To build them,
 type:
 
 ::
@@ -1940,8 +1940,8 @@ Further Reading
 ===============
 
 The GTK+ Tutorial, and the GTK+ documentation are highly recommended.
-These are available from \url{http://www.gtk.org/}.  The Gtkmm
-documentation is available from \url{www.gtkmm.org}.  Unfortunately,
+These are available from `<http://www.gtk.org/>`_.  The Gtkmm
+documentation is available from `<http://www.gtkmm.org>`_.  Unfortunately,
 some parts of these manuals are as yet incomplete.  I hope that they
 will be fully documented in the future, since without good
 documentation, it will not be possible to write programs that take
@@ -1951,18 +1951,9 @@ reading the source, having good documentation is essential for
 widespread adoption of GTK+.
 
 Documentation and examples of GObject are scarce, but Mathieu Lacage
-has written an excellent tutorial which is available from
-\url{http://le-hacker.org/papers/gobject/}.
-
-
-\end{document}
-
-%%% Local Variables: 
-%%% mode: latex
-%%% TeX-master: t
-%%% End: 
-
-
+has wrote an excellent tutorial.  This is unfortunately no longer
+available, but parts of it were merged with the main API documentation
+at `<https://developer.gnome.org/gobject/stable/>`_.
 
 
 Indices and tables
