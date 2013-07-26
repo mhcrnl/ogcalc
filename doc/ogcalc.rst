@@ -192,43 +192,57 @@ A selection of Qt widgets.
 
 .. _fig-qtwidget-label:
 .. figure:: figures/qt-label.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 20%
+   :align: center
 
    A text label
 
 .. _fig-qtwidget-combobox:
 .. figure:: figures/qt-combo-box.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 30%
+   :align: center
 
    A drop-down selection (combo box)
 
 .. _fig-qtwidget-button:
 .. figure:: figures/qt-button.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 15%
+   :align: center
 
    A push button
 
 .. _fig-qtwidget-checkbox:
 .. figure:: figures/qt-check-button.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 30%
+   :align: center
 
    A tick box
 
 .. _fig-qtwidget-menu:
 .. figure:: figures/qt-menu.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    A menu bar
 
 .. _fig-qtwidget-entry:
 .. figure:: figures/qt-text-entry.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 30%
+   :align: center
 
    A text entry field
 
 .. _fig-qtwidget-fontsel:
 .. figure:: figures/qt-font-selection.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 60%
+   :align: center
 
    A font selection
 
@@ -237,43 +251,57 @@ A selection of GTK+ widgets.
 
 .. _fig-gtkwidget-label:
 .. figure:: figures/gtk-label.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 20%
+   :align: center
 
    A text label
 
 .. _fig-gtkwidget-combobox:
 .. figure:: figures/gtk-combo-box.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 30%
+   :align: center
 
    A drop-down selection (combo box)
 
 .. _fig-gtkwidget-button:
 .. figure:: figures/gtk-button.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 15%
+   :align: center
 
    A push button
 
 .. _fig-gtkwidget-checkbox:
 .. figure:: figures/gtk-check-button.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 30%
+   :align: center
 
    A tick box
 
 .. _fig-gtkwidget-menu:
 .. figure:: figures/gtk-menu.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    A menu bar
 
 .. _fig-gtkwidget-entry:
 .. figure:: figures/gtk-text-entry.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 30%
+   :align: center
 
    A text entry field
 
 .. _fig-gtkwidget-fontsel:
 .. figure:: figures/gtk-font-selection.png
-   :figwidth: 45%
+   :figwidth: 100%
+   :width: 60%
+   :align: center
 
    A font selection
 
@@ -586,42 +614,97 @@ user will use go in last.  This is illustrated in Figure
 Widget packing.  The steps taken during the creation of an interface
 are shown, demonstrating the use of nested containers to pack widgets.
 
+.. _qt-fig-packing:
+.. _qt-fig-packing-1:
+.. figure:: figures/qt-packing-1.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   An empty window
+
+.. _qt-fig-packing-2:
+.. figure:: figures/qt-packing-2.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of a :c:type:`GtkVBox`
+
+.. _qt-fig-packing-3:
+.. figure:: figures/qt-packing-3.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of three :c:type:`GtkHBox` widgets
+
+.. _qt-fig-packing-4:
+.. figure:: figures/qt-packing-4.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of five more :c:type:`GtkHBox` widgets, used to ensure
+   visually appealing widget placement
+
+.. _qt-fig-packing-final:
+.. figure:: figures/qt-packing-final.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of all of the user-visible widgets
+
+
 .. _fig-packing:
 .. _fig-packing-1:
-.. figure:: figures/packing-1
-   :figwidth: 45%
+.. figure:: figures/packing-1.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    An empty window
 
 .. _fig-packing-2:
-.. figure:: figures/packing-2
-   :figwidth: 45%
+.. figure:: figures/packing-2.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    Addition of a :c:type:`GtkVBox`
 
 .. _fig-packing-3:
-.. figure:: figures/packing-3
-   :figwidth: 45%
+.. figure:: figures/packing-3.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    Addition of a second :c:type:`GtkVBox`; this has uniformly-
    sized children (it is *homogeneous*), unlike the first.
 
 .. _fig-packing-4:
-.. figure:: figures/packing-4
-   :figwidth: 45%
+.. figure:: figures/packing-4.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    Addition of three :c:type:`GtkHBox` widgets
 
 .. _fig-packing-5:
-.. figure:: figures/packing-5
-   :figwidth: 45%
+.. figure:: figures/packing-5.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    Addition of five more :c:type:`GtkHBox` widgets, used to ensure
    visually appealing widget placement
 
 .. _fig-packing-6:
-.. figure:: figures/packing-6
-   :figwidth: 45%
+.. figure:: figures/packing-final.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
    Addition of all of the user-visible widgets
 
@@ -758,10 +841,12 @@ respectively.  Figure \ref{fig:boxpacking} shows how
 :c:func:`gtk_box_pack_start` works.
 
 .. _fig-boxpacking:
-.. figure:: figures/box-packing
-   :figwidth: 60%
+.. figure:: figures/box-packing.svg
+   :figwidth: 100%
+   :width: 40%
+   :align: center
 
-   Packing widgets into a :c:type:`GtkHBox}.
+   Packing widgets into a :c:type:`GtkHBox`.
 
 The :c:func:`create_spin_entry` function is a helper function to
 create a numeric entry (spin button) together with a label and
