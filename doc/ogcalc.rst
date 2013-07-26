@@ -187,125 +187,96 @@ fields, tick boxes, labels and more complex things such as menus,
 lists, multiple selections, colour and font pickers.  Some example
 widgets are shown in Figure \ref{fig:gtkwidgets}.
 
-\begin{figure}
-  \centering
-  \subfigure[A text label]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/qt-label.png}
-      }
-    }
-.. _fig-qtwidget:label:
-  }
-  \subfigure[A drop-down selection (combo box)]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/qt-combo-box.png}
-      }
-    }
-.. _fig-qtwidget:combobox:
-  }
-  \subfigure[A push button]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/qt-button.png}
-      }
-    }
-.. _fig-qtwidget:button:
-  }
-  \subfigure[A tick box]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/qt-check-button.png}
-      }
-    }
-.. _fig-qtwidget:checkbox:
-  }
-  \subfigure[A menu bar]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/qt-menu.png}
-      }
-    }
-.. _fig-qtwidget:menu:
-  }
-  \subfigure[A text entry field]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/qt-text-entry.png}
-      }
-    }
-.. _fig-qtwidget:entry:
-  }
-  \subfigure[A font selection]{
-    \resizebox{0.45\textwidth}{!}{
-      \includegraphics{figures/qt-font-selection.png}
-    }
-.. _fig-qtwidget:fontsel:
-  }
-  \caption[A selection of Qt widgets]{A selection of Qt widgets.}
 .. _fig-qtwidgets:
-\end{figure}
+A selection of Qt widgets:
 
-\begin{figure}
-  \centering
-  \subfigure[A text label]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/gtk-label.png}
-      }
-    }
-.. _fig-gtkwidget:label:
-  }
-  \subfigure[A drop-down selection (combo box)]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/gtk-combo-box.png}
-      }
-    }
-.. _fig-gtkwidget:combobox:
-  }
-  \subfigure[A push button]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/gtk-button.png}
-      }
-    }
-.. _fig-gtkwidget:button:
-  }
-  \subfigure[A tick box]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/gtk-check-button.png}
-      }
-    }
-.. _fig-gtkwidget:checkbox:
-  }
-  \subfigure[A menu bar]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/gtk-menu.png}
-      }
-    }
-.. _fig-gtkwidget:menu:
-  }
-  \subfigure[A text entry field]{
-    \makebox[0.45\textwidth][c]{
-      \resizebox{!}{0.3in}{
-        \includegraphics{figures/gtk-text-entry.png}
-      }
-    }
-.. _fig-gtkwidget:entry:
-  }
-  \subfigure[A font selection]{
-    \resizebox{0.45\textwidth}{!}{
-      \includegraphics{figures/gtk-font-selection.png}
-    }
-.. _fig-gtkwidget:fontsel:
-  }
-  \caption[A selection of GTK+ widgets]{A selection of GTK+ widgets.}
+.. _fig-qtwidget-label:
+.. figure:: ../figures/qt-label.png
+   :figwidth: 45%
+
+   A text label
+
+.. _fig-qtwidget-combobox:
+.. figure:: ../figures/qt-combo-box.png
+   :figwidth: 45%
+
+   A drop-down selection (combo box)
+
+.. _fig-qtwidget-button:
+.. figure:: ../figures/qt-button.png
+   :figwidth: 45%
+
+   A push button
+
+.. _fig-qtwidget-checkbox:
+.. figure:: ../figures/qt-check-button.png
+   :figwidth: 45%
+
+   A tick box
+
+.. _fig-qtwidget-menu:
+.. figure:: ../figures/qt-menu.png
+   :figwidth: 45%
+
+   A menu bar
+
+.. _fig-qtwidget-entry:
+.. figure:: ../figures/qt-text-entry.png
+   :figwidth: 45%
+
+   A text entry field
+
+.. _fig-qtwidget-fontsel:
+.. figure:: ../figures/qt-font-selection.png
+   :figwidth: 45%
+
+   A font selection
+
 .. _fig-gtkwidgets:
-\end{figure}
+A selection of GTK+ widgets:
+
+.. _fig-gtkwidget-label:
+.. figure:: ../figures/gtk-label.png
+   :figwidth: 45%
+
+   A text label
+
+.. _fig-gtkwidget-combobox:
+.. figure:: ../figures/gtk-combo-box.png
+   :figwidth: 45%
+
+   A drop-down selection (combo box)
+
+.. _fig-gtkwidget-button:
+.. figure:: ../figures/gtk-button.png
+   :figwidth: 45%
+
+   A push button
+
+.. _fig-gtkwidget-checkbox:
+.. figure:: ../figures/gtk-check-button.png
+   :figwidth: 45%
+
+   A tick box
+
+.. _fig-gtkwidget-menu:
+.. figure:: ../figures/gtk-menu.png
+   :figwidth: 45%
+
+   A menu bar
+
+.. _fig-gtkwidget-entry:
+.. figure:: ../figures/gtk-text-entry.png
+   :figwidth: 45%
+
+   A text entry field
+
+.. _fig-gtkwidget-fontsel:
+.. figure:: ../figures/gtk-font-selection.png
+   :figwidth: 45%
+
+   A font selection
+
 
 Not all widgets are interactive.  For example, the user cannot usually
 interact with a label, or a framebox.  Some widgets, such as
@@ -350,29 +321,29 @@ shrunk to fit the space allotted to them.  There are several ways to
 control this behaviour, to give fine control over the appearance of
 the interface.
 
-
-\begin{figure}
-  \centering
-  \subfigure[Horizontal box: :c:type:`GtkHBox`]{
-    \includegraphics[width=0.45\textwidth]{figures/container-hbox}
-.. _fig-container:hbox:
-  }
-  \subfigure[Vertical box: :c:type:`GtkVBox`]{
-    \makebox[0.45\textwidth][c]{
-      \includegraphics[height=0.45\textwidth]{figures/container-vbox}
-    }
-.. _fig-container:vbox:
-   }
-   \subfigure[Table: :c:type:`GtkTable`]{
-     \includegraphics[width=0.45\textwidth]{figures/container-table}
-.. _fig-container:table:
-   }
-   \caption[GTK+ containers]{GTK+ containers.  Each container may
-    contain other widgets in the shaded areas.  Containers may contain
-    more containers, allowing them to nest.  Complex interfaces may be
-    constructed by nesting the different types of container.}
 .. _fig-containers:
-\end{figure}
+GTK+ containers.  Each container may contain other widgets in the
+shaded areas.  Containers may contain more containers, allowing them
+to nest.  Complex interfaces may be constructed by nesting the
+different types of container.
+
+.. _fig-container-hbox:
+.. figure:: ../figures/container-hbox
+   :figwidth: 45%
+
+   Horizontal box: :c:type:`GtkHBox`
+
+.. _fig-container-vbox:
+.. figure:: ../figures/container-vbox
+   :figwidth: 45%
+
+   Vertical box: :c:type:`GtkVbox`
+
+.. _fig-container-table:
+.. figure:: ../figures/container-table
+   :figwidth: 45%
+
+   Table: :c:type:`GtkTable`
 
 In addition to the containers discussed above, there are more complex
 containers available, such are horizontal and vertical panes, tabbed
