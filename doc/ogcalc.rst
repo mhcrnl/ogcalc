@@ -441,8 +441,10 @@ are known as *callbacks*.  The process is illustrated graphically in
 Figure :ref:`A typical signal handler <fig-signals>`.
 
 .. _fig-signals:
-.. figure:: figures/signals
+.. figure:: figures/signals.svg
    :figwidth: 60%
+   :width: 80%
+   :align: center
 
    A typical signal handler.  When the button is pressed, a signal is
    emitted, causing the registered callback function to be called.
@@ -796,12 +798,12 @@ exits.
    gtk_container_add (GTK_CONTAINER(window), vbox1);
 
 :c:data:`vbox1` is a :c:type:`GtkVBox`.  When constructed using
-:c:func:`gtk_vbox_new`, it is set to be non-homogeneous
-(``FALSE``), which allows the widgets contained within the
-:c:type:`GtkVBox` to be of different sizes, and has zero pixels padding
-space between the container widgets it will contain.  The homogeneity
-and padding space are different for the various :c:type:`GtkBox`es used,
-depending on the visual effect intended.
+:c:func:`gtk_vbox_new` , it is set to be non-homogeneous (``FALSE``),
+which allows the widgets contained within the :c:type:`GtkVBox` to be
+of different sizes, and has zero pixels padding space between the
+container widgets it will contain.  The homogeneity and padding space
+are different for the various :c:type:`GtkBox` widgets used, depending
+on the visual effect intended.
 
 :c:func:`gtk_container_add` packs :c:data:`vbox1` into the window
 (a :c:type:`GtkWindow` object *is a* :c:type:`GtkContainer`).
@@ -859,18 +861,18 @@ A new label is created displaying the text :c:data:`label_text`.
    gtk_spin_button_set_numeric
      (GTK_SPIN_BUTTON(spinbutton), TRUE);
 
-A :c:type:`GtkSpinButton` is a numeric entry field.  It has up and down
-buttons to "spin" the numeric value up and down.  It is associated
-with a :c:type:`GtkAdjustment`, which controls the range allowed,
-default value, etc..  :c:func:`gtk_adjustment_new` returns a new
-:c:type:`GtkAdjustment` object.  Its arguments are the default value,
-minimum value, maximum value, step increment, page increment and page
-size, respectively.  This is straightforward, apart from the step and
-page increments and sizes.  The step and page increments are the value
-that will be added or subtracted when the mouse button 1 or button 2
-are clicked on the up or down buttons, respectively.  The page size
-has no meaning in this context (:c:type:`GtkAdjustment`s are also used
-with scrollbars).
+A :c:type:`GtkSpinButton` is a numeric entry field.  It has up and
+down buttons to "spin" the numeric value up and down.  It is
+associated with a :c:type:`GtkAdjustment`, which controls the range
+allowed, default value, etc..  :c:func:`gtk_adjustment_new` returns a
+new :c:type:`GtkAdjustment` object.  Its arguments are the default
+value, minimum value, maximum value, step increment, page increment
+and page size, respectively.  This is straightforward, apart from the
+step and page increments and sizes.  The step and page increments are
+the value that will be added or subtracted when the mouse button 1 or
+button 2 are clicked on the up or down buttons, respectively.  The
+page size has no meaning in this context (:c:type:`GtkAdjustment` is
+also used with scrollbars).
 
 :c:func:`gtk_spin_button_new` creates a new :c:type:`GtkSpinButton`,
 and associates it with :c:data:`adjustment`.  The second and third
@@ -1047,6 +1049,7 @@ in a similar manner to other interface designers.  Figure
 Glade.
 
 .. _fig-glade:
+
 The Glade user interface designer.
 
 .. _fig-glade:main:
@@ -1174,7 +1177,7 @@ Firstly, the :c:type:`GladeXML` interface is found, by finding the
 widget tree containing the widget passed as the first argument to the
 signal handler.  Once :c:data:`xml` has been set,
 :c:func:`glade_xml_get_widget` may be used to obtain pointers to
-the :c:type:`GtkWidget`s stored in the widget tree.
+the :c:type:`GtkWidget` instances stored in the widget tree.
 
 Compared with the pure C GTK+ application, the code is far simpler,
 and the signal handlers no longer need to get their data as structures
