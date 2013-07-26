@@ -24,11 +24,6 @@ Contents:
    :maxdepth: 2
 
 ..
- \newcommand{\variable}[1]{\textsl{#1}}
- \newcommand{\class}[1]{\texttt{#1}}
- \newcommand{\function}[1]{\texttt{#1()}}
- \newcommand{\type}[1]{\texttt{#1}}
- \newcommand{\code}[1]{\texttt{#1}}
 
 Introduction
 ============
@@ -62,15 +57,15 @@ required, but the Python tutorial and manual, and the PyGTK and Glade
 API references, will also be useful.
 
 I hope you find this tutorial informative.  Please send any
-corrections or suggestions to \texttt{rleigh@debian.org}.
+corrections or suggestions to `rleigh@debian.org
+<mailto:rleigh@debian.org>`_.
 
 Building the example code
 -------------------------
 
 Several working, commented examples accompany the tutorial.  They are
-also available from
-`<http://people.debian.org/~rleigh/gtk/ogcalc/>`_.  To build them,
-type:
+also available from `people.debian.org/~rleigh/ogcalc/
+<http://people.debian.org/~rleigh/ogcalc/>`_.  To build them, type:
 
 ::
 
@@ -134,7 +129,7 @@ differs a little from C++ though.  As an example, the following C++
    myclass *c = myclass_new();
    myclass_add(c, 2);
 
-\noindent The difference is due to the lack of a \variable{this}
+\noindent The difference is due to the lack of a :c:data:`this`
 pointer in the C language (since objects do not exist).  This means
 that class methods require the object pointer passing as their first
 argument.  This happens automatically in C++, but it needs doing
@@ -142,13 +137,12 @@ argument.  This happens automatically in C++, but it needs doing
 
 Another difference is seen when dealing with polymorphic objects.  All
 GTK+ widgets (the controls, such as buttons, checkboxes, labels, etc.)
-are derived from \class{GtkWidget}.  That is to say, a
-\class{GtkButton} *is a* \class{GtkWidget}, which *is a*
-\class{GtkObject}, which *is a* \class{GObject}.  In C++, one can call
+are derived from :c:type:`GtkWidget`.  That is to say, a
+:c:type:`GtkButton` *is a* :c:type:`GtkWidget`, which *is a*
+:c:type:`GtkObject`, which *is a* :c:type:`GObject`.  In C++, one can call
 member functions from both the class and the classes it is derived
 from.  With GTK+, the object needs explicit casting to the required
 type.  For example
-
 
 .. code-block:: c++
 
@@ -164,23 +158,24 @@ type.  For example
    gtk_button_set_label(mybutton, "Cancel");
    gtk_widget_show(GTK_WIDGET(mybutton))
 
-\noindent In this example, \texttt{set\_label()} is a method of
-\class{GtkButton}, whilst \texttt{show()} is a method of
-\class{GtkWidget}, which requires an explicit cast.  The
-\texttt{GTK\_WIDGET()} cast is actually a form of *run-time type
-identification* (RTTI).  This ensures that the objects are of the
-correct type when they are used.
+\noindent In this example, :cpp:func:`set_label` is a method of
+:cpp:class:`GtkButton`, whilst :cpp:func:`show` is a method of
+:cpp:class:`GtkWidget`, which requires an explicit cast.  The C API
+uses functions prefixed with the class name, the object being operated
+upon being passed as the first argument.  The ``GTK_WIDGET()`` cast
+is actually a form of *run-time type identification* (RTTI).  This
+ensures that the objects are of the correct type when they are used.
 
-Objects and C work well, but there are some issues, such as a lack of
-type-safety of callbacks and limited compile-time type checking.
-Using GObject, deriving new widgets is complex and error-prone.  For
-these, and other, reasons, C++ may be a better language to use.
-:program:`libsigc++` provides type-safe signal handling, and all of the
-GTK+ (and GLib, Pango et. al.) objects are available as standard C++
-classes.  Callbacks may also be class methods, which makes for cleaner
-code since the class can contain object data, removing the need to
-pass in data as a function argument.  These potential problems will
-become clearer in the next sections.
+Objects and C "work", but there are some issues to be aware of, such
+as a lack of type-safety of callbacks and limited compile-time type
+checking.  Using GObject, deriving new widgets is both complex and
+error-prone.  For these, and other, reasons, C++ may be a better
+language to use.  :program:`libsigc++` provides type-safe signal
+handling, and all of the GTK+ (and GLib, Pango et. al.) objects are
+available as standard C++ classes.  Callbacks may also be class
+methods, which makes for cleaner code since the class can contain
+object data, removing the need to pass in data as a function argument.
+These potential problems will become clearer in the next sections.
 
 
 Widgets
@@ -334,17 +329,17 @@ The top-level of every GTK+ interface is the *window*.  A window
 is what one might expect it to be: it has a title bar, borders (which
 may allow resizing), and it contains the rest of the interface.
 
-In GTK+, a \class{GtkWindow} *is a* \class{GtkContainer}.  In English,
+In GTK+, a :c:type:`GtkWindow` *is a* :c:type:`GtkContainer`.  In English,
 this means that the window is a widget that can contain another
-widget.  More precisely, a \class{GtkContainer} can contain exactly
+widget.  More precisely, a :c:type:`GtkContainer` can contain exactly
 **one** widget.  This is usually quite confusing compared with
 the behaviour of other graphics toolkits, which allow one to place the
 controls on some sort of "form".
 
-The fact that a \class{GtkWindow} can only contain one widget
+The fact that a :c:type:`GtkWindow` can only contain one widget
 initially seems quite useless.  After all, user interfaces usually
 consist of more than a single button.  In GTK+, there are other kinds
-of \class{GtkContainer}.  The most commonly used are horizontal boxes,
+of :c:type:`GtkContainer`.  The most commonly used are horizontal boxes,
 vertical boxes, and tables.  The structure of these containers is
 shown in Figure \ref{fig:containers}.
 
@@ -358,17 +353,17 @@ the interface.
 
 \begin{figure}
   \centering
-  \subfigure[Horizontal box: \class{GtkHBox}]{
+  \subfigure[Horizontal box: :c:type:`GtkHBox`]{
     \includegraphics[width=0.45\textwidth]{figures/container-hbox}
 .. _fig-container:hbox:
   }
-  \subfigure[Vertical box: \class{GtkVBox}]{
+  \subfigure[Vertical box: :c:type:`GtkVBox`]{
     \makebox[0.45\textwidth][c]{
       \includegraphics[height=0.45\textwidth]{figures/container-vbox}
     }
 .. _fig-container:vbox:
    }
-   \subfigure[Table: \class{GtkTable}]{
+   \subfigure[Table: :c:type:`GtkTable`]{
      \includegraphics[width=0.45\textwidth]{figures/container-table}
 .. _fig-container:table:
    }
@@ -626,20 +621,20 @@ user will use go in last.  This is illustrated in Figure
     \includegraphics[width=0.45\textwidth]{figures/packing-1}
 .. _fig-packing:1:
   }
-  \subfigure[Addition of a \class{GtkVBox}]{
+  \subfigure[Addition of a :c:type:`GtkVBox`]{
     \includegraphics[width=0.45\textwidth]{figures/packing-2}
 .. _fig-packing:2:
   }
-  \subfigure[Addition of a second \class{GtkVBox}; this has uniformly-
+  \subfigure[Addition of a second :c:type:`GtkVBox`; this has uniformly-
   sized children (it is *homogeneous*), unlike the first.]{
     \includegraphics[width=0.45\textwidth]{figures/packing-3}
 .. _fig-packing:3:
   }
-  \subfigure[Addition of three \class{GtkHBox}es]{
+  \subfigure[Addition of three :c:type:`GtkHBox`es]{
     \includegraphics[width=0.45\textwidth]{figures/packing-4}
 .. _fig-packing:4:
   }
-  \subfigure[Addition of five more \class{GtkHBox}es, used to ensure
+  \subfigure[Addition of five more :c:type:`GtkHBox`es, used to ensure
   visually appealing widget placement]{
     \includegraphics[width=0.45\textwidth]{figures/packing-5}
 .. _fig-packing:5:
@@ -684,19 +679,19 @@ finished application.
 
 This program consists of five functions:
 
-\function{on\_button\_clicked\_reset}
+:c:func:`on_button_clicked_reset`
    Reset the interface to its default state.
-\function{on\_button\_clicked\_calculate}
+:c:func:`on_button_clicked_calculate`
    Get the values the user has entered, do
    a calculation, then display the results.
-\function{main}
+:c:func:`main`
    Initialise GTK+, construct the interface,
    connect the signal handlers, then enter the GTK+ event loop.
-\function{create\_spin\_entry}
+:c:func:`create_spin_entry`
    A helper function to create a
    numeric entry with descriptive label and tooltip, used when
    constructing the interface.
-\function{create\_result\_label}
+:c:func:`create_result_label`
    A helper function to create a
    result label with discriptive label and tooltip, used when
    constructing the interface.
@@ -724,7 +719,7 @@ To build the source, do the following:
 Analysis
 --------
 
-The \function{main} function is responsible for constructing the user
+The :c:func:`main` function is responsible for constructing the user
 interface, connecting the signals to the signal handlers, and then
 entering the main event loop.  The more complex aspects of the
 function are discussed here.
@@ -735,8 +730,8 @@ function are discussed here.
                      "destroy",
                      gtk_main_quit, NULL);
 
-This code connects the "destroy" signal of \variable{window} to the
-\function{gtk\_main\_quit} function.  This signal is emitted by the
+This code connects the "destroy" signal of :c:data:`window` to the
+:c:func:`gtk_main_quit` function.  This signal is emitted by the
 window when it is to be destroyed, for example when the "close"
 button on the titlebar is clicked).  The result is that when the
 window is closed, the main event loop returns, and the program then
@@ -747,16 +742,16 @@ exits.
    vbox1 = gtk_vbox_new (FALSE, 0);
    gtk_container_add (GTK_CONTAINER(window), vbox1);
 
-\variable{vbox1} is a \class{GtkVBox}.  When constructed using
-\function{gtk\_vbox\_new}, it is set to be non-homogeneous
+:c:data:`vbox1` is a :c:type:`GtkVBox`.  When constructed using
+:c:func:`gtk_vbox_new`, it is set to be non-homogeneous
 (``FALSE``), which allows the widgets contained within the
-\class{GtkVBox} to be of different sizes, and has zero pixels padding
+:c:type:`GtkVBox` to be of different sizes, and has zero pixels padding
 space between the container widgets it will contain.  The homogeneity
-and padding space are different for the various \class{GtkBox}es used,
+and padding space are different for the various :c:type:`GtkBox`es used,
 depending on the visual effect intended.
 
-\function{gtk\_container\_add} packs \variable{vbox1} into the window
-(a \class{GtkWindow} object *is a* \class{GtkContainer}).
+:c:func:`gtk_container_add` packs :c:data:`vbox1` into the window
+(a :c:type:`GtkWindow` object *is a* :c:type:`GtkContainer`).
 
 .. code-block:: c
 
@@ -768,34 +763,34 @@ depending on the visual effect intended.
 Some widgets do not receive events from the windowing system, and
 hence cannot emit signals.  Label widgets are one example of this.  If
 this is required, for example in order to show a tooltip, they must be
-put into a \class{GtkEventBox}, which can receive the events.  The
-signals emitted from the \class{GtkEventBox} may then be connected to
+put into a :c:type:`GtkEventBox`, which can receive the events.  The
+signals emitted from the :c:type:`GtkEventBox` may then be connected to
 the appropriate handler.
 
-\function{gtk\_widget\_show} displays a widget.  Widgets are hidden by
+:c:func:`gtk_widget_show` displays a widget.  Widgets are hidden by
 default when created, and so must be shown before they can be used.
 It is typical to show the top-level window *last*, so that the
 user does not see the interface being drawn.
 
-\function{gtk\_box\_pack\_start} packs a widget into a \class{GtkBox},
-in a similar manner to \function{gtk\_container\_add}.  This packs
-\variable{eventbox} into \variable{hbox2}.  The last three arguments
+:c:func:`gtk_box_pack_start` packs a widget into a :c:type:`GtkBox`,
+in a similar manner to :c:func:`gtk_container_add`.  This packs
+:c:data:`eventbox` into :c:data:`hbox2`.  The last three arguments
 control whether the child widget should expand into an extra space
 available, whether it should fill any extra space available (this has
-no effect if \variable{expand} is ``FALSE``), and extra space in
+no effect if :c:data:`expand` is ``FALSE``), and extra space in
 pixels to put between its neighbours (or the edge of the box),
 respectively.  Figure \ref{fig:boxpacking} shows how
-\function{gtk\_box\_pack\_start} works.
+:c:func:`gtk_box_pack_start` works.
 
 \begin{figure}
   \centering \resizebox{0.6\textwidth}{!}{
     \includegraphics{figures/box-packing} }
-  \caption[Packing widgets into a \class{GtkHBox}]{Packing widgets
-    into a \class{GtkHBox}.}
+  \caption[Packing widgets into a :c:type:`GtkHBox`]{Packing widgets
+    into a :c:type:`GtkHBox}.`
 .. _fig-boxpacking:
 \end{figure}
 
-The \function{create\_spin\_entry} function is a helper function to
+The :c:func:`create_spin_entry` function is a helper function to
 create a numeric entry (spin button) together with a label and
 tooltip.  It is used to create all three entries.
 
@@ -803,7 +798,7 @@ tooltip.  It is used to create all three entries.
 
    label = gtk_label_new(label_text);
 
-A new label is created displaying the text \variable{label\_text}.
+A new label is created displaying the text :c:data:`label_text`.
 
 .. code-block:: c
 
@@ -811,25 +806,25 @@ A new label is created displaying the text \variable{label\_text}.
    gtk_spin_button_set_numeric
      (GTK_SPIN_BUTTON(spinbutton), TRUE);
 
-A \class{GtkSpinButton} is a numeric entry field.  It has up and down
+A :c:type:`GtkSpinButton` is a numeric entry field.  It has up and down
 buttons to "spin" the numeric value up and down.  It is associated
-with a \class{GtkAdjustment}, which controls the range allowed,
-default value, etc..  \function{gtk\_adjustment\_new} returns a new
-\class{GtkAdjustment} object.  Its arguments are the default value,
+with a :c:type:`GtkAdjustment`, which controls the range allowed,
+default value, etc..  :c:func:`gtk_adjustment_new` returns a new
+:c:type:`GtkAdjustment` object.  Its arguments are the default value,
 minimum value, maximum value, step increment, page increment and page
 size, respectively.  This is straightforward, apart from the step and
 page increments and sizes.  The step and page increments are the value
 that will be added or subtracted when the mouse button 1 or button 2
 are clicked on the up or down buttons, respectively.  The page size
-has no meaning in this context (\class{GtkAdjustment}s are also used
+has no meaning in this context (:c:type:`GtkAdjustment`s are also used
 with scrollbars).
 
-\function{gtk\_spin\_button\_new} creates a new \class{GtkSpinButton},
-and associates it with \variable{adjustment}.  The second and third
+:c:func:`gtk_spin_button_new` creates a new :c:type:`GtkSpinButton`,
+and associates it with :c:data:`adjustment`.  The second and third
 arguments set the "climb rate" (rate of change when the spin buttons
 are pressed) and the number of decimal places to display.
 
-Finally, \function{gtk\_spin\_button\_set\_numeric} is used to ensure
+Finally, :c:func:`gtk_spin_button_set_numeric` is used to ensure
 that only numbers can be entered.
 
 .. code-block:: c
@@ -839,12 +834,12 @@ that only numbers can be entered.
                         tooltip_text, NULL);
 
 A tooltip (pop-up help message) is created with
-\function{gtk\_tooltips\_new}.  \function{gtk\_tooltips\_set\_tip} is
-used to associate \variable{tooltip} with the \variable{eventbox}
+:c:func:`gtk_tooltips_new`.  :c:func:`gtk_tooltips_set_tip` is
+used to associate :c:data:`tooltip` with the :c:data:`eventbox`
 widget, also specifying the message it should contain.  The fourth
 argument should typically be ``NULL``.
 
-The \function{create\_result\_label} function is a helper function to
+The :c:func:`create_result_label` function is a helper function to
 create a result label together with a descriptive label and tooltip.
 
 .. code-block:: c
@@ -856,7 +851,7 @@ the text to be selected and copied, to allow pasting of the text
 elsewhere.  This is used for the result fields so the user can easily
 copy them.
 
-Continuing with the \function{main} function:
+Continuing with the :c:func:`main` function:
 
 .. code-block:: c
 
@@ -881,8 +876,8 @@ a keyboard shortcut).  The shortcut is underlined, in common with
 other graphical toolkits.
 
 The "clicked" signal (emitted when the button is pressed and
-released) is connected to the \function{on\_button\_clicked\_calculate}
-callback.  A pointer to the \variable{cb\_widgets} structure is passed
+released) is connected to the :c:func:`on_button_clicked_calculate`
+callback.  A pointer to the :c:data:`cb_widgets` structure is passed
 as the argument to the callback.
 
 Lastly, the ``GTK_CAN_DEFAULT`` attribute is set.  This attribute
@@ -897,12 +892,12 @@ allows the button to be the default widget in the window.
       (gpointer)GTK_WIDGET(cb_widgets.ri_val));
 
 This code connects signals in the same way as
-\function{gtk\_signal\_connect}.  The difference is the fourth
-argument, which is a \class{GtkWidget} pointer.  This allows the
+:c:func:`gtk_signal_connect`.  The difference is the fourth
+argument, which is a :c:type:`GtkWidget` pointer.  This allows the
 signal emitted by one widget to be received by the signal handler for
-another.  Basically, the \variable{widget} argument of the signal
-handler is given \variable{cb\_widgets.ri\_val} rather than
-\variable{cb\_widgets.pg\_val}.  This allows the focus (where keyboard
+another.  Basically, the :c:data:`widget` argument of the signal
+handler is given :c:data:`cb_widgets.ri_val` rather than
+:c:data:`cb_widgets.pg_val`.  This allows the focus (where keyboard
 input is sent) to be switched to the next entry field when Enter is
 pressed in the first.
 
@@ -915,8 +910,8 @@ pressed in the first.
       (gpointer) GTK_WIDGET(window));
 
 This is identical to the last example, but in this case the callback
-is the function \function{gtk\_window\_activate\_default} and the widget
-to give to the signal handler is \variable{window}.  When Enter is
+is the function :c:func:`gtk_window_activate_default` and the widget
+to give to the signal handler is :c:data:`window`.  When Enter is
 pressed in the CF entry field, the default "Calculate" button is
 activated.
 
@@ -924,11 +919,11 @@ activated.
 
    gtk_main();
 
-This is the GTK+ event loop.  It runs until \function{gtk\_main\_quit}
+This is the GTK+ event loop.  It runs until :c:func:`gtk_main_quit`
 is called.
 
 The signal handlers are far simpler than the interface construction.
-The function \function{on\_button\_clicked\_calculate} reads the user
+The function :c:func:`on_button_clicked_calculate` reads the user
 input, performs a calculation, and then displays the result.
 
 .. code-block:: c
@@ -939,11 +934,11 @@ input, performs a calculation, and then displays the result.
      struct calculation_widgets *w;
      w = (struct calculation_widgets *) data;
 
-Recall that a pointer to \variable{cb\_widgets}, of type \type{struct
-  calculation\_widgets}, was passed to the signal handler, cast to a
-\type{gpointer}.  The reverse process is now applied, casting
-\variable{data} to a pointer of type \type{struct
-  calculation\_widgets}.
+Recall that a pointer to :c:data:`cb_widgets`, of type \type{struct
+  calculation_widgets}, was passed to the signal handler, cast to a
+:c:type:`gpointer`.  The reverse process is now applied, casting
+:c:data:`data` to a pointer of type \type{struct
+  calculation_widgets}.
 
 .. code-block:: c
 
@@ -951,7 +946,7 @@ Recall that a pointer to \variable{cb\_widgets}, of type \type{struct
    pg = gtk_spin_button_get_value
      (GTK_SPIN_BUTTON(w->pg_val));
 
-This code gets the value from the \class{GtkSpinButton}.
+This code gets the value from the :c:type:`GtkSpinButton`.
 
 .. code-block:: c
 
@@ -961,9 +956,9 @@ This code gets the value from the \class{GtkSpinButton}.
                          og_string);
    g_free (og_string);
 
-Here the result \variable{og} is printed to the string
-\variable{og\_string}.  This is then set as the label text using
-\function{gtk\_label\_set\_markup}.  This function sets the label text
+Here the result :c:data:`og` is printed to the string
+:c:data:`og_string`.  This is then set as the label text using
+:c:func:`gtk_label_set_markup`.  This function sets the label text
 using the *Pango Markup Format*, which uses the ``<b>`` and
 ``</b>`` tags to embolden the text.
 
@@ -973,7 +968,7 @@ using the *Pango Markup Format*, which uses the ``<b>`` and
                               0.0);
    gtk_label_set_text (GTK_LABEL(w->og_result), "");
 
-\function{on\_button\_clicked\_reset} resets the input fields to their
+:c:func:`on_button_clicked_reset` resets the input fields to their
 default value, and blanks the result fields.
 
 
@@ -1050,10 +1045,10 @@ the "Properties" dialogue box.
 The source code is listed below.  This is the same as the previous
 listing, but with the following changes:
 
-* The \function{main} function does not construct the interface.  It
+* The :c:func:`main` function does not construct the interface.  It
   merely loads the :file:`ogcalc.glade` interface description,
   auto-connects the signals, and shows the main window.
-* The \class{cb\_widgets} structure is no longer needed: the callbacks
+* The :c:type:`cb_widgets` structure is no longer needed: the callbacks
   are now able to query the widget tree through the Glade XML object
   to locate the widgets they need.  This allows for greater
   encapsulation of data, and signal handler connection is simpler.
@@ -1097,7 +1092,7 @@ Analysis
 --------
 
 The most obvious difference between this listing and the previous one
-is the huge reduction in size.  The \function{main} function is
+is the huge reduction in size.  The :c:func:`main` function is
 reduced to just these lines:
 
 .. code-block:: c
@@ -1112,20 +1107,20 @@ reduced to just these lines:
    window = glade_xml_get_widget (xml, "ogcalc_main_window");
    gtk_widget_show(window);
 
-\function{glade\_xml\_new} reads the interface from the file
+:c:func:`glade_xml_new` reads the interface from the file
 :file:`ogcalc.glade`.  It returns the interface as a pointer to a
-\class{GladeXML} object, which will be used later.  Next, the signal
+:c:type:`GladeXML` object, which will be used later.  Next, the signal
 handlers are connected with
-\function{glade\_xml\_signal\_autoconnect}.  Windows users may require
+:c:func:`glade_xml_signal_autoconnect`.  Windows users may require
 special linker flags because signal autoconnection requires the
 executable to have a dynamic symbol table in order to dynamically find
 the required functions.
 
 The signal handlers are identical to those in the previous section.
-The only difference is that \type{struct calculation\_widgets} has been
+The only difference is that :c:type:`struct calculation_widgets` has been
 removed.  No information needs to be passed to them through the
-\variable{data} argument, since the widgets they need to use may now
-be found using the \class{GladeXML} interface description.
+:c:data:`data` argument, since the widgets they need to use may now
+be found using the :c:type:`GladeXML` interface description.
 
 .. code-block:: c
 
@@ -1134,15 +1129,15 @@ be found using the \class{GladeXML} interface description.
    xml = glade_get_widget_tree (GTK_WIDGET (widget));
    pg_val = glade_xml_get_widget (xml, "pg_entry");
 
-Firstly, the \class{GladeXML} interface is found, by finding the
+Firstly, the :c:type:`GladeXML` interface is found, by finding the
 widget tree containing the widget passed as the first argument to the
-signal handler.  Once \variable{xml} has been set,
-\function{glade\_xml\_get\_widget} may be used to obtain pointers to
-the \class{GtkWidget}s stored in the widget tree.
+signal handler.  Once :c:data:`xml` has been set,
+:c:func:`glade_xml_get_widget` may be used to obtain pointers to
+the :c:type:`GtkWidget`s stored in the widget tree.
 
 Compared with the pure C GTK+ application, the code is far simpler,
 and the signal handlers no longer need to get their data as structures
-cast to \type{gpointer}, which was ugly.  The code is far more
+cast to :c:type:`gpointer`, which was ugly.  The code is far more
 understandable, cleaner and maintainable.
 
 
@@ -1166,16 +1161,16 @@ One very common way of reducing this complexity is
 many different objects.  By using the same object mechanism (GObject),
 the ogcalc code can be made more understandable and maintainable.
 
-The ogcalc program consists of a \class{GtkWindow} which contains a
-number of other \class{GtkWidget}s and some signal handler functions.
-If our program was a class (\class{Ogcalc}) which derived from
-\class{GtkWindow}, the widgets the window contains would be member
+The ogcalc program consists of a :c:type:`GtkWindow` which contains a
+number of other :c:type:`GtkWidget`s and some signal handler functions.
+If our program was a class (:c:type:`Ogcalc`) which derived from
+:c:type:`GtkWindow`, the widgets the window contains would be member
 variables and the signal handlers would be member functions (methods).
 The user of the class wouldn't be required to have knowledge of these
-details, they just create a new \class{Ogcalc} object and show it.
+details, they just create a new :c:type:`Ogcalc` object and show it.
 
 By using objects one also gains *reusability*.  Previously only
-one instance of the object at a time was possible, and \function{main}
+one instance of the object at a time was possible, and :c:func:`main`
 had explicit knowledge of the creation and workings of the interface.
 
 This example bears many similarities with the C++ Glade example in
@@ -1230,21 +1225,21 @@ Analysis
 
 The bulk of the code is the same as in previous sections, and so
 describing what the code does will not be repeated here.  The
-\class{Ogcalc} class is defined in :file:`gtk/C/gobject/ogcalc.h`.
+:c:type:`Ogcalc` class is defined in :file:`gtk/C/gobject/ogcalc.h`.
 This header declares the object and class structures and some macros
 common to all GObject-based objects and classes.  The macros and
 internals of GObject are out of the scope of this document, but
 suffice it to say that this boilerplate is required, and is identical
 for all GObject classes bar the class and object names.
 
-The object structure (\class{\_Ogcalc}) has the object it derives from
+The object structure (:c:type:`_Ogcalc`) has the object it derives from
 as the first member.  This is very important, since it allows casting
 between types in the inheritance hierarchy, since all of the object
 structures start at an offset of 0 from the start address of the
 object.  The other members may be in any order.  In this case it
 contains the Glade XML interface object and the widgets required to be
 manipulated after object and interface construction.  The class
-structure (\class{\_OgcalcClass}) is identical to that of the derived
+structure (:c:type:`_OgcalcClass`) is identical to that of the derived
 class (GtkWindowClass).  For more complex classes, this might contain
 virtual function pointers.  It has many similarities to a C++ vtable.
 Finally, the header defines the public member functions of the class.
@@ -1260,81 +1255,81 @@ The macro ``G_DEFINE_TYPE`` is used for convenience.  Its
 parameters are the class name to register, the prefix used by methods
 of this class and the GType of the parent type we are inheriting from.
 It prototypes the initialisation functions defined in the source
-below, and it defines the function \function{ogcalc\_get\_type}, which
-is used to get the the typeid (\type{GType}) of the class.  As a side
+below, and it defines the function :c:func:`ogcalc_get_type`, which
+is used to get the the typeid (:c:type:`GType`) of the class.  As a side
 effect, this function triggers registration of the class with the
 GType type system.  GType is a *dynamic* type system.  Unlike
 languages like C++, where the types of all classes are known at
 compile-time, the majority of all the types used with GTK+ are
 registered on demand, except for the primitive data types and the base
-class \class{GObject} which are registered as *fundamental* types.  As
+class :c:type:`GObject` which are registered as *fundamental* types.  As
 a result, in addition to being able to specify constructors and
 destructors for the *object* (or *initialisers* and *finalisers* in
 GType parlance), it is also possible to have initialisation and
 finalisation functions for both the *class* and *base*.  For example,
 the class initialiser could be used to fix up the vtable for
 overriding virtual functions in derived classes.  In addition, there
-is also an \variable{instance\_init} function, which is used in this
+is also an :c:data:`instance_init` function, which is used in this
 example to initialise the class.  It's similar to the constructor, but
 is called after object construction.
 
-All these functions are specified in a \class{GTypeInfo} structure
-which is passed to \function{g\_type\_register\_static} to register the
+All these functions are specified in a :c:type:`GTypeInfo` structure
+which is passed to :c:func:`g_type_register_static` to register the
 new type.
 
-\function{ogcalc\_class\_init} is the class initialisation function.
+:c:func:`ogcalc_class_init` is the class initialisation function.
 This has no C++ equivalent, since this is taken care of by the
-compiler.  In this case it is used to override the \function{finalize}
-virtual function in the \class{GObjectClass} base class.  This is used
+compiler.  In this case it is used to override the :c:func:`finalize`
+virtual function in the :c:type:`GObjectClass` base class.  This is used
 to specify a virtual destructor (it's not specified in the
-\class{GTypeInfo} because the destructor cannot be run until after an
+:c:type:`GTypeInfo` because the destructor cannot be run until after an
 instance is created, and so has no place in object construction).
 With C++, the vtable would be fixed up automatically; here, it must be
 done manually.  Pure virtual functions and default implementations are
 also possible, as with C++.
 
-\function{ogcalc\_init} is the object initialisation function
-(C++ constructor).  This does a similar job to the \function{main}
+:c:func:`ogcalc_init` is the object initialisation function
+(C++ constructor).  This does a similar job to the :c:func:`main`
 function in previous examples, namely contructing the interface (using
 Glade) and setting up the few object properties and signal handlers
 that could not be done automatically with Glade.  In this example, a
-second argument is passed to \function{glade\_xml\_new}; in this case,
-there is no need to create the window, since our \class{Ogcalc} object
+second argument is passed to :c:func:`glade_xml_new`; in this case,
+there is no need to create the window, since our :c:type:`Ogcalc` object
 *is a* window, and so only the interface rooted from
 ``ogcalc_main_vbox`` is loaded.
 
-\function{ogcalc\_finalize} is the object finalisation function (C++
+:c:func:`ogcalc_finalize` is the object finalisation function (C++
 destructor).  It's used to free resources allocated by the object, in
-this case the \class{GladeXML} interface description.
-\function{g\_object\_unref} is used to decrease the reference count on
-a \class{GObject}.  When the reference count reaches zero, the object
+this case the :c:type:`GladeXML` interface description.
+:c:func:`g_object_unref` is used to decrease the reference count on
+a :c:type:`GObject`.  When the reference count reaches zero, the object
 is destroyed and its destructor is run.  There is also a
-\function{dispose} function called prior to \function{finalize}, which
+:c:func:`dispose` function called prior to :c:func:`finalize`, which
 may be called multiple times.  Its purpose is to safely free resources
 when there are cyclic references between objects, but this is not
 required in this simple case.
 
 An important difference with earlier examples is that instead of
-connecting the window "destroy" signal to \function{gtk\_main\_quit}
+connecting the window "destroy" signal to :c:func:`gtk_main_quit`
 to end the application by ending the GTK+ main loop, the "delete"
-signal is connected to \function{ogcalc\_on\_delete\_event} instead.
+signal is connected to :c:func:`ogcalc_on_delete_event` instead.
 This is because the default action of the "delete" event is to
 trigger a "destroy" event.  The object should not be destroyed, so
 by handling the "delete" signal and returning ``TRUE``,
 destruction is prevented.  Both the "Quit" button and the "delete"
-event end up calling \function{gtk\_widget\_hide} to hide the widget
-rather than \function{gtk\_main\_quit} as before.
+event end up calling :c:func:`gtk_widget_hide` to hide the widget
+rather than :c:func:`gtk_main_quit` as before.
 
 Lastly, :file:`gtk/C/gobject/ogcalc-main.c` defines a minimal
-\function{main}.  The sole purpose of this function is to create an
-instance of \class{Ogcalc}, show it, and then destroy it.  Notice how
+:c:func:`main`.  The sole purpose of this function is to create an
+instance of :c:type:`Ogcalc`, show it, and then destroy it.  Notice how
 simple and understandable this has become now that building the UI is
 where it belongs---in the object construction process.  The users of
-\class{Ogcalc} need no knowledge of its internal workings, which is
+:c:type:`Ogcalc` need no knowledge of its internal workings, which is
 the advantage of encapsulating complexity in classes.
 
-By connecting the "hide" signal of the \class{Ogcalc} object to
-\function{gtk\_main\_quit} the GTK+ event loop is ended when the user
+By connecting the "hide" signal of the :c:type:`Ogcalc` object to
+:c:func:`gtk_main_quit` the GTK+ event loop is ended when the user
 presses "Quit" or closes the window.  By not doing this directly in
 the class it is possible to have as many instances of it as ones likes
 in the same program, and control over termination is entirely in the
@@ -1366,8 +1361,8 @@ maintainability.  However, some problems remain:
   signature compatible with the signal it is connected to.
 * Signal handlers are functions, and there is often a need to
   resort to using global variables and casting structures to type
-  \type{gpointer} to pass complex information to a callback though its
-  \variable{data} argument.  If Glade or GObject are used, this can be
+  :c:type:`gpointer` to pass complex information to a callback though its
+  :c:data:`data` argument.  If Glade or GObject are used, this can be
   avoided, however.
 
 Gtkmm offers solutions to most of these problems.  Firstly, all of the
@@ -1386,7 +1381,7 @@ deferred until run-time.
 
 Signal handling is also more reliable.  Gtkmm uses the
 :program:`libsigc++` library, which provides a templated signalling
-mechanism for type-safe signal handling.  The \class{mem\_fun} objects
+mechanism for type-safe signal handling.  The \class{mem_fun} objects
 allow signal handlers with a different signature than the signal
 requires to be bound, which gives greater flexibility than the C
 signals allow.  Perhaps the most notable feature is that signal
@@ -1425,10 +1420,10 @@ The \class{ogcalc} class is derived from the \class{Gtk::Window}
 class, and so contains all of the functionality of a
 \class{Gtk::Window}, plus its own additional functions and data.
 \class{ogcalc} contains methods called
-\function{on\_button\_clicked\_calculate} and
-\function{on\_button\_clicked\_reset}.  These are the equivalents of
-the functions \function{on\_button\_clicked\_calculate} and
-\function{on\_button\_clicked\_reset} used in the previous examples.
+\function{on_button_clicked_calculate} and
+\function{on_button_clicked_reset}.  These are the equivalents of
+the functions \function{on_button_clicked_calculate} and
+\function{on_button_clicked_reset} used in the previous examples.
 Because these functions are class methods, they have access to the
 class member data, and as a result are somewhat simpler than
 previously.
@@ -1503,8 +1498,8 @@ The header file declares the \class{ogcalc} class.
    virtual void on_button_clicked_calculate();
    virtual void on_button_clicked_reset();
 
-\function{on\_button\_clicked\_calculate} and
-\function{on\_button\_clicked\_reset} are the signal handling
+\function{on_button_clicked_calculate} and
+\function{on_button_clicked_reset} are the signal handling
 functions, as previously.  However, they are now class *member
 functions*, taking no arguments.
 
@@ -1533,20 +1528,20 @@ interface when the class is instantiated.
    set_resizable(false);
 
 The above code uses member functions of the \class{Gtk::Window} class.
-The global functions \function{gtk\_window\_set\_title} and
-\function{gtk\_window\_set\_resizable} were used previously.
+The global functions \function{gtk_window_set_title} and
+\function{gtk_window_set_resizable} were used previously.
 
 .. code-block:: c++
 
    set_title("OG & ABV Calculator");
    set_resizable(false);
 
-   xml\_interface =
+   xml_interface =
      Gnome::Glade::Xml::create("ogcalc.glade",
-                               "ogcalc\_main\_vbox");
-   Gtk::VBox *main\_vbox;
-   xml\_interface->get\_widget("ogcalc\_main\_vbox", main\_vbox);
-   add(*main\_vbox);
+                               "ogcalc_main_vbox");
+   Gtk::VBox *main_vbox;
+   xml_interface->get_widget("ogcalc_main_vbox", main_vbox);
+   add(*main_vbox);
 
 The Glade interface is loaded using
 \function{Gnome::Glade::Xml::create}, in a similar manner to the
@@ -1558,7 +1553,7 @@ object.
    xml_interface->get_widget("pg_entry", pg_entry);
 
 Individual widgets may be obtained from the widget tree using the
-static member function \function{Gnome::Glade::Xml::get\_widget}.
+static member function \function{Gnome::Glade::Xml::get_widget}.
 
 Because Gtkmm uses :program:`libsigc++` for signal handling, which uses
 class member functions as signal handlers (normal functions may also
@@ -1576,7 +1571,7 @@ This complex-looking code can be broken into several parts.
 
    sigc::mem_fun(*this, &ogcalc::hide)
 
-\noindent creates a \class{sigc::mem\_fun} (function object) which points
+\noindent creates a \class{sigc::mem_fun} (function object) which points
 to the \function{ogcalc::hide} member function of this object.
 
 .. code-block:: c++
@@ -1598,8 +1593,8 @@ to connect \function{ogcalc::hide} to the "clicked" signal of the
 
 Here two signal handlers are connected to the same signal.  When the
 "Calculate" button is clicked,
-\function{ogcalc::on\_button\_clicked\_calculate} is called first,
-followed by \function{Gtk::Widget::grab\_focus}.
+\function{ogcalc::on_button_clicked_calculate} is called first,
+followed by \function{Gtk::Widget::grab_focus}.
 
 .. code-block:: c++
 
@@ -1608,13 +1603,13 @@ followed by \function{Gtk::Widget::grab\_focus}.
        ( sigc::mem_fun(*this,
                       &Gtk::Window::activate_default) ) );
 
-\class{sigc::hide\_return} is a special \class{sigc::mem\_fun} used to
-mask the boolean value returned by \function{activate\_default}.  The
-\class{mem\_fun} created is incompatible with with the
-\class{mem\_fun} type required by the signal, and this "glues" them
+\class{sigc::hide_return} is a special \class{sigc::mem_fun} used to
+mask the boolean value returned by \function{activate_default}.  The
+\class{mem_fun} created is incompatible with with the
+\class{mem_fun} type required by the signal, and this "glues" them
 together.
 
-In the \function{ogcalc::on\_button\_clicked\_calculate} member
+In the \function{ogcalc::on_button_clicked_calculate} member
 function,
 
 .. code-block:: c++
@@ -1622,8 +1617,8 @@ function,
    double pg
    pg = pg_entry->get_value();
 
-\noindent the member function \function{Gtk::SpinButton::get\_value}
-was previously used as \function{gtk\_spin\_button\_get\_value}.
+\noindent the member function \function{Gtk::SpinButton::get_value}
+was previously used as \function{gtk_spin_button_get_value}.
 
 .. code-block:: c++
 
@@ -1636,7 +1631,7 @@ was previously used as \function{gtk\_spin\_button\_get\_value}.
 This code sets the result field text, using an output stringstream and
 Pango markup.
 
-In the \function{ogcalc::on\_button\_clicked\_reset} member function,
+In the \function{ogcalc::on_button_clicked_reset} member function,
 
 .. code-block:: c++
 
@@ -1745,18 +1740,18 @@ GTK+ version is correct.
            …
 
 These two simple classes derive from \class{GtkHBox}.  They are the
-Python equivalents of the \function{create\_spin\_entry} and
-\function{create\_result\_label} functions in Section \ref{sec:gtkc}.
+Python equivalents of the \function{create_spin_entry} and
+\function{create_result_label} functions in Section \ref{sec:gtkc}.
 They are mostly identical to the C code in terms of the objects
 created and the object methods used.  The main difference is that
-\function{create\_spin\_entry} has a \variable{spinbutton\_pointer}
+:c:func:`create_spin_entry` has a :c:data:`spinbutton_pointer`
 argument which has been dropped here.  The same difference applies to
-\function{create\_result\_label} for
-\variable{result\_label\_pointer}.  In Python, we can't pass pointers
+:c:func:`create_result_label` for
+:c:data:`result_label_pointer`.  In Python, we can't pass pointers
 as easily as in C, however we can access the spinbutton as a member of
-the \class{OgcalcSpinEntry} object instead (\code{object.spinbutton}).
+the \class{OgcalcSpinEntry} object instead (``object.spinbutton``).
 
-Note that because the object is derived, the \function{\_\_init\_\_}
+Note that because the object is derived, the \function{__init__}
 initialiser (constructor) has to manually chain up to the parent
 initialiser in order to correctly initialise the class instance.
 
@@ -1798,14 +1793,14 @@ and the C++ code used to construct the result string.
 
 This is the initialiser for the \class{Ogcalc} class.  It starts by
 chaining up the \class{gtk.Window} initialiser, and then calls the
-\function{set\_title} \class{gtk.Window} method to set the window
+\function{set_title} \class{gtk.Window} method to set the window
 title.
 
 .. code-block:: python
 
            self.connect("destroy", gtk.main_quit, None)
 
-This connects the "destroy" signal to the \function{gtk.main\_quit}
+This connects the "destroy" signal to the \function{gtk.main_quit}
 function.  There's far less to type than the C and C++ equivalents,
 and hence it's rather more readable.
 
@@ -1843,7 +1838,7 @@ first and third, or the second arguments are redundant, respectively.
                Ogcalc.on_button_clicked_reset, self)
 
 This connects the "clicked" signal to the \class{Ogcalc}
-\function{on\_button\_clicked\_reset} method of the \variable{self}
+\function{on_button_clicked_reset} method of the \variable{self}
 object.
 
 .. code-block:: python
@@ -1852,8 +1847,8 @@ object.
                gtk.Widget.grab_focus, self.ri_entry.spinbutton)
 
 This connects the "activate" signal to the \class{Ogcalc}
-\function{grab\_focus} method of the
-\variable{self.ri\_entry.spinbutton} object.
+\function{grab_focus} method of the
+\variable{self.ri_entry.spinbutton} object.
 
 .. code-block:: python
 
@@ -1940,20 +1935,21 @@ Further Reading
 ===============
 
 The GTK+ Tutorial, and the GTK+ documentation are highly recommended.
-These are available from `<http://www.gtk.org/>`_.  The Gtkmm
-documentation is available from `<http://www.gtkmm.org>`_.  Unfortunately,
-some parts of these manuals are as yet incomplete.  I hope that they
-will be fully documented in the future, since without good
-documentation, it will not be possible to write programs that take
-advantage of all the capabilities of GTK+ and Gtkmm, without having to
-read the original source code.  While there is nothing wrong with
-reading the source, having good documentation is essential for
+These are available from `gtk.org <http://www.gtk.org/>`_.  The Gtkmm
+documentation is available from `gtkmm.org <http://www.gtkmm.org>`_.
+Unfortunately, some parts of these manuals are as yet incomplete.  I
+hope that they will be fully documented in the future, since without
+good documentation, it will not be possible to write programs that
+take advantage of all the capabilities of GTK+ and Gtkmm, without
+having to read the original source code.  While there is nothing wrong
+with reading the source, having good documentation is essential for
 widespread adoption of GTK+.
 
 Documentation and examples of GObject are scarce, but Mathieu Lacage
 has wrote an excellent tutorial.  This is unfortunately no longer
 available, but parts of it were merged with the main API documentation
-at `<https://developer.gnome.org/gobject/stable/>`_.
+at `developer.gnome.org/gobject/stable
+<https://developer.gnome.org/gobject/stable/>`_.
 
 
 Indices and tables
