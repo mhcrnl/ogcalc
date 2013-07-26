@@ -391,14 +391,12 @@ positions on a form has *no* advantages over automatic
 positioning and sizing.  All decent modern toolkits use automatic
 positioning.  This fixes several issues with fixed layouts:
 
-\begin{itemize}
-\item The hours spent laying out forms, particularly when maintaining
+* The hours spent laying out forms, particularly when maintaining
   existing code.
-\item Windows that are too big for the screen.
-\item Windows that are too small for the form they contain.
-\item Issues with spacing when accommodating translated text.
-\item Bad things happen when changing the font size from the default.
-\end{itemize}
+* Windows that are too big for the screen.
+* Windows that are too small for the form they contain.
+* Issues with spacing when accommodating translated text.
+* Bad things happen when changing the font size from the default.
 
 The nesting of containers results in a *widget tree*, which has
 many useful properties, some of which will be used later.  One
@@ -428,11 +426,9 @@ exception.  Traditional console applications tend not to be
 event-driven; these programs follow a fixed path of execution.  A
 typical program might do something along these lines:
 
-\begin{itemize}
-\item{Prompt the user for some input}
-\item{Do some work}
-\item{Print the results}
-\end{itemize}
+* Prompt the user for some input
+* Do some work
+* Print the results
 
 \noindent This type of program does not give the user any freedom to
 do things in a different order.  Each of the above steps might be a
@@ -480,37 +476,42 @@ Libraries
 
 GTK+ is comprised of several separate libraries:
 
-\begin{description}
-\item[:program:`atk`] Accessibility Toolkit, to enable use by disabled
-  people.
-\item[:program:`gdk`] GIMP Drawing Kit (XLib abstraction
-  layer---windowing system dependent part).
-\item[:program:`gdk-pixbuf`] Image loading and display.
-\item[:program:`glib`] Basic datatypes and common algorithms.
-\item[:program:`gmodule}] Dynamic module loader (\filename{libdl`
-  portability wrapper).
-\item[:program:`gobject`] Object/type system.
-\item[:program:`gtk`] GIMP Tool Kit (windowing system independent part).
-\item[:program:`pango`] Typeface layout and rendering.
-\end{description}
+:program:`atk`
+   Accessibility Toolkit, to enable use by disabled people.
+:program:`gdk`
+   GIMP Drawing Kit (XLib abstraction layer---windowing system dependent part).
+:program:`gdk-pixbuf`
+   Image loading and display.
+:program:`glib`
+   Basic datatypes and common algorithms.
+:program:`gmodule`
+   Dynamic module loader (:program:`libdl` portability wrapper).
+:program:`gobject`
+   Object/type system.
+:program:`gtk`
+   GIMP Tool Kit (windowing system independent part).
+:program:`pango`
+   Type layout and rendering.
 
 When using :program:`libglade` another library is required:
 
-\begin{description}
-\item[:program:`glade`] User Interface description loader/constructor.
-\end{description}
+:program:`glade`
+   User Interface description loader/constructor.
 
 Lastly, when using C++, some additional C++ libraries are also needed:
 
-\begin{description}
-\item[:program:`atkmm`] C++ ATK wrapper.
-\item[:program:`gdkmm`] C++ GDK wrapper.
-\item[:program:`gtkmm`] C++ GTK+ wrapper.
-\item[:program:`glademm`] C++ Glade wrapper.
-\item[:program:`pangomm`] C++ Pango wrapper.
-\item[:program:`sigc++`] Advanced C++ signalling \& event handling
-  (wraps GObject signals).
-\end{description}
+:program:`atkmm`
+   C++ ATK wrapper.
+:program:`gdkmm`
+   C++ GDK wrapper.
+:program:`gtkmm`
+   C++ GTK+ wrapper.
+:program:`glademm`
+   C++ Glade wrapper.
+:program:`pangomm`
+   C++ Pango wrapper.
+:program:`sigc++`
+   Advanced C++ signalling and event handling (wraps GObject signals).
 
 This looks quite intimidating!  However, there is no need to worry,
 since compiling and linking programs is quite easy.  Since the
@@ -541,13 +542,13 @@ Introducing :program:`ogcalc`
 As part of the production (and quality control) processes in the
 brewing industry, it is necessary to determine the alcohol content of
 each batch at several stages during the brewing process.  This is
-calculated using the density (gravity) in \unitfrac{g}{cm$^3$} and the
-refractive index.  A correction factor is used to align the calculated
-value with that determined by distillation, which is the standard
-required by HM Customs \& Excise.  Because alcoholic beverages are
-only slightly denser than water, the PG value is the
-$(\mathrm{density} -1) \times 10000$.  That is, 1.0052 would be
-entered as 52.
+calculated using the density (gravity) in
+:math:`\mathrm{g}/\mathrm{cm}^3` and the refractive index.  A
+correction factor is used to align the calculated value with that
+determined by distillation, which is the standard required by HM
+Customs \& Excise.  Because alcoholic beverages are only slightly
+denser than water, the PG value is the :math:`(\mathrm{density} -1)
+\times 10000`.  That is, 1.0052 would be entered as 52.
 
 Original gravity is the density during fermentation.  As alcohol is
 produced during fermentation, the density falls.  Traditionally, this
@@ -559,37 +560,42 @@ product as the ABV.
 
 The :program:`ogcalc` program performs the following calculation:
 
-\begin{equation}
-O = (R \times 2.597) - (P \times 1.644) - 34.4165 + C
-\end{equation}
+.. math::
+
+   O = (R \times 2.597) - (P \times 1.644) - 34.4165 + C
 
 \noindent If O is less than 60, then
 
-\begin{equation}
-A = (O - P) \times 0.130
-\end{equation}
+.. math::
+
+   A = (O - P) \times 0.130
 
 \noindent otherwise
 
-\begin{equation}
-A = (O - P) \times 0.134
-\end{equation}
+.. math::
+
+   A = (O - P) \times 0.134
 
 \noindent The symbols have the following meanings:
-\begin{description}
-\item[$A$] Percentage Alcohol By Volume
-\item[$C$] Correction Factor
-\item[$O$] Original Gravity
-\item[$P$] Present Gravity
-\item[$R$] Refractive Index
-\end{description}
+
+:math:`A`
+   Percentage Alcohol By Volume
+:math:`C`
+   Correction Factor
+:math:`O`
+   Original Gravity
+:math:`P`
+   Present Gravity
+:math:`R`
+   Refractive Index
 
 
 Designing the interface
 -----------------------
 
-The program needs to ask the user for the values of $C$, $P$, and
-$R$.  It must then display the results, $A$ and $O$.
+The program needs to ask the user for the values of :math:`C`,
+:math:`P`, and :math:`R`.  It must then display the results, :math:`A`
+and :math:`O`.
 
 A simple sketch of the interface is shown in Figure \ref{fig:sketch}.
 
@@ -678,19 +684,22 @@ finished application.
 
 This program consists of five functions:
 
-\begin{description}
-\item[\function{on\_button\_clicked\_reset}] Reset the interface to its default state.
-\item[\function{on\_button\_clicked\_calculate}] Get the values the user has entered, do
-  a calculation, then display the results.
-\item[\function{main}] Initialise GTK+, construct the interface,
-  connect the signal handlers, then enter the GTK+ event loop.
-\item[\function{create\_spin\_entry}] A helper function to create a
-  numeric entry with descriptive label and tooltip, used when
-  constructing the interface.
-\item[\function{create\_result\_label}] A helper function to create a
-  result label with discriptive label and tooltip, used when
-  constructing the interface.
-\end{description}
+\function{on\_button\_clicked\_reset}
+   Reset the interface to its default state.
+\function{on\_button\_clicked\_calculate}
+   Get the values the user has entered, do
+   a calculation, then display the results.
+\function{main}
+   Initialise GTK+, construct the interface,
+   connect the signal handlers, then enter the GTK+ event loop.
+\function{create\_spin\_entry}
+   A helper function to create a
+   numeric entry with descriptive label and tooltip, used when
+   constructing the interface.
+\function{create\_result\_label}
+   A helper function to create a
+   result label with discriptive label and tooltip, used when
+   constructing the interface.
 
 Code listing
 ------------
@@ -1041,17 +1050,15 @@ the "Properties" dialogue box.
 The source code is listed below.  This is the same as the previous
 listing, but with the following changes:
 
-\begin{itemize}
-\item The \function{main} function does not construct the interface.
-  It merely loads the :file:`ogcalc.glade` interface description,
+* The \function{main} function does not construct the interface.  It
+  merely loads the :file:`ogcalc.glade` interface description,
   auto-connects the signals, and shows the main window.
-\item The \class{cb\_widgets} structure is no longer needed: the
-  callbacks are now able to query the widget tree through the Glade
-  XML object to locate the widgets they need.  This allows for greater
+* The \class{cb\_widgets} structure is no longer needed: the callbacks
+  are now able to query the widget tree through the Glade XML object
+  to locate the widgets they need.  This allows for greater
   encapsulation of data, and signal handler connection is simpler.
-\item The code saving is significant, and there is now separation
-  between the interface and the callbacks.
-\end{itemize}
+* The code saving is significant, and there is now separation between
+  the interface and the callbacks.
 
 The running :program:`gtk/C/glade/ogcalc` application is shown in Figure
 \ref{fig:ogcalcgl}.  Notice that it is identical to
@@ -1346,24 +1353,22 @@ In the previous section, it was shown that Glade and GObject could
 make programs much simpler, and hence increase their long-term
 maintainability.  However, some problems remain:
 
-\begin{itemize}
-\item Much type checking is done at run-time.  This might mean errors
+* Much type checking is done at run-time.  This might mean errors
   only show up when the code is in production use.
-\item Although object-oriented, using objects in C is a bit clunky.
+* Although object-oriented, using objects in C is a bit clunky.
   In addition, it is very difficult (although not impossible) to
   derive new widgets from existing ones using GObject, or override a
   class method or signal.  Most programmers do not bother, or just use
   "compound widgets", which are just a container containing more
   widgets.
-\item Signal handlers are not type safe.  This could result in
+* Signal handlers are not type safe.  This could result in
   undefined behaviour, or a crash, if a signal handler does not have a
   signature compatible with the signal it is connected to.
-\item Signal handlers are functions, and there is often a need to
+* Signal handlers are functions, and there is often a need to
   resort to using global variables and casting structures to type
   \type{gpointer} to pass complex information to a callback though its
   \variable{data} argument.  If Glade or GObject are used, this can be
   avoided, however.
-\end{itemize}
 
 Gtkmm offers solutions to most of these problems.  Firstly, all of the
 GTK+ objects are available as native C++ classes.  The object accessor
@@ -1886,12 +1891,10 @@ Conclusion
 Which method of programming one chooses is dependent on many different
 factors, such as:
 
-\begin{itemize}
-\item{The languages one is familiar with.}
-\item{The size and nature of the program to be written.}
-\item{The need for long-term maintainability.}
-\item{The need for code reuse.}
-\end{itemize}
+* The languages one is familiar with.
+* The size and nature of the program to be written.
+* The need for long-term maintainability.
+* The need for code reuse.
 
 For simple programs, such as :program:`gtk/C/plain/ogcalc`, there is no
 problem with writing in plain C, but as programs become more complex,
