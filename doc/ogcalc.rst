@@ -188,6 +188,7 @@ lists, multiple selections, colour and font pickers.  Some example
 widgets are shown in Figure \ref{fig:gtkwidgets}.
 
 .. _fig-qtwidgets:
+
 A selection of Qt widgets.
 
 .. _fig-qtwidget-label:
@@ -247,6 +248,7 @@ A selection of Qt widgets.
    A font selection
 
 .. _fig-gtkwidgets:
+
 A selection of GTK+ widgets.
 
 .. _fig-gtkwidget-label:
@@ -593,8 +595,10 @@ and :math:`O`.
 A simple sketch of the interface is shown in Figure \ref{fig:sketch}.
 
 .. _fig-sketch:
-.. figure:: figures/sketch
+.. figure:: figures/sketch.svg
    :figwidth: 60%
+   :width: 80%
+   :align: center
 
    Sketching a user interface.  The :program:`ogcalc` main window is
    drawn simply, to illustrate its functionality.  The top row
