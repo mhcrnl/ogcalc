@@ -84,7 +84,7 @@ One well known use of Qt is as the foundation of KDE, and there are a
 large number of applications using it, from free software to
 commercial and proprietary applications on all platforms.
 
-Qt is written in C++, with `bindings
+Qt is written in C++, with `Qt bindings
 <https://qt-project.org/wiki/Category:LanguageBindings>`_ available
 other languages.  This tutorial is intended as a simple introduction
 to writing Qt applications in C++ and Python, using the 5.x version of
@@ -128,7 +128,7 @@ later); there are no plans to port to GTK+ 3.x, the bleak future of
 GTK+ 3.x being the primary reason for this.
 
 GTK+ is written in C and, because of the ubiquity of the C language,
-`bindings <http://www.gtk.org/language-bindings.php>`_ have been
+`GTK+ bindings <http://www.gtk.org/language-bindings.php>`_ have been
 written to allow the development of GTK+ applications in many other
 languages.  This tutorial is intended as a simple introduction to
 writing GTK+ applications in C, C++ and Python, using the 2.x (2.6 and
@@ -147,11 +147,11 @@ Extra reading
 -------------
 
 It is assumed that the reader is familiar with C and C++ programming.
-If you're using Qt, the `online documentation
+If you're using Qt, the `Qt online documentation
 <http://qt-project.org/doc/qt-5.1/qtdoc/index.html>`_ will be useful to
 refer to as you're going through the tutorial, and also includes a
 number of useful examples and tutorials.  If you're using GTK+, there
-is also `online documentation <http://www.gtk.org/documentation.php>`_
+is also `GTK+ online documentation <http://www.gtk.org/documentation.php>`_
 and it would be helpful to work through the "Getting Started" chapter
 of the `GTK+ tutorial
 <https://developer.gnome.org/gtk-tutorial/stable/>`_ before reading

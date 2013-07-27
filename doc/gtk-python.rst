@@ -1,7 +1,7 @@
 .. _sec-python:
 
-Python
-======
+GTK+ and Python
+===============
 
 Introduction
 ------------
@@ -37,6 +37,9 @@ just how easy Python is to get into.
 
 Code listing
 ------------
+
+* :download:`gtk/python/plain/ogcalc <../gtk/python/plain/ogcalc>`
+* :download:`gtk/python/glade/ogcalc <../gtk/python/glade/ogcalc>`
 
 :file:`gtk/python/plain/ogcalc`
 
