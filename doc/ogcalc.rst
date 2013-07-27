@@ -729,6 +729,7 @@ finished application.
 .. _fig-ogcalc:
 .. figure:: figures/c-plain.png
    :figwidth: 60%
+   :align: center
 
    :program:`gtk/C/plain/ogcalc` in action
 
@@ -1055,30 +1056,35 @@ The Glade user interface designer.
 .. _fig-glade:main:
 .. figure:: figures/glade-main-window.png
    :figwidth: 40%
+   :align: center
 
    Main window
 
 .. _fig-glade:palette:
 .. figure:: figures/glade-palette.png
    :figwidth: 40%
+   :align: center
 
    Palette for widget selection
 
 .. _fig-glade:properties:
 .. figure:: figures/glade-properties.png
    :figwidth: 40%
+   :align: center
 
    Widget properties dialogue
 
 .. _fig-glade:tree:
 .. figure:: figures/glade-widget-tree.png
    :figwidth: 40%
+   :align: center
 
    Widget tree
 
 .. _fig-glade:ogcalc:
 .. figure:: figures/glade-ogcalc.png
    :figwidth: 40%
+   :align: center
 
    The program being designed
 
@@ -1111,6 +1117,7 @@ are *not* the same screenshot!)
 .. _fig-ogcalcgl:
 .. figure:: figures/c-glade.png
    :figwidth: 60%
+   :align: center
 
    :program:`gtk/C/glade/ogcalc` in action
 
@@ -1224,6 +1231,7 @@ be taken advantage of using plain C and GObject.
 .. _fig-ogcalcgo:
 .. figure:: figures/c-gobject.png
    :figwidth: 60%
+   :align: center
 
    :program:`gtk/C/gobject/ogcalc` in action
 
@@ -1445,6 +1453,7 @@ functionality.  However, internally there are some major differences.
 .. _fig-ogcalcmm:
 .. figure:: figures/c++-glade.png
    :figwidth: 60%
+   :align: center
 
    :program:`gtk/C++/glade/ogcalc` in action
 
