@@ -37,7 +37,7 @@ source_suffix = '.rst'
 #source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'ogcalc'
+master_doc = 'index'
 
 # General information about the project.
 project = u'ogcalc'
@@ -183,8 +183,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('ogcalc', 'ogcalc.tex', u'ogcalc Documentation',
-   u'Roger Leigh', 'manual'),
+  ('ogcalc', 'ogcalc.tex', u'An introduction to programming with Qt and GTK+ in C, C++ and Python',
+   u'Roger Leigh', 'howto'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

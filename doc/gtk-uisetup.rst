@@ -1,0 +1,68 @@
+GTK+ interface creation
+-----------------------
+
+Due to the need to build up an interface from the bottom up, due to
+the containers being nested, the interface is constructed starting
+with the window, then the containers that fit in it.  The widgets the
+user will use go in last.  This is illustrated below.
+
+Widget packing.  The steps taken during the creation of an interface
+are shown, demonstrating the use of nested containers to pack widgets.
+
+.. _fig-packing:
+.. _fig-packing-1:
+.. figure:: figures/packing-1.*
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   An empty window
+
+.. _fig-packing-2:
+.. figure:: figures/packing-2.*
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of a :c:type:`GtkVBox`
+
+.. _fig-packing-3:
+.. figure:: figures/packing-3.*
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of a second :c:type:`GtkVBox`; this has uniformly-
+   sized children (it is *homogeneous*), unlike the first.
+
+.. _fig-packing-4:
+.. figure:: figures/packing-4.*
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of three :c:type:`GtkHBox` widgets
+
+.. _fig-packing-5:
+.. figure:: figures/packing-5.*
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of five more :c:type:`GtkHBox` widgets, used to ensure
+   visually appealing widget placement
+
+.. _fig-packing-6:
+.. figure:: figures/packing-final.*
+   :figwidth: 100%
+   :width: 40%
+   :align: center
+
+   Addition of all of the user-visible widgets
+
+Once a widget has been created, signal handlers may be connected to
+its signals.  After this is completed, the interface can be displayed,
+and the main *event loop* may be entered.  The event loop
+receives events from the keyboard, mouse and other sources, and causes
+the widgets to emit signals.  To end the program, the event loop must
+first be left.
