@@ -1,6 +1,6 @@
 /* ogcalc - calculate %ABV and OG from PG, RI and CF.
  *
- * Copyright (C) 2003-2004  Roger Leigh <rleigh@debian.org>
+ * Copyright © 2003-2004  Roger Leigh <rleigh@debian.org>
  *
  * This program is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General
@@ -21,6 +21,9 @@
  *
  **********************************************************/
 
+// BEGIN and END comments are for example inclusion in the
+// tutorial and may be ignored.
+
 #include <gtk/gtk.h>
 
 GtkWidget *
@@ -38,6 +41,7 @@ void on_button_clicked_reset( GtkWidget *widget,
 void on_button_clicked_calculate( GtkWidget *widget,
                                   gpointer   data );
 
+// BEGIN CALCULATION_WIDGETS
 /* This structure holds all of the widgets needed to get all
    the values for the calculation. */
 struct calculation_widgets
@@ -48,7 +52,9 @@ struct calculation_widgets
   GtkWidget *og_result;  /* OG result label */
   GtkWidget *abv_result; /* ABV% result label */
 };
+// END CALCULATION_WIDGETS
 
+// BEGIN MAIN
 /* The bulk of the program.  This is nearly all setting up
    of the user interface.  If Glade and libglade were used,
    this would be under 10 lines only! */
@@ -296,7 +302,9 @@ int main(int argc, char *argv[])
 
   return 0;
 }
+// END MAIN
 
+// BEGIN CREATE_SPIN_ENTRY
 /* A utility function for UI construction.  It constructs
    part of the widget tree, then returns its root. */
 GtkWidget *
@@ -350,7 +358,9 @@ create_spin_entry( const gchar    *label_text,
   *spinbutton_pointer = spinbutton;
   return hbox;
 }
+// END CREATE_SPIN_ENTRY
 
+// BEGIN CREATE_RESULT_LABEL
 /* A utility function for UI construction.  It constructs
    part of the widget tree, then returns its root. */
 GtkWidget *
@@ -393,7 +403,9 @@ create_result_label(const gchar   *label_text,
   *result_label_pointer = result_value;
   return hbox;
 }
+// END CREATE_RESULT_LABEL
 
+// BEGIN ON_BUTTON_CLICKED_RESET
 /* This is a callback function.  It resets the values of the
    entry widgets, and clears the results.  "data" is the
    calculation_widgets structure, which needs casting back
@@ -415,7 +427,9 @@ void on_button_clicked_reset( GtkWidget *widget,
   gtk_label_set_text (GTK_LABEL(w->og_result), "");
   gtk_label_set_text (GTK_LABEL(w->abv_result), "");
 }
+// END ON_BUTTON_CLICKED_RESET
 
+// BEGIN ON_BUTTON_CLICKED_CALCULATE
 /* This callback does the actual calculation.  Its arguments
    are the same as for on_button_clicked_reset(). */
 void on_button_clicked_calculate( GtkWidget *widget,
@@ -457,6 +471,7 @@ void on_button_clicked_calculate( GtkWidget *widget,
   g_free (og_string);
   g_free (abv_string);
 }
+// END ON_BUTTON_CLICKED_CALCULATE
 
 /*
  * Local Variables:

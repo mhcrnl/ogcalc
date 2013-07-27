@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
   /* Load the interface description. */
   builder = gtk_builder_new();
   if (!gtk_builder_add_from_file(builder, "ogcalc.ui", &error))
-    {}
+    { /* Handle error here. */ }
 
   /* Set up the signal handlers. */
   gtk_builder_connect_signals(builder, (gpointer) builder);
