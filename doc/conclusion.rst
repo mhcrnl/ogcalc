@@ -1,3 +1,6 @@
+.. _sec-conclusion:
+
+
 Conclusion
 ==========
 
@@ -47,3 +50,12 @@ mixture of custom widgets and Glade interfaces (and your custom
 widgets can *contain* Glade interfaces!).  Really dynamic interfaces
 must be coded by hand, since Glade interfaces are not sufficiently
 flexible.  Use what is best for each situation.
+
+* ISVs -- choice of toolkit.
+* Programming languages
+* Vala working around brokenness.
+* GObject fragility.
+* Time spent battling with GObject - inefficient and unproductive
+* Example of GObject only: schroot and C++ conversion
+* uic type safety
+* Abandonment of GTK+ LXDE and others.

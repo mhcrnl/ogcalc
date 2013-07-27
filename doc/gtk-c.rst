@@ -43,11 +43,59 @@ Code listing
 The program code is listed below.  The source code is extensively
 commented, to explain what is going on.
 
-:file:`gtk/C/plain/ogcalc.c`
+:download:`gtk/C/plain/ogcalc.c <../gtk/C/plain/ogcalc.c>`
+
+Structure to hold the interface state.
 
 .. literalinclude:: ../gtk/C/plain/ogcalc.c
    :language: c
-   :lines: 24-459
+   :start-after: BEGIN CALCULATION_WIDGETS
+   :end-before: END CALCULATION_WIDGETS
+   :linenos:
+
+:c:func:`main` function.
+
+.. literalinclude:: ../gtk/C/plain/ogcalc.c
+   :language: c
+   :start-after: BEGIN MAIN
+   :end-before: END MAIN
+   :linenos:
+
+Create a numeric entry with descriptive label.
+
+.. literalinclude:: ../gtk/C/plain/ogcalc.c
+   :language: c
+   :start-after: BEGIN CREATE_SPIN_ENTRY
+   :end-before: END CREATE_SPIN_ENTRY
+   :linenos:
+
+Create a result label with descriptive label.
+
+.. literalinclude:: ../gtk/C/plain/ogcalc.c
+   :language: c
+   :start-after: BEGIN CREATE_RESULT_LABEL
+   :end-before: END CREATE_RESULT_LABEL
+   :linenos:
+
+Signal handler to reset the interface.
+
+.. literalinclude:: ../gtk/C/plain/ogcalc.c
+   :language: c
+   :start-after: BEGIN ON_BUTTON_CLICKED_RESET
+   :end-before: END ON_BUTTON_CLICKED_RESET
+   :linenos:
+
+Signal handler to calculate and display the results.
+
+.. literalinclude:: ../gtk/C/plain/ogcalc.c
+   :language: c
+   :start-after: BEGIN ON_BUTTON_CLICKED_CALCULATE
+   :end-before: END ON_BUTTON_CLICKED_CALCULATE
+   :linenos:
+
+
+Building
+--------
 
 To build the source, do the following:
 
@@ -70,6 +118,7 @@ function are discussed here.
    g_signal_connect (G_OBJECT(window),
                      "destroy",
                      gtk_main_quit, NULL);
+
 
 This code connects the "destroy" signal of :c:data:`window` to the
 :c:func:`gtk_main_quit` function.  This signal is emitted by the
@@ -279,6 +328,9 @@ Recall that a pointer to :c:data:`cb_widgets`, of type :c:type:`struct
 calculation_widgets`, was passed to the signal handler, cast to a
 :c:type:`gpointer`.  The reverse process is now applied, casting
 :c:data:`data` to a pointer of type :c:type:`struct calculation_widgets`.
+This is one of the major flaws with GTK+; casting to and from raw
+pointers completely defeats compile-time type checking and can lead to
+crashes and/or undefined behaviour if the wrong type is passed.
 
 .. code-block:: c
 
@@ -330,9 +382,8 @@ complex, constructing them entirely in code becomes less feasible.
 The Glade user interface designer is an alternative to this.  Glade
 allows one to design an interface visually, selecting the desired
 widgets from a palette and placing them on windows, or in containers,
-in a similar manner to other interface designers.  Figure
-:ref:`fig-glade` shows some screenshots of the various components of
-Glade.
+in a similar manner to other interface designers.  The figures in this
+section show some of the interface features of the designer.
 
 .. _fig-glade:
 
@@ -373,13 +424,23 @@ The Glade user interface designer.
 
    The program being designed
 
-The file :file:`gtk/C/glade/ogcalc.glade` contains the same interface
-constructed in :program:`gtk/C/plain/ogcalc`, but designed in Glade.  This
-file can be opened in Glade, and changed as needed, without needing to
-touch any code.
+There are two ways to load Glade interfaces.  The current method is
+built in to GTK+, using the :c:type:`GtkBuilder` class to load the
+interface.  These interface files end with a :file:`.ui` extension.
+The older method is to use the :program:`glade` library which is
+separate from the main GTK+ libraries.  These interface files use a
+:file:`.glade` extension.  Either method may be used, though the newer
+:c:type:`GtkBuilder` method would be the better choice for new code.
+The interfaces are mostly identical, since :c:type:`GtkBuilder` is
+essentially the incorporation of :program:`glade` into GTK+.  Examples
+using both methods are provided.
 
-Even signal connection is automated.  Examine the "Signals" tab in
-the "Properties" dialogue box.
+The files :file:`gtk/C/builder/ogcalc.ui` and
+:file:`gtk/C/glade/ogcalc.glade` contain the same interface
+constructed in :program:`gtk/C/plain/ogcalc`, but designed in Glade.
+These files can be opened in Glade, and changed as needed, without
+needing to touch any code.  Even signal connection is automated.
+Examine the "Signals" tab in the "Properties" dialogue box.
 
 The source code is listed below.  This is the same as the previous
 listing, but with the following changes:
@@ -409,11 +470,8 @@ are *not* the same screenshot!)
 Code listing
 ------------
 
-:file:`gtk/C/glade/ogcalc.c`
-
-.. literalinclude:: ../gtk/C/glade/ogcalc.c
-   :language: c
-   :lines: 24-142
+* :download:`gtk/C/builder/ogcalc.c <../gtk/C/builder/ogcalc.c>`
+* :download:`gtk/C/glade/ogcalc.c <../gtk/C/glade/ogcalc.c>`
 
 To build the source, do the following:
 
@@ -429,7 +487,24 @@ Analysis
 
 The most obvious difference between this listing and the previous one
 is the huge reduction in size.  The :c:func:`main` function is
-reduced to just these lines:
+reduced to just these lines for :c:type:`GtkBuilder`:
+
+.. code-block:: c
+
+   GtkBuilder *builder;
+   GtkWidget *window;
+   GError *error = NULL;
+
+   builder = gtk_builder_new();
+   if (!gtk_builder_add_from_file(builder, "ogcalc.ui", &error))
+     { /* Handle error here. */ }
+
+   gtk_builder_connect_signals(builder, (gpointer) builder);
+
+   window = GTK_WIDGET(gtk_builder_get_object(builder, "ogcalc_main_window"));
+   gtk_widget_show(window);
+
+and for :program:`glade`
 
 .. code-block:: c
 
@@ -443,20 +518,41 @@ reduced to just these lines:
    window = glade_xml_get_widget (xml, "ogcalc_main_window");
    gtk_widget_show(window);
 
+For :c:type:`GtkBuilder`, :c:func:`gtk_builder_add_from_file` reads
+the interface from the file :file:`ogcalc.ui`.  It stores interface in
+the :c:type:`GtkBuilder` object, which will be used later.  Next, the
+signal handlers are connected with
+:c:func:`gtk_builder_connect_signals`.  For :program:`glade`,
 :c:func:`glade_xml_new` reads the interface from the file
 :file:`ogcalc.glade`.  It returns the interface as a pointer to a
 :c:type:`GladeXML` object, which will be used later.  Next, the signal
-handlers are connected with
-:c:func:`glade_xml_signal_autoconnect`.  Windows users may require
-special linker flags because signal autoconnection requires the
-executable to have a dynamic symbol table in order to dynamically find
-the required functions.
+handlers are connected with :c:func:`glade_xml_signal_autoconnect`.
+
+.. note::
+
+   Windows users may require special linker flags because signal
+   autoconnection requires the executable to have a dynamic symbol
+   table in order to dynamically find the required functions.
 
 The signal handlers are identical to those in the previous section.
-The only difference is that :c:type:`struct calculation_widgets` has been
-removed.  No information needs to be passed to them through the
-:c:data:`data` argument, since the widgets they need to use may now
-be found using the :c:type:`GladeXML` interface description.
+The only difference is that :c:type:`struct calculation_widgets` has
+been removed.  No information needs to be passed to them through the
+:c:data:`data` argument, since the widgets they need to use may now be
+found using the :c:type:`GtkBuilder` or :c:type:`GladeXML` interface
+description.
+
+.. code-block:: c
+
+  GtkWidget *pg_val;
+  GtkBuilder *builder;
+  builder = GTK_BUILDER(data);
+  pg_val = GTK_WIDGET(gtk_builder_get_object(builder, "pg_entry"));
+
+For :c:type:`GtkBuilder`, the first action is to find the
+:c:type:`GtkBuilder` object containing the widget tree, passed as the
+first argument to the signal handler.  Once :c:data:`builder` has been
+set, :c:func:`gtk_builder_get_object` may be used to obtain pointers
+to the :c:type:`GtkWidget` instances stored in the widget tree.
 
 .. code-block:: c
 
@@ -465,16 +561,23 @@ be found using the :c:type:`GladeXML` interface description.
    xml = glade_get_widget_tree (GTK_WIDGET (widget));
    pg_val = glade_xml_get_widget (xml, "pg_entry");
 
-Firstly, the :c:type:`GladeXML` interface is found, by finding the
-widget tree containing the widget passed as the first argument to the
-signal handler.  Once :c:data:`xml` has been set,
-:c:func:`glade_xml_get_widget` may be used to obtain pointers to
+For :program:`glade`, the first action is to find the
+:c:type:`GladeXML` object containing the widget tree, passed as the
+first argument to the signal handler.  Once :c:data:`xml` has been
+set, :c:func:`glade_xml_get_widget` may be used to obtain pointers to
 the :c:type:`GtkWidget` instances stored in the widget tree.
 
 Compared with the pure C GTK+ application, the code is far simpler,
 and the signal handlers no longer need to get their data as structures
 cast to :c:type:`gpointer`, which was ugly.  The code is far more
 understandable, cleaner and maintainable.
+
+However, do bear in mind how a program may misbehave if the interface
+file is absent, missing widgets, or has widgets of the wrong type but
+with the same name that you are using.  All of these could result in
+run-time crashes or misbehaviour unless precautions are taken.  In
+these examples, we have not taken any extra precautions such as
+ensuring all objects are valid or of the correct type.
 
 
 .. _sec-gobject:
@@ -490,27 +593,28 @@ by hand, or automatically using libglade.  The callback functions
 called in response to signals were simple C functions.  While this
 mechanism is simple, understandable and works well, as a project gets
 larger the source will become more difficult to understand and manage.
-A better way of organising the source is required.
+A more scalable method of organisation is required.
 
-One very common way of reducing this complexity is
+One very common way of reducing this complexity is through
 *object-orientation*.  The GTK+ library is already made up of
 many different objects.  By using the same object mechanism (GObject),
 the ogcalc code can be made more understandable and maintainable.
 
 The ogcalc program consists of a :c:type:`GtkWindow` which contains a
-number of other :c:type:`GtkWidget`s and some signal handler functions.
-If our program was a class (:c:type:`Ogcalc`) which derived from
-:c:type:`GtkWindow`, the widgets the window contains would be member
-variables and the signal handlers would be member functions (methods).
-The user of the class wouldn't be required to have knowledge of these
-details, they just create a new :c:type:`Ogcalc` object and show it.
+number of other :c:type:`GtkWidget` objects and some signal handler
+functions.  If our program was a class (:c:type:`Ogcalc`) which
+derived from :c:type:`GtkWindow`, the widgets the window contains
+would be member variables and the signal handlers would be member
+functions (methods).  The user of the class wouldn't be required to
+have knowledge of these details, they just create a new
+:c:type:`Ogcalc` object and show it.
 
 By using objects one also gains *reusability*.  Previously only
 one instance of the object at a time was possible, and :c:func:`main`
 had explicit knowledge of the creation and workings of the interface.
 
 This example bears many similarities with the C++ Glade example in
-Section :ref:`sec:cxxglade`.  Some of the features offered by C++ may
+Section :ref:`sec-cxxglade`.  Some of the features offered by C++ may
 be taken advantage of using plain C and GObject.
 
 .. _fig-ogcalcgo:
