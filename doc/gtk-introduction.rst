@@ -4,19 +4,18 @@ GTK+ basics
 Objects
 -------
 
-GTK+ is an *object-oriented* (OO) toolkit.  I'm afraid that unless one
-is aware of the basic OO concepts (classes, class methods,
-inheritance, polymorphism), this tutorial (and GTK+ in general) will
-seem rather confusing.  On my first attempt at learning GTK+, I didn't
-understand it, but after I learnt C++, the concepts GTK+ is built on
-finally made sense.
+GTK+ is an *object-oriented* (OO) toolkit.  The tutorial does require
+knowledge of some basic OO concepts (classes, class methods,
+inheritance, polymorphism), or else this tutorial (and GTK+ in
+general) will seem rather confusing.
 
 The C language does not natively support classes, and so GTK+ provides
-its own object/type system, **GObject**.  GObject provides
-objects, inheritance, polymorphism, constructors, destructors and
-other facilities such as reference counting and signal emission and
-handling.  Essentially, it provides C++ classes in C.  The syntax
-differs a little from C++ though.  As an example, the following C++
+its own object/type system, **GObject**.  GObject provides objects,
+inheritance, polymorphism, constructors, destructors and other
+facilities such as properties, reference counting and signal emission
+and handling.  Essentially, it provides C++ classes in C with some
+additional bells and whistles.  The syntax differs a little from C++
+though.  As an example, the following C++
 
 .. code-block:: c++
 
@@ -69,14 +68,29 @@ ensures that the objects are of the correct type when they are used.
 
 Objects and C "work", but there are some issues to be aware of, such
 as a lack of type-safety of callbacks and limited compile-time type
-checking.  Using GObject, deriving new widgets is both complex and
-error-prone.  For these, and other, reasons, C++ may be a better
-language to use.  :program:`libsigc++` provides type-safe signal
-handling, and all of the GTK+ (and GLib, Pango et. al.) objects are
-available as standard C++ classes.  Callbacks may also be class
-methods, which makes for cleaner code since the class can contain
-object data, removing the need to pass in data as a function argument.
-These potential problems will become clearer in the next sections.
+checking since by having explict casts all over the place (including
+to :c:type:`void *`) you're completely defeating the ability of the
+compiler to pick up an entire class of serious bugs.  Using GObject,
+deriving new widgets is both complex and error-prone.  For these and
+other reasons, C++ is definitely a better language to use---it's the
+correct tool for the job, while C is clearly *not*.
+:program:`libsigc++` provides type-safe signal handling, and all of
+the GTK+ (and GLib, Pango et. al.) objects are available as standard
+C++ classes.  Callbacks may also be class methods, which makes for
+cleaner code since the class can contain object data, removing the
+need to pass in data as a function argument, and it's all completely
+type-safe.  These potential problems will become clearer in the next
+sections.
+
+On my first attempt at learning GTK+ as a C programmer of several
+years experience, I didn't understand it.  However, after I learnt C++
+the concepts GTK+ is built on finally made sense.  This is absolutely
+**not** a good thing.  If one is required to have an expert
+understanding not only of C++ but to also have an intimate familiarity
+with how internal details of how inheritance and polymorphism are
+implemented by the C++ compiler (such as vtables), just in order to
+reimplement the same facilities, but poorly and unsafely, in C, one
+does need to question why you wouldn't just use C++ from the start.
 
 Libraries
 ---------

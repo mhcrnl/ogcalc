@@ -12,7 +12,7 @@ maintainability.  However, some problems remain:
 
 * Much type checking is done at run-time.  This might mean errors
   only show up when the code is in production use.
-* Although object-oriented, using objects in C is a bit clunky.
+* Although object-oriented, using objects in C is very clunky.
   In addition, it is very difficult (although not impossible) to
   derive new widgets from existing ones using GObject, or override a
   class method or signal.  Most programmers do not bother, or just use
@@ -60,7 +60,7 @@ be connected manually.  This is because the :program:`libsigc++`
 signals, connecting to the methods of individual objects, cannot be
 connected automatically.
 
-:program:`gtk/C++/glade/ogcalc`, shown in Figure :ref:`fig:ogcalcmm`, is
+:program:`gtk/C++/glade/ogcalc`, shown in Figure :ref:`fig-ogcalcmm`, is
 identical to the previous examples, both in appearance and
 functionality.  However, internally there are some major differences.
 
@@ -99,6 +99,21 @@ to the reader to compare and contrast them.
 Code Listing
 ------------
 
+GTK+ only
+^^^^^^^^^
+
+* :download:`gtk/C++/plain/ogcalc.h <../gtk/C++/plain/ogcalc.h>`
+* :download:`gtk/C++/plain/ogcalc.cc <../gtk/C++/plain/ogcalc.cc>`
+* :download:`gtk/C++/plain/ogcalc-main.cc <../gtk/C++/plain/ogcalc-main.cc>`
+
+GTK+ with Glade
+^^^^^^^^^^^^^^^
+
+* :download:`gtk/C++/glade/ogcalc.h <../gtk/C++/glade/ogcalc.h>`
+* :download:`gtk/C++/glade/ogcalc.cc <../gtk/C++/glade/ogcalc.cc>`
+* :download:`gtk/C++/glade/ogcalc-main.cc <../gtk/C++/glade/ogcalc-main.cc>`
+
+
 :file:`gtk/C++/glade/ogcalc.h`
 
 .. literalinclude:: ../gtk/C++/glade/ogcalc.h
@@ -117,7 +132,24 @@ Code Listing
    :language: c++
    :lines: 24-40
 
+Building
+--------
+
 To build the source, do the following:
+
+GTK+ only
+^^^^^^^^^
+
+::
+
+   cd gtk/C++/plain
+   c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc.cc
+   c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc-main.cc
+   c++ $(pkg-config --libs gtkmm-2.4) -o ogcalc ogcalc.o \
+                                             ogcalc-main.o
+
+GTK+ with Glade
+^^^^^^^^^^^^^^^
 
 ::
 
@@ -127,19 +159,10 @@ To build the source, do the following:
    c++ $(pkg-config --libs libglademm-2.4) -o ogcalc ogcalc.o \
                                              ogcalc-main.o
 
-Similarly, for the plain C++ version, which is not discussed in the
-tutorial:
-
-::
-
-   cd gtk/C++/plain
-   c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc.cc
-   c++ $(pkg-config --cflags gtkmm-2.4) -c ogcalc-main.cc
-   c++ $(pkg-config --libs gtkmm-2.4) -o ogcalc ogcalc.o \
-                                               ogcalc-main.o
-
 Analysis
 --------
+
+We will focus primarily on the Glade version in this section.
 
 :file:`ogcalc.h`
 ^^^^^^^^^^^^^^^^
@@ -160,7 +183,8 @@ The header file declares the :cpp:class:`ogcalc` class.
 :cpp:func:`on_button_clicked_calculate` and
 :cpp:func:`on_button_clicked_reset` are the signal handling
 functions, as previously.  However, they are now class *member
-functions*, taking no arguments.
+functions*, taking no arguments--all the state they need is contained
+in the class members.
 
 .. code-block:: c++
 
@@ -176,7 +200,7 @@ pointer" class, which will take care of destroying the pointed-to
 object when :cpp:class:`ogcalc` is destroyed.
 
 :file:`ogcalc.cc`
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 The constructor :cpp:func:`ogcalc::ogcalc` takes care of creating the
 interface when the class is instantiated.
@@ -273,8 +297,7 @@ function,
 
 .. code-block:: c++
 
-   double pg
-   pg = pg_entry->get_value();
+   double pg = pg_entry->get_value();
 
 the member function :cpp:func:`Gtk::SpinButton::get_value`
 was previously used as :cpp:func:`gtk_spin_button_get_value`.
@@ -316,3 +339,6 @@ A :cpp:class:`Gtk::Main` object is created, and then an :cpp:class:`ogcalc`
 class, :cpp:member:`window`, is instantiated.  Finally, the interface is
 run, using ``kit.run()``.  This function will return when
 :cpp:member:`window` is hidden, and then the program will exit.
+
+Overall, the C++ code is much cleaner, simpler and vastly more
+understandable than the equivalent C code.

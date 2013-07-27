@@ -54,6 +54,7 @@ be important to them:
 * Support for particular programming languages
 * Support for different platforms and display systems
 * Programmer time and efficiency
+* Barrier to entry for new team members
 * Community surrounding and development of the "platform"
 * Long term prospects of the "platform"
 
@@ -61,12 +62,12 @@ Should you use Qt or GTK+?  The decision is entirely up to you.  My
 personal experiences to date would lead me to say that **Qt** is a
 better choice.  However, when I originally wrote this tutorial, I
 would have argued that GTK+ would be the most sensible choice for
-various reasons.  However, it's now abuntantly clear that GTK+ is
-inferior for many technical and other reasons, which we'll cover as we
-go through the details in tutorial.  However, that is not to say that
-GTK+ may not be preferable in some circumstances.  If you want a quick
-summary, the rest of this section and the :ref:`sec-conclusion`
-section contain the most salient points.
+various reasons.  But I was wrong.  It's now abuntantly clear to me
+that GTK+ is inferior for many technical and other reasons, which
+we'll cover as we go through the details in tutorial.  However, that
+is not to say that GTK+ may not be preferable in some circumstances.
+If you want a quick summary, the rest of this section and the
+:ref:`sec-conclusion` section contain the most salient points.
 
 
 What is Qt?
@@ -79,7 +80,7 @@ mobile phones, and so may be used for cross-platform software
 development.  The examples in this tutorial will build and run on
 Linux, Windows and MacOS X.
 
-The biggest use of Qt is as the foundation of KDE, but there are a
+One well known use of Qt is as the foundation of KDE, and there are a
 large number of applications using it, from free software to
 commercial and proprietary applications on all platforms.
 

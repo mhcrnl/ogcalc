@@ -6,9 +6,6 @@ the containers being nested, the interface is constructed starting
 with the window, then the containers that fit in it.  The widgets the
 user will use go in last.  This is illustrated below.
 
-Widget packing.  The steps taken during the creation of an interface
-are shown, demonstrating the use of nested containers to pack widgets.
-
 .. _qt-fig-packing:
 .. _qt-fig-packing-1:
 .. figure:: figures/qt-packing-1.*

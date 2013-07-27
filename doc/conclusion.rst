@@ -59,3 +59,5 @@ flexible.  Use what is best for each situation.
 * Example of GObject only: schroot and C++ conversion
 * uic type safety
 * Abandonment of GTK+ LXDE and others.
+* GObject is all an exercise in masochism on an extreme scale, as made clear
+  by the examples

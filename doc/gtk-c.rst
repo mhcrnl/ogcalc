@@ -613,9 +613,12 @@ By using objects one also gains *reusability*.  Previously only
 one instance of the object at a time was possible, and :c:func:`main`
 had explicit knowledge of the creation and workings of the interface.
 
-This example bears many similarities with the C++ Glade example in
-Section :ref:`sec-cxxglade`.  Some of the features offered by C++ may
-be taken advantage of using plain C and GObject.
+The following examples bear many similarities with the original
+examples, and also with the C++ examples in Section
+:ref:`sec-cxxglade` since the OO idioms map very closely to doing the
+same thing in C++.  Some of the features offered by C++ may be taken
+advantage of using plain C and GObject, but it's quite obviously
+clunkier and more difficult to write and maintain.
 
 .. _fig-ogcalcgo:
 .. figure:: figures/c-gobject.png
@@ -627,25 +630,61 @@ be taken advantage of using plain C and GObject.
 Code listing
 ------------
 
-:file:`gtk/C/gobject/ogcalc.h`
+GTK+ only
+^^^^^^^^^
 
-.. literalinclude:: ../gtk/C/gobject/ogcalc.h
-   :language: c
-   :lines: 27-113
+* :download:`gtk/C/gobject/ogcalc.h <../gtk/C/gobject/ogcalc.h>`
+* :download:`gtk/C/gobject/ogcalc.c <../gtk/C/gobject/ogcalc.c>`
+* :download:`gtk/C/gobject/ogcalc-main.c <../gtk/C/gobject/ogcalc-main.c>`
 
-:file:`gtk/C/gobject/ogcalc.c`
+GTK+ with Glade
+^^^^^^^^^^^^^^^
 
-.. literalinclude:: ../gtk/C/gobject/ogcalc.c
-   :language: c
-   :lines: 24-201
+* :download:`gtk/C/gobject-glade/ogcalc.h <../gtk/C/gobject-glade/ogcalc.h>`
+* :download:`gtk/C/gobject-glade/ogcalc.c <../gtk/C/gobject-glade/ogcalc.c>`
+* :download:`gtk/C/gobject-glade/ogcalc-main.c <../gtk/C/gobject-glade/ogcalc-main.c>`
 
-:file:`gtk/C/gobject/ogcalc-main.c`
+GTK+ with :c:type:`GtkBuilder`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. literalinclude:: ../gtk/C/gobject/ogcalc-main.c
-   :language: c
-   :lines: 24-55
+* :download:`gtk/C/gobject-builder/ogcalc.h <../gtk/C/gobject-builder/ogcalc.h>`
+* :download:`gtk/C/gobject-builder/ogcalc.c <../gtk/C/gobject-builder/ogcalc.c>`
+* :download:`gtk/C/gobject-builder/ogcalc-main.c <../gtk/C/gobject-builder/ogcalc-main.c>`
+
+
+Building
+--------
 
 To build the source, do the following:
+
+GTK+ only
+^^^^^^^^^
+
+::
+
+   cd gtk/C/gobject
+   cc $(pkg-config --cflags gtk+-2.0 gmodule-2.0) \
+     -c ogcalc.c
+   cc $(pkg-config --cflags gtk+-2.0 gmodule-2.0) \
+     -c ogcalc-main.c
+   cc $(pkg-config --libs gtk+-2.0 gmodule-2.0) \
+     -o ogcalc ogcalc.o ogcalc-main.o
+
+GTK+ with Glade
+^^^^^^^^^^^^^^^
+
+::
+
+   cd gtk/C/gobject-glade
+   cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
+     -c ogcalc.c
+   cc $(pkg-config --cflags libglade-2.0 gmodule-2.0) \
+     -c ogcalc-main.c
+   cc $(pkg-config --libs libglade-2.0 gmodule-2.0) \
+     -o ogcalc ogcalc.o ogcalc-main.o
+
+GTK+ with :c:type:`GtkBuilder`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -662,22 +701,27 @@ Analysis
 
 The bulk of the code is the same as in previous sections, and so
 describing what the code does will not be repeated here.  The
-:c:type:`Ogcalc` class is defined in :file:`gtk/C/gobject/ogcalc.h`.
-This header declares the object and class structures and some macros
-common to all GObject-based objects and classes.  The macros and
-internals of GObject are out of the scope of this document, but
-suffice it to say that this boilerplate is required, and is identical
-for all GObject classes bar the class and object names.
+:c:type:`Ogcalc` class is defined in
+e.g. :file:`gtk/C/gobject/ogcalc.h`.  This header declares the object
+and class structures and some macros common to all GObject-based
+objects and classes.  The macros and internals of GObject are out of
+the scope of this document, but suffice it to say that this
+boilerplate is required, and is identical for all GObject classes bar
+the class and object names.
 
-The object structure (:c:type:`_Ogcalc`) has the object it derives from
-as the first member.  This is very important, since it allows casting
-between types in the inheritance hierarchy, since all of the object
-structures start at an offset of 0 from the start address of the
-object.  The other members may be in any order.  In this case it
-contains the Glade XML interface object and the widgets required to be
-manipulated after object and interface construction.  The class
-structure (:c:type:`_OgcalcClass`) is identical to that of the derived
-class (GtkWindowClass).  For more complex classes, this might contain
+The object structure (:c:type:`_Ogcalc`) has the object it derives
+from as the first member.  This is very important, since it allows
+casting between types in the inheritance hierarchy, since all of the
+object structures start at an offset of 0 from the start address of
+the object [note this isn't strictly true, since the C standard
+doesn't require such alignment, but it's true for most
+implementations].  The other members may be in any order.  These are
+the widgets required to be manipulated after object and interface
+construction.  This is also the same for the Glade and
+:c:type:`GtkBuilder` versions except for the addition of the XML
+interface as a class member.  The class structure
+(:c:type:`_OgcalcClass`) is identical to that of the derived class
+(GtkWindowClass).  For more complex classes, this might contain
 virtual function pointers.  It has many similarities to a C++ vtable.
 Finally, the header defines the public member functions of the class.
 
@@ -717,13 +761,13 @@ new type.
 :c:func:`ogcalc_class_init` is the class initialisation function.
 This has no C++ equivalent, since this is taken care of by the
 compiler.  In this case it is used to override the :c:func:`finalize`
-virtual function in the :c:type:`GObjectClass` base class.  This is used
-to specify a virtual destructor (it's not specified in the
-:c:type:`GTypeInfo` because the destructor cannot be run until after an
-instance is created, and so has no place in object construction).
+virtual function in the :c:type:`GObjectClass` base class.  This is
+used to specify a virtual destructor (it's not specified in the
+:c:type:`GTypeInfo` because the destructor cannot be run until after
+an instance is created, and so has no place in object construction).
 With C++, the vtable would be fixed up automatically; here, it must be
 done manually.  Pure virtual functions and default implementations are
-also possible, as with C++.
+also possible, as with C++.  But it's "manual".
 
 :c:func:`ogcalc_init` is the object initialisation function
 (C++ constructor).  This does a similar job to the :c:func:`main`
@@ -737,14 +781,14 @@ there is no need to create the window, since our :c:type:`Ogcalc` object
 
 :c:func:`ogcalc_finalize` is the object finalisation function (C++
 destructor).  It's used to free resources allocated by the object, in
-this case the :c:type:`GladeXML` interface description.
-:c:func:`g_object_unref` is used to decrease the reference count on
-a :c:type:`GObject`.  When the reference count reaches zero, the object
-is destroyed and its destructor is run.  There is also a
-:c:func:`dispose` function called prior to :c:func:`finalize`, which
-may be called multiple times.  Its purpose is to safely free resources
-when there are cyclic references between objects, but this is not
-required in this simple case.
+this case of the Glade version this includes the :c:type:`GladeXML`
+interface description.  :c:func:`g_object_unref` is used to decrease
+the reference count on a :c:type:`GObject`.  When the reference count
+reaches zero, the object is destroyed and its destructor is run.
+There is also a :c:func:`dispose` function called prior to
+:c:func:`finalize`, which may be called multiple times.  Its purpose
+is to safely free resources when there are cyclic references between
+objects, but this is not required in this simple case.
 
 An important difference with earlier examples is that instead of
 connecting the window "destroy" signal to :c:func:`gtk_main_quit`
