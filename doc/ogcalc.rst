@@ -194,7 +194,6 @@ A selection of Qt widgets.
 .. _fig-qtwidget-label:
 .. figure:: figures/qt-label.png
    :figwidth: 100%
-   :width: 20%
    :align: center
 
    A text label
@@ -202,7 +201,6 @@ A selection of Qt widgets.
 .. _fig-qtwidget-combobox:
 .. figure:: figures/qt-combo-box.png
    :figwidth: 100%
-   :width: 30%
    :align: center
 
    A drop-down selection (combo box)
@@ -210,7 +208,6 @@ A selection of Qt widgets.
 .. _fig-qtwidget-button:
 .. figure:: figures/qt-button.png
    :figwidth: 100%
-   :width: 15%
    :align: center
 
    A push button
@@ -218,7 +215,6 @@ A selection of Qt widgets.
 .. _fig-qtwidget-checkbox:
 .. figure:: figures/qt-check-button.png
    :figwidth: 100%
-   :width: 30%
    :align: center
 
    A tick box
@@ -226,7 +222,6 @@ A selection of Qt widgets.
 .. _fig-qtwidget-menu:
 .. figure:: figures/qt-menu.png
    :figwidth: 100%
-   :width: 40%
    :align: center
 
    A menu bar
@@ -234,7 +229,6 @@ A selection of Qt widgets.
 .. _fig-qtwidget-entry:
 .. figure:: figures/qt-text-entry.png
    :figwidth: 100%
-   :width: 30%
    :align: center
 
    A text entry field
@@ -242,7 +236,6 @@ A selection of Qt widgets.
 .. _fig-qtwidget-fontsel:
 .. figure:: figures/qt-font-selection.png
    :figwidth: 100%
-   :width: 60%
    :align: center
 
    A font selection
@@ -254,7 +247,6 @@ A selection of GTK+ widgets.
 .. _fig-gtkwidget-label:
 .. figure:: figures/gtk-label.png
    :figwidth: 100%
-   :width: 20%
    :align: center
 
    A text label
@@ -262,7 +254,6 @@ A selection of GTK+ widgets.
 .. _fig-gtkwidget-combobox:
 .. figure:: figures/gtk-combo-box.png
    :figwidth: 100%
-   :width: 30%
    :align: center
 
    A drop-down selection (combo box)
@@ -270,7 +261,6 @@ A selection of GTK+ widgets.
 .. _fig-gtkwidget-button:
 .. figure:: figures/gtk-button.png
    :figwidth: 100%
-   :width: 15%
    :align: center
 
    A push button
@@ -278,7 +268,6 @@ A selection of GTK+ widgets.
 .. _fig-gtkwidget-checkbox:
 .. figure:: figures/gtk-check-button.png
    :figwidth: 100%
-   :width: 30%
    :align: center
 
    A tick box
@@ -286,7 +275,6 @@ A selection of GTK+ widgets.
 .. _fig-gtkwidget-menu:
 .. figure:: figures/gtk-menu.png
    :figwidth: 100%
-   :width: 40%
    :align: center
 
    A menu bar
@@ -294,7 +282,6 @@ A selection of GTK+ widgets.
 .. _fig-gtkwidget-entry:
 .. figure:: figures/gtk-text-entry.png
    :figwidth: 100%
-   :width: 30%
    :align: center
 
    A text entry field
@@ -302,7 +289,6 @@ A selection of GTK+ widgets.
 .. _fig-gtkwidget-fontsel:
 .. figure:: figures/gtk-font-selection.png
    :figwidth: 100%
-   :width: 60%
    :align: center
 
    A font selection
@@ -352,7 +338,7 @@ allotted to them.  There are several ways to control this behaviour,
 to give fine control over the appearance of the interface.
 
 .. _fig-containers:
-.. figure:: figures/containers.svg
+.. figure:: figures/containers.*
    :figwidth: 100%
    :width: 60%
    :align: center
@@ -441,7 +427,7 @@ are known as *callbacks*.  The process is illustrated graphically in
 Figure :ref:`A typical signal handler <fig-signals>`.
 
 .. _fig-signals:
-.. figure:: figures/signals.svg
+.. figure:: figures/signals.*
    :figwidth: 60%
    :width: 80%
    :align: center
@@ -588,7 +574,7 @@ and :math:`O`.
 A simple sketch of the interface is shown in Figure :ref:`fig:sketch`.
 
 .. _fig-sketch:
-.. figure:: figures/sketch.svg
+.. figure:: figures/sketch.*
    :figwidth: 60%
    :width: 80%
    :align: center
@@ -613,7 +599,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
 
 .. _qt-fig-packing:
 .. _qt-fig-packing-1:
-.. figure:: figures/qt-packing-1.svg
+.. figure:: figures/qt-packing-1.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -621,7 +607,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    An empty window
 
 .. _qt-fig-packing-2:
-.. figure:: figures/qt-packing-2.svg
+.. figure:: figures/qt-packing-2.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -629,7 +615,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    Addition of a :c:type:`GtkVBox`
 
 .. _qt-fig-packing-3:
-.. figure:: figures/qt-packing-3.svg
+.. figure:: figures/qt-packing-3.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -637,7 +623,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    Addition of three :c:type:`GtkHBox` widgets
 
 .. _qt-fig-packing-4:
-.. figure:: figures/qt-packing-4.svg
+.. figure:: figures/qt-packing-4.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -646,7 +632,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    visually appealing widget placement
 
 .. _qt-fig-packing-final:
-.. figure:: figures/qt-packing-final.svg
+.. figure:: figures/qt-packing-final.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -656,7 +642,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
 
 .. _fig-packing:
 .. _fig-packing-1:
-.. figure:: figures/packing-1.svg
+.. figure:: figures/packing-1.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -664,7 +650,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    An empty window
 
 .. _fig-packing-2:
-.. figure:: figures/packing-2.svg
+.. figure:: figures/packing-2.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -672,7 +658,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    Addition of a :c:type:`GtkVBox`
 
 .. _fig-packing-3:
-.. figure:: figures/packing-3.svg
+.. figure:: figures/packing-3.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -681,7 +667,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    sized children (it is *homogeneous*), unlike the first.
 
 .. _fig-packing-4:
-.. figure:: figures/packing-4.svg
+.. figure:: figures/packing-4.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -689,7 +675,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    Addition of three :c:type:`GtkHBox` widgets
 
 .. _fig-packing-5:
-.. figure:: figures/packing-5.svg
+.. figure:: figures/packing-5.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -698,7 +684,7 @@ are shown, demonstrating the use of nested containers to pack widgets.
    visually appealing widget placement
 
 .. _fig-packing-6:
-.. figure:: figures/packing-final.svg
+.. figure:: figures/packing-final.*
    :figwidth: 100%
    :width: 40%
    :align: center
@@ -839,7 +825,7 @@ respectively.  Figure :ref:`fig-boxpacking` shows how
 :c:func:`gtk_box_pack_start` works.
 
 .. _fig-boxpacking:
-.. figure:: figures/box-packing.svg
+.. figure:: figures/box-packing.*
    :figwidth: 100%
    :width: 40%
    :align: center
