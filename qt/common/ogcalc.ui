@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../../ogcalc/ogcalc.svg</normaloff>../../../../../ogcalc/ogcalc.svg</iconset>
+    <normaloff>ogcalc.svg</normaloff>ogcalc/ogcalc.svg</iconset>
   </property>
   <widget class="QWidget" name="toplevel_layout">
    <property name="sizePolicy">
