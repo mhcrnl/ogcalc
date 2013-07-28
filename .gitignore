@@ -9,3 +9,4 @@ stamp*
 INSTALL
 aclocal.m4
 configure
+*~
