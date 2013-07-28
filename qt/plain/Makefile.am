@@ -1,5 +1,5 @@
 # Subdirectories to make.
-SUBDIRS = am
+SUBDIRS = make am
 
 all-local:
 	$(MAKE) -C qmake all
