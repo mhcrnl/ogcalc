@@ -20,4 +20,4 @@ ogcalc_LDADD = $(QT_LIBS)
 moc_%.cpp: %.h
 	moc $< -o $@
 
-CLEANFILES = $(OGCALC_MOC_SOURCES) $(BUILT_SOURCES)
+CLEANFILES = $(OGCALC_MOC_SRC) $(BUILT_SOURCES)
