@@ -29,7 +29,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -293,7 +293,7 @@
        sodipodi:role="line"
        id="tspan8639-4-7"
        x="187.31664"
-       y="3385.2319">ABV:</tspan></text>
+       y="3385.2319">OG:</tspan></text>
   <use
      x="0"
      y="0"
@@ -312,7 +312,7 @@
        sodipodi:role="line"
        id="tspan8639-4-7-2"
        x="2817.3323"
-       y="3385.2319">OG:</tspan></text>
+       y="3385.2319">ABV:</tspan></text>
   <use
      x="0"
      y="0"
