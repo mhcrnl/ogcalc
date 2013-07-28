@@ -24,7 +24,14 @@ finished application.
    :figwidth: 60%
    :align: center
 
-   :program:`qt/plain/am/ogcalc` in action on GNU/Linux
+   :program:`qt/plain/am/ogcalc` in action on GNU/Linux.
+
+.. _fig-ogcalc-qt-plain-win7:
+.. figure:: figures/qt-plain-win7.png
+   :figwidth: 60%
+   :align: center
+
+   :program:`qt/plain/am/ogcalc` in action on Windows 7.
 
 Code listing
 ------------
