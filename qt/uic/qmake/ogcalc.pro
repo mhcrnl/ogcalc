@@ -21,3 +21,5 @@ FORMS    += ogcalc.ui
 QMAKE_INFO_PLIST = ogcalc.plist
 
 ICON = ogcalc.icns
+
+RC_FILE = ogcalc.rc

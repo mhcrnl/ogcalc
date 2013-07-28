@@ -19,3 +19,5 @@ HEADERS  += ogcalc.h \
 QMAKE_INFO_PLIST = ogcalc.plist
 
 ICON = ogcalc.icns
+
+RC_FILE = ogcalc.rc
