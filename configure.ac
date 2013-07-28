@@ -62,6 +62,7 @@ AC_CONFIG_FILES([qt/plain/Makefile])
 AC_CONFIG_FILES([qt/plain/am/Makefile])
 
 AC_CONFIG_COMMANDS([qt/uic/qmake/Makefile], [($MKDIR_P qt/uic/qmake && cd qt/uic/qmake && "$QMAKE" "${ac_abs_top_srcdir}/qt/uic/qmake/ogcalc.pro" -o "Makefile")], [QMAKE="$QMAKE"])
+AC_CONFIG_COMMANDS([qt/plain/qmake/Makefile], [($MKDIR_P qt/plain/qmake && cd qt/plain/qmake && "$QMAKE" "${ac_abs_top_srcdir}/qt/plain/qmake/ogcalc.pro" -o "Makefile")], [QMAKE="$QMAKE"])
 
 dnl Output the generated config.status script.
 AC_OUTPUT
