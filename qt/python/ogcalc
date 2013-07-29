@@ -29,6 +29,7 @@ from PyQt5.QtWidgets import (QApplication, QDoubleSpinBox, QFrame,
                              QHBoxLayout, QLabel, QMainWindow,
                              QPushButton, QSizePolicy, QVBoxLayout,
                              QWidget)
+import SpinBoxEntry
 
 class SpinBoxEntry(QDoubleSpinBox):
     def __init__(self, parent = None):
