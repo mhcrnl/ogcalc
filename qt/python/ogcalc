@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-from PyQt5.QtCore import QObject, Qt, pyqtSignal, pyqtSlot
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QDoubleSpinBox, QLabel, QPushButton)
+from PyQt5.QtCore import QObject, Qt, QSize, pyqtSignal, pyqtSlot
+from PyQt5.QtGui import QIcon, QFont
+from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QDoubleSpinBox, QLabel, QPushButton, QSizePolicy, QFrame)
 
 class SpinBoxEntry(QDoubleSpinBox):
-    def __init__(self):
-        super(SpinBoxEntry, self).__init__()
+    def __init__(self, parent):
+        super(SpinBoxEntry, self).__init__(parent)
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Enter or event.key() == Qt.Key_Return:
@@ -22,240 +23,232 @@ class Ogcalc(QMainWindow):
         self.reset()
 
     def setupUi(self):
-        pass
-#   setObjectName(QStringLiteral("ogcalc"));
-#   resize(407, 123);
-#   {
-#     QSizePolicy sp(QSizePolicy::Preferred, QSizePolicy::Preferred);
-#     sp.setHorizontalStretch(0);
-#     sp.setVerticalStretch(0);
-#     sp.setHeightForWidth(sizePolicy().hasHeightForWidth());
-#     setSizePolicy(sp);
-#   }
-#   setMaximumSize(QSize(16777215, 16777215));
+        self.setObjectName("ogcalc")
+        self.resize(407, 123)
 
-#   QIcon icon;
-#   icon.addFile(QStringLiteral("ogcalc.svg"), QSize(), QIcon::Normal, QIcon::Off);
-#   setWindowIcon(icon);
+        wsp = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        wsp.setHorizontalStretch(0)
+        wsp.setVerticalStretch(0)
+        wsp.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
+        self.setSizePolicy(wsp)
+        self.setMaximumSize(QSize(16777215, 16777215))
 
-#   toplevel_layout = new QWidget(this);
-#   toplevel_layout->setObjectName(QStringLiteral("toplevel_layout"));
-#   {
-#     QSizePolicy sp(QSizePolicy::Minimum, QSizePolicy::Minimum);
-#     sp.setHorizontalStretch(0);
-#     sp.setVerticalStretch(0);
-#     sp.setHeightForWidth(toplevel_layout->sizePolicy().hasHeightForWidth());
-#     toplevel_layout->setSizePolicy(sp);
-#   }
+        icon = QIcon()
+        icon.addFile("ogcalc.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
 
-#   vertical_layout = new QVBoxLayout(toplevel_layout);
-#   vertical_layout->setSpacing(6);
-#   vertical_layout->setContentsMargins(11, 11, 11, 11);
-#   vertical_layout->setObjectName(QStringLiteral("vertical_layout"));
+        toplevel_layout = QWidget(self)
+        toplevel_layout.setObjectName("toplevel_layout")
+        tsp = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        tsp.setHorizontalStretch(0)
+        tsp.setVerticalStretch(0)
+        tsp.setHeightForWidth(toplevel_layout.sizePolicy().hasHeightForWidth())
+        toplevel_layout.setSizePolicy(tsp)
 
-#   QSizePolicy label_size_policy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-#   label_size_policy.setHorizontalStretch(0);
-#   label_size_policy.setVerticalStretch(0);
-#   label_size_policy.setHeightForWidth(false);
+        vertical_layout = QVBoxLayout(toplevel_layout)
+        vertical_layout.setSpacing(6)
+        vertical_layout.setContentsMargins(11, 11, 11, 11)
+        vertical_layout.setObjectName("vertical_layout")
 
-#   QSizePolicy entry_size_policy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-#   entry_size_policy.setHorizontalStretch(0);
-#   entry_size_policy.setVerticalStretch(0);
-#   entry_size_policy.setHeightForWidth(false);
+        label_size_policy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        label_size_policy.setHorizontalStretch(0)
+        label_size_policy.setVerticalStretch(0)
+        label_size_policy.setHeightForWidth(False)
 
-#   QSizePolicy result_size_policy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-#   result_size_policy.setHorizontalStretch(0);
-#   result_size_policy.setVerticalStretch(0);
-#   result_size_policy.setHeightForWidth(false);
+        entry_size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        entry_size_policy.setHorizontalStretch(0)
+        entry_size_policy.setVerticalStretch(0)
+        entry_size_policy.setHeightForWidth(False)
 
-#   entry_layout = new QHBoxLayout();
-#   entry_layout->setSpacing(6);
-#   entry_layout->setObjectName(QStringLiteral("entry_layout"));
+        result_size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        result_size_policy.setHorizontalStretch(0)
+        result_size_policy.setVerticalStretch(0)
+        result_size_policy.setHeightForWidth(False)
 
-#   pg_layout = new QHBoxLayout();
-#   pg_layout->setSpacing(6);
-#   pg_layout->setObjectName(QStringLiteral("pg_layout"));
+        entry_layout = QHBoxLayout()
+        entry_layout.setSpacing(6)
+        entry_layout.setObjectName("entry_layout")
 
-#   pg_label = new QLabel(toplevel_layout);
-#   pg_label->setObjectName(QStringLiteral("pg_label"));
-#   pg_label->setSizePolicy(label_size_policy);
-#   pg_label->setTextFormat(Qt::AutoText);
-#   pg_layout->addWidget(pg_label);
+        pg_layout = QHBoxLayout()
+        pg_layout.setSpacing(6)
+        pg_layout.setObjectName("pg_layout")
 
-#   pg_entry = new SpinBoxEntry(toplevel_layout);
-#   pg_entry->setObjectName(QStringLiteral("pg_entry"));
-#   pg_entry->setSizePolicy(entry_size_policy);
+        self.pg_label = QLabel(toplevel_layout)
+        self.pg_label.setObjectName("pg_label")
+        self.pg_label.setSizePolicy(label_size_policy)
+        self.pg_label.setTextFormat(Qt.AutoText)
+        pg_layout.addWidget(self.pg_label)
 
-#   pg_layout->addWidget(pg_entry);
+        self.pg_entry = SpinBoxEntry(toplevel_layout)
+        self.pg_entry.setObjectName("pg_entry")
+        self.pg_entry.setSizePolicy(entry_size_policy)
 
-#   entry_layout->addLayout(pg_layout);
+        pg_layout.addWidget(self.pg_entry)
 
-#   ri_layout = new QHBoxLayout();
-#   ri_layout->setSpacing(6);
-#   ri_layout->setObjectName(QStringLiteral("ri_layout"));
-#   ri_label = new QLabel(toplevel_layout);
-#   ri_label->setObjectName(QStringLiteral("ri_label"));
-#   ri_label->setSizePolicy(label_size_policy);
+        entry_layout.addLayout(pg_layout)
 
-#   ri_layout->addWidget(ri_label);
+        ri_layout = QHBoxLayout()
+        ri_layout.setSpacing(6)
+        ri_layout.setObjectName("ri_layout")
+        self.ri_label = QLabel(toplevel_layout)
+        self.ri_label.setObjectName("ri_label")
+        self.ri_label.setSizePolicy(label_size_policy)
 
-#   ri_entry = new SpinBoxEntry(toplevel_layout);
-#   ri_entry->setObjectName(QStringLiteral("ri_entry"));
-#   ri_entry->setSizePolicy(entry_size_policy);
+        ri_layout.addWidget(self.ri_label)
 
-#   ri_layout->addWidget(ri_entry);
+        self.ri_entry = SpinBoxEntry(toplevel_layout)
+        self.ri_entry.setObjectName("ri_entry")
+        self.ri_entry.setSizePolicy(entry_size_policy)
 
-#   entry_layout->addLayout(ri_layout);
+        ri_layout.addWidget(self.ri_entry)
 
-#   cf_layout = new QHBoxLayout();
-#   cf_layout->setSpacing(6);
-#   cf_layout->setObjectName(QStringLiteral("cf_layout"));
-#   cf_label = new QLabel(toplevel_layout);
-#   cf_label->setObjectName(QStringLiteral("cf_label"));
-#   cf_label->setSizePolicy(label_size_policy);
+        entry_layout.addLayout(ri_layout)
 
-#   cf_layout->addWidget(cf_label);
+        cf_layout = QHBoxLayout()
+        cf_layout.setSpacing(6)
+        cf_layout.setObjectName("cf_layout")
+        self.cf_label = QLabel(toplevel_layout)
+        self.cf_label.setObjectName("cf_label")
+        self.cf_label.setSizePolicy(label_size_policy)
 
-#   cf_entry = new SpinBoxEntry(toplevel_layout);
-#   cf_entry->setObjectName(QStringLiteral("cf_entry"));
-#   cf_entry->setSizePolicy(entry_size_policy);
+        cf_layout.addWidget(self.cf_label)
 
-#   cf_layout->addWidget(cf_entry);
+        self.cf_entry = SpinBoxEntry(toplevel_layout)
+        self.cf_entry.setObjectName("cf_entry")
+        self.cf_entry.setSizePolicy(entry_size_policy)
 
-#   entry_layout->addLayout(cf_layout);
+        cf_layout.addWidget(self.cf_entry)
 
-#   vertical_layout->addLayout(entry_layout);
+        entry_layout.addLayout(cf_layout)
 
-#   result_layout = new QHBoxLayout();
-#   result_layout->setSpacing(6);
-#   result_layout->setObjectName(QStringLiteral("result_layout"));
-#   og_layout = new QHBoxLayout();
-#   og_layout->setSpacing(6);
-#   og_layout->setObjectName(QStringLiteral("og_layout"));
-#   og_label = new QLabel(toplevel_layout);
-#   og_label->setObjectName(QStringLiteral("og_label"));
-#   og_label->setSizePolicy(label_size_policy);
+        vertical_layout.addLayout(entry_layout)
 
-#   og_layout->addWidget(og_label);
+        result_layout = QHBoxLayout()
+        result_layout.setSpacing(6)
+        result_layout.setObjectName("result_layout")
+        og_layout = QHBoxLayout()
+        og_layout.setSpacing(6)
+        og_layout.setObjectName("og_layout")
+        self.og_label = QLabel(toplevel_layout)
+        self.og_label.setObjectName("og_label")
+        self.og_label.setSizePolicy(label_size_policy)
 
-#   og_result = new QLabel(toplevel_layout);
-#   og_result->setObjectName(QStringLiteral("og_result"));
-#   og_result->setSizePolicy(result_size_policy);
-#   QFont font;
-#   font.setBold(true);
-#   font.setWeight(75);
-#   og_result->setFont(font);
-#   og_result->setAlignment(Qt::AlignCenter);
-#   og_result->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+        og_layout.addWidget(self.og_label)
 
-#   og_layout->addWidget(og_result);
+        bold_font = QFont()
+        bold_font.setBold(True)
+        bold_font.setWeight(75)
 
-#   result_layout->addLayout(og_layout);
+        self.og_result = QLabel(toplevel_layout)
+        self.og_result.setObjectName("og_result")
+        self.og_result.setSizePolicy(result_size_policy)
+        self.og_result.setFont(bold_font)
+        self.og_result.setAlignment(Qt.AlignCenter)
+        self.og_result.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-#   abv_layout = new QHBoxLayout();
-#   abv_layout->setSpacing(6);
-#   abv_layout->setObjectName(QStringLiteral("abv_layout"));
-#   abv_label = new QLabel(toplevel_layout);
-#   abv_label->setObjectName(QStringLiteral("abv_label"));
-#   abv_label->setSizePolicy(label_size_policy);
-#   abv_layout->addWidget(abv_label);
+        og_layout.addWidget(self.og_result)
 
-#   abv_result = new QLabel(toplevel_layout);
-#   abv_result->setObjectName(QStringLiteral("abv_result"));
-#   abv_result->setSizePolicy(result_size_policy);
-#   abv_result->setFont(font);
-#   abv_result->setAlignment(Qt::AlignCenter);
-#   abv_result->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+        result_layout.addLayout(og_layout)
 
-#   abv_layout->addWidget(abv_result);
+        abv_layout = QHBoxLayout()
+        abv_layout.setSpacing(6)
+        abv_layout.setObjectName("abv_layout")
+        self.abv_label = QLabel(toplevel_layout)
+        self.abv_label.setObjectName("abv_label")
+        self.abv_label.setSizePolicy(label_size_policy)
+        abv_layout.addWidget(self.abv_label)
 
-#   result_layout->addLayout(abv_layout);
+        self.abv_result = QLabel(toplevel_layout)
+        self.abv_result.setObjectName("abv_result")
+        self.abv_result.setSizePolicy(result_size_policy)
+        self.abv_result.setFont(bold_font)
+        self.abv_result.setAlignment(Qt.AlignCenter)
+        self.abv_result.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-#   vertical_layout->addLayout(result_layout);
+        abv_layout.addWidget(self.abv_result)
 
-#   line = new QFrame(toplevel_layout);
-#   line->setObjectName(QStringLiteral("line"));
-#   line->setFrameShadow(QFrame::Sunken);
-#   line->setLineWidth(1);
-#   line->setMidLineWidth(0);
-#   line->setFrameShape(QFrame::HLine);
-#   vertical_layout->addWidget(line);
+        result_layout.addLayout(abv_layout)
 
-#   button_layout = new QHBoxLayout();
-#   button_layout->setSpacing(6);
-#   button_layout->setObjectName(QStringLiteral("button_layout"));
+        vertical_layout.addLayout(result_layout)
 
-#   quit_button = new QPushButton(toplevel_layout);
-#   quit_button->setObjectName(QStringLiteral("quit"));
-#   button_layout->addWidget(quit_button);
+        line = QFrame(toplevel_layout)
+        line.setObjectName("line")
+        line.setFrameShadow(QFrame.Sunken)
+        line.setLineWidth(1)
+        line.setMidLineWidth(0)
+        line.setFrameShape(QFrame.HLine)
+        vertical_layout.addWidget(line)
 
-#   reset_button = new QPushButton(toplevel_layout);
-#   reset_button->setObjectName(QStringLiteral("reset"));
-#   reset_button->setAutoDefault(true);
-#   button_layout->addWidget(reset_button);
+        button_layout = QHBoxLayout()
+        button_layout.setSpacing(6)
+        button_layout.setObjectName("button_layout")
 
-#   calculate_button = new QPushButton(toplevel_layout);
-#   calculate_button->setObjectName(QStringLiteral("calculate"));
-#   calculate_button->setAutoDefault(true);
-#   calculate_button->setDefault(true);
-#   button_layout->addWidget(calculate_button);
+        self.quit_button = QPushButton(toplevel_layout)
+        self.quit_button.setObjectName("quit")
+        button_layout.addWidget(self.quit_button)
+
+        self.reset_button = QPushButton(toplevel_layout)
+        self.reset_button.setObjectName("reset")
+        self.reset_button.setAutoDefault(True)
+        button_layout.addWidget(self.reset_button)
+
+        self.calculate_button = QPushButton(toplevel_layout)
+        self.calculate_button.setObjectName("calculate")
+        self.calculate_button.setAutoDefault(True)
+        self.calculate_button.setDefault(True)
+        button_layout.addWidget(self.calculate_button)
 
 
-#   vertical_layout->addLayout(button_layout);
+        vertical_layout.addLayout(button_layout)
 
-#   setCentralWidget(toplevel_layout);
-# #ifndef QT_NO_SHORTCUT
-#   pg_label->setBuddy(pg_entry);
-#   ri_label->setBuddy(ri_entry);
-#   cf_label->setBuddy(cf_entry);
-# #endif // QT_NO_SHORTCUT
+        self.setCentralWidget(toplevel_layout)
+        self.pg_label.setBuddy(self.pg_entry)
+        self.ri_label.setBuddy(self.ri_entry)
+        self.cf_label.setBuddy(self.cf_entry)
 
-#   retranslateUi();
+        self.retranslateUi()
 
-#   QObject::connect(reset_button, SIGNAL(clicked()), this, SLOT(reset()));
-#   QObject::connect(quit_button, SIGNAL(clicked()), this, SLOT(close()));
-#   QObject::connect(calculate_button, SIGNAL(clicked()), this, SLOT(calculate()));
-#   QObject::connect(calculate_button, SIGNAL(clicked()), reset_button, SLOT(setFocus()));
-#   QObject::connect(pg_entry, SIGNAL(enterPressed()), ri_entry, SLOT(setFocus()));
-#   QObject::connect(ri_entry, SIGNAL(enterPressed()), cf_entry, SLOT(setFocus()));
-#   QObject::connect(cf_entry, SIGNAL(enterPressed()), calculate_button, SLOT(click()));
-#   QObject::connect(pg_entry, SIGNAL(enterPressed()), ri_entry, SLOT(selectAll()));
-#   QObject::connect(ri_entry, SIGNAL(enterPressed()), cf_entry, SLOT(selectAll()));
+        self.reset_button.clicked.connect(self.reset)
+        self.quit_button.clicked.connect(self.close)
+        self.calculate_button.clicked.connect(self.calculate)
+        self.calculate_button.clicked.connect(self.reset_button.setFocus)
 
-#   QMetaObject::connectSlotsByName(this);
+        self.pg_entry.enterPressed.connect(self.ri_entry.setFocus)
+        self.pg_entry.enterPressed.connect(self.ri_entry.selectAll)
+        self.ri_entry.enterPressed.connect(self.cf_entry.setFocus)
+        self.ri_entry.enterPressed.connect(self.cf_entry.selectAll)
+        self.cf_entry.enterPressed.connect(self.calculate_button.click)
+        self.pg_entry.enterPressed.connect(self.ri_entry.setFocus)
 
 
     def retranslateUi(self):
-        pass
-#   setWindowTitle(QApplication::translate("ogcalc", "OG & ABV calculator", 0));
+        self.setWindowTitle(QApplication.translate("ogcalc", "OG & ABV calculator", None, 0))
 
-# #ifndef QT_NO_TOOLTIP
-#   pg_label->setToolTip(QApplication::translate("ogcalc", "Present Gravity (density)", 0));
-#   ri_label->setToolTip(QApplication::translate("ogcalc", "Refractive Index", 0));
-#   cf_label->setToolTip(QApplication::translate("ogcalc", "Correction Factor", 0));
-#   og_label->setToolTip(QApplication::translate("ogcalc", "Original Gravity (density)", 0));
-#   abv_label->setToolTip(QApplication::translate("ogcalc", "Percent Alcohol By Volume", 0));
-# #endif // QT_NO_TOOLTIP
+        self.pg_label.setToolTip(QApplication.translate("ogcalc", "Present Gravity (density)", None, 0))
+        self.ri_label.setToolTip(QApplication.translate("ogcalc", "Refractive Index", None, 0))
+        self.cf_label.setToolTip(QApplication.translate("ogcalc", "Correction Factor", None, 0))
+        self.og_label.setToolTip(QApplication.translate("ogcalc", "Original Gravity (density)", None, 0))
+        self.abv_label.setToolTip(QApplication.translate("ogcalc", "Percent Alcohol By Volume", None, 0))
 
-#   pg_label->setText(QApplication::translate("ogcalc", "&PG:", 0));
-#   ri_label->setText(QApplication::translate("ogcalc", "R&I:", 0));
-#   cf_label->setText(QApplication::translate("ogcalc", "C&F:", 0));
-#   og_label->setText(QApplication::translate("ogcalc", "OG:", 0));
-#   abv_label->setText(QApplication::translate("ogcalc", "ABV %:", 0));
+        self.pg_label.setText(QApplication.translate("ogcalc", "&PG:", None, 0))
+        self.ri_label.setText(QApplication.translate("ogcalc", "R&I:", None, 0))
+        self.cf_label.setText(QApplication.translate("ogcalc", "C&F:", None, 0))
+        self.og_label.setText(QApplication.translate("ogcalc", "OG:", None, 0))
+        self.abv_label.setText(QApplication.translate("ogcalc", "ABV %:", None, 0))
 
-#   quit_button->setText(QApplication::translate("ogcalc", "&Quit", 0));
-#   reset_button->setText(QApplication::translate("ogcalc", "&Reset", 0));
-#   calculate_button->setText(QApplication::translate("ogcalc", "&Calculate", 0));
+        self.quit_button.setText(QApplication.translate("ogcalc", "&Quit", None, 0))
+        self.reset_button.setText(QApplication.translate("ogcalc", "&Reset", None, 0))
+        self.calculate_button.setText(QApplication.translate("ogcalc", "&Calculate", None, 0))
 
     @pyqtSlot()
-    def calulate(self):
-        pg = pg_entry.value();
-        ri = ri_entry.value();
-        cf = cf_entry.value();
+    def calculate(self):
+        pg = self.pg_entry.value()
+        ri = self.ri_entry.value()
+        cf = self.cf_entry.value()
 
         #Calculate OG.
         og = (ri * 2.597) - (pg * 1.644) - 34.4165 + cf
-        d
+
         # Calculate ABV.
         abv = 0.0
         if og < 60:
@@ -266,9 +259,8 @@ class Ogcalc(QMainWindow):
         self.og_result.setText("%(result)0.2f" %{'result': og})
         self.abv_result.setText("%(result)0.2f" %{'result': abv})
 
-        self.reset_button.setDefault(True);
-        self.calculate_button.setDefault(False);
-
+        self.reset_button.setDefault(True)
+        self.calculate_button.setDefault(False)
 
     @pyqtSlot()
     def reset(self):
@@ -281,7 +273,7 @@ class Ogcalc(QMainWindow):
         self.pg_entry.setFocus()
         self.pg_entry.selectAll()
         self.reset_button.setDefault(False)
-        self.calculate_button.setDefault(True);
+        self.calculate_button.setDefault(True)
 
 
 if __name__ == "__main__":
