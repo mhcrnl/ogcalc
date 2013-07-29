@@ -1,11 +1,37 @@
 #!/usr/bin/python3
+#
+# ogcalc - calculate %ABV and OG from PG, RI and CF.
+#
+# Copyright © 2003-2013  Roger Leigh <rleigh@debian.org>
+#
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General
+# Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public
+# License along with this program; if not, write to the
+# Free Software Foundation, Inc., 675 Mass Ave, Cambridge,
+# MA 02139, USA.
+#
+#############################################################
 
-from PyQt5.QtCore import QObject, Qt, QSize, pyqtSignal, pyqtSlot
-from PyQt5.QtGui import QIcon, QFont
-from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QDoubleSpinBox, QLabel, QPushButton, QSizePolicy, QFrame)
+from PyQt5.QtCore import (QObject, QSize, Qt, pyqtSignal, pyqtSlot)
+from PyQt5.QtGui import (QFont, QIcon)
+from PyQt5.QtWidgets import (QApplication, QDoubleSpinBox, QFrame,
+                             QHBoxLayout, QLabel, QMainWindow,
+                             QPushButton, QSizePolicy, QVBoxLayout,
+                             QWidget)
 
 class SpinBoxEntry(QDoubleSpinBox):
-    def __init__(self, parent):
+    def __init__(self, parent = None):
         super(SpinBoxEntry, self).__init__(parent)
 
     def keyPressEvent(self, event):
@@ -16,21 +42,113 @@ class SpinBoxEntry(QDoubleSpinBox):
 
     enterPressed = pyqtSignal()
 
+class OgcalcSpinEntry(QHBoxLayout):
+    label_size_policy = QSizePolicy(QSizePolicy.Minimum,
+                                    QSizePolicy.Preferred)
+    label_size_policy.setHorizontalStretch(0)
+    label_size_policy.setVerticalStretch(0)
+    label_size_policy.setHeightForWidth(False)
+
+    entry_size_policy = QSizePolicy(QSizePolicy.Expanding,
+                                    QSizePolicy.Fixed)
+    entry_size_policy.setHorizontalStretch(0)
+    entry_size_policy.setVerticalStretch(0)
+    entry_size_policy.setHeightForWidth(False)
+
+    def __init__(self, parent = None):
+        super(OgcalcSpinEntry, self).__init__(None)
+
+        self.setSpacing(6)
+
+        self.label = QLabel()
+        self.label.setSizePolicy(OgcalcSpinEntry.label_size_policy)
+        self.label.setTextFormat(Qt.AutoText)
+        self.addWidget(self.label)
+
+        self.entry = SpinBoxEntry()
+        self.entry.setSizePolicy(OgcalcSpinEntry.entry_size_policy)
+        self.addWidget(self.entry)
+
+        self.label.setBuddy(self.entry)
+
+        self.entry.enterPressed.connect(self.__enterPressed)
+
+    def setToolTip(self, tip):
+        self.label.setToolTip(tip)
+
+    def setText(self, text):
+        self.label.setText(text)
+
+    def value(self):
+        return self.entry.value()
+
+    def setValue(self, value):
+        self.entry.setValue(value)
+
+    def setStartEdit(self):
+        self.entry.setFocus()
+        self.entry.selectAll()
+
+    def __enterPressed(self):
+            self.enterPressed.emit()
+
+    enterPressed = pyqtSignal()
+
+class OgcalcResult(QHBoxLayout):
+    label_size_policy = QSizePolicy(QSizePolicy.Minimum,
+                                    QSizePolicy.Preferred)
+    label_size_policy.setHorizontalStretch(0)
+    label_size_policy.setVerticalStretch(0)
+    label_size_policy.setHeightForWidth(False)
+
+    result_size_policy = QSizePolicy(QSizePolicy.Expanding,
+                                     QSizePolicy.Preferred)
+    result_size_policy.setHorizontalStretch(0)
+    result_size_policy.setVerticalStretch(0)
+    result_size_policy.setHeightForWidth(False)
+
+    bold_font = QFont()
+    bold_font.setBold(True)
+    bold_font.setWeight(75)
+
+    def __init__(self, parent = None):
+        super(OgcalcResult, self).__init__(None)
+
+        self.setSpacing(6)
+
+        self.label = QLabel()
+        self.label.setSizePolicy(OgcalcResult.label_size_policy)
+        self.addWidget(self.label)
+
+        self.result = QLabel()
+        self.result.setSizePolicy(OgcalcResult.result_size_policy)
+        self.result.setFont(OgcalcResult.bold_font)
+        self.result.setAlignment(Qt.AlignCenter)
+        self.result.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.addWidget(self.result)
+
+    def setToolTip(self, tip):
+        self.label.setToolTip(tip)
+
+    def setText(self, text):
+        self.label.setText(text)
+
+    def setResult(self, text):
+        self.result.setText(text)
+
 class Ogcalc(QMainWindow):
     def __init__(self):
         super(Ogcalc, self).__init__()
-        self.setupUi()
-        self.reset()
 
-    def setupUi(self):
-        self.setObjectName("ogcalc")
         self.resize(407, 123)
 
-        wsp = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        wsp.setHorizontalStretch(0)
-        wsp.setVerticalStretch(0)
-        wsp.setHeightForWidth(self.sizePolicy().hasHeightForWidth())
-        self.setSizePolicy(wsp)
+        window_size_policy = QSizePolicy(QSizePolicy.Preferred,
+                                         QSizePolicy.Preferred)
+        window_size_policy.setHorizontalStretch(0)
+        window_size_policy.setVerticalStretch(0)
+        window_size_policy.setHeightForWidth(self.sizePolicy().
+                                             hasHeightForWidth())
+        self.setSizePolicy(window_size_policy)
         self.setMaximumSize(QSize(16777215, 16777215))
 
         icon = QIcon()
@@ -38,141 +156,37 @@ class Ogcalc(QMainWindow):
         self.setWindowIcon(icon)
 
         toplevel_layout = QWidget(self)
-        toplevel_layout.setObjectName("toplevel_layout")
-        tsp = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        tsp.setHorizontalStretch(0)
-        tsp.setVerticalStretch(0)
-        tsp.setHeightForWidth(toplevel_layout.sizePolicy().hasHeightForWidth())
-        toplevel_layout.setSizePolicy(tsp)
+        toplevel_size_policy = QSizePolicy(QSizePolicy.Minimum,
+                                           QSizePolicy.Minimum)
+        toplevel_size_policy.setHorizontalStretch(0)
+        toplevel_size_policy.setVerticalStretch(0)
+        toplevel_size_policy.setHeightForWidth(toplevel_layout.sizePolicy().
+                                               hasHeightForWidth())
+        toplevel_layout.setSizePolicy(toplevel_size_policy)
 
         vertical_layout = QVBoxLayout(toplevel_layout)
         vertical_layout.setSpacing(6)
         vertical_layout.setContentsMargins(11, 11, 11, 11)
-        vertical_layout.setObjectName("vertical_layout")
-
-        label_size_policy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
-        label_size_policy.setHorizontalStretch(0)
-        label_size_policy.setVerticalStretch(0)
-        label_size_policy.setHeightForWidth(False)
-
-        entry_size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        entry_size_policy.setHorizontalStretch(0)
-        entry_size_policy.setVerticalStretch(0)
-        entry_size_policy.setHeightForWidth(False)
-
-        result_size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        result_size_policy.setHorizontalStretch(0)
-        result_size_policy.setVerticalStretch(0)
-        result_size_policy.setHeightForWidth(False)
 
         entry_layout = QHBoxLayout()
         entry_layout.setSpacing(6)
-        entry_layout.setObjectName("entry_layout")
-
-        pg_layout = QHBoxLayout()
-        pg_layout.setSpacing(6)
-        pg_layout.setObjectName("pg_layout")
-
-        self.pg_label = QLabel(toplevel_layout)
-        self.pg_label.setObjectName("pg_label")
-        self.pg_label.setSizePolicy(label_size_policy)
-        self.pg_label.setTextFormat(Qt.AutoText)
-        pg_layout.addWidget(self.pg_label)
-
-        self.pg_entry = SpinBoxEntry(toplevel_layout)
-        self.pg_entry.setObjectName("pg_entry")
-        self.pg_entry.setSizePolicy(entry_size_policy)
-
-        pg_layout.addWidget(self.pg_entry)
-
-        entry_layout.addLayout(pg_layout)
-
-        ri_layout = QHBoxLayout()
-        ri_layout.setSpacing(6)
-        ri_layout.setObjectName("ri_layout")
-        self.ri_label = QLabel(toplevel_layout)
-        self.ri_label.setObjectName("ri_label")
-        self.ri_label.setSizePolicy(label_size_policy)
-
-        ri_layout.addWidget(self.ri_label)
-
-        self.ri_entry = SpinBoxEntry(toplevel_layout)
-        self.ri_entry.setObjectName("ri_entry")
-        self.ri_entry.setSizePolicy(entry_size_policy)
-
-        ri_layout.addWidget(self.ri_entry)
-
-        entry_layout.addLayout(ri_layout)
-
-        cf_layout = QHBoxLayout()
-        cf_layout.setSpacing(6)
-        cf_layout.setObjectName("cf_layout")
-        self.cf_label = QLabel(toplevel_layout)
-        self.cf_label.setObjectName("cf_label")
-        self.cf_label.setSizePolicy(label_size_policy)
-
-        cf_layout.addWidget(self.cf_label)
-
-        self.cf_entry = SpinBoxEntry(toplevel_layout)
-        self.cf_entry.setObjectName("cf_entry")
-        self.cf_entry.setSizePolicy(entry_size_policy)
-
-        cf_layout.addWidget(self.cf_entry)
-
-        entry_layout.addLayout(cf_layout)
-
+        self.pg_entry = OgcalcSpinEntry(toplevel_layout)
+        entry_layout.addLayout(self.pg_entry)
+        self.ri_entry = OgcalcSpinEntry(toplevel_layout)
+        entry_layout.addLayout(self.ri_entry)
+        self.cf_entry = OgcalcSpinEntry(toplevel_layout)
+        entry_layout.addLayout(self.cf_entry)
         vertical_layout.addLayout(entry_layout)
 
         result_layout = QHBoxLayout()
         result_layout.setSpacing(6)
-        result_layout.setObjectName("result_layout")
-        og_layout = QHBoxLayout()
-        og_layout.setSpacing(6)
-        og_layout.setObjectName("og_layout")
-        self.og_label = QLabel(toplevel_layout)
-        self.og_label.setObjectName("og_label")
-        self.og_label.setSizePolicy(label_size_policy)
-
-        og_layout.addWidget(self.og_label)
-
-        bold_font = QFont()
-        bold_font.setBold(True)
-        bold_font.setWeight(75)
-
-        self.og_result = QLabel(toplevel_layout)
-        self.og_result.setObjectName("og_result")
-        self.og_result.setSizePolicy(result_size_policy)
-        self.og_result.setFont(bold_font)
-        self.og_result.setAlignment(Qt.AlignCenter)
-        self.og_result.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        og_layout.addWidget(self.og_result)
-
-        result_layout.addLayout(og_layout)
-
-        abv_layout = QHBoxLayout()
-        abv_layout.setSpacing(6)
-        abv_layout.setObjectName("abv_layout")
-        self.abv_label = QLabel(toplevel_layout)
-        self.abv_label.setObjectName("abv_label")
-        self.abv_label.setSizePolicy(label_size_policy)
-        abv_layout.addWidget(self.abv_label)
-
-        self.abv_result = QLabel(toplevel_layout)
-        self.abv_result.setObjectName("abv_result")
-        self.abv_result.setSizePolicy(result_size_policy)
-        self.abv_result.setFont(bold_font)
-        self.abv_result.setAlignment(Qt.AlignCenter)
-        self.abv_result.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
-
-        abv_layout.addWidget(self.abv_result)
-
-        result_layout.addLayout(abv_layout)
-
+        self.og_result = OgcalcResult(toplevel_layout)
+        result_layout.addLayout(self.og_result)
+        self.abv_result = OgcalcResult(toplevel_layout)
+        result_layout.addLayout(self.abv_result)
         vertical_layout.addLayout(result_layout)
 
         line = QFrame(toplevel_layout)
-        line.setObjectName("line")
         line.setFrameShadow(QFrame.Sunken)
         line.setLineWidth(1)
         line.setMidLineWidth(0)
@@ -181,30 +195,18 @@ class Ogcalc(QMainWindow):
 
         button_layout = QHBoxLayout()
         button_layout.setSpacing(6)
-        button_layout.setObjectName("button_layout")
-
         self.quit_button = QPushButton(toplevel_layout)
-        self.quit_button.setObjectName("quit")
         button_layout.addWidget(self.quit_button)
-
         self.reset_button = QPushButton(toplevel_layout)
-        self.reset_button.setObjectName("reset")
         self.reset_button.setAutoDefault(True)
         button_layout.addWidget(self.reset_button)
-
         self.calculate_button = QPushButton(toplevel_layout)
-        self.calculate_button.setObjectName("calculate")
         self.calculate_button.setAutoDefault(True)
         self.calculate_button.setDefault(True)
         button_layout.addWidget(self.calculate_button)
-
-
         vertical_layout.addLayout(button_layout)
 
         self.setCentralWidget(toplevel_layout)
-        self.pg_label.setBuddy(self.pg_entry)
-        self.ri_label.setBuddy(self.ri_entry)
-        self.cf_label.setBuddy(self.cf_entry)
 
         self.retranslateUi()
 
@@ -213,28 +215,25 @@ class Ogcalc(QMainWindow):
         self.calculate_button.clicked.connect(self.calculate)
         self.calculate_button.clicked.connect(self.reset_button.setFocus)
 
-        self.pg_entry.enterPressed.connect(self.ri_entry.setFocus)
-        self.pg_entry.enterPressed.connect(self.ri_entry.selectAll)
-        self.ri_entry.enterPressed.connect(self.cf_entry.setFocus)
-        self.ri_entry.enterPressed.connect(self.cf_entry.selectAll)
+        self.pg_entry.enterPressed.connect(self.ri_entry.setStartEdit)
+        self.ri_entry.enterPressed.connect(self.cf_entry.setStartEdit)
         self.cf_entry.enterPressed.connect(self.calculate_button.click)
-        self.pg_entry.enterPressed.connect(self.ri_entry.setFocus)
 
+        self.reset()
 
     def retranslateUi(self):
         self.setWindowTitle(QApplication.translate("ogcalc", "OG & ABV calculator", None, 0))
+        self.pg_entry.setToolTip(QApplication.translate("ogcalc", "Present Gravity (density)", None, 0))
 
-        self.pg_label.setToolTip(QApplication.translate("ogcalc", "Present Gravity (density)", None, 0))
-        self.ri_label.setToolTip(QApplication.translate("ogcalc", "Refractive Index", None, 0))
-        self.cf_label.setToolTip(QApplication.translate("ogcalc", "Correction Factor", None, 0))
-        self.og_label.setToolTip(QApplication.translate("ogcalc", "Original Gravity (density)", None, 0))
-        self.abv_label.setToolTip(QApplication.translate("ogcalc", "Percent Alcohol By Volume", None, 0))
-
-        self.pg_label.setText(QApplication.translate("ogcalc", "&PG:", None, 0))
-        self.ri_label.setText(QApplication.translate("ogcalc", "R&I:", None, 0))
-        self.cf_label.setText(QApplication.translate("ogcalc", "C&F:", None, 0))
-        self.og_label.setText(QApplication.translate("ogcalc", "OG:", None, 0))
-        self.abv_label.setText(QApplication.translate("ogcalc", "ABV %:", None, 0))
+        self.ri_entry.setToolTip(QApplication.translate("ogcalc", "Refractive Index", None, 0))
+        self.cf_entry.setToolTip(QApplication.translate("ogcalc", "Correction Factor", None, 0))
+        self.og_result.setToolTip(QApplication.translate("ogcalc", "Original Gravity (density)", None, 0))
+        self.abv_result.setToolTip(QApplication.translate("ogcalc", "Percent Alcohol By Volume", None, 0))
+        self.pg_entry.setText(QApplication.translate("ogcalc", "&PG:", None, 0))
+        self.ri_entry.setText(QApplication.translate("ogcalc", "R&I:", None, 0))
+        self.cf_entry.setText(QApplication.translate("ogcalc", "C&F:", None, 0))
+        self.og_result.setText(QApplication.translate("ogcalc", "OG:", None, 0))
+        self.abv_result.setText(QApplication.translate("ogcalc", "ABV %:", None, 0))
 
         self.quit_button.setText(QApplication.translate("ogcalc", "&Quit", None, 0))
         self.reset_button.setText(QApplication.translate("ogcalc", "&Reset", None, 0))
@@ -256,8 +255,8 @@ class Ogcalc(QMainWindow):
         else:
             abv = (og - pg) * 0.134
 
-        self.og_result.setText("%(result)0.2f" %{'result': og})
-        self.abv_result.setText("%(result)0.2f" %{'result': abv})
+        self.og_result.setResult("%(result)0.2f" %{'result': og})
+        self.abv_result.setResult("%(result)0.2f" %{'result': abv})
 
         self.reset_button.setDefault(True)
         self.calculate_button.setDefault(False)
@@ -267,13 +266,12 @@ class Ogcalc(QMainWindow):
         self.pg_entry.setValue(0.0)
         self.ri_entry.setValue(0.0)
         self.cf_entry.setValue(0.0)
-        self.og_result.setText("")
-        self.abv_result.setText("")
+        self.og_result.setResult("")
+        self.abv_result.setResult("")
 
-        self.pg_entry.setFocus()
-        self.pg_entry.selectAll()
         self.reset_button.setDefault(False)
         self.calculate_button.setDefault(True)
+        self.pg_entry.setStartEdit()
 
 
 if __name__ == "__main__":
