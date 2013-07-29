@@ -23,13 +23,17 @@
 
 #include "SpinBoxEntry.h"
 
-SpinBoxEntry::SpinBoxEntry(QWidget *parent) :
+SpinBoxEntry::SpinBoxEntry (QWidget *parent) :
     QDoubleSpinBox(parent)
 {
 }
 
+SpinBoxEntry::~SpinBoxEntry ()
+{
+}
+
 void
-SpinBoxEntry::keyPressEvent(QKeyEvent *event)
+SpinBoxEntry::keyPressEvent (QKeyEvent *event)
 {
     switch(event->key())
     {
@@ -38,7 +42,7 @@ SpinBoxEntry::keyPressEvent(QKeyEvent *event)
         emit enterPressed();
         break;
     default:
-        QDoubleSpinBox::keyPressEvent(event);
+        QDoubleSpinBox::keyPressEvent (event);
     }
 }
 

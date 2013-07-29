@@ -29,17 +29,18 @@
 
 class SpinBoxEntry : public QDoubleSpinBox
 {
-    Q_OBJECT
+  Q_OBJECT;
 public:
-    explicit SpinBoxEntry(QWidget *parent = 0);
+  explicit SpinBoxEntry (QWidget *parent = 0);
+  virtual ~SpinBoxEntry ();
 
 protected:
-    void
-    keyPressEvent(QKeyEvent *event);
+  void
+  keyPressEvent (QKeyEvent *event);
 
 signals:
-    void
-    enterPressed();
+  void
+  enterPressed ();
 };
 
 #endif // SPINBOXENTRY_H

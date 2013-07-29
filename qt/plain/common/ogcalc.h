@@ -9,17 +9,17 @@
 class ogcalc : public QMainWindow
 {
   Q_OBJECT;
- public:
+public:
   explicit ogcalc (QWidget *parent = 0);
 
-  ~ogcalc ();
+  virtual ~ogcalc ();
 
-  public slots:
+public slots:
   void calculate ();
 
   void reset ();
 
- private:
+private:
   void setupUi ();
   void retranslateUi ();
 
@@ -39,3 +39,10 @@ class ogcalc : public QMainWindow
 };
 
 #endif // OGCALC_H
+
+/*
+ * Local Variables:
+ * mode:C++
+ * fill-column:60
+ * End:
+ */
