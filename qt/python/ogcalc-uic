@@ -82,10 +82,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     ogcalc = Ogcalc()
     ogcalc.show()
-#    w = uic.loadUi("ogcalc.ui")
-#   w.show()
     sys.exit(app.exec())
-
 
 # Local Variables:
 # mode:Python
