@@ -1,0 +1,93 @@
+#!/usr/bin/python3
+#
+# ogcalc - calculate %ABV and OG from PG, RI and CF.
+#
+# Copyright © 2003-2013  Roger Leigh <rleigh@debian.org>
+#
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General
+# Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# This program is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public
+# License along with this program; if not, write to the
+# Free Software Foundation, Inc., 675 Mass Ave, Cambridge,
+# MA 02139, USA.
+#
+#############################################################
+
+from PyQt5 import uic
+from PyQt5.QtCore import (QObject, QSize, Qt, pyqtSignal, pyqtSlot)
+from PyQt5.QtGui import (QFont, QIcon)
+from PyQt5.QtWidgets import (QApplication, QDoubleSpinBox, QFrame,
+                             QHBoxLayout, QLabel, QMainWindow,
+                             QPushButton, QSizePolicy, QVBoxLayout,
+                             QWidget)
+
+from ui_ogcalc import Ui_ogcalc
+
+class Ogcalc(QMainWindow):
+    def __init__(self):
+        super(Ogcalc, self).__init__()
+
+        self.ui = Ui_ogcalc()
+        self.ui.setupUi(self)
+        self.reset()
+
+    @pyqtSlot()
+    def calculate(self):
+        pg = self.ui.pg_entry.value()
+        ri = self.ui.ri_entry.value()
+        cf = self.ui.cf_entry.value()
+
+        #Calculate OG.
+        og = (ri * 2.597) - (pg * 1.644) - 34.4165 + cf
+
+        # Calculate ABV.
+        abv = 0.0
+        if og < 60:
+            abv = (og - pg) * 0.130
+        else:
+            abv = (og - pg) * 0.134
+
+        self.ui.og_result.setText("%(result)0.2f" %{'result': og})
+        self.ui.abv_result.setText("%(result)0.2f" %{'result': abv})
+
+        self.ui.reset.setDefault(True)
+        self.ui.calculate.setDefault(False)
+
+    @pyqtSlot()
+    def reset(self):
+        self.ui.pg_entry.setValue(0.0)
+        self.ui.ri_entry.setValue(0.0)
+        self.ui.cf_entry.setValue(0.0)
+        self.ui.og_result.setText("")
+        self.ui.abv_result.setText("")
+
+        self.ui.reset.setDefault(False)
+        self.ui.calculate.setDefault(True)
+        self.ui.pg_entry.setFocus()
+        self.ui.pg_entry.selectAll()
+
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    ogcalc = Ogcalc()
+    ogcalc.show()
+#    w = uic.loadUi("ogcalc.ui")
+#   w.show()
+    sys.exit(app.exec())
+
+
+# Local Variables:
+# mode:Python
+# fill-column:60
+# End:
