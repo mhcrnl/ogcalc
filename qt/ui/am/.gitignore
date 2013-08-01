@@ -1,0 +1,6 @@
+ogcalc
+moc.cpp
+*.lo
+scripts
+.libs
+*.la
