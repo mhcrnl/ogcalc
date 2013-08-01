@@ -1,2 +1,2 @@
 # Subdirectories to make.
-SUBDIRS = gtk qt
+SUBDIRS = qt

@@ -8,7 +8,7 @@ dnl bug-reporting address.
 AC_INIT([ogcalc], [1.5.0], [rleigh@debian.org])
 dnl For safety, check we are in the right directory by
 dnl checking for a known unique file.
-AC_CONFIG_SRCDIR([qt/common/main.cpp])
+AC_CONFIG_SRCDIR([C/plain/ogcalc.c])
 dnl Place auxilliary scripts here.
 AC_CONFIG_AUX_DIR([scripts])
 dnl Put macro definitions here (though they aren't used).
@@ -19,11 +19,16 @@ AM_INIT_AUTOMAKE
 
 # Checks for programs.
 AC_PROG_CXX
+AC_PROG_CC
+AM_PROG_CC_C_O
 AC_PROG_LIBTOOL
-AC_PATH_PROG([QMAKE], [qmake])
 
 # Checks for libraries.
-PKG_CHECK_MODULES([QT], [Qt5Core Qt5Gui Qt5Widgets Qt5Svg])
+PKG_CHECK_MODULES([GTK], [gtk+-2.0 >= 2.4.0])
+PKG_CHECK_MODULES([GTKBUILDER], [gtk+-2.0 >= 2.12.0 gmodule-2.0])
+PKG_CHECK_MODULES([GLADE], [libglade-2.0 >= 2.4.0 gmodule-2.0])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4])
+PKG_CHECK_MODULES([GLADEMM], [libglademm-2.4])
 
 # Checks for header files (none at the moment).
 
@@ -34,14 +39,19 @@ AC_HEADER_STDBOOL
 
 dnl Configure which files to generate.
 AC_CONFIG_FILES([Makefile])
-AC_CONFIG_FILES([qt/Makefile])
-AC_CONFIG_FILES([qt/uic/Makefile])
-AC_CONFIG_FILES([qt/uic/am/Makefile])
-AC_CONFIG_FILES([qt/plain/Makefile])
-AC_CONFIG_FILES([qt/plain/am/Makefile])
-
-AC_CONFIG_COMMANDS([qt/uic/qmake/Makefile], [($MKDIR_P qt/uic/qmake && cd qt/uic/qmake && "$QMAKE" "${ac_abs_top_srcdir}/qt/uic/qmake/ogcalc.pro" -o "Makefile")], [QMAKE="$QMAKE"])
-AC_CONFIG_COMMANDS([qt/plain/qmake/Makefile], [($MKDIR_P qt/plain/qmake && cd qt/plain/qmake && "$QMAKE" "${ac_abs_top_srcdir}/qt/plain/qmake/ogcalc.pro" -o "Makefile")], [QMAKE="$QMAKE"])
+AC_CONFIG_FILES([C/Makefile])
+AC_CONFIG_FILES([C/plain/Makefile])
+AC_CONFIG_FILES([C/builder/Makefile])
+AC_CONFIG_FILES([C/glade/Makefile])
+AC_CONFIG_FILES([C/gobject/Makefile])
+AC_CONFIG_FILES([C/gobject-glade/Makefile])
+AC_CONFIG_FILES([C/gobject-builder/Makefile])
+AC_CONFIG_FILES([C++/Makefile])
+AC_CONFIG_FILES([C++/plain/Makefile])
+AC_CONFIG_FILES([C++/glade/Makefile])
+AC_CONFIG_FILES([python/Makefile])
+AC_CONFIG_FILES([python/plain/Makefile])
+AC_CONFIG_FILES([python/glade/Makefile])
 
 dnl Output the generated config.status script.
 AC_OUTPUT
