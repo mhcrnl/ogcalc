@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+# Note that this script builds *everything* and hence requires
+# all prerequisites to be installed.  If you don't have everything,
+# run the builds from individual subdirectories.
+
+# Build all Qt code
+
+for type in plain uic; do
+  (
+    cd "qt/$type"
+    (cd make && make clean all)
+    (cd am && autoreconf -i && ./configure && make clean all)
+    (cd qmake && qmake && make clean all)
+    (cd cmake && cmake . && make clean all)
+  )
+done
+
+# Build all GTK+ code
+(cd gtk && autoreconf -i && ./configure && make clean all)
+
