@@ -29,6 +29,7 @@ Contents:
 
    qt-introduction
    qt-uisetup
+   qt-building
    qt-c++
 
    gtk-introduction
