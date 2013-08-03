@@ -24,7 +24,7 @@
 #include "SpinBoxEntry.h"
 
 SpinBoxEntry::SpinBoxEntry (QWidget *parent) :
-    QDoubleSpinBox(parent)
+  QDoubleSpinBox(parent)
 {
 }
 
@@ -35,20 +35,15 @@ SpinBoxEntry::~SpinBoxEntry ()
 void
 SpinBoxEntry::keyPressEvent (QKeyEvent *event)
 {
-    switch(event->key())
+  // If Enter or Return are pressed, emit the enterPressed
+  // signal, or else defer to the parent class.
+  switch(event->key())
     {
     case Qt::Key_Enter:
     case Qt::Key_Return:
-        emit enterPressed();
-        break;
+      emit enterPressed();
+      break;
     default:
-        QDoubleSpinBox::keyPressEvent (event);
+      QDoubleSpinBox::keyPressEvent (event);
     }
 }
-
-/*
- * Local Variables:
- * mode:C++
- * fill-column:60
- * End:
- */

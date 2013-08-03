@@ -29,27 +29,26 @@ from PyQt5.QtWidgets import (QApplication, QDoubleSpinBox, QFrame,
                              QHBoxLayout, QLabel, QMainWindow,
                              QPushButton, QSizePolicy, QVBoxLayout,
                              QWidget)
-import SpinBoxEntry
+from SpinBoxEntry import SpinBoxEntry
 
-class SpinBoxEntry(QDoubleSpinBox):
-    def __init__(self, parent = None):
-        super(SpinBoxEntry, self).__init__(parent)
-
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key_Enter or event.key() == Qt.Key_Return:
-            self.enterPressed.emit()
-        else:
-            super(SpinBoxEntry, self).keyPressEvent(event)
-
-    enterPressed = pyqtSignal()
-
+# Custom widget which is a descriptive label and entry box.
+# Derived from a horizontal layout so that the child widgets
+# will be laid out horizontally.
+#
+# So that the internal details of the label and entry are
+# hidden from the user, several methods and signals of the
+# contained widgets are wrapped to make their use entirely
+# transparent.
 class OgcalcSpinEntry(QHBoxLayout):
+    # Size policy for labels (minimum size).
     label_size_policy = QSizePolicy(QSizePolicy.Minimum,
                                     QSizePolicy.Preferred)
     label_size_policy.setHorizontalStretch(0)
     label_size_policy.setVerticalStretch(0)
     label_size_policy.setHeightForWidth(False)
 
+    # Size policy for entry boxes (expand horizontally,
+    # fixed vertically).
     entry_size_policy = QSizePolicy(QSizePolicy.Expanding,
                                     QSizePolicy.Fixed)
     entry_size_policy.setHorizontalStretch(0)
@@ -61,53 +60,83 @@ class OgcalcSpinEntry(QHBoxLayout):
 
         self.setSpacing(6)
 
+        # Create a label and add to ourself.  We use our
+        # label size policy.
         self.label = QLabel()
         self.label.setSizePolicy(OgcalcSpinEntry.label_size_policy)
         self.label.setTextFormat(Qt.AutoText)
         self.addWidget(self.label)
 
+        # Create a SpinBoxEntry and add to ourself.  We use our
+        # entry size policy.
         self.entry = SpinBoxEntry()
         self.entry.setSizePolicy(OgcalcSpinEntry.entry_size_policy)
         self.addWidget(self.entry)
 
+        # The label is the buddy of the entry.
         self.label.setBuddy(self.entry)
 
+        # When Enter is pressed in the entry, pass it to our
+        # enterPressed slot so that we can handle and
+        # re-emit the signal.
         self.entry.enterPressed.connect(self.__enterPressed)
 
+    # Set label tooltip.
     def setToolTip(self, tip):
         self.label.setToolTip(tip)
 
+    # Set descriptive text.
     def setText(self, text):
         self.label.setText(text)
 
+    # Get entry value.
     def value(self):
         return self.entry.value()
 
+    # Set entry value.
     def setValue(self, value):
         self.entry.setValue(value)
 
+    # Start editing, shorthand for setting focus to the
+    # entry and selecting all its contents.
+    @pyqtSlot()
     def setStartEdit(self):
         self.entry.setFocus()
         self.entry.selectAll()
 
+    # Internal slot to re-emit the entry enterPressed signal.
+    @pyqtSlot()
     def __enterPressed(self):
             self.enterPressed.emit()
 
+    # enterPressed signal.
     enterPressed = pyqtSignal()
 
+# Custom widget which is a descriptive label and result label.
+# Derived from a horizontal layout so that the child widgets
+# will be laid out horizontally.
+#
+# So that the internal details of the descriptive label and
+# result label are hidden from the user, several methods of
+# the contained widgets are wrapped to make their use
+# entirely transparent.
 class OgcalcResult(QHBoxLayout):
+    # Size policy for labels (minimum size).
     label_size_policy = QSizePolicy(QSizePolicy.Minimum,
                                     QSizePolicy.Preferred)
     label_size_policy.setHorizontalStretch(0)
     label_size_policy.setVerticalStretch(0)
     label_size_policy.setHeightForWidth(False)
 
+    # Size policy for result labels (expand horizontally, can be expanded
+    # vertically if needed).
     result_size_policy = QSizePolicy(QSizePolicy.Expanding,
                                      QSizePolicy.Preferred)
     result_size_policy.setHorizontalStretch(0)
     result_size_policy.setVerticalStretch(0)
     result_size_policy.setHeightForWidth(False)
 
+    # Bold font description.
     bold_font = QFont()
     bold_font.setBold(True)
     bold_font.setWeight(75)
@@ -117,10 +146,17 @@ class OgcalcResult(QHBoxLayout):
 
         self.setSpacing(6)
 
+        # Create a label and add to ourself.  We use our
+        # label size policy.
         self.label = QLabel()
         self.label.setSizePolicy(OgcalcResult.label_size_policy)
         self.addWidget(self.label)
 
+        # Create a label and add to ourself.  The label is
+        # displayed using a bold font, centred, which is
+        # also selectable using the mouse or keyboard (so
+        # the result value can be copied and pasted
+        # elsewhere).
         self.result = QLabel()
         self.result.setSizePolicy(OgcalcResult.result_size_policy)
         self.result.setFont(OgcalcResult.bold_font)
@@ -128,21 +164,25 @@ class OgcalcResult(QHBoxLayout):
         self.result.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
         self.addWidget(self.result)
 
+    # Set label tooltip.
     def setToolTip(self, tip):
         self.label.setToolTip(tip)
 
+    # Set descriptive text.
     def setText(self, text):
         self.label.setText(text)
 
+    # Set result text.
     def setResult(self, text):
         self.result.setText(text)
 
+# The main window of the application.
 class Ogcalc(QMainWindow):
     def __init__(self):
         super(Ogcalc, self).__init__()
 
+        # Set initial window size and size policy.
         self.resize(407, 123)
-
         window_size_policy = QSizePolicy(QSizePolicy.Preferred,
                                          QSizePolicy.Preferred)
         window_size_policy.setHorizontalStretch(0)
@@ -152,9 +192,12 @@ class Ogcalc(QMainWindow):
         self.setSizePolicy(window_size_policy)
         self.setMaximumSize(QSize(16777215, 16777215))
 
+        # Load and set the window icon.
         icon = QIcon()
         icon.addFile("ogcalc.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
+
+        # Top level layout and size policy for all window content.
 
         toplevel_layout = QWidget(self)
         toplevel_size_policy = QSizePolicy(QSizePolicy.Minimum,
@@ -165,6 +208,7 @@ class Ogcalc(QMainWindow):
                                                hasHeightForWidth())
         toplevel_layout.setSizePolicy(toplevel_size_policy)
 
+        # Vertical layout for containing widgets at the top level.
         vertical_layout = QVBoxLayout(toplevel_layout)
         vertical_layout.setSpacing(6)
         vertical_layout.setContentsMargins(11, 11, 11, 11)

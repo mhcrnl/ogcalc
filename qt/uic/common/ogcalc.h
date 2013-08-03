@@ -9,19 +9,29 @@ class ogcalc;
 
 class ogcalc : public QMainWindow
 {
-    Q_OBJECT
-    
+  Q_OBJECT;
+
 public:
-    explicit ogcalc(QWidget *parent = 0);
-    ~ogcalc();
+  explicit ogcalc(QWidget *parent = 0);
+  ~ogcalc();
 
 public slots:
-    void calculate();
+  // Calculation signal handler.
+  void calculate();
 
-    void reset();
+  // Reset signal handler.
+  void reset();
 
 private:
-    Ui::ogcalc *ui;
+  // The code-generated user interface.
+  Ui::ogcalc *ui;
 };
 
 #endif // OGCALC_H
+
+/*
+ * Local Variables:
+ * mode:C++
+ * fill-column:60
+ * End:
+ */

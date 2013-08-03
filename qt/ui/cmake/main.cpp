@@ -1,1 +1,1 @@
-../../common/main.cpp
+../common/main.cpp

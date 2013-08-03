@@ -9,20 +9,25 @@
 class ogcalc : public QMainWindow
 {
   Q_OBJECT;
+
 public:
   explicit ogcalc (QWidget *parent = 0);
-
   virtual ~ogcalc ();
 
 public slots:
+  // Calculation signal handler.
   void calculate ();
 
+  // Reset signal handler.
   void reset ();
 
 private:
+  // Initialise the UI
   void setupUi ();
+  // Translate the UI text.
   void retranslateUi ();
 
+  // The widgets that are manipulated.
   QLabel       *pg_label;
   SpinBoxEntry *pg_entry;
   QLabel       *ri_label;

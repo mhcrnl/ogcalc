@@ -9,26 +9,29 @@
 
 class ogcalc : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT;
 
 public:
-    explicit ogcalc(QWidget *parent = 0);
-    ~ogcalc();
+  explicit ogcalc(QWidget *parent = 0);
+  virtual ~ogcalc();
 
 public slots:
-    void calculate();
+  // Calculation signal handler.
+  void calculate();
 
-    void reset();
+  // Reset signal handler.
+  void reset();
 
 private:
-    SpinBoxEntry *pg_entry;
-    SpinBoxEntry *ri_entry;
-    SpinBoxEntry *cf_entry;
-    QLabel *og_result;
-    QLabel *abv_result;
-    QPushButton *quit_button;
-    QPushButton *reset_button;
-    QPushButton *calculate_button;
+  // The widgets that are manipulated.
+  SpinBoxEntry *pg_entry;
+  SpinBoxEntry *ri_entry;
+  SpinBoxEntry *cf_entry;
+  QLabel *og_result;
+  QLabel *abv_result;
+  QPushButton *quit_button;
+  QPushButton *reset_button;
+  QPushButton *calculate_button;
 };
 
 #endif // OGCALC_H

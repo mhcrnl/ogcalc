@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::addLibraryPath("/home/rleigh/code/ogcalc/git/qt/ui/cmake");
+    QCoreApplication::addLibraryPath(".");
     QApplication a(argc, argv);
 
     ogcalc w;

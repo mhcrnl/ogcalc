@@ -35,10 +35,12 @@ public:
   virtual ~SpinBoxEntry ();
 
 protected:
+  // Signal handler for key presses.
   void
   keyPressEvent (QKeyEvent *event);
 
 signals:
+  // Signal to be emitted when Enter is pressed.
   void
   enterPressed ();
 };

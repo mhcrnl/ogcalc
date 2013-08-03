@@ -11,22 +11,22 @@ FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(Qt5Designer)
 FIND_PACKAGE(Qt5Svg REQUIRED)
 
-SET(entry_SOURCES SpinBoxEntry.cpp)
-SET(entry_HEADERS SpinBoxEntry.h)
+SET(SpinBoxEntry_SOURCES SpinBoxEntry.cpp)
+SET(SpinBoxEntry_HEADERS SpinBoxEntry.h)
 
-SET(plugin_SOURCES SpinBoxEntryPlugin.cpp)
-SET(plugin_HEADERS SpinBoxEntryPlugin.h)
+SET(SpinBoxEntryPlugin_SOURCES SpinBoxEntryPlugin.cpp)
+SET(SpinBoxEntryPlugin_HEADERS SpinBoxEntryPlugin.h)
 
 SET(ogcalc_SOURCES main.cpp ogcalc.cpp SpinBoxEntryPlugin.cpp)
 SET(ogcalc_HEADERS ogcalc.h SpinBoxEntryPlugin.h)
 
-add_library(entry SHARED ${entry_SOURCES} ${entry_HEADERS_MOC})
-qt5_use_modules(entry Core Gui UiTools Widgets Designer Svg)
+add_library(SpinBoxEntry SHARED ${SpinBoxEntry_SOURCES} ${SpinBoxEntry_HEADERS_MOC})
+qt5_use_modules(SpinBoxEntry Core Gui UiTools Widgets Designer Svg)
 
-add_library(plugin MODULE ${plugin_SOURCES} ${plugin_HEADERS_MOC})
-qt5_use_modules(plugin Core Gui UiTools Widgets Designer Svg)
-target_link_libraries(plugin entry)
+add_library(SpinBoxEntryPlugin MODULE ${SpinBoxEntryPlugin_SOURCES} ${SpinBoxEntryPlugin_HEADERS_MOC})
+qt5_use_modules(SpinBoxEntryPlugin Core Gui UiTools Widgets Designer Svg)
+target_link_libraries(SpinBoxEntryPlugin SpinBoxEntry)
 
 add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC})
 qt5_use_modules(ogcalc Core Gui UiTools Widgets Designer Svg)
-target_link_libraries(ogcalc entry)
+target_link_libraries(ogcalc SpinBoxEntry)
