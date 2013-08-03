@@ -218,8 +218,13 @@ certainly much less difficult in time and effort than it would be
 using the autotools without any prior experience.  I would definitely
 recommend trying out :program:`cmake` first.
 
-However, don't let my experiences influence you too greatly.  Look at
-the examples, try them all, and compare them for yourself.  Also
-consider that these are simple examples; think about how each would
-differ when you also factor in keeping them updated and maintained in
-a bigger, changing, codebase.
+However, don't let my experiences influence you too greatly.  The
+above discussion is necessarily brief, and does not go into any of the
+systems in great depth; it would be worth considering your
+requirements researching them all in detail before committing to one,
+since this may be a major commitment with many implications, some of
+which may not be immediately obvious.  Look at the examples, try them
+all, and compare them for yourself.  Also consider that these are
+simple examples; think about how each would differ when you also
+factor in keeping them updated and maintained in a bigger, changing,
+codebase.
