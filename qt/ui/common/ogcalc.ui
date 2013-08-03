@@ -250,14 +250,14 @@
     <item>
      <layout class="QHBoxLayout" name="button_layout">
       <item>
-       <widget class="QPushButton" name="quit">
+       <widget class="QPushButton" name="quit_button">
         <property name="text">
          <string>&amp;Quit</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="reset">
+       <widget class="QPushButton" name="reset_button">
         <property name="text">
          <string>&amp;Reset</string>
         </property>
@@ -267,7 +267,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="calculate">
+       <widget class="QPushButton" name="calculate_button">
         <property name="text">
          <string>&amp;Calculate</string>
         </property>
@@ -332,7 +332,7 @@
   <connection>
    <sender>cf_entry</sender>
    <signal>enterPressed()</signal>
-   <receiver>calculate</receiver>
+   <receiver>calculate_button</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">

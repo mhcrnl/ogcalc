@@ -25,9 +25,9 @@ ogcalc::ogcalc(QWidget *parent) :
     cf_entry = findChild<SpinBoxEntry *>("cf_entry");
     og_result = findChild<QLabel *>("og_result");
     abv_result = findChild<QLabel *>("abv_result");
-    quit_button = findChild<QPushButton *>("quit");
-    reset_button = findChild<QPushButton *>("reset");
-    calculate_button = findChild<QPushButton *>("calculate");
+    quit_button = findChild<QPushButton *>("quit_button");
+    reset_button = findChild<QPushButton *>("reset_button");
+    calculate_button = findChild<QPushButton *>("calculate_button");
 
     QObject::connect(reset_button, SIGNAL(clicked()), this, SLOT(reset()));
     QObject::connect(quit_button, SIGNAL(clicked()), this, SLOT(close()));
