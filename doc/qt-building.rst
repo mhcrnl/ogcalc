@@ -14,6 +14,10 @@ Each example contains a set of subdirectories.  The code is identical
 in each directory (it's symlinked to :file:`common`), but each
 subdirectory contains the files specific to a particular build system.
 
+These examples are all written in C++.  Examples in Python are in
+:file:`python` subdirectories.  The Python examples do not require
+building and may be run directly, with the exception of the :file:`ui`
+sample which contains a :file:`Makefile` to generate a source file.
 
 Building by hand
 ----------------
