@@ -15,5 +15,9 @@ SET(ogcalc_UI ogcalc.ui)
 
 qt5_wrap_ui(ogcalc_UI_HEADERS ${ogcalc_UI})
 
-add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC} ${ogcalc_UI_HEADERS} ${ogcalc_UI})
+if(WIN32)
+  set(ogcalc_RESOURCES ogcalc.rc)
+endif(WIN32)
+
+add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC} ${ogcalc_UI_HEADERS} ${ogcalc_UI} ${ogcalc_RESOURCES})
 qt5_use_modules(ogcalc Core Gui Widgets Svg)
