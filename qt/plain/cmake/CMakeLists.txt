@@ -13,7 +13,7 @@ SET(ogcalc_SOURCES main.cpp ogcalc.cpp  SpinBoxEntry.cpp)
 SET(ogcalc_HEADERS ogcalc.h SpinBoxEntry.h)
 
 if(WIN32)
-  set(ogcalc_RESOURCES ogcalc.res)
+  set(ogcalc_RESOURCES ogcalc.rc)
 endif(WIN32)
 
 add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC} ${ogcalc_RESOURCES})
