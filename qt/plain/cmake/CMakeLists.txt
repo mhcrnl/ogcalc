@@ -12,5 +12,9 @@ FIND_PACKAGE(Qt5Svg REQUIRED)
 SET(ogcalc_SOURCES main.cpp ogcalc.cpp  SpinBoxEntry.cpp)
 SET(ogcalc_HEADERS ogcalc.h SpinBoxEntry.h)
 
-add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC})
+if(WIN32)
+  set(ogcalc_RESOURCES ogcalc.res)
+endif(WIN32)
+
+add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC} ${ogcalc_RESOURCES})
 qt5_use_modules(ogcalc Core Gui Widgets Svg)
