@@ -10,14 +10,24 @@ set -e
 
 for type in plain uic; do
   (
+    echo "Building qt/$type"
     cd "qt/$type"
+    echo "Plain make"
     (cd make && make clean all)
-    (cd am && autoreconf -i && ./configure && make clean all)
+    echo "Autoconf/automake"
+    (cd automake && autoreconf -i && ./configure && make clean all)
+    echo "qmake"
     (cd qmake && qmake && make clean all)
+    echo "cmake"
     (cd cmake && cmake . && make clean all)
   )
 done
 
 # Build all GTK+ code
-(cd gtk && autoreconf -i && ./configure && make clean all)
+for type in $(find gtk -name 'configure.ac' | xargs dirname); do
+  (
+    echo "Building $type"
+    (cd "$type" autoreconf -i ./configure && make clean all)
+  )
+done
 
