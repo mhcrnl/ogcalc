@@ -7,8 +7,8 @@ noinst_PROGRAMS = ogcalc
 
 # The sources and compiler flags.
 ogcalc_SOURCES = ogcalc.c ogcalc.h ogcalc-main.c
-ogcalc_CFLAGS = $(GLADE_CFLAGS)
-ogcalc_LDADD = $(GLADE_LIBS)
+ogcalc_CFLAGS = $(GTK_CFLAGS)
+ogcalc_LDADD = $(GTK_LIBS)
 
 # The Glade user interface files.
 noinst_DATA = ogcalc.glade ogcalc.gladep
