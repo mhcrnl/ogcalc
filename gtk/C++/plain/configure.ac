@@ -27,7 +27,6 @@ PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4])
 # Checks for header files (none at the moment).
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
 
 # Checks for library functions (none at the moment).
 
