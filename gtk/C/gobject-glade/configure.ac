@@ -5,7 +5,7 @@ dnl The minimum version of autoconf required.
 AC_PREREQ(2.59)
 dnl Initialise automake with the package name, version and
 dnl bug-reporting address.
-AC_INIT([ogcalc], [1.5.0], [rleigh@debian.org])
+AC_INIT([ogcalc-gtk-c-gobject-glade], [1.5.0], [rleigh@debian.org])
 dnl For safety, check we are in the right directory by
 dnl checking for a known unique file.
 AC_CONFIG_SRCDIR([ogcalc.c])
