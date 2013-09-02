@@ -1,5 +1,5 @@
 OGCALC_MOC_H = $(shell egrep -l "[[:space:]]*((public|protected|private)[[:space:]]+)?signals|slots:" $(srcdir)/*.h)
-OGCALC_MOC_SRC = $(addsuffix .moccpp,$(basename $(OGCALC_MOC_H)))
+OGCALC_MOC_SRC = $(addsuffix .moc.cpp,$(basename $(OGCALC_MOC_H)))
 
 BUILT_SOURCES = moc.cpp
 
