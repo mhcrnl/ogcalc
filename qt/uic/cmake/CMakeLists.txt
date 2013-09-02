@@ -21,3 +21,12 @@ endif(WIN32)
 
 add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC} ${ogcalc_UI_HEADERS} ${ogcalc_UI} ${ogcalc_RESOURCES})
 qt5_use_modules(ogcalc Core Gui Widgets Svg)
+
+set(ARCHIVE_NAME
+  "${CMAKE_PROJECT_NAME}-${OGCALC_VERSION_MAJOR}.${OGCALC_VERSION_MINOR}.${OGCALC_VERSION_PATCH}")
+# Normally, "git archive" would work well, but it doesn't follow
+# symlinks.  Due to using symlinks heavily, we need to follow them to
+# avoid creating broken archives.
+add_custom_target(dist
+    COMMAND tar chfv - "--transform='s;^;${ARCHIVE_NAME}/;'" \$\$\(git ls-tree -r --name-only HEAD . | grep -v '^.gitignore'\) | gzip -9 > ${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar.xz
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

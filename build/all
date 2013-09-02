@@ -15,11 +15,11 @@ for type in plain uic; do
     echo "Plain make"
     (cd make && make clean all)
     echo "Autoconf/automake"
-    (cd automake && autoreconf -i && ./configure && make clean all)
+    (cd automake && autoreconf -i && ./configure && make clean all distcheck)
     echo "qmake"
     (cd qmake && qmake && make clean all)
     echo "cmake"
-    (cd cmake && cmake . && make clean all)
+    (cd cmake && cmake . && make clean all dist)
   )
 done
 
@@ -27,7 +27,7 @@ done
 for type in $(find gtk -name 'configure.ac' | xargs dirname); do
   (
     echo "Building $type"
-    (cd "$type" autoreconf -i ./configure && make clean all)
+    (cd "$type" autoreconf -i ./configure && make clean all distcheck)
   )
 done
 
