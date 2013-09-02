@@ -51,12 +51,12 @@ install(TARGETS SpinBoxEntry DESTINATION lib)
 install(TARGETS SpinBoxEntryPlugin DESTINATION ${QT_PLUGINS_DIR}/designer)
 
 set(ARCHIVE_NAME
-  "${CMAKE_PROJECT_NAME}-${OGCALC_VERSION_MAJOR}.${OGCALC_VERSION_MINOR}.${OGCALC_VERSION_PATCH}")
+  "ogcalc-qt-ui-cmake-${OGCALC_VERSION_MAJOR}.${OGCALC_VERSION_MINOR}.${OGCALC_VERSION_PATCH}")
 # Normally, "git archive" would work well, but it doesn't follow
 # symlinks.  Due to using symlinks heavily, we need to follow them to
 # avoid creating broken archives.
 add_custom_target(dist
-    COMMAND tar chfv - "--transform='s;^;${ARCHIVE_NAME}/;'" \$\$\(git ls-tree -r --name-only HEAD . | grep -v '^.gitignore'\) | gzip -9 > ${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar.xz
+    COMMAND tar chfv - "--transform='s;^;${ARCHIVE_NAME}/;'" \$\$\(git ls-tree -r --name-only HEAD . | grep -v '^.gitignore'\) | gzip -9 > ${CMAKE_BINARY_DIR}/${ARCHIVE_NAME}.tar.gz
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 get_cmake_property(_variableNames VARIABLES)
