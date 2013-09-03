@@ -1,3 +1,6 @@
+VERSION=1.5.0
+ARCHIVE_NAME = ogcalc-qt-uic-make-$(VERSION)
+
 OGCALC_MOC_HEADERS = $(wildcard *.h)
 OGCALC_MOC_SOURCES = $(addprefix moc_,$(addsuffix .cpp,$(basename $(OGCALC_MOC_HEADERS))))
 
@@ -50,4 +53,7 @@ distclean: clean
 
 maintainerclean: distclean
 
-.PHONY: default clean distclean maintainerclean
+dist:
+	tar chfv - --transform='s;^;$(ARCHIVE_NAME)/;' $$(git ls-tree -r --name-only HEAD . | grep -v '^.gitignore') | gzip -9 > "$(ARCHIVE_NAME).tar.gz"
+
+.PHONY: default clean distclean maintainerclean dist
