@@ -8,18 +8,31 @@ set -e
 
 # Build all Qt code
 
-for type in plain uic; do
+for type in plain uic ui; do
   (
     echo "Building qt/$type"
     cd "qt/$type"
-    echo "Plain make"
-    (cd make && make clean all)
-    echo "Autoconf/automake"
-    (cd automake && autoreconf -i && ./configure && make clean all distcheck)
-    echo "qmake"
-    (cd qmake && qmake && make clean all)
-    echo "cmake"
-    (cd cmake && cmake . && make clean all dist)
+    if [ -d make ]; then
+      echo "Plain make"
+      (cd make && make clean all dist)
+    fi
+    if [ -d automake ]; then
+      echo "Autoconf/automake"
+      (cd automake && autoreconf -i && ./configure && make clean all distcheck)
+    fi
+    if [ -d qmake ]; then
+      echo "qmake"
+      (cd qmake && qmake && make clean all dist)
+    fi
+    if [ -d cmake ]; then
+      echo "cmake"
+      (cd cmake && cmake . && make clean all dist)
+    fi
+    if [ -d python ]; then
+      echo "python"
+      ARCHIVE_NAME="ogcalc-qt-${type}-python-1.5.0"
+      (cd python && tar chfv - --transform="s;^;${ARCHIVE_NAME}/;" $(git ls-tree -r --name-only HEAD . | grep -v '^.gitignore') | gzip -9 > "${ARCHIVE_NAME}.tar.gz")
+    fi
   )
 done
 
