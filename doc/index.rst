@@ -1,5 +1,5 @@
 ..
-   Copyright © 2003-2013  Roger Leigh <rleigh@debian.org>
+   Copyright © 2003-2013  Roger Leigh <rleigh@codelibre.net>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -69,8 +69,8 @@ Feedback
 ========
 
 I hope you find this tutorial informative.  Please send any
-corrections or suggestions to `rleigh@debian.org
-<mailto:rleigh@debian.org>`_.
+corrections or suggestions to `rleigh@codelibre.net
+<mailto:rleigh@codelibre.net>`_.
 
 The source code for the tutorial may be obtained from git repository using
 

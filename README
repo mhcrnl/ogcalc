@@ -84,4 +84,4 @@ ogcalcmm: libgtkmm2.4-dev, libglademm-2.4-dev
 python: python-gtk2, python-glade2
 glade-2 provides the Glade interface editor.
 
- -- Roger Leigh <rleigh@debian.org>  Fri, 29 Apr 2005 22:54:04 +0100
+ -- Roger Leigh <rleigh@codelibre.net>  Fri, 29 Apr 2005 22:54:04 +0100
