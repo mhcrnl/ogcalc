@@ -2,6 +2,9 @@
 # construct the interface and connect all signals, and GObject to
 # create a class derived from a GTK+ GtkWindow class.
 
+# Not using GNU conventions
+AUTOMAKE_OPTIONS = foreign
+
 # The program to build.
 noinst_PROGRAMS = ogcalc
 
@@ -15,4 +18,6 @@ noinst_DATA = ogcalc.glade ogcalc.gladep
 
 # Files not automatically distributed which should be included
 # in the distribution tarball.
-EXTRA_DIST = $(noinst_DATA)
+EXTRA_DIST =		\
+	$(noinst_DATA)	\
+	README.md

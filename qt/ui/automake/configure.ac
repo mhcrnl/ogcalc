@@ -29,6 +29,9 @@ PKG_CHECK_MODULES([QT], [Qt5Core Qt5UiTools Qt5Gui Qt5Widgets Qt5Svg])
 PKG_CHECK_MODULES([QTW], [Qt5Widgets])
 PKG_CHECK_MODULES([QTUI], [Qt5Core Qt5UiTools Qt5Designer])
 
+plugindir=$(${QMAKE} -query QT_INSTALL_PLUGINS)
+AC_SUBST(plugindir)
+
 # Checks for header files (none at the moment).
 
 # Checks for typedefs, structures, and compiler characteristics.

@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = foreign
+
 OGCALC_MOC_H = $(shell egrep -l "[[:space:]]*((public|protected|private)[[:space:]]+)?signals|slots:" $(srcdir)/*.h)
 OGCALC_MOC_SRC = $(addsuffix .moc.cpp,$(notdir $(basename $(OGCALC_MOC_H))))
 

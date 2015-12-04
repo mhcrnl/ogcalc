@@ -184,5 +184,5 @@ how the GNU autotools work.  While this is not the aim of this
 tutorial, I have converted the build to use the autotools as a simple
 example of their use.  All the GTK+ examples make use of
 :program:`automake`.  The Qt samples have been written to demonstrate
-the use of :program:`automake`, :program:`qmake` and plain
-:program:`make`.
+the use of :program:`cmake`, :program:`qmake`, :program:`automake`,
+and plain :program:`make`.

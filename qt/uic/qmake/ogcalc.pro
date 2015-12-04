@@ -26,7 +26,7 @@ ICON = ogcalc.icns
 
 RC_FILE = ogcalc.rc
 
-DISTFILES += AUTHORS ChangeLog COPYING NEWS README
+DISTFILES += AUTHORS ChangeLog COPYING NEWS README.md
 
 ARCHIVE_NAME = ogcalc-qt-plain-uic-$$VERSION
 QMAKE_EXTRA_TARGETS += dist

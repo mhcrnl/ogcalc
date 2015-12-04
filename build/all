@@ -18,7 +18,7 @@ for type in plain uic ui; do
     fi
     if [ -d automake ]; then
       echo "Autoconf/automake"
-      (cd automake && autoreconf -i && ./configure && make clean all distcheck)
+      (cd automake && autoreconf -i && ./configure && make clean all dist)
     fi
     if [ -d qmake ]; then
       echo "qmake"
@@ -40,7 +40,7 @@ done
 for type in $(find gtk -name 'configure.ac' | xargs dirname); do
   (
     echo "Building $type"
-    (cd "$type" autoreconf -i ./configure && make clean all distcheck)
+    (cd "$type" autoreconf -i && ./configure && make clean all distcheck)
   )
 done
 

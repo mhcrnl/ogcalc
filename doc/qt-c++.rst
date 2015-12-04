@@ -24,21 +24,21 @@ finished application.
    :figwidth: 60%
    :align: center
 
-   :program:`qt/plain/am/ogcalc` in action on GNU/Linux.
+   :program:`qt/plain/automake/ogcalc` in action on GNU/Linux.
 
 .. _fig-ogcalc-qt-plain-win7:
 .. figure:: figures/qt-plain-win7.png
    :figwidth: 60%
    :align: center
 
-   :program:`qt/plain/am/ogcalc` in action on Windows 7.
+   :program:`qt/plain/automake/ogcalc` in action on Windows 7.
 
 .. _fig-ogcalc-qt-plain-osx:
 .. figure:: figures/qt-plain-osx.png
    :figwidth: 60%
    :align: center
 
-   :program:`qt/plain/am/ogcalc` in action on MacOS X 10.6.
+   :program:`qt/plain/automake/ogcalc` in action on MacOS X 10.6.
 
 Code listing
 ------------
@@ -46,11 +46,11 @@ Code listing
 The program code is listed below.  The source code is extensively
 commented, to explain what is going on.
 
-* :download:`qt/plain/am/SpinBoxEntry.h <../qt/plain/am/SpinBoxEntry.h>`
-* :download:`qt/plain/am/SpinBoxEntry.cpp <../qt/plain/am/SpinBoxEntry.cpp>`
-* :download:`qt/plain/am/ogcalc.h <../qt/plain/am/ogcalc.h>`
-* :download:`qt/plain/am/ogcalc.cpp <../qt/plain/am/ogcalc.cpp>`
-* :download:`qt/plain/am/main.cpp <../qt/plain/am/main.cpp>`
+* :download:`qt/plain/automake/SpinBoxEntry.h <../qt/plain/automake/SpinBoxEntry.h>`
+* :download:`qt/plain/automake/SpinBoxEntry.cpp <../qt/plain/automake/SpinBoxEntry.cpp>`
+* :download:`qt/plain/automake/ogcalc.h <../qt/plain/automake/ogcalc.h>`
+* :download:`qt/plain/automake/ogcalc.cpp <../qt/plain/automake/ogcalc.cpp>`
+* :download:`qt/plain/automake/main.cpp <../qt/plain/automake/main.cpp>`
 
 Building
 --------

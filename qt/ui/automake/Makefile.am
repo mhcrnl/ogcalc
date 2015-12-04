@@ -1,5 +1,7 @@
-OGCALC_MOC_H = $(shell egrep -l "[[:space:]]*((public|protected|private)[[:space:]]+)?signals|slots:" *.h)
-OGCALC_MOC_SRC = $(addprefix moc_,$(addsuffix .cpp,$(basename $(OGCALC_MOC_H))))
+AUTOMAKE_OPTIONS = foreign
+
+OGCALC_MOC_H = $(shell egrep -l "[[:space:]]*((public|protected|private)[[:space:]]+)?signals|slots:" $(srcdir)/*.h)
+OGCALC_MOC_SRC = $(addprefix moc_,$(addsuffix .cpp,$(basename $(notdir $(OGCALC_MOC_H)))))
 
 OGCALC_UI_DEFS = $(wildcard *.ui)
 OGCALC_UI_SRC = $(addprefix ui_,$(addsuffix .h,$(basename $(OGCALC_UI_DEFS))))
@@ -13,8 +15,8 @@ bin_PROGRAMS = ogcalc
 
 lib_LTLIBRARIES = libentry.la
 
-plugindir = /lib
-plugin_LTLIBRARIES = libplugin.la
+designerplugindir = $(plugindir)/designer
+designerplugin_LTLIBRARIES = libplugin.la
 
 libentry_la_SOURCES =		\
 	SpinBoxEntry.h		\
@@ -33,12 +35,12 @@ libplugin_la_LIBADD = $(QTUI_LIBS)
 ogcalc_SOURCES =		\
 	main.cpp		\
 	ogcalc.h		\
-	ogcalc.cpp		\
+	ogcalc.cpp
 nodist_ogcalc_SOURCES = moc.cpp $(OGCALC_UI_SRC)
 ogcalc_CXXFLAGS = $(AM_CXXFLAGS) $(QT_CFLAGS) -fPIC
 ogcalc_LDADD = $(QT_LIBS) libentry.la
 
-moc_%.cpp: %.h
+moc_%.cpp: $(srcdir)/%.h
 	moc $< -o $@
 
 ui_%.h: %.ui

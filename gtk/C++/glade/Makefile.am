@@ -1,6 +1,9 @@
 # ogcalcmm a GTK+ program written in C++, using Gtkmm and libglademm
 # (the C++ bindings for GTK+ and libglade).
 
+# Not using GNU conventions
+AUTOMAKE_OPTIONS = foreign
+
 # The program to build.
 bin_PROGRAMS = ogcalc
 
@@ -14,4 +17,6 @@ noinst_DATA = ogcalc.glade ogcalc.gladep
 
 # Files not automatically distributed which should be included
 # in the distribution tarball.
-EXTRA_DIST = $(noinst_DATA)
+EXTRA_DIST =		\
+	$(noinst_DATA)	\
+	README.md
