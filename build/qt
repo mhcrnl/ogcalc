@@ -2,12 +2,7 @@
 
 set -e
 
-# Note that this script builds *everything* and hence requires
-# all prerequisites to be installed.  If you don't have everything,
-# run the builds from individual subdirectories.
-
 # Build all Qt code
-
 for type in plain uic ui; do
   (
     echo "Building qt/$type"
@@ -35,12 +30,3 @@ for type in plain uic ui; do
     fi
   )
 done
-
-# Build all GTK+ code
-for type in $(find gtk -name 'configure.ac' | xargs dirname); do
-  (
-    echo "Building $type"
-    (cd "$type" autoreconf -i && ./configure && make clean all distcheck)
-  )
-done
-

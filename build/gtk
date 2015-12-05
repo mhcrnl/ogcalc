@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Build all GTK+ code
+for type in $(find gtk -name 'configure.ac' | xargs dirname); do
+  (
+    echo "Building $type"
+    (cd "$type" && autoreconf -i && ./configure && make clean all distcheck)
+  )
+done
+
