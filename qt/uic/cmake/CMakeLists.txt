@@ -1,21 +1,14 @@
-cmake_minimum_required(VERSION 2.8)
-PROJECT(ogcalc)
-
-set(OGCALC_VERSION_MAJOR 1)
-set(OGCALC_VERSION_MINOR 5)
-set(OGCALC_VERSION_PATCH 0)
+cmake_minimum_required(VERSION 3.0)
+project(ogcalc VERSION 1.5.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-FIND_PACKAGE(Qt5Core REQUIRED)
-FIND_PACKAGE(Qt5Gui REQUIRED)
-FIND_PACKAGE(Qt5Widgets REQUIRED)
-FIND_PACKAGE(Qt5Svg REQUIRED)
+find_package(Qt5 5.2.0 REQUIRED COMPONENTS Core Gui Widgets Svg)
 
-SET(ogcalc_SOURCES main.cpp ogcalc.cpp  SpinBoxEntry.cpp)
-SET(ogcalc_HEADERS ogcalc.h SpinBoxEntry.h)
-SET(ogcalc_UI ogcalc.ui)
+set(ogcalc_SOURCES main.cpp ogcalc.cpp  SpinBoxEntry.cpp)
+set(ogcalc_HEADERS ogcalc.h SpinBoxEntry.h)
+set(ogcalc_UI ogcalc.ui)
 
 qt5_wrap_ui(ogcalc_UI_HEADERS ${ogcalc_UI})
 
@@ -27,7 +20,7 @@ add_executable(ogcalc ${ogcalc_SOURCES} ${ogcalc_HEADERS_MOC} ${ogcalc_UI_HEADER
 qt5_use_modules(ogcalc Core Gui Widgets Svg)
 
 set(ARCHIVE_NAME
-  "ogcalc-qt-uic-cmake-${OGCALC_VERSION_MAJOR}.${OGCALC_VERSION_MINOR}.${OGCALC_VERSION_PATCH}")
+  "ogcalc-qt-uic-cmake-${ogcalc_VERSION_MAJOR}.${ogcalc_VERSION_MINOR}.${ogcalc_VERSION_PATCH}")
 # Normally, "git archive" would work well, but it doesn't follow
 # symlinks.  Due to using symlinks heavily, we need to follow them to
 # avoid creating broken archives.
